@@ -1,0 +1,164 @@
+/****************************************/
+/*	PART: RESET CSS
+/****************************************/
+* {box-sizing: border-box;}
+html {font-size:62.5%;padding:0;margin:0;} /* rem default 10px */
+body{
+    background:$color-white;
+    @include width;
+    @include overflow(x, hidden);
+     /* 뷰표트 변환시 폰트크기 자동확대 방지. */
+    -webkit-text-size-adjust:none;
+    font-size:var(--space-ms);
+    word-break:keep-all;
+}
+
+@media screen and (max-width: 1260px) {
+    body {overflow-x: auto;}
+}
+
+/* HTML, body 높이값 100% 고정 */
+html, body{
+    @include fullHeight;
+}
+
+body,div,dl,dt,dd,ul,ol,li,hgroup,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,
+legend,textarea,p,blockquote,th,td,input,select,textarea,button{margin:0;padding:0;}
+fieldset,img{border:0 none;}
+dl,ul,ol,menu,li {list-style:none;}
+blockquote, q {quotes:none;}
+address,caption,cite,code,dfn,em,var,i,b {font-style:normal; font-weight:400;}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none;}
+input,select,textarea,button {vertical-align:middle;font-size:100%;}
+button {border:0 none;background-color:transparent;cursor:pointer;} /* 포커스 라인 비활성처리*/
+table {background-color:transparent;border-spacing:0;}
+
+input,
+textarea,
+select {background-color: transparent;}
+input:checked[type='checkbox'] {background-color:#666; -webkit-appearance:checkbox;}
+input[type='text'],input[type='password'],input[type='submit'],
+input[type='search'],input[type='tel'],input[type='email'] { -webkit-appearance:none; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0; -ms-border-radius:0; -o-border-radius:0;}
+input[type='search']::-webkit-search-cancel-button {-webkit-appearance:none;}
+/* 
+select {appearance:none; -webkit-appearance:none; -moz-appearance:none; border-radius:0; ; -webkit-border-radius:0 ; -moz-border-radius:0 ; -ms-border-radius:0 ; -o-border-radius:0 ; border-color: #ccc; text-indent: 10px;  background:url(../../img/ico_selarrow.png) 100% 50% no-repeat; background-size:auto calc(1.8rem/3);}
+*/
+select::-ms-expand {display:none;} /* IE9 이상 select 화살표 삭제 */
+/* select {border-radius:0; ; -webkit-border-radius:0 ; -moz-border-radius:0 ; -ms-border-radius:0 ; -o-border-radius:0 ; border-color: #ccc; text-indent: 10px; } */
+
+body,th,td,input,select,textarea,button {
+    @include fontSize($size:"base");
+    @include webfont($fontKO, 400);
+    color:$color-default;
+    letter-spacing:-0.5px;
+}
+input[type='text']:read-only, input[type='password']:read-only,
+input[type='text']:disabled, input[type='password']:disabled {background:#f6f6f6;}
+
+
+strong {@include webfont("NotoSansKR", 400);}
+b {@include webfont("NotoSansKR", 600);}
+a {display:inline-block; color:$color-default; text-decoration:none;/*outline:transparent;*/} 
+a:active, a:hover {text-decoration:none;}
+
+legend, caption{@include ir("hide");}
+#{$hr} {display:none; visibility:hidden;}
+/****************************************/
+/*	PART: BASIC CSS
+/****************************************/
+.hide {@include ir("hide");}
+.blind {@include ir("blind");}
+.screen {@include ir("screen");}
+.full {width:100% !important;}
+
+/* ALIGN */
+.alL, .l {@include align("text", left);}
+.alC, .c {@include align("text", center);}
+.alR, .r {@include align("text", right);}
+
+.vm {@include align("valign", middle);}
+.vt {@include align("valign", top);}
+.vb {@include align("valign", bottom);}
+
+.posR {@include pos(relative);}
+.posA {@include pos(absolute);}
+.block {@include display(block !important);}
+.inBlock {@include display(inline-block !important);}
+.flex {
+    @include display(flex);
+    align-items: center;
+    &.center {justify-content: center;}
+    &.between {justify-content: space-between;}
+    &.col {flex-direction: column;}
+}
+// @include flex($direction:row, $wrap:nowrap, $j-content:flex-start, $al-items:center)
+
+.scrollY {@include overflow (y, scroll);}
+.scrollX {@include overflow (x, scroll);}
+
+.underline {
+    text-decoration:underline;
+    &:active, &:hover {
+        text-decoration:underline;
+    }
+}
+.bold {@include webfont($fontKO, 600);}
+.fs-md {@include fontSize(1.6rem !important);}
+.fs-s {@include fontSize(1.3rem !important);}
+.fs-xs {@include fontSize(1.2rem !important);}
+.fs-xxs {@include fontSize(.9rem !important);}
+
+.wb-txt {word-break:break-all;}
+.asterisk {
+    position: relative;
+    @include fontSize("base");
+    color: $flag-pk;
+    font-weight: normal;
+    padding-left: 1rem;
+    &:before{
+        content:"\002A";
+        display: inline-block;
+        position: absolute;
+        top: .4rem;
+        left: 0rem;
+        margin-right: 2px;
+    }
+}
+
+.uline {
+    @include display(inline-block);
+    @include el-content(after){
+        background:$color-yellow;
+        height:1rem;
+        margin-top:-1rem;
+        // border-bottom:1px $color-gray1 solid;
+    }
+}
+
+// *********************
+
+/* SKIP */
+.skipMenu { 
+  overflow:hidden;
+  position:relative;
+  width:100%;
+  z-index:2;
+  a {
+      display: block;
+      font-size:1;
+      height: 1px;
+      width: 0px;
+      margin: 0 -1px -1px 0;
+      overflow: hidden;
+      line-height: 0;
+      text-align: center;
+      &:focus,
+      &:hover,
+      &:active {
+          width:auto; height:2.8rem; margin:0; padding:.8rem 0;  
+          background:$color-gray2; @include fontSize("base"); line-height:1.2rem; color:$color-white;
+          z-index:$zIndex-15; box-sizing:border-box;
+      }
+  }
+  
+}

@@ -1,0 +1,442 @@
+@charset "UTF-8";
+/****************************************/
+/*	Name: KBDS PMS
+/*	Version: 1.0
+/*	Author: [써냐]BLUEWEBD™
+/****************************************/
+/****************************************/
+/*	PART: IMPORT CSS
+/****************************************/
+/* flag */
+:root {
+  --space-4xs: .4rem;
+  --space-3xs: .8rem;
+  --space-2xs: 1rem;
+  --space-xs: 1.1rem;
+  --space-sm: 1.2rem;
+  --space-ms: 1.3rem;
+  --space-md: 1.4rem;
+  --space-mx: 1.8rem;
+  --space-lg: 2.0rem;
+  --space-xl: 2.4rem;
+  --space-2xl: 2.8rem;
+  --space-3xl: 3.0rem;
+  --space-4xl: 4.8rem;
+}
+
+/****************************************/
+/*	PART: RESET CSS
+/****************************************/
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  padding: 0;
+  margin: 0;
+} /* rem default 10px */
+body {
+  background: #fff;
+  width: 100%;
+  overflow-x: hidden;
+  /* 뷰표트 변환시 폰트크기 자동확대 방지. */
+  -webkit-text-size-adjust: none;
+  font-size: var(--space-ms);
+  word-break: keep-all;
+}
+
+@media screen and (max-width: 1260px) {
+  body {
+    overflow-x: auto;
+  }
+}
+/* HTML, body 높이값 100% 고정 */
+html, body {
+  height: 100%;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+body, div, dl, dt, dd, ul, ol, li, hgroup, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset,
+legend, textarea, p, blockquote, th, td, input, select, textarea, button {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset, img {
+  border: 0 none;
+}
+
+dl, ul, ol, menu, li {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+address, caption, cite, code, dfn, em, var, i, b {
+  font-style: normal;
+  font-weight: 400;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+input, select, textarea, button {
+  vertical-align: middle;
+  font-size: 100%;
+}
+
+button {
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer;
+} /* 포커스 라인 비활성처리*/
+table {
+  background-color: transparent;
+  border-spacing: 0;
+}
+
+input,
+textarea,
+select {
+  background-color: transparent;
+}
+
+input:checked[type=checkbox] {
+  background-color: #666;
+  -webkit-appearance: checkbox;
+}
+
+input[type=text], input[type=password], input[type=submit],
+input[type=search], input[type=tel], input[type=email] {
+  -webkit-appearance: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* 
+select {appearance:none; -webkit-appearance:none; -moz-appearance:none; border-radius:0; ; -webkit-border-radius:0 ; -moz-border-radius:0 ; -ms-border-radius:0 ; -o-border-radius:0 ; border-color: #ccc; text-indent: 10px;  background:url(../../img/ico_selarrow.png) 100% 50% no-repeat; background-size:auto calc(1.8rem/3);}
+*/
+select::-ms-expand {
+  display: none;
+} /* IE9 이상 select 화살표 삭제 */
+/* select {border-radius:0; ; -webkit-border-radius:0 ; -moz-border-radius:0 ; -ms-border-radius:0 ; -o-border-radius:0 ; border-color: #ccc; text-indent: 10px; } */
+body, th, td, input, select, textarea, button {
+  font-size: 1.4rem;
+  font-family: "KBFG Display", "NotoSansKR", "Malgun Gothic", "Dotum", Arial, sans-serif;
+  font-weight: 400;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+
+input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
+  background: #f6f6f6;
+}
+
+input[type=text]:read-only, input[type=password]:read-only,
+input[type=text]:disabled, input[type=password]:disabled {
+  background: #f6f6f6;
+}
+
+strong {
+  font-family: "NotoSansKR";
+  font-weight: 400;
+}
+
+b {
+  font-family: "NotoSansKR";
+  font-weight: 600;
+}
+
+a {
+  display: inline-block;
+  color: #333;
+  text-decoration: none; /*outline:transparent;*/
+}
+
+a:active, a:hover {
+  text-decoration: none;
+}
+
+legend, caption {
+  position: absolute !important;
+  overflow: hidden !important;
+  height: 1px !important;
+  width: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+}
+
+.hr {
+  display: none;
+  visibility: hidden;
+}
+
+/****************************************/
+/*	PART: BASIC CSS
+/****************************************/
+.hide {
+  position: absolute !important;
+  overflow: hidden !important;
+  height: 1px !important;
+  width: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+}
+
+.blind {
+  position: absolute !important;
+  overflow: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  border: 0;
+  display: block !important;
+  font-size: 1px !important;
+  z-index: -1;
+}
+
+.screen {
+  position: absolute !important;
+  overflow: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  border: 0;
+  font-size: 1px;
+  text-indent: -9999px;
+}
+
+.full {
+  width: 100% !important;
+}
+
+/* ALIGN */
+.alL, .l {
+  text-align: left !important;
+}
+
+.alC, .c {
+  text-align: center !important;
+}
+
+.alR, .r {
+  text-align: right !important;
+}
+
+.vm {
+  vertical-align: middle !important;
+}
+
+.vt {
+  vertical-align: top !important;
+}
+
+.vb {
+  vertical-align: bottom !important;
+}
+
+.posR {
+  position: relative;
+}
+
+.posA {
+  position: absolute;
+}
+
+.block {
+  display: block !important;
+}
+
+.inBlock {
+  display: inline-block !important;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.flex.center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.flex.between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.flex.col {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.scrollY {
+  overflow-y: scroll;
+}
+
+.scrollX {
+  overflow-x: scroll;
+}
+
+.underline {
+  text-decoration: underline;
+}
+.underline:active, .underline:hover {
+  text-decoration: underline;
+}
+
+.bold {
+  font-family: "KBFG Display", "NotoSansKR", "Malgun Gothic", "Dotum", Arial, sans-serif;
+  font-weight: 600;
+}
+
+.fs-md {
+  font-size: 1.6rem !important;
+}
+
+.fs-s {
+  font-size: 1.3rem !important;
+}
+
+.fs-xs {
+  font-size: 1.2rem !important;
+}
+
+.fs-xxs {
+  font-size: 0.9rem !important;
+}
+
+.wb-txt {
+  word-break: break-all;
+}
+
+.asterisk {
+  position: relative;
+  font-size: 1.4rem;
+  color: #e93c79;
+  font-weight: normal;
+  padding-left: 1rem;
+}
+.asterisk:before {
+  content: "*";
+  display: inline-block;
+  position: absolute;
+  top: 0.4rem;
+  left: 0rem;
+  margin-right: 2px;
+}
+
+.uline {
+  display: inline-block;
+}
+.uline::after {
+  content: "";
+  display: block;
+  background: #fc0;
+  height: 1rem;
+  margin-top: -1rem;
+}
+
+/* SKIP */
+.skipMenu {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+.skipMenu a {
+  display: block;
+  font-size: 1;
+  height: 1px;
+  width: 0px;
+  margin: 0 -1px -1px 0;
+  overflow: hidden;
+  line-height: 0;
+  text-align: center;
+}
+.skipMenu a:focus, .skipMenu a:hover, .skipMenu a:active {
+  width: auto;
+  height: 2.8rem;
+  margin: 0;
+  padding: 0.8rem 0;
+  background: #333;
+  font-size: 1.4rem;
+  line-height: 1.2rem;
+  color: #fff;
+  z-index: 15;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+header {
+  background: #333;
+}
+
+.btnWrap {
+  padding: 0.5rem;
+}
+.btnWrap > a {
+  padding: 0.5rem 1rem;
+  color: #242424;
+  text-decoration: none;
+  background: #fc0;
+  font-size: var(--space-ms);
+  border-radius: 0.3rem;
+}
+
+.container {
+  padding: 3rem;
+}
+.container .section {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+.container .section .md {
+  background: #ddd;
+  min-height: 10rem;
+}
+.container .section .md ~ .md {
+  margin-top: 1rem;
+}
+.container .section .md-txt {
+  border: 5px solid #4b90df;
+}
+.container .section .md-img {
+  border: 5px solid #e93c79;
+}
+.container .section .md-video {
+  border: 5px solid #4bdf7c;
+}
+.container .section .md-goods {
+  border: 5px solid #484239;
+}

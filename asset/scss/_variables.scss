@@ -1,0 +1,81 @@
+//------ font
+$fontDefault: 'Malgun Gothic','Dotum', Arial, sans-serif;
+$KBFGDisplay: 'KBFG Display';
+$KBFGText: 'KBFG Text';
+$fontKO: $KBFGDisplay, 'NotoSansKR', $fontDefault; //default
+$fontEN: 'roboto','NotoSansKR', $fontDefault;
+
+//------ color system
+$color-default:#333;
+$color-white: #fff;
+$color-black: #000;
+$color-gray1: #242424;
+$color-gray2: #333;
+$color-gray3: #666;
+$color-gray4: #999;
+$color-gray5: #aaa;
+$color-gray6: #ddd;
+$color-gray7: #eee;
+$color-gray8: #ccc;
+
+$color-light-gray1:#e6e6e6;
+$color-light-gray2:#f5f5f5;
+$color-light-gray3:#f7f7f7;
+$color-light-gray4:#f1f1f1;
+
+$color-yellow: #fc0;
+$color-brown: #484239;
+$color-pk: #e93c79;
+$color-green: #4bdf7c;
+$color-violet: #8b4bdf;
+$color-blue: #4b90df;
+
+/* flag */
+$flag-gr: #4bdf7c;
+$flag-pk: #e93c79;
+
+$default-color: $color-default;
+
+//------ name spaces
+$header: '.header';
+$nav: '.snb-wrap';
+$container: '.container';
+$main: '.main';
+$cont: ".contents";
+$section:".section";
+$article:".groupWrap";
+$sub: '.sub';
+$hr: '.hr';
+$dep1:'.dep1';
+$dep2:'.dep2';
+$dep3:'.dep3';
+$footer: '.footer';
+$tit:'.tit';
+$txt:'.txt';
+$lst:".lst";
+$btn: '.btn';
+$tbl: '.tbl';
+$isActive:'._is-active';
+
+//-------z-index
+$zIndex-minus: -1;
+$zIndex-default : 1;
+$zIndex-10 : 10;
+$zIndex-15 : 15;
+$zIndex-20 : 20;
+
+:root {
+    --space-4xs: .4rem;
+    --space-3xs: .8rem;
+    --space-2xs: 1rem;
+    --space-xs: 1.1rem;
+    --space-sm: 1.2rem;
+    --space-ms: 1.3rem;
+    --space-md: 1.4rem; // default
+    --space-mx: 1.8rem;
+    --space-lg: 2.0rem;
+    --space-xl: 2.4rem;
+    --space-2xl: 2.8rem;
+    --space-3xl: 3.0rem;
+    --space-4xl: 4.8rem;
+}
