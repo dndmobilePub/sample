@@ -35,7 +35,7 @@ header {background:$color-gray2;}
       & ~ .md {margin-top:1rem;}
 
       &-txt {border:5px solid $color-blue;}
-      &-img {border:5px solid $color-pk;}
+      &-img {border:5px solid $color-pk; font-size: 0;}
       &-video {border:5px solid $color-green;}
       &-goods {border:5px solid $color-brown;}
 
@@ -53,6 +53,10 @@ header {background:$color-gray2;}
           clip: rect(0,0,0,0);
           white-space: nowrap;
           border: 0;
+        }
+
+        img {
+          max-width: 100%;
         }
       }
       .alert {
