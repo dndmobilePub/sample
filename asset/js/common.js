@@ -17,11 +17,7 @@ $(document).ready(function() {
         $mdImg.find('.img-container img').attr('id', imgId);
         $mdImg.find('.btn-primary').attr('id', cropId);
 
-        $mdImg.load('./modal.html', function() {
-            console.log('aaa')
-            iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $mdImg);
-        });
-        
+        iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $mdImg);
     });
 
     // 고유한 ID 생성 함수
@@ -45,7 +41,8 @@ $(document).ready(function() {
                 $input.value = '';
                 $image.src = url;
                 $alert.hide();
-                $modal.modal('show');
+                $modal.show();
+                cropper = new Cropper($image);
             };
             var reader;
             var file;
@@ -66,18 +63,21 @@ $(document).ready(function() {
             }
         });
 
-        $modal.on('shown.bs.modal', function () {
+        $modal.on('shown', function () {
             cropper = new Cropper($image);
-        }).on('hidden.bs.modal', function () {
-            cropper.destroy();
-            cropper = null;
+        });
+        $modal.on('hide', function () {
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
         });
 
         $('#' + cropId).on('click', function () {
             var initialAvatarURL;
             var canvas;
 
-            $modal.modal('hide');
+            $modal.hide();
 
             if (cropper) {
                 var cropWidth = $('#cropWidth').val();
@@ -114,7 +114,16 @@ $(document).ready(function() {
                             }, 2000);
                         },
                     });
+                    cropper.destroy();
+                    cropper = null;
                 });
+            }
+        });
+        $('.btn-secondary, .close').on('click', function () {
+            $modal.hide();
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
             }
         });
     };

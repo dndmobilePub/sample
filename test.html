@@ -11,7 +11,7 @@
     <script type="text/javascript" src="./asset/js/lib.jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="./asset/js/pg.cropper.js"></script>
     <script type="text/javascript" src="./asset/js/jquery-ui.min.js"></script>
-    <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./asset/js/common.js"></script>
 
@@ -144,23 +144,34 @@
       $('.btnWrap a').click(function(e){
           e.preventDefault(); 
           const dataType = $(this).data('type'),
-                newImg = $('<div class="imgWrap no-img"><label class="label"><img src=""><input type="file" class="sr-only"></label></div>')
                 newMd = $('<div class="md"></div>')
           
           newMd.addClass('md-' + dataType);
           newMd.attr('data-type', dataType);
       
-          if(dataType === 'img') {
-              newMd.append(newImg);
-          } else if(dataType === 'txt') {
-              newMd.attr('contenteditable', 'false');
-              newMd.text('텍스트'); 
-          } else if(dataType === 'video') {
-              newMd.text('동영상');
-          } else if(dataType === 'goods') {
-              newMd.text('상품');
-          }
-          $('.container .section').append(newMd);
+    if(dataType !== 'img') {
+        if(dataType === 'txt') {
+            newMd.attr('contenteditable', 'false');
+            newMd.text('텍스트'); 
+        } else if(dataType === 'video') {
+            newMd.text('동영상');
+        } else if(dataType === 'goods') {
+            newMd.text('상품');
+        }
+        $('.container .section').append(newMd);
+    } else {
+        $.ajax({
+            url: './md-img.html',
+            dataType: 'html',
+            success: function(response) {
+                newMd.html(response);
+                $('.container .section').append(newMd);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error loading md-img.html:", error);
+            }
+        });
+    }
       });
 
 
