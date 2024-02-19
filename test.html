@@ -16,9 +16,31 @@
     <script src="./asset/js/common.js"></script>
 
     <style>
-      .swiper {
-        width: 200px;
-        height: 100px;
+      .section [data-type="goods"]{
+        display: flex;
+      }
+      .swiperAddBtn{
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        border-radius: 30px;
+        background: white;
+      }
+      .swiper .swiper-slide{
+        background: moccasin;
+      }
+      .md{
+        cursor: pointer;
+      }
+      [contenteditable="true"] {
+        cursor: text;
+      }
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000; /* 다른 요소들보다 위에 보이도록 설정 */
       }
     </style>
 </head>
@@ -35,47 +57,110 @@
     </header>
     <div class="container">
       <section class="section">
-        <div class="md md-img" data-type="img">
-          <div class="imgWrap no-img"></div>
+        <div class="md md-goods" data-type="goods">
+          <div class="swiper">
+            <ul class="swiper-wrapper">
+              <li class="swiper-slide">
+                <div class="swiper-box">
+                  <label class="label" data-toggle="tooltip">
+                    <div class="imgWrap no-img" id="avatar"></div>
+                    <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+                  </label>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                  </div>
+                  <div class="alert" role="alert"></div>
+                  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="img-container">
+                            <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                          <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit" contenteditable="false">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="swiper-slide">
+                <div class="swiper-box">
+                  <label class="label" data-toggle="tooltip">
+                    <div class="imgWrap no-img" id="avatar"></div>
+                    <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+                  </label>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                  </div>
+                  <div class="alert" role="alert"></div>
+                  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="img-container">
+                            <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                          <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit" contenteditable="false">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <button type="button" class="swiperAddBtn">추가</button>
         </div>
         <div class="md md-txt" data-type="txt">
-          <div class="txtEdit" contenteditable="true">
+          <div class="txtEdit" contenteditable="false">
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
           </div>
         </div>
         <div class="md md-img" data-type="img">
-          <label class="label" data-toggle="tooltip">
-            <img src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
-            <input type="file" class="sr-only" name="image" accept="image/*">
-          </label>
-          <div class="alert" role="alert"></div>
-          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Crop the image</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="img-container">
-                    <img src="https://avatars0.githubusercontent.com/u/3456749">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Crop</button>
-                </div>
-              </div>
-            </div>
+          <div class="imgWrap">
+            <img src="https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg">
           </div>
         </div>
         <div class="md md-img" data-type="img">
           <label class="label" data-toggle="tooltip">
-            <img src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
-            <input type="file" class="sr-only" name="image" accept="image/*">
+            <img id="avatar" src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
+            <input type="file" class="sr-only" id="input" name="image" accept="image/*">
           </label>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+          </div>
           <div class="alert" role="alert"></div>
           <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -99,11 +184,14 @@
             </div>
           </div>
         </div>
-        <div class="md md-txt" data-type="txt" contenteditable="true">텍스트</div>
+        <div class="md md-txt" data-type="txt">
+          <div class="txtEdit" contenteditable="false">
+            <p>텍스트</p>
+          </div>
+        </div>
         <div class="md md-video" data-type="video">
           <div class="videoWrap no-video"></div>
         </div>
-        <div class="md md-goods" data-type="goods">상품</div>
       </section>
     </div>
   </div>
@@ -112,31 +200,17 @@
     //드래그앤드롭
     $( function() {
       $( ".section" ).sortable({
-        revert: true
+        tolerance: 'pointer' // 마우스 커서의 이동 거리가 클릭 시점에서 이 값보다 크면 드래그가 시작됨
       });
-      $( ".section" ).draggable({
-        connectToSortable: "#sortable",
-        helper: "clone",
-        revert: "invalid"
-      });
-      // $( ".md" ).disableSelection();
 
       // 마우스 왼쪽 버튼 클릭 시 contenteditable 속성을 활성화합니다.
-      // $(document).on('mousedown', '.md-txt', function(e) {
-      //   if (e.which === 1) { // 마우스 왼쪽 버튼을 클릭한 경우
-      //     $(this).attr('contenteditable', 'true');
-      //     $(this).focus(); 
-      //   }
-      // });
-
-      $(document).on('click', '.md-txt', function(e) {
-        // $('.md-txt').attr('contenteditable', 'false');
+      $(document).on('click', '.txtEdit', function(e) {
         $(this).attr('contenteditable', 'true');
-          $(this).focus(); 
+        $(this).focus(); 
       });
 
       // 텍스트 영역을 벗어날 때 contenteditable 속성을 비활성화합니다.
-      $(document).on('focusout', '.md-txt', function() {
+      $(document).on('focusout', '.txtEdit', function() {
         $(this).attr('contenteditable', 'false');
       });
       
@@ -144,51 +218,65 @@
       $('.btnWrap a').click(function(e){
           e.preventDefault(); 
           const dataType = $(this).data('type'),
+                newImg = $('<div class="imgWrap no-img"></div>')
                 newMd = $('<div class="md"></div>')
           
           newMd.addClass('md-' + dataType);
           newMd.attr('data-type', dataType);
       
-    if(dataType !== 'img') {
-        if(dataType === 'txt') {
-            newMd.attr('contenteditable', 'false');
-            newMd.text('텍스트'); 
-        } else if(dataType === 'video') {
-            newMd.text('동영상');
-        } else if(dataType === 'goods') {
-            newMd.text('상품');
-        }
-        $('.container .section').append(newMd);
-    } else {
-        $.ajax({
-            url: './md-img.html',
-            dataType: 'html',
-            success: function(response) {
-                newMd.html(response);
-                $('.container .section').append(newMd);
-            },
-            error: function(xhr, status, error) {
-                console.error("Error loading md-img.html:", error);
-            }
+          if(dataType === 'img') {
+              newMd.append(newImg);
+          } else if(dataType === 'txt') {
+              newMd.attr('contenteditable', 'false');
+              newMd.text('텍스트'); 
+          } else if(dataType === 'video') {
+              newMd.text('동영상');
+          } else if(dataType === 'goods') {
+              newMd.text('상품');
+          }
+          $('.container .section').append(newMd);
+      });
+
+      // 동적으로 생성된 스와이퍼에 대한 초기화 함수
+      function initializeSwiper(swiperContainer) {
+        var newSwiper = new Swiper(swiperContainer, {
+          loop: false,
+          slidesPerView: 2, 
+          spaceBetween: 10, 
+          pagination: {
+            el: '.swiper-pagination',
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
         });
-    }
+        return newSwiper;
+      }
+
+      // 슬라이드 추가 함수
+      function addSlide(swiperInstance) {
+        var newSlideHTML = `<li class='swiper-slide'>` + fileAreaHTML + textAreaHTML + `</li>`;
+        swiperInstance.appendSlide(newSlideHTML);
+      }
+
+      // 버튼 클릭 이벤트 핸들러
+      $('.container .section').on('click', '.swiperAddBtn', function() {
+        var swiperContainer = $(this).siblings('.swiper');
+        var swiperInstance = swiperContainer.data('swiper');
+        addSlide(swiperInstance);
       });
 
-
-      
-      const swiper = new Swiper('.swiper', {
-        loop: false,
-      
-        pagination: {
-          el: '.swiper-pagination',
-        },
-      
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      
+      // 초기화
+      $(document).ready(function() {
+        // 초기에 존재하는 스와이퍼 객체에 대해서 초기화
+        var initialSwipers = $('.section .swiper');
+        initialSwipers.each(function() {
+          var swiperInstance = initializeSwiper(this);
+          $(this).data('swiper', swiperInstance);
+        });
       });
+
 
     } );
   </script>

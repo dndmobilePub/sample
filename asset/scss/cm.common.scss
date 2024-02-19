@@ -13,7 +13,14 @@
 @import 'mixin';
 @import 'reset';
 
-header {background:$color-gray2;}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background:$color-gray2;
+}
 .btnWrap {
   padding:.5rem;
   & > a {
@@ -32,6 +39,7 @@ header {background:$color-gray2;}
     .md {
       background:$color-gray6;
       min-height:10rem;
+      cursor: pointer;
       & ~ .md {margin-top:1rem;}
 
       &-txt {border:5px solid $color-blue;}
@@ -66,6 +74,19 @@ header {background:$color-gray2;}
         background-color: #fff3cd;
         font-size: 1rem;
         color: #856404;
+      }
+      &-goods{
+        display: flex;
+      }
+      [contenteditable=true] {
+        cursor: text;
+      }
+      .swiperAddBtn{
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        border-radius: 30px;
+        background: $color-white;
       }
     }
   }
@@ -136,6 +157,11 @@ header {background:$color-gray2;}
   }
 }
 
+.swiper{
+  &-slide{
+    background: $color-violet;
+  }
+}
 .img-container {
   img {
     max-width: 100%;
