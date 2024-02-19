@@ -28,8 +28,7 @@
 /*	PART: RESET CSS
 /****************************************/
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -140,10 +139,6 @@ body, th, td, input, select, textarea, button {
   font-weight: 400;
   color: #333;
   letter-spacing: -0.5px;
-}
-
-input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
-  background: #f6f6f6;
 }
 
 input[type=text]:read-only, input[type=password]:read-only,
@@ -276,28 +271,17 @@ legend, caption {
 }
 
 .flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 .flex.center {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 .flex.between {
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 .flex.col {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .scrollY {
@@ -394,8 +378,7 @@ legend, caption {
   line-height: 1.2rem;
   color: #fff;
   z-index: 15;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 header {
@@ -439,4 +422,98 @@ header {
 }
 .container .section .md-goods {
   border: 5px solid #484239;
+}
+.container .section .md .label {
+  display: inline-block;
+  cursor: pointer;
+}
+.container .section .md .label .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.container .section .md .alert {
+  display: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.25rem;
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+}
+.modal-dialog {
+  position: relative;
+  width: auto;
+  max-width: 500px;
+  margin: 1.75rem auto;
+}
+.modal-content {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 0.3rem;
+  background-color: #fff;
+}
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+.modal-header .close {
+  margin: -1rem;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.modal-body {
+  padding: 1rem;
+}
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.75rem;
+  border-top: 1px solid #dee2e6;
+}
+.modal-footer .btn {
+  display: inline-block;
+  margin: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.modal-footer .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+}
+.modal-footer .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.img-container img {
+  max-width: 100%;
 }

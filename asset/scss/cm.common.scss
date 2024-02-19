@@ -38,6 +38,101 @@ header {background:$color-gray2;}
       &-img {border:5px solid $color-pk;}
       &-video {border:5px solid $color-green;}
       &-goods {border:5px solid $color-brown;}
+
+      .label {
+        display: inline-block;
+        cursor: pointer;
+
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0,0,0,0);
+          white-space: nowrap;
+          border: 0;
+        }
+      }
+      .alert {
+        display: none;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.25rem;
+        background-color: #fff3cd;
+        color: #856404;
+      }
     }
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 1000;
+  width: 100%; height: 100%;
+
+  &-dialog {
+    position: relative;
+    width: auto; max-width: 500px;
+    margin: 1.75rem auto;
+  }
+  &-content {
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 0.3rem;
+    background-color: #fff;
+  }
+  &-header {
+    display: flex;
+    @include flex($j-content:space-between);
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    .close {
+      margin: -1rem;
+      padding: 1rem;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+  }
+  &-title {
+
+  }
+  &-body {
+    padding: 1rem;
+  }
+  &-footer {
+    display: flex;
+    @include flex($j-content:flex-end);
+    padding: .75rem;
+    border-top: 1px solid #dee2e6;
+
+    .btn {
+      display: inline-block;
+      margin: .25rem;
+      padding: .375rem .75rem;
+      border-radius: .25rem;
+      font-size: 1.3rem;
+
+      cursor: pointer;
+      &-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: #fff;
+      }
+      &-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.img-container {
+  img {
+    max-width: 100%;
   }
 }
