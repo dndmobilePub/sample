@@ -382,6 +382,11 @@ legend, caption {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   background: #333;
 }
 
@@ -407,6 +412,7 @@ header {
 .container .section .md {
   background: #ddd;
   min-height: 10rem;
+  cursor: pointer;
 }
 .container .section .md ~ .md {
   margin-top: 1rem;
@@ -449,6 +455,19 @@ header {
   background-color: #fff3cd;
   font-size: 1rem;
   color: #856404;
+}
+.container .section .md-goods {
+  display: flex;
+}
+.container .section .md [contenteditable=true] {
+  cursor: text;
+}
+.container .section .md .swiperAddBtn {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  border-radius: 30px;
+  background: #fff;
 }
 
 .modal {
@@ -519,6 +538,10 @@ header {
   color: #fff;
 }
 
+.swiper-slide {
+  background: #8b4bdf;
+}
+
 .img-container img {
   max-width: 100%;
 }
@@ -541,6 +564,9 @@ header {
   content: "이미지를 등록해주세요";
   font-weight: 700;
   margin-top: 2rem;
+}
+.imgWrap img {
+  max-width: 100%;
 }
 
 .videoWrap.no-video {
