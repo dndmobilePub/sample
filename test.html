@@ -8,9 +8,15 @@
     <link rel="stylesheet" type="text/css" href="./asset/css/cm.common.css">
     <script type="text/javascript" src="./asset/js/lib.jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="./asset/js/pg.cropper.js"></script>
+    <script type="text/javascript" src="./asset/js/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fengyuanchen.github.io/cropperjs/css/cropper.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <style>
       .label {
         cursor: pointer;
@@ -28,6 +34,11 @@
       .img-container img {
         max-width: 100%;
       }
+
+      .swiper {
+        width: 200px;
+        height: 100px;
+      }
     </style>
 </head>
 
@@ -35,57 +46,57 @@
   <div class="wrap">
     <header>
       <div class="btnWrap">
-        <a href="">사진</a>
-        <a href="">동영상</a>
-        <a href="">텍스트</a>
-        <a href="">상품</a>
+        <a href="#;" data-type="img">사진</a>
+        <a href="" data-type="video">동영상</a>
+        <a href="" data-type="txt">텍스트</a>
+        <a href="" data-type="goods">상품</a>
       </div>
     </header>
     <div class="container">
       <section class="section">
-        <div class="md md-txt">
+        <div class="md md-txt" data-type="txt">
           <div class="txtEdit" contenteditable="true">
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
           </div>
         </div>
-        <div class="md md-img">
+        <div class="md md-img" data-type="img">
           <img src="https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg">
         
         </div>
-        <div class="md md-img">
-        <label class="label" data-toggle="tooltip">
-          <img class="rounded" id="avatar" src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
-          <input type="file" class="sr-only" id="input" name="image" accept="image/*">
-        </label>
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-        </div>
-        <div class="alert" role="alert"></div>
-        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Crop the image</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="img-container">
-                  <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+        <div class="md md-img" data-type="img">
+          <label class="label" data-toggle="tooltip">
+            <img class="rounded" id="avatar" src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
+            <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+          </label>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+          </div>
+          <div class="alert" role="alert"></div>
+          <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                <div class="modal-body">
+                  <div class="img-container">
+                    <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-        <div class="md md-txt" contenteditable="true">텍스트</div>
-        <div class="md md-video">동영상</div>
-        <div class="md md-goods">상품</div>
+        <div class="md md-txt" data-type="txt" contenteditable="true">텍스트</div>
+        <div class="md md-video" data-type="video">동영상</div>
+        <div class="md md-goods" data-type="goods">상품</div>
       </section>
     </div>
   </div>
@@ -199,6 +210,71 @@
         }
       });
     });
+    
+    
+    //드래그앤드롭
+    $( function() {
+      $( ".section" ).sortable({
+        revert: true
+      });
+      $( ".section" ).draggable({
+        connectToSortable: "#sortable",
+        helper: "clone",
+        revert: "invalid"
+      });
+      // $( ".md" ).disableSelection();
+
+      // 마우스 왼쪽 버튼 클릭 시 contenteditable 속성을 활성화합니다.
+      $(document).on('mousedown', '.md-txt', function(e) {
+        if (e.which === 1) { // 마우스 왼쪽 버튼을 클릭한 경우
+          $(this).attr('contenteditable', 'true');
+          $(this).focus(); 
+        }
+      });
+
+      // 텍스트 영역을 벗어날 때 contenteditable 속성을 비활성화합니다.
+      $(document).on('focusout', '.md-txt', function() {
+        $(this).attr('contenteditable', 'false');
+      });
+      
+      //버튼 클릭시 영역추가
+      $('.btnWrap a').click(function(e){
+          e.preventDefault(); 
+          var dataType = $(this).data('type');
+          var newMd = $('<div class="md"></div>');
+          newMd.addClass('md-' + dataType);
+          newMd.attr('data-type', dataType);
+      
+          if(dataType === 'img') {
+              newMd.append('<img src="https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg">');
+          } else if(dataType === 'txt') {
+              newMd.attr('contenteditable', 'true');
+              newMd.text('텍스트'); 
+          } else if(dataType === 'video') {
+              newMd.text('동영상');
+          } else if(dataType === 'goods') {
+              newMd.text('상품');
+          }
+          $('.container .section').append(newMd);
+      });
+
+
+      
+      const swiper = new Swiper('.swiper', {
+        loop: false,
+      
+        pagination: {
+          el: '.swiper-pagination',
+        },
+      
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      
+      });
+
+    } );
   </script>
 </body>
 </html>
