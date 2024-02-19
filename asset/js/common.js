@@ -17,7 +17,11 @@ $(document).ready(function() {
         $mdImg.find('.img-container img').attr('id', imgId);
         $mdImg.find('.btn-primary').attr('id', cropId);
 
-        iterateMdImg(avatarId, inputId, modalId, imgId, cropId);
+        $mdImg.load('./modal.html', function() {
+            console.log('aaa')
+            iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $mdImg);
+        });
+        
     });
 
     // 고유한 ID 생성 함수
@@ -25,13 +29,11 @@ $(document).ready(function() {
         return '_' + Math.random().toString(36).substr(2, 9);
     }
         
-    function iterateMdImg(avatarId, inputId, modalId, imgId, cropId) {
+    function iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $mdImg) {
         var avatar = document.getElementById(avatarId);
         var $image = $('#' + imgId)[0];
         var $input = $('#' + inputId)[0];
-        var $progress = $('.progress');
-        var $progressBar = $('.progress-bar');
-        var $alert = $('.alert');
+        var $alert = $mdImg.find('.alert');
         var $modal = $('#' + modalId);
         var cropper;
 
@@ -86,7 +88,6 @@ $(document).ready(function() {
                 });
                 initialAvatarURL = avatar.src;
                 avatar.src = canvas.toDataURL();
-                $progress.show();
                 $alert.removeClass('alert-success alert-warning');
                 canvas.toBlob(function (blob) {
                     var formData = new FormData();
@@ -98,34 +99,19 @@ $(document).ready(function() {
                         processData: false,
                         contentType: false,
 
-                        xhr: function () {
-                            var xhr = new XMLHttpRequest();
-
-                            xhr.upload.onprogress = function (e) {
-                                var percent = '0';
-                                var percentage = '0%';
-
-                                if (e.lengthComputable) {
-                                percent = Math.round((e.loaded / e.total) * 100);
-                                percentage = percent + '%';
-                                $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
-                                }
-                            };
-
-                            return xhr;
-                        },
-
                         success: function () {
                             $alert.show().addClass('alert-success').text('Upload success');
+                            setTimeout( function(){
+                                $('.alert').hide();
+                            }, 2000);
                         },
 
                         error: function () {
                             avatar.src = initialAvatarURL;
                             $alert.show().addClass('alert-warning').text('Upload error');
-                        },
-
-                        complete: function () {
-                            $progress.hide();
+                            setTimeout( function(){
+                                $('.alert').hide();
+                            }, 2000);
                         },
                     });
                 });

@@ -144,7 +144,7 @@
       $('.btnWrap a').click(function(e){
           e.preventDefault(); 
           const dataType = $(this).data('type'),
-                newImg = $('<div class="imgWrap no-img"></div>')
+                newImg = $('<div class="imgWrap no-img"><label class="label"><img src=""><input type="file" class="sr-only"></label></div>')
                 newMd = $('<div class="md"></div>')
           
           newMd.addClass('md-' + dataType);
