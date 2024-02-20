@@ -187,8 +187,9 @@ header {
     }
     @include el-content(after){
       content:'이미지를 등록해주세요';
-      font-weight:700;
       margin-top:2rem;
+      font-size: 1.4rem;
+      font-weight:700;
     }
   }
   img {

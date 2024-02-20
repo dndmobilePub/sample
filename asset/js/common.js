@@ -1,5 +1,5 @@
 
-$(document).ready(function() {
+function cropper() {
     $('.md-img label').click(function() {
         var $mdImg = $(this).closest('.md-img');
         var uniqueId = generateUniqueId(); // 고유한 ID 생성
@@ -15,7 +15,7 @@ $(document).ready(function() {
         $mdImg.find('.sr-only').attr('id', inputId);
         $mdImg.find('.modal').attr('id', modalId);
         $mdImg.find('.img-container img').attr('id', imgId);
-        $mdImg.find('.btn-primary').attr('id', cropId);
+        $mdImg.find('.crop').attr('id', cropId);
 
         iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $mdImg);
     });
@@ -104,6 +104,7 @@ $(document).ready(function() {
                             setTimeout( function(){
                                 $('.alert').hide();
                             }, 2000);
+                            $('.imgWrap').removeClass('no-img');
                         },
 
                         error: function () {
@@ -112,6 +113,7 @@ $(document).ready(function() {
                             setTimeout( function(){
                                 $('.alert').hide();
                             }, 2000);
+                            $('.imgWrap').removeClass('no-img');
                         },
                     });
                     cropper.destroy();
@@ -127,5 +129,5 @@ $(document).ready(function() {
             }
         });
     };
-});
-    
+};
+cropper();   
