@@ -1,5 +1,5 @@
 
-function cropper() {
+function cropperOpen() {
     $('.md-img label').click(function() {
         var $mdImg = $(this).closest('.md-img');
         var uniqueId = generateUniqueId(); // 고유한 ID 생성
@@ -130,4 +130,4 @@ function cropper() {
         });
     };
 };
-cropper();   
+cropperOpen();   
