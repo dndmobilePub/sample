@@ -33,10 +33,14 @@ header {
 }
 
 .container {
-  padding:3rem;
+  padding:6rem 3rem 3rem;
   .section {
     max-width:36rem; margin:0 auto;
+    [data-type="goods"]{
+      display: flex;
+    }
     .md {
+      position: relative;
       background:$color-gray6;
       min-height:10rem;
       cursor: pointer;
@@ -82,11 +86,18 @@ header {
         cursor: text;
       }
       .swiperAddBtn{
-        width: 30px;
-        height: 30px;
+        width: 3rem;
+        height: 3rem;
         margin: auto;
-        border-radius: 30px;
+        border-radius: 3rem;
         background: $color-white;
+      }
+      .deleteBtn{
+        position: absolute;
+        top: 0; right: 0;
+        width: 3rem;
+        height: 2rem;
+        background: red;
       }
     }
   }
@@ -159,7 +170,7 @@ header {
 
 .swiper{
   &-slide{
-    background: $color-violet;
+    background: moccasin;
   }
 }
 .img-container {

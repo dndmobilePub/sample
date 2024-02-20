@@ -141,6 +141,10 @@ body, th, td, input, select, textarea, button {
   letter-spacing: -0.5px;
 }
 
+input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
+  background: #f6f6f6;
+}
+
 input[type=text]:read-only, input[type=password]:read-only,
 input[type=text]:disabled, input[type=password]:disabled {
   background: #f6f6f6;
@@ -403,13 +407,17 @@ header {
 }
 
 .container {
-  padding: 3rem;
+  padding: 6rem 3rem 3rem;
 }
 .container .section {
   max-width: 36rem;
   margin: 0 auto;
 }
+.container .section [data-type=goods] {
+  display: flex;
+}
 .container .section .md {
+  position: relative;
   background: #ddd;
   min-height: 10rem;
   cursor: pointer;
@@ -463,11 +471,19 @@ header {
   cursor: text;
 }
 .container .section .md .swiperAddBtn {
-  width: 30px;
-  height: 30px;
+  width: 3rem;
+  height: 3rem;
   margin: auto;
-  border-radius: 30px;
+  border-radius: 3rem;
   background: #fff;
+}
+.container .section .md .deleteBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 2rem;
+  background: red;
 }
 
 .modal {
@@ -539,7 +555,7 @@ header {
 }
 
 .swiper-slide {
-  background: #8b4bdf;
+  background: moccasin;
 }
 
 .img-container img {
