@@ -1,7 +1,7 @@
 
 function cropperOpen() {
-    $('.md-img label').click(function() {
-        var $mdImg = $(this).closest('.md-img');
+    $('.cropLabel').click(function() {
+        var $mdImg = $(this).closest('div');
         var uniqueId = generateUniqueId(); // 고유한 ID 생성
 
         var avatarId = 'avatar_' + uniqueId;
@@ -11,11 +11,11 @@ function cropperOpen() {
         var cropId = 'crop_' + uniqueId;
         
         // 각 요소에 ID 부여
-        $mdImg.find('.label img').attr('id', avatarId);
+        $mdImg.find('.cropLabel img').attr('id', avatarId);
         $mdImg.find('.sr-only').attr('id', inputId);
-        $mdImg.find('.modal').attr('id', modalId);
-        $mdImg.find('.img-container img').attr('id', imgId);
-        $mdImg.find('.crop').attr('id', cropId);
+        $('.modal').attr('id', modalId);
+        $('.img-container img').attr('id', imgId);
+        $('.crop').attr('id', cropId);
 
         iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $mdImg);
     });
@@ -113,7 +113,6 @@ function cropperOpen() {
                             setTimeout( function(){
                                 $('.alert').hide();
                             }, 2000);
-                            $('.imgWrap').removeClass('no-img');
                         },
                     });
                     cropper.destroy();
