@@ -36,11 +36,10 @@ function cropperOpen() {
         var $modal = $('#' + modalId);
         var cropper;
 
-        if ($(avatar).attr('src') === '') {
-            $modal.show();
-        } else {
+        $modal.show();
+
+        if ($(avatar).attr('src') != '') {
             $image.onload = function() {
-                $modal.show();
                 initializeCropper();
             };
             $image.src = $(avatar).attr('src');
@@ -48,6 +47,10 @@ function cropperOpen() {
 
         // Cropper를 초기화하는 함수
         function initializeCropper() {
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
             cropper = new Cropper($image);
         }
         
@@ -90,10 +93,8 @@ function cropperOpen() {
         $('#' + cropId).on('click', function () {
             var initialAvatarURL;
             var canvas;
-            console.log('크롭 클릭');
 
             if (cropper) {
-                console.log('크롭 실행');
                 var cropWidth = $('#cropWidth').val();
                 var cropHeight = $('#cropHeight').val();
                 canvas = cropper.getCroppedCanvas({
@@ -122,13 +123,14 @@ function cropperOpen() {
                         },
 
                         error: function () {
-                            avatar.src = initialAvatarURL;
+                            avatar.src = '/asset/images/romeo.jpg'; //임시 url 추후 avatar.src = initialAvatarURL; 로 수정해야함!!!!
                             $alert.show().addClass('alert-warning').text('Upload error');
                             setTimeout( function(){
                                 $('.alert').hide();
                             }, 2000);
                         },
                     });
+                    cropper = new Cropper($image);
                 });
             }
 
