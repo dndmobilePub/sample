@@ -128,6 +128,7 @@ function cropperOpen() {
                             setTimeout( function(){
                                 $('.alert').hide();
                             }, 2000);
+                            $imgWrap.removeClass('no-img'); // 임시 제거 테스트 완료 후 삭제해야함!!!!
                         },
                     });
                     cropper = new Cropper($image);
