@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal cropModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,13 +9,20 @@
       </div>
       <div class="modal-body">
         <div class="img-container">
-          <img src="https://avatars0.githubusercontent.com/u/3456749">
+          <img src="">
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary crop">Crop</button>
+      <div class="modal-footer between">
+        <label class="btn label cropLabel">
+          이미지 불러오기
+          <input type="file" class="sr-only" name="image" accept="image/*">
+        </label>
+        <div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary crop">Crop</button>
+        </div>
       </div>
     </div>
   </div>
+  <div class="modal-dim"></div>
 </div>

@@ -32,10 +32,7 @@
             <ul class="swiper-wrapper">
               <li class="swiper-slide">
                 <div class="swiper-box">
-                  <label class="label cropLabel" data-toggle="tooltip">
-                    <div class="imgWrap no-img"><img src="" alt=""></div>
-                    <input type="file" class="sr-only" name="image" accept="image/*">
-                  </label>
+                  <div class="imgWrap no-img"><img src="" alt=""></div>
                   <div class="alert" role="alert"></div>
                 </div>
                 <div class="swiper-box">
@@ -46,10 +43,7 @@
               </li>
               <li class="swiper-slide">
                 <div class="swiper-box">
-                  <label class="label cropLabel" data-toggle="tooltip">
-                    <div class="imgWrap no-img"><img src="" alt=""></div>
-                    <input type="file" class="sr-only" name="image" accept="image/*">
-                  </label>
+                  <div class="imgWrap no-img"><img src="" alt=""></div>
                   <div class="alert" role="alert"></div>
                 </div>
                 <div class="swiper-box">
@@ -73,10 +67,12 @@
           <button type="button" class="deleteBtn">삭제</button>
         </div>
         <div class="md md-img" data-type="img">
-          <label class="label cropLabel" data-toggle="tooltip">
-            <img src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
-            <input type="file" class="sr-only" name="image" accept="image/*">
-          </label>
+          <div class="imgWrap"><img src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar"></div>
+          <div class="alert" role="alert"></div>
+          <button type="button" class="deleteBtn">삭제</button>
+        </div>
+        <div class="md md-img" data-type="img">
+          <div class="imgWrap no-img"><img src=""></div>
           <div class="alert" role="alert"></div>
           <button type="button" class="deleteBtn">삭제</button>
         </div>
@@ -95,28 +91,7 @@
   </div>
 
   <!-- S: cropper modal -->
-  <div class="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Crop the image</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="img-container">
-            <img src="">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary crop">Crop</button>
-        </div>
-      </div>
-    </div>
-    <div class="modal-dim"></div>
-  </div>
+  <div class="modalWrap"></div>
   <!-- E: cropper modal -->
 
 
@@ -144,12 +119,8 @@
       var imgFile =`<div class="imgWrap no-img"><img src=""></div>`;
       var videoFile =`<div class="videoWrap no-video" id="avatar"></div>`;
       var fileAreaHTML = `
-        <label class="label cropLabel" data-toggle="tooltip">
-           ${imgFile} 
-          <input type="file" class="sr-only" name="image" accept="image/*">
-        </label>
+        ${imgFile} 
         <div class="alert" role="alert"></div>
-        
       `;
       var textAreaHTML = `
       <div class="txtEdit" contenteditable="false">
@@ -161,10 +132,7 @@
           <ul class="swiper-wrapper">
             <li class="swiper-slide">
               <div class="swiper-box">
-                <label class="label" data-toggle="tooltip">
-                  <div class="imgWrap no-img" id="avatar"></div>
-                  <input type="file" class="sr-only" id="input" name="image" accept="image/*">
-                </label>
+                <div class="imgWrap no-img"><img src="" alt=""></div>
                 <div class="alert" role="alert"></div>
               </div>
               <div class="swiper-box">
@@ -175,10 +143,7 @@
             </li>
             <li class="swiper-slide">
               <div class="swiper-box">
-                <label class="label" data-toggle="tooltip">
-                  <div class="imgWrap no-img" id="avatar"></div>
-                  <input type="file" class="sr-only" id="input" name="image" accept="image/*">
-                </label>
+                <div class="imgWrap no-img"><img src="" alt=""></div>
                 <div class="alert" role="alert"></div>
               </div>
               <div class="swiper-box">
