@@ -196,7 +196,8 @@ header {
     max-width: 100%;
   }
 }
-.imgWrap {
+.imgWrap,
+.noImgWrap {
   &.no-img {
     text-align:center; padding:2rem;
     @include el-content(before){
