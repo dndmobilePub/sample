@@ -1,28 +1,29 @@
-<div class="modal cropModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modalPop _center">
+  <div class="modalWrap" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Crop the image</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="mp-title dep01">Crop the image</h5>
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button> -->
+        <a href="#" class="btn-close-pop ico ico-pop-close" role="button"><span class="hide">창닫기</span></a>
       </div>
-      <div class="modal-body">
+      <div class="modal-container">
         <div class="img-container">
           <img src="">
         </div>
       </div>
-      <div class="modal-footer between">
-        <label class="btn label cropLabel">
-          이미지 불러오기
-          <input type="file" class="sr-only" name="image" accept="image/*">
-        </label>
-        <div>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary crop">Crop</button>
-        </div>
+      <div class="modal-footer">
+        <div class="btnWrap grow">
+          <label class="btnLabel cropLabel">
+            이미지 불러오기
+            <input type="file" class="cropInput" name="image" accept="image/*">
+          </label>
+          <button class="btn btn-size md bg btn-close-pop">Cancel</button>
+          <button class="btn btn-size md type2 bg btnCrop">Crop</button>
+      </div>
       </div>
     </div>
   </div>
-  <div class="modal-dim"></div>
+  <div class="dimmed"></div>
 </div>
