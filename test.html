@@ -102,34 +102,32 @@
       // cropperOpen();   
 
       //드래그앤드롭
-      $( ".section" ).sortable({
-        tolerance: 'pointer', // 마우스 커서의 이동 거리가 클릭 시점에서 이 값보다 크면 드래그가 시작됨
-        distance:20,
-      });
+      // $( ".section" ).sortable({
+      //   tolerance: 'pointer', // 마우스 커서의 이동 거리가 클릭 시점에서 이 값보다 크면 드래그가 시작됨
+      //   distance:20,
+      // });
 
       // 마우스 왼쪽 버튼 클릭 시 contenteditable 속성을 활성화합니다.
-      $(document).on('click', '.txtEdit', function(e) {
-        $(this).attr('contenteditable', 'true');
-        $(this).focus(); 
-      });
+      // $(document).on('click', '.txtEdit', function(e) {
+      //   $(this).attr('contenteditable', 'true');
+      //   $(this).focus(); 
+      // });
 
-      // 텍스트 영역을 벗어날 때 contenteditable 속성을 비활성화합니다.
-      $(document).on('focusout', '.txtEdit', function() {
-        $(this).attr('contenteditable', 'false');
-      });
+      // // 텍스트 영역을 벗어날 때 contenteditable 속성을 비활성화합니다.
+      // $(document).on('focusout', '.txtEdit', function() {
+      //   $(this).attr('contenteditable', 'false');
+      // });
 
-      var fileType = '';
-      var imgFile =`<div class="imgWrap no-img"><img src=""></div>`;
-      var videoFile =`<div class="videoWrap no-video" id="avatar"></div>`;
-      var fileAreaHTML = `
-        ${imgFile} 
-        <div class="alert" role="alert"></div>
-      `;
       var textAreaHTML = `
       <div class="txtEdit" contenteditable="false">
         <p>텍스트입력</p>
       </div>
       `;
+      var imgAreaHTML = `
+        <div class="imgWrap no-img"><img src=""></div>
+        <div class="alert" role="alert"></div>
+      `;
+      var videoAreaHTML = `<div class="videoWrap no-video" id="avatar"></div>`;
       var swiperAreaHTML = `
         <div class="swiper">
           <ul class="swiper-wrapper">
@@ -171,23 +169,15 @@
         newMd.addClass('md-' + dataType);
         newMd.attr('data-type', dataType);
 
-          // 클릭된 버튼의 데이터 유형에 따라 fileType 설정
-        if(dataType === 'img') {
-          fileType = imgFile; // fileType을 imgFile로 설정
-        } else if(dataType === 'video') {
-          fileType = videoFile; // fileType을 videoFile로 설정
-        }
-        console.log(fileType)
-
         var newContentHTML;
         if(dataType === 'img') {
-          newContentHTML = fileAreaHTML.replace('${fileType}', imgFile);
+          newContentHTML = imgAreaHTML;
         } else if(dataType === 'goods') {
           newContentHTML = swiperAreaHTML;
         } else if(dataType === 'txt') {
           newContentHTML = textAreaHTML;
         } else if(dataType === 'video') {
-          newContentHTML = fileAreaHTML.replace('${fileType}', videoFile);
+          newContentHTML = videoAreaHTML;
         }
         newMd.append(newContentHTML);
         $('.container .section').append(newMd);
@@ -206,10 +196,6 @@
         
       });
 
-      //삭제버튼
-      $(document).on('click', '.deleteBtn', function() {
-        $(this).closest('.md').remove();
-      });
 
       // 동적으로 생성된 스와이퍼에 대한 초기화 함수
       function initializeSwiper(swiperContainer) {
@@ -230,7 +216,7 @@
 
       // 슬라이드 추가 함수
       function addSlide(swiperInstance) {
-        var newSlideHTML = `<li class='swiper-slide'>` + fileAreaHTML + textAreaHTML + `</li>`;
+        var newSlideHTML = `<li class='swiper-slide'>` + imgAreaHTML + textAreaHTML + `</li>`;
         swiperInstance.appendSlide(newSlideHTML);
       }
 
@@ -239,7 +225,8 @@
         var swiperContainer = $(this).siblings('.swiper');
         var swiperInstance = swiperContainer.data('swiper');
         addSlide(swiperInstance);
-        cropperOpen();
+        //cropperOpen();
+        COMPONENT_UI.init();
       });
 
       // 초기화
@@ -252,6 +239,12 @@
         });
       });
 
+
+      
+      //삭제버튼
+      $(document).on('click', '.deleteBtn', function() {
+        $(this).closest('.md').remove();
+      });
 
     } );
   </script>

@@ -214,11 +214,178 @@ var COMPONENT_UI = (function (cp, $) {
         }
     };
     // cp.videoModule.init();
+
+    cp.moduleDrag = {
+        init: function () {
+            // 드래그앤드롭 초기화
+            $(".section").sortable({
+                tolerance: 'pointer', 
+                distance: 20,
+            });
+        },
+        dragFn: function () {
+            // dragFn 함수 코드 작성
+        }
+    };
+
+    cp.txtEdit = {
+        init: function () {
+            // 마우스 왼쪽 버튼 클릭 시 contenteditable 속성을 활성화합니다.
+            $(document).on('click', '.txtEdit', function(e) {
+                $(this).attr('contenteditable', 'true');
+                $(this).focus(); 
+            });
+
+            // 텍스트 영역을 벗어날 때 contenteditable 속성을 비활성화합니다.
+            $(document).on('focusout', '.txtEdit', function() {
+                $(this).attr('contenteditable', 'false');
+            });
+        }
+    };
+    
+    // cp.moduleAdd = {
+    //     textAreaHTML: `
+    //         <div class="txtEdit" contenteditable="false">
+    //             <p>텍스트입력</p>
+    //         </div>
+    //     `,
+    //     imgAreaHTML: `
+    //         <div class="imgWrap no-img"><img src=""></div>
+    //         <div class="alert" role="alert"></div>
+    //     `,
+    //     videoAreaHTML: `<div class="videoWrap no-video" id="avatar"></div>`,
+    //     swiperAreaHTML: `
+    //         <div class="swiper">
+    //             <ul class="swiper-wrapper">
+    //                 <li class="swiper-slide">
+    //                     <div class="swiper-box">
+    //                         <div class="imgWrap no-img"><img src="" alt=""></div>
+    //                         <div class="alert" role="alert"></div>
+    //                     </div>
+    //                     <div class="swiper-box">
+    //                         <div class="txtEdit" contenteditable="false">
+    //                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+    //                         </div>
+    //                     </div>
+    //                 </li>
+    //                 <li class="swiper-slide">
+    //                     <div class="swiper-box">
+    //                         <div class="imgWrap no-img"><img src="" alt=""></div>
+    //                         <div class="alert" role="alert"></div>
+    //                     </div>
+    //                     <div class="swiper-box">
+    //                         <div class="txtEdit" contenteditable="false">
+    //                             <p>텍스트 입력</p>
+    //                         </div>
+    //                     </div>
+    //                 </li>
+    //             </ul>
+    //             <div class="swiper-button-next"></div>
+    //             <div class="swiper-button-prev"></div>
+    //             <div class="swiper-pagination"></div>
+    //         </div>
+    //         <button type="button" class="swiperAddBtn">추가</button>
+    //     `,
+    //     init: function () {
+    //         // 이벤트 핸들러 바인딩 전에 이전에 바인딩된 핸들러를 제거
+    //     $('.btnWrap').off('click', 'a');
+    //         // 버튼 클릭 이벤트 핸들러
+    //         $('.btnWrap').on('click', 'a', function (e) {
+    //             e.preventDefault();
+    //             var dataType = $(this).data('type');
+    //             var newMd = $('<div class="md"><button type="button" class="deleteBtn">삭제</button></div>');
+    //             newMd.addClass('md-' + dataType);
+    //             newMd.attr('data-type', dataType);
+    
+    //             var newContentHTML;
+    //             if (dataType === 'img') {
+    //                 newContentHTML = cp.moduleAdd.imgAreaHTML;
+    //             } else if (dataType === 'goods') {
+    //                 newContentHTML = cp.moduleAdd.swiperAreaHTML;
+    //             } else if (dataType === 'txt') {
+    //                 newContentHTML = cp.moduleAdd.textAreaHTML;
+    //             } else if (dataType === 'video') {
+    //                 newContentHTML = cp.moduleAdd.videoAreaHTML;
+    //             }
+    //             newMd.append(newContentHTML);
+    //             $('.container .section').append(newMd);
+    //             // cropperOpen();
+    //              COMPONENT_UI.init();
+    
+    //             // 새로 생성된 스와이퍼에 대한 초기화
+    //             if (dataType === 'goods') {
+    //                 var newSwiperContainer = newMd.find('.swiper')[0];
+    //                 var newSwiperInstance = initializeSwiper(newSwiperContainer);
+    //                 $(newSwiperContainer).data('swiper', newSwiperInstance);
+    //             }
+    
+    //             // 페이지 하단으로 스크롤
+    //             $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+    
+    //         });
+    
+    //         // 동적으로 생성된 스와이퍼에 대한 초기화 함수
+    //         function initializeSwiper(swiperContainer) {
+    //             var newSwiper = new Swiper(swiperContainer, {
+    //                 loop: false,
+    //                 slidesPerView: 2,
+    //                 spaceBetween: 10,
+    //                 pagination: {
+    //                     el: '.swiper-pagination',
+    //                 },
+    //                 navigation: {
+    //                     nextEl: '.swiper-button-next',
+    //                     prevEl: '.swiper-button-prev',
+    //                 },
+    //             });
+    //             return newSwiper;
+    //         }
+    
+    //         // 슬라이드 추가 함수
+    //         function addSlide(swiperInstance) {
+    //             var newSlideHTML = `<li class='swiper-slide'>` + cp.moduleAdd.imgAreaHTML + cp.moduleAdd.textAreaHTML + `</li>`;
+    //             swiperInstance.appendSlide(newSlideHTML);
+    //         }
+    
+    //         // 버튼 클릭 이벤트 핸들러
+    //         $('.container .section').on('click', '.swiperAddBtn', function () {
+    //             var swiperContainer = $(this).siblings('.swiper');
+    //             var swiperInstance = swiperContainer.data('swiper');
+    //             addSlide(swiperInstance);
+    //             //cropperOpen();
+    //             COMPONENT_UI.init();
+    //         });
+    
+    //         // 초기화
+    //         $(document).ready(function () {
+    //             // 초기에 존재하는 스와이퍼 객체에 대해서 초기화
+    //             var initialSwipers = $('.section .swiper');
+    //             initialSwipers.each(function () {
+    //                 var swiperInstance = initializeSwiper(this);
+    //                 $(this).data('swiper', swiperInstance);
+    //             });
+    //         });
+    //     }
+    // };
+    
+
+    cp.moduleDelete = {
+        init: function() {
+            // 삭제버튼
+            $(document).on('click', '.deleteBtn', function() {
+                $(this).closest('.md').remove();
+            });
+        }
+    };
     
 
     cp.init = function () {
         cp.imgCrop.init();
         cp.videoModule.init();
+        cp.moduleDrag.init();
+        cp.txtEdit.init(); 
+        // cp.moduleAdd.init();
+        cp.moduleDelete.init();
     };
 
     cp.init();
