@@ -123,7 +123,7 @@ function cropperOpen() {
                         },
 
                         error: function () {
-                            avatar.src = '/asset/images/romeo.jpg'; //임시 url 추후 avatar.src = initialAvatarURL; 로 수정해야함!!!!
+                            // avatar.src = '/asset/images/romeo.jpg'; //임시 url 추후 avatar.src = initialAvatarURL; 로 수정해야함!!!!
                             $alert.show().addClass('alert-warning').text('Upload error');
                             setTimeout( function(){
                                 $('.alert').hide();

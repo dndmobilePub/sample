@@ -12,6 +12,8 @@
 @import 'variables';
 @import 'mixin';
 @import 'reset';
+@import '_cp.button';
+@import '_cp.popup';
 
 header {
   position: fixed;
@@ -196,22 +198,23 @@ header {
     max-width: 100%;
   }
 }
-.imgWrap {
-  &.no-img {
-    text-align:center; padding:2rem;
-    @include el-content(before){
-      background:svgIconForm(no-img, 666);
-      @include el-size(5rem, 5rem); margin:auto;
-    }
-    @include el-content(after){
-      content:'이미지를 등록해주세요';
-      margin-top:2rem;
-      font-size: 1.4rem;
-      font-weight:700;
-    }
-  }
+.imgWrap {  
   img {
     max-width: 100%;
+  }
+}
+
+.no-img {
+  text-align:center; padding:2rem;
+  @include el-content(before){
+    background:svgIconForm(no-img, 666);
+    @include el-size(5rem, 5rem); margin:auto;
+  }
+  @include el-content(after){
+    content:'이미지를 등록해주세요';
+    margin-top:2rem;
+    font-size: 1.4rem;
+    font-weight:700;
   }
 }
 

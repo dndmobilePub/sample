@@ -80,6 +80,21 @@
     @content;
 }
 
+@mixin line-effect($color, $el-type, $direction) {
+    backface-visibility:hidden;
+	position:relative;
+    // transition:0.5s color ease;
+	text-decoration:none;
+	color:$color;
+
+    @include el-content($el-type) {
+        backface-visibility:hidden;
+        position:absolute;
+        @include eff-direction($direction);
+        @content;
+    }
+}
+
 // width, height
 @mixin width ($width:100%) {
     width:$width;

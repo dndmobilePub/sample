@@ -11,7 +11,8 @@
     <script type="text/javascript" src="./asset/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="./asset/js/pg.cropper.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="./asset/js/common.js"></script>
+    <script src="./asset/js/ui.component.js"></script>
+    <!-- <script src="./asset/js/common.js"></script> -->
 
 </head>
 
@@ -97,11 +98,13 @@
 
   <script>
     $( function() {
-      cropperOpen();   
+      COMPONENT_UI.init();
+      // cropperOpen();   
 
       //드래그앤드롭
       $( ".section" ).sortable({
-        tolerance: 'pointer' // 마우스 커서의 이동 거리가 클릭 시점에서 이 값보다 크면 드래그가 시작됨
+        tolerance: 'pointer', // 마우스 커서의 이동 거리가 클릭 시점에서 이 값보다 크면 드래그가 시작됨
+        distance:20,
       });
 
       // 마우스 왼쪽 버튼 클릭 시 contenteditable 속성을 활성화합니다.
@@ -188,7 +191,8 @@
         }
         newMd.append(newContentHTML);
         $('.container .section').append(newMd);
-        cropperOpen();  
+        // cropperOpen();
+        COMPONENT_UI.init();
 
         // 새로 생성된 스와이퍼에 대한 초기화
         if (dataType === 'goods') {
