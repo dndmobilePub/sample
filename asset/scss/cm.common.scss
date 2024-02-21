@@ -40,9 +40,6 @@ header {
     border:1px $color-gray5 solid;
     max-width:36rem; margin:2rem auto;
 
-    [data-type="goods"]{
-      display: flex;
-    }
     .md {
       position: relative;
       // background:$color-gray6;
@@ -109,6 +106,20 @@ header {
     display: none;
   }
 }
+/*상품추가 모달팝업*/
+.modalWrap{
+  .product-list{
+    display: flex;
+    gap: 10px;
+    & > li{
+      width: calc((100% - 20px)/3)
+    }
+    .swiper-slide{
+      display: block;
+    }
+  }
+}
+
 
 /* cropper 모달팝업 */
 .cropModalWrap {
@@ -188,10 +199,27 @@ header {
     font-weight:700;
   }
 }
-
+.product-list{
+  li{
+    .swiper-slide{
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
 .swiper{
   &-slide{
-    background: moccasin;
+    .no-img{
+      background: #eee;
+    }
+    .swiper-box{
+      .txtEdit {
+        padding: 0 10px;
+      }
+      &.swiper-box{
+        padding-top: 10px;
+      }
+    }
   }
 }
 

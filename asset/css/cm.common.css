@@ -141,6 +141,10 @@ body, th, td, input, select, textarea, button {
   letter-spacing: -0.5px;
 }
 
+input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
+  background: #f6f6f6;
+}
+
 input[type=text]:read-only, input[type=password]:read-only,
 input[type=text]:disabled, input[type=password]:disabled {
   background: #f6f6f6;
@@ -1120,9 +1124,6 @@ header {
   max-width: 36rem;
   margin: 2rem auto;
 }
-.container .section [data-type=goods] {
-  display: flex;
-}
 .container .section .md {
   position: relative;
   min-height: 10rem;
@@ -1151,12 +1152,6 @@ header {
   font-size: 1rem;
   color: #856404;
 }
-<<<<<<< HEAD
-=======
-.container .section .md-goods {
-  display: flex;
-}
->>>>>>> 00ea9344af6da8c2d92c2bfe26fcaad51dcc8168
 .container .section .md [contenteditable=true] {
   cursor: text;
 }
@@ -1182,6 +1177,18 @@ header {
   z-index: 2;
   margin: 0;
   display: none;
+}
+
+/*상품추가 모달팝업*/
+.modalWrap .product-list {
+  display: flex;
+  gap: 10px;
+}
+.modalWrap .product-list > li {
+  width: calc((100% - 20px) / 3);
+}
+.modalWrap .product-list .swiper-slide {
+  display: block;
 }
 
 /* cropper 모달팝업 */
@@ -1267,8 +1274,19 @@ header {
   font-weight: 700;
 }
 
-.swiper-slide {
-  background: moccasin;
+.product-list li .swiper-slide {
+  display: flex;
+  gap: 10px;
+}
+
+.swiper-slide .no-img {
+  background: #eee;
+}
+.swiper-slide .swiper-box .txtEdit {
+  padding: 0 10px;
+}
+.swiper-slide .swiper-box.swiper-box {
+  padding-top: 10px;
 }
 
 .videoWrap.no-video {
@@ -1307,11 +1325,9 @@ header {
   font-size: 0;
   line-height: 0;
   position: relative;
-  -ms-touch-action: none;
   touch-action: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .cropper-container img {
