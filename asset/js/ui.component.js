@@ -5,6 +5,12 @@ var COMPONENT_UI = (function (cp, $) {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
 
+    cp.module = {
+        init: function () {
+            $('.md').not(':last').append('<hr class="devide" />');
+        },
+    }
+
     cp.imgCrop = {
         init: function () {
             $('.imgWrap').click(this.openCropImg);
@@ -97,6 +103,7 @@ var COMPONENT_UI = (function (cp, $) {
 
             // cropper 실행 후(crop 버튼 클릭 후)
             $('#' + cropId).on('click', function () {
+                var imgIndex =  $('#modal').attr('img-index');
                 var initialAvatarURL;
                 var canvas;
                 
@@ -112,12 +119,12 @@ var COMPONENT_UI = (function (cp, $) {
                     initialAvatarURL = avatar.src;
                     avatar.src = canvas.toDataURL();
                     $alert.removeClass('alert-success alert-warning');
+                    /*
+                    서버전송관련
                     canvas.toBlob(function (blob) {
                         var formData = new FormData();
-
                         formData.append('avatar', blob, 'avatar.jpg');
-                        /*
-                        서버전송관련
+                        
                         $.ajax('https://jsonplaceholder.typicode.com/posts', {
                             method: 'POST',
                             data: formData,
@@ -140,9 +147,9 @@ var COMPONENT_UI = (function (cp, $) {
                                 }, 2000);
                             },
                         });
-                        */
                         cropper = new Cropper($image);
                     });
+                    */
                 }
 
                 $modal.hide();
@@ -196,21 +203,17 @@ var COMPONENT_UI = (function (cp, $) {
             }
         },
         videoAdd: function ($container) {
-            var fileInput = $('<input type="file">');
-    
-            fileInput.on('change', function () {
-                var file = this.files[0];
-                var videoURL = URL.createObjectURL(file);
-    
-                var videoElement = $('<video controls><source type="video/mp4"></video>');
-                videoElement.find('source').attr('src', videoURL);
-    
-                $container.html(videoElement);
+            var inputURL = prompt("Please enter YouTube video URL:");
+            if (inputURL && inputURL.includes("youtube.com")) {
+                var videoId = inputURL.split('v=')[1];
+                var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
+                iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+                $container.html(iframe);
                 $container.removeClass('no-video');
                 cp.videoModule.checkVideo($container);
-            });
-    
-            fileInput.click();
+            } else {
+                alert("Invalid YouTube video URL.");
+            }
         }
     };
     // cp.videoModule.init();
@@ -383,7 +386,8 @@ var COMPONENT_UI = (function (cp, $) {
         cp.imgCrop.init();
         cp.videoModule.init();
         cp.moduleDrag.init();
-        cp.txtEdit.init(); 
+        cp.txtEdit.init();
+        cp.module.init();
         // cp.moduleAdd.init();
         cp.moduleDelete.init();
     };

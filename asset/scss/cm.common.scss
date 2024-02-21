@@ -37,21 +37,32 @@ header {
 .container {
   padding:6rem 3rem 3rem;
   .section {
-    max-width:36rem; margin:0 auto;
+    border:1px $color-gray5 solid;
+    max-width:36rem; margin:2rem auto;
+
     [data-type="goods"]{
       display: flex;
     }
     .md {
       position: relative;
-      background:$color-gray6;
+      // background:$color-gray6;
       min-height:10rem;
       cursor: pointer;
-      & ~ .md {margin-top:1rem;}
+      & ~ .md {margin-top: 1rem;}
 
-      &-txt {border:5px solid $color-blue;}
-      &-img {border:5px solid $color-pk; font-size: 0;}
-      &-video {border:5px solid $color-green;}
-      &-goods {border:5px solid $color-brown;}
+      & > hr.devide {
+        @include pos-offset-b(-1rem, 0){}
+        @include display(block);
+        @include el-size(100%, 1rem);
+        background:$color-gray6;
+        border:none;
+        padding:0; margin:0;
+      }
+
+      // &-txt {border:5px solid $color-blue;}
+      // &-img {border:5px solid $color-pk; font-size: 0;}
+      // &-video {border:5px solid $color-green;}
+      // &-goods {border:5px solid $color-brown;}
 
       .alert {
         display: none;
@@ -62,32 +73,40 @@ header {
         color: #856404;
       }
       &-goods{
-        display: flex;
+        // display: flex;
       }
       [contenteditable=true] {
         cursor: text;
       }
-      .swiperAddBtn{
-        width: 3rem;
-        height: 3rem;
-        margin: auto;
-        border-radius: 3rem;
-        background: $color-white;
-      }
-      .deleteBtn{
-        display: none;
-        position: absolute;
-        top: 0; right: 0;
-        width: 3rem;
-        height: 2rem;
-        background: red;
-      }
+      // .btnWrap {
+      //   margin:0; padding:0;
+      //   @include pos-offset-r(2.5rem, -10rem){
+      //     z-index:2;
+      //   }
+      // }
+      
       &:hover{
         .deleteBtn{
           display: block;
         }
       }
+      
     }
+  }
+}
+
+.btn {
+  &.swiperAddBtn{
+    @include pos-offset-r(calc(50% - 2.5rem), -2.5rem){z-index:2;}
+    @include el-size(5rem, 5rem);
+    border-radius:100%;
+    background: $color-white;
+    color:$color-gray3;
+  }
+  &.deleteBtn{
+    @include pos-offset-r(-.5rem, -.5rem){z-index:2;}
+    margin:0;
+    display: none;
   }
 }
 
@@ -231,6 +250,11 @@ header {
       font-weight:700;
       margin-top:2rem;
     }
+  }
+  video, iframe {@include el-size(100%, 100%);}
+  & + .btnWrap {
+    padding:0; margin-top:0; margin-bottom:2rem;
+    @include align(text, center);
   }
 }
 

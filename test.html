@@ -29,6 +29,10 @@
     <div class="container">
       <section class="section">
         <div class="md md-goods" data-type="goods">
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="btnWrap">
+            <button class="btn btn-size xs shadow swiperAddBtn">상품 항목추가</button>
+          </div>
           <div class="swiper">
             <ul class="swiper-wrapper">
               <li class="swiper-slide">
@@ -58,34 +62,40 @@
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
           </div>
-          <button type="button" class="swiperAddBtn">추가</button>
-          <button type="button" class="deleteBtn">삭제</button>
+          
         </div>
         <div class="md md-txt" data-type="txt">
           <div class="txtEdit" contenteditable="false">
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
           </div>
-          <button type="button" class="deleteBtn">삭제</button>
+          
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div>
         <div class="md md-img" data-type="img">
           <div class="imgWrap"><img src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar"></div>
           <div class="alert" role="alert"></div>
-          <button type="button" class="deleteBtn">삭제</button>
+          
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div>
         <div class="md md-img" data-type="img">
           <div class="imgWrap no-img"><img src=""></div>
           <div class="alert" role="alert"></div>
-          <button type="button" class="deleteBtn">삭제</button>
+          
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div>
         <div class="md md-txt" data-type="txt">
           <div class="txtEdit" contenteditable="false">
             <p>텍스트</p>
-          </div>
-          <button type="button" class="deleteBtn">삭제</button>
+          </div>          
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div>
         <div class="md md-video" data-type="video">
           <div class="videoWrap no-video"></div>
-          <button type="button" class="deleteBtn">삭제</button>
+          <div class="btnWrap">
+            <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
+            <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div>
       </section>
     </div>
@@ -127,8 +137,15 @@
         <div class="imgWrap no-img"><img src=""></div>
         <div class="alert" role="alert"></div>
       `;
-      var videoAreaHTML = `<div class="videoWrap no-video" id="avatar"></div>`;
+      var videoAreaHTML = `<div class="videoWrap no-video"></div>
+          <div class="btnWrap">
+            <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
+            <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
+          </div>`;
       var swiperAreaHTML = `
+      <div class="btnWrap">
+            <button class="btn btn-size xs shadow swiperAddBtn">상품 항목추가</button>
+          </div>
         <div class="swiper">
           <ul class="swiper-wrapper">
             <li class="swiper-slide">
@@ -158,14 +175,14 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-pagination"></div>
         </div>
-        <button type="button" class="swiperAddBtn">추가</button>
+        
       `;
       
       // 버튼 클릭 이벤트 핸들러
       $('.btnWrap').on('click', 'a', function(e) {
         e.preventDefault(); 
         var dataType = $(this).data('type');
-        var newMd = $('<div class="md"><button type="button" class="deleteBtn">삭제</button></div>');
+        var newMd = $('<div class="md"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button></div>');
         newMd.addClass('md-' + dataType);
         newMd.attr('data-type', dataType);
 
@@ -241,7 +258,7 @@
 
 
       
-      //삭제버튼
+      //모듈삭제버튼
       $(document).on('click', '.deleteBtn', function() {
         $(this).closest('.md').remove();
       });
