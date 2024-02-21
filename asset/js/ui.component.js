@@ -167,8 +167,58 @@ var COMPONENT_UI = (function (cp, $) {
         }
     };
 
+    cp.videoModule = {
+        init: function () {
+            $('.videoWrap').each(function () {
+                var $videoWrap = $(this);
+                cp.videoModule.checkVideo($videoWrap);
+            });
+    
+            // Delegate click event for dynamically added .btn-addVideo buttons
+            $(document).on('click', '.btn-addVideo', function () {
+                var $videoWrap = $(this).parent();
+                cp.videoModule.videoAdd($videoWrap);
+            });
+        },
+        checkVideo: function ($videoWrap) {
+            if ($videoWrap.find('video').length > 0) {
+                // If video tag exists, add .btn-addVideo button
+                $videoWrap.find('.btn-addVideo').remove(); // Remove existing .btn-addVideo button
+                $videoWrap.append('<button class="btn-addVideo">Add Video</button>');
+    
+                // Remove click event from .videoWrap
+                $videoWrap.off('click');
+            } else {
+                // If video tag doesn't exist, bind click event to open file input
+                $videoWrap.click(function () {
+                    cp.videoModule.videoAdd($videoWrap);
+                });
+            }
+        },
+        videoAdd: function ($container) {
+            var fileInput = $('<input type="file">');
+    
+            fileInput.on('change', function () {
+                var file = this.files[0];
+                var videoURL = URL.createObjectURL(file);
+    
+                var videoElement = $('<video controls><source type="video/mp4"></video>');
+                videoElement.find('source').attr('src', videoURL);
+    
+                $container.html(videoElement);
+                $container.removeClass('no-video');
+                cp.videoModule.checkVideo($container);
+            });
+    
+            fileInput.click();
+        }
+    };
+    // cp.videoModule.init();
+    
+
     cp.init = function () {
         cp.imgCrop.init();
+        cp.videoModule.init();
     };
 
     cp.init();
