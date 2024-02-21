@@ -176,41 +176,51 @@ var COMPONENT_UI = (function (cp, $) {
 
     cp.videoModule = {
         init: function () {
-            $('.videoWrap').each(function () {
-                var $videoWrap = $(this);
-                cp.videoModule.checkVideo($videoWrap);
+            // 파일 업로드 버튼 클릭 시
+            $(document).off('click', '.addVideo-file').on('click', '.addVideo-file', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+                cp.videoModule.addVideo($videoWrap);
             });
-    
-            // Delegate click event for dynamically added .btn-addVideo buttons
-            $(document).on('click', '.btn-addVideo', function () {
-                var $videoWrap = $(this).parent();
-                cp.videoModule.videoAdd($videoWrap);
+
+            // 유투브 파일 추가 버튼 클릭 시
+            $(document).off('click', '.addVideo-utube').on('click', '.addVideo-utube', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+                cp.videoModule.addYuetube($videoWrap);
             });
         },
-        checkVideo: function ($videoWrap) {
-            if ($videoWrap.find('video').length > 0) {
-                // If video tag exists, add .btn-addVideo button
-                $videoWrap.find('.btn-addVideo').remove(); // Remove existing .btn-addVideo button
-                $videoWrap.append('<button class="btn-addVideo">Add Video</button>');
-    
-                // Remove click event from .videoWrap
-                $videoWrap.off('click');
-            } else {
-                // If video tag doesn't exist, bind click event to open file input
-                $videoWrap.click(function () {
-                    cp.videoModule.videoAdd($videoWrap);
-                });
-            }
+        addVideo: function ($videoWrap) {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'video/*';
+            input.style.display = 'none';
+            input.onchange = function(event) {
+                var file = event.target.files[0];
+                var videoURL = URL.createObjectURL(file);
+                var videoElement = $('<video controls></video>');
+                videoElement.attr('src', videoURL);
+                $videoWrap.html(videoElement);
+                $videoWrap.removeClass('no-video');
+            };
+
+            // 파일 업로드 input을 document body에 추가하기 전에 제거하는 코드
+            $('input[type="file"]').remove(); 
+
+            document.body.appendChild(input);
+            input.click();
         },
-        videoAdd: function ($container) {
+        addYuetube: function ($container) {
             var inputURL = prompt("Please enter YouTube video URL:");
-            if (inputURL && inputURL.includes("youtube.com")) {
-                var videoId = inputURL.split('v=')[1];
+            if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
+                var videoId;
+                if (inputURL.includes("youtube.com")) {
+                    videoId = inputURL.split('v=')[1];
+                } else if (inputURL.includes("youtu.be")) {
+                    videoId = inputURL.split('/').pop();
+                }
                 var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
                 iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
                 $container.html(iframe);
                 $container.removeClass('no-video');
-                cp.videoModule.checkVideo($container);
             } else {
                 alert("Invalid YouTube video URL.");
             }
