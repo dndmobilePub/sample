@@ -36,13 +36,15 @@ function cropperOpen() {
         var $modal = $('#' + modalId);
         var cropper;
 
-        $modal.show();
+        $modal.show(); // 모달 실행
 
-        if ($(avatar).attr('src') != '') {
+        if ($(avatar).attr('src') != '') { //이미지 있을 경우 기존 이미지 로드
             $image.onload = function() {
                 initializeCropper();
             };
             $image.src = $(avatar).attr('src');
+        } else { //이미지 없을 경우 noImgWrap 추가
+            $modal.find('.modal-body').append('<div class="noImgWrap no-img"></div>');
         }
 
         // Cropper를 초기화하는 함수
@@ -78,6 +80,7 @@ function cropperOpen() {
                     reader.readAsDataURL(file);
                 }
             }
+            $('.noImgWrap').remove(); // 이미지 바뀌면 noImgWrap 제거
         });
       
 
@@ -128,6 +131,7 @@ function cropperOpen() {
                             setTimeout( function(){
                                 $('.alert').hide();
                             }, 2000);
+                            $imgWrap.removeClass('no-img'); // 임시 제거 테스트 완료 후 삭제해야함!!!!
                         },
                     });
                     cropper = new Cropper($image);

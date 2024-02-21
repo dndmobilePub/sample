@@ -1421,6 +1421,7 @@ header {
   max-width: 100%;
 }
 
+<<<<<<< HEAD
 .imgWrap img {
   max-width: 100%;
 }
@@ -1430,6 +1431,15 @@ header {
   padding: 2rem;
 }
 .no-img::before {
+=======
+.imgWrap.no-img,
+.noImgWrap.no-img {
+  text-align: center;
+  padding: 2rem;
+}
+.imgWrap.no-img::before,
+.noImgWrap.no-img::before {
+>>>>>>> c1caba689ca34a5317e280414b4eb772c47e87eb
   content: "";
   display: block;
   background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0'/%3E%3Cpath d='M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z'/%3E%3C/svg%3E") no-repeat;
@@ -1437,7 +1447,12 @@ header {
   height: 5rem;
   margin: auto;
 }
+<<<<<<< HEAD
 .no-img::after {
+=======
+.imgWrap.no-img::after,
+.noImgWrap.no-img::after {
+>>>>>>> c1caba689ca34a5317e280414b4eb772c47e87eb
   content: "";
   display: block;
   content: "이미지를 등록해주세요";
@@ -1445,6 +1460,13 @@ header {
   font-size: 1.4rem;
   font-weight: 700;
 }
+<<<<<<< HEAD
+=======
+.imgWrap img,
+.noImgWrap img {
+  max-width: 100%;
+}
+>>>>>>> c1caba689ca34a5317e280414b4eb772c47e87eb
 
 .videoWrap.no-video {
   text-align: center;
