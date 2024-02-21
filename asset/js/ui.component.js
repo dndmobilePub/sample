@@ -12,7 +12,7 @@ var COMPONENT_UI = (function (cp, $) {
         openCropImg: function () {
             var $imgWrap = $(this);
 
-            $('.modalWrap').load('modal.html', function () {
+            $('.cropModalWrap').load('modal.html', function () {
                 var uniqueId = generateUniqueId(); // 고유한 ID 생성
 
                 var avatarId = 'avatar_' + uniqueId;
@@ -23,10 +23,10 @@ var COMPONENT_UI = (function (cp, $) {
 
                 // 각 요소에 ID 부여
                 $imgWrap.children('img').attr('id', avatarId);
-                $('.sr-only').attr('id', inputId);
-                $('.cropModal').attr('id', modalId);
+                $('.cropInput').attr('id', inputId);
+                $('.cropModalWrap').children('.modalPop').attr('id', modalId);
                 $('.img-container img').attr('id', imgId);
-                $('.crop').attr('id', cropId);
+                $('.btnCrop').attr('id', cropId);
 
                 cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap);
             });
@@ -42,12 +42,12 @@ var COMPONENT_UI = (function (cp, $) {
             $modal.show();
 
             if ($(avatar).attr('src') != '') {
+                $image.src = $(avatar).attr('src');
                 $image.onload = function () {
                     initializeCropper();
                 };
-                $image.src = $(avatar).attr('src');
             } else {
-                $('.modalWrap .img-container').addClass("no-img");
+                $('.cropModalWrap .img-container').addClass("no-img");
             }
 
             // Cropper를 초기화하는 함수
@@ -70,7 +70,7 @@ var COMPONENT_UI = (function (cp, $) {
                 var file;
                 var url;
 
-                $('.modalWrap .img-container').removeClass("no-img");
+                $('.cropModalWrap .img-container').removeClass("no-img");
 
                 if (files && files.length > 0) {
                     file = files[0];
@@ -150,7 +150,7 @@ var COMPONENT_UI = (function (cp, $) {
             });
 
             // 모달 닫기 cropper 초기화
-            $('.btn-secondary, .close').on('click', function () {
+            $('.btn-close-pop').on('click', function () {
                 $modal.hide();
                 cropRemove();
             });
@@ -162,7 +162,7 @@ var COMPONENT_UI = (function (cp, $) {
                     cropper = null;
                 }
                 $('#' + imgId).attr('src', '');
-                $('.cropModal').remove();
+                $('.cropModalWrap').children('.modalPop').remove();
             }
         }
     };

@@ -2,7 +2,7 @@ function cropperOpen() {
     $('.imgWrap').click(function() {
         var $imgWrap = $(this);
 
-        $('.modalWrap').load('modal.html', function() {
+        $('.cropModalWrap').load('modal.html', function() {
             var uniqueId = generateUniqueId(); // 고유한 ID 생성
     
             var avatarId = 'avatar_' + uniqueId;
@@ -13,10 +13,10 @@ function cropperOpen() {
             
             // 각 요소에 ID 부여
             $imgWrap.children('img').attr('id', avatarId);
-            $('.sr-only').attr('id', inputId);
-            $('.cropModal').attr('id', modalId);
+            $('.cropInput').attr('id', inputId);
+            $('.cropModalWrap').children('.modalPop').attr('id', modalId);
             $('.img-container img').attr('id', imgId);
-            $('.crop').attr('id', cropId);
+            $('.btnCrop').attr('id', cropId);
     
             iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap);
         });
@@ -39,12 +39,12 @@ function cropperOpen() {
         $modal.show(); // 모달 실행
 
         if ($(avatar).attr('src') != '') { //이미지 있을 경우 기존 이미지 로드
+            $image.src = $(avatar).attr('src');
             $image.onload = function() {
                 initializeCropper();
             };
-            $image.src = $(avatar).attr('src');
         } else { //이미지 없을 경우 noImgWrap 추가
-            $modal.find('.modal-body').append('<div class="noImgWrap no-img"></div>');
+            $modal.find('.modal-container').append('<div class="noImgWrap no-img"></div>');
         }
 
         // Cropper를 초기화하는 함수
@@ -143,7 +143,7 @@ function cropperOpen() {
         });
 
         // 모달 닫기 cropper 초기화
-        $('.btn-secondary, .close').on('click', function () {
+        $('.btn-close-pop').on('click', function () {
             $modal.hide();
             cropRemove();
         });
@@ -155,7 +155,7 @@ function cropperOpen() {
                 cropper = null;
             }
             $('#' + imgId).attr('src', '');
-            $('.cropModal').remove();
+            $('.cropModalWrap').children('.modalPop').remove();
         }
     };
 };
