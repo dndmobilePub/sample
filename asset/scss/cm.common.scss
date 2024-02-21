@@ -198,25 +198,8 @@ header {
     max-width: 100%;
   }
 }
-<<<<<<< HEAD
-.imgWrap {  
-=======
-.imgWrap,
-.noImgWrap {
-  &.no-img {
-    text-align:center; padding:2rem;
-    @include el-content(before){
-      background:svgIconForm(no-img, 666);
-      @include el-size(5rem, 5rem); margin:auto;
-    }
-    @include el-content(after){
-      content:'이미지를 등록해주세요';
-      margin-top:2rem;
-      font-size: 1.4rem;
-      font-weight:700;
-    }
-  }
->>>>>>> c1caba689ca34a5317e280414b4eb772c47e87eb
+
+.imgWrap {
   img {
     max-width: 100%;
   }
