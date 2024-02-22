@@ -53,9 +53,12 @@ header {
       & ~ .md {margin-top: 1.5rem;}
 
       &:hover {
-        outline-color: #c82b00;
+        outline-color: $flag-pk;
 
         .deleteBtn{
+          display: block;
+        }
+        .dragBtn {
           display: block;
         }
       }
@@ -113,6 +116,14 @@ header {
   }
   &.deleteBtn{
     @include pos-offset-r(-.5rem, -.5rem){z-index:2;}
+    margin:0;
+    display: none;
+  }
+  &.dragBtn {
+    @include pos-offset-r(2.1rem, -.5rem){z-index:2;}
+    padding: .85rem 1.15rem;
+    background: $color-violet;
+    border-color: $color-violet;
     margin:0;
     display: none;
   }

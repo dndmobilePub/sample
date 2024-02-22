@@ -1144,9 +1144,12 @@ header {
   margin-top: 1.5rem;
 }
 .container .section .md:hover {
-  outline-color: #c82b00;
+  outline-color: #e93c79;
 }
 .container .section .md:hover .deleteBtn {
+  display: block;
+}
+.container .section .md:hover .dragBtn {
   display: block;
 }
 .container .section .md .txtEdit {
@@ -1189,6 +1192,17 @@ header {
   top: -0.5rem;
   right: -0.5rem;
   z-index: 2;
+  margin: 0;
+  display: none;
+}
+.btn.dragBtn {
+  position: absolute;
+  top: 2.1rem;
+  right: -0.5rem;
+  z-index: 2;
+  padding: 0.85rem 1.15rem;
+  background: #8b4bdf;
+  border-color: #8b4bdf;
   margin: 0;
   display: none;
 }
