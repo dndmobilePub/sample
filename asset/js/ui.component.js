@@ -4,6 +4,7 @@ var COMPONENT_UI = (function (cp, $) {
     function generateUniqueId() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
+    cp.generateUniqueId = generateUniqueId;
 
     cp.imgCrop = {
         init: function () {

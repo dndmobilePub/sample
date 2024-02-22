@@ -273,11 +273,13 @@
             <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
             <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
           </div>`;
+      var uniqueData = COMPONENT_UI.generateUniqueId();
+      var swiperDataModal = 'swiper_' + uniqueData;
       var swiperAreaHTML = `
           <div class="txtEdit">
             <h1 contenteditable="true">대제목</h1>
           </div>
-          <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
+          <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="${swiperDataModal}">상품 항목추가</button>
           <div class="swiper">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
