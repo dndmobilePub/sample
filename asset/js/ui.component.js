@@ -31,7 +31,7 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap);
             });
         },
-        iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $mdImg) {
+        iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap) {
             var avatar = $('#' + avatarId)[0];
             var $image = $('#' + imgId)[0];
             var $input = $('#' + inputId)[0];
@@ -101,7 +101,7 @@ var COMPONENT_UI = (function (cp, $) {
                 var initialAvatarURL;
                 var canvas;
                 
-                $('.imgWrap').removeClass("no-img");
+                $imgWrap.removeClass("no-img");
 
                 if (cropper) {
                     var cropWidth = $('#cropWidth').val();
@@ -131,7 +131,7 @@ var COMPONENT_UI = (function (cp, $) {
                                 setTimeout(function () {
                                     $('.alert').hide();
                                 }, 2000);
-                                $mdImg.removeClass('no-img');
+                                $imgWrap.removeClass('no-img');
                             },
 
                             error: function () {

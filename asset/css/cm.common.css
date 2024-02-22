@@ -1220,6 +1220,7 @@ header {
 }
 
 .imgWrap img {
+  display: block;
   max-width: 100%;
 }
 
