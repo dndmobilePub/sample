@@ -239,8 +239,8 @@ var COMPONENT_UI = (function (cp, $) {
     cp.txtEdit = {
         init: function () {
             // 마우스 왼쪽 버튼 클릭 시 contenteditable 속성을 활성화합니다.
-            $(document).on('click', '.txtEdit', function(e) {
-                // .txtEdit.editDone 클래스가 존재하면 실행 중단
+            $(document).on('click', '[contenteditable]', function(e) {
+                // .editDone 클래스가 존재하면 실행 중단
                 if ($(this).hasClass('editDone')) {
                     return;
                 }
@@ -250,8 +250,8 @@ var COMPONENT_UI = (function (cp, $) {
             });
     
             // 텍스트 영역을 벗어날 때 contenteditable 속성을 비활성화합니다.
-            $(document).on('focusout', '.txtEdit', function() {
-                // .txtEdit.editDone 클래스가 존재하면 실행 중단
+            $(document).on('focusout', '[contenteditable]', function() {
+                // .editDone 클래스가 존재하면 실행 중단
                 if ($(this).hasClass('editDone')) {
                     return;
                 }

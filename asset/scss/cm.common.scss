@@ -59,7 +59,7 @@ header {
         }
       }
 
-      .txt {
+      .txtEdit {
         padding: 2.4rem;
         font-size: 1.4rem;
         color: $color-black;
@@ -75,9 +75,10 @@ header {
           margin: 0 2.4rem;
         }
       }
-
-      .txtEdit {
-        padding: 2.4rem;
+      
+      [contenteditable=true] {
+        cursor: text;
+        outline: 0;
       }
 
       .swiper{
@@ -97,10 +98,6 @@ header {
         font-size: 1rem;
         color: #856404;
       } */
-
-      [contenteditable=true] {
-        cursor: text;
-      }
     }
   }
 }
@@ -169,7 +166,7 @@ header {
 
 .videoWrap {
   &.no-video {
-    text-align:center; padding:2rem;
+    text-align:center; padding: 3.6rem 2.4rem 1.2rem;
     @include el-content(before){
       background:svgIconForm(no-video, 666);
       @include el-size(5rem, 5rem); margin:auto;
@@ -182,7 +179,7 @@ header {
   }
   video, iframe {@include el-size(100%, 100%);}
   & + .btnWrap {
-    margin-top:0; margin-bottom:0;
+    margin:0; padding: 1.2rem 2.4rem 2.4rem;
     @include align(text, center);
   }
 }

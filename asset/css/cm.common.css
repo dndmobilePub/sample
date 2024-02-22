@@ -1148,30 +1148,28 @@ header {
 .container .section .md:hover .deleteBtn {
   display: block;
 }
-.container .section .md .txt {
+.container .section .md .txtEdit {
   padding: 2.4rem;
   font-size: 1.4rem;
   color: #000;
 }
-.container .section .md .txt h1 {
+.container .section .md .txtEdit h1 {
   font-size: 2.8rem;
 }
-.container .section .md .txt > *:not(:first-child) {
+.container .section .md .txtEdit > *:not(:first-child) {
   margin-top: 1rem;
 }
-.container .section .md .txt + .imgWrap {
+.container .section .md .txtEdit + .imgWrap {
   margin: 0 2.4rem;
 }
-.container .section .md .txtEdit {
-  padding: 2.4rem;
+.container .section .md [contenteditable=true] {
+  cursor: text;
+  outline: 0;
 }
 .container .section .md .swiper-slide .txtEdit {
   padding: 1.2rem 0.8rem;
   font-size: 1.2rem;
   font-weight: 700;
-}
-.container .section .md [contenteditable=true] {
-  cursor: text;
 }
 
 .btn.swiperAddBtn {
@@ -1248,7 +1246,7 @@ header {
 
 .videoWrap.no-video {
   text-align: center;
-  padding: 2rem;
+  padding: 3.6rem 2.4rem 1.2rem;
 }
 .videoWrap.no-video::before {
   content: "";
@@ -1270,8 +1268,8 @@ header {
   height: 100%;
 }
 .videoWrap + .btnWrap {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
+  padding: 1.2rem 2.4rem 2.4rem;
   text-align: center !important;
 }
 
