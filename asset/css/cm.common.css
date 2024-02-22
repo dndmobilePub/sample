@@ -22,6 +22,7 @@
   --space-2xl: 2.8rem;
   --space-3xl: 3.0rem;
   --space-4xl: 4.8rem;
+  --section: 37.5rem ;
 }
 
 /****************************************/
@@ -1116,52 +1117,61 @@ header {
   padding: 6rem 3rem 3rem;
 }
 .container .section {
-  border: 1px #aaa solid;
-  max-width: 36rem;
+  border: 1px #ccc solid;
+  background: #ddd;
+  max-width: var(--section);
   margin: 2rem auto;
 }
-.container .section [data-type=goods] {
+.container .section [data-type=goods] .swiper {
   display: flex;
 }
 .container .section .md {
   position: relative;
+  background: #fff;
   min-height: 10rem;
   cursor: pointer;
+  /*       .alert {
+          display: none;
+          padding: 0.75rem 1.25rem;
+          border-radius: 0.25rem;
+          background-color: #fff3cd;
+          font-size: 1rem;
+          color: #856404;
+        } */
 }
 .container .section .md ~ .md {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
-.container .section .md > hr.devide {
-  position: absolute;
-  bottom: -1rem;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 1rem;
-  background: #ddd;
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-.container .section .md .alert {
-  display: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.25rem;
-  background-color: #fff3cd;
-  font-size: 1rem;
-  color: #856404;
-}
-<<<<<<< HEAD
-=======
-.container .section .md-goods {
-  display: flex;
-}
->>>>>>> 00ea9344af6da8c2d92c2bfe26fcaad51dcc8168
-.container .section .md [contenteditable=true] {
-  cursor: text;
+.container .section .md:hover {
+  border: 3px dashed #c82b00;
 }
 .container .section .md:hover .deleteBtn {
   display: block;
+}
+.container .section .md .txt {
+  padding: 2.4rem;
+  font-size: 1.4rem;
+  color: #000;
+}
+.container .section .md .txt h1 {
+  font-size: 2.8rem;
+}
+.container .section .md .txt > *:not(:first-child) {
+  margin-top: 1rem;
+}
+.container .section .md .txt + .imgWrap {
+  margin: 0 2.4rem;
+}
+.container .section .md .txtEdit {
+  padding: 2.4rem;
+}
+.container .section .md .swiper-slide .txtEdit {
+  padding: 1.2rem 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.container .section .md [contenteditable=true] {
+  cursor: text;
 }
 
 .btn.swiperAddBtn {
@@ -1182,6 +1192,75 @@ header {
   z-index: 2;
   margin: 0;
   display: none;
+}
+
+.imgWrap img {
+  max-width: 100%;
+}
+
+.img-container {
+  text-align: center;
+}
+.img-container img {
+  width: 100%;
+}
+
+.no-img {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 16.3rem;
+  background: #f3f4f6;
+  text-align: center;
+}
+.no-img::before {
+  content: "";
+  display: block;
+  /* background:svgIconForm(no-img, 666); */
+  background: url("https://cdn.icon-icons.com/icons2/197/PNG/96/image_24009.png") no-repeat center/cover;
+  width: 3.2rem;
+  height: 3.2rem;
+  opacity: 0.2;
+}
+.no-img::after {
+  content: "";
+  display: block;
+  content: "이미지 영역";
+  margin-top: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #d2d5da;
+}
+
+.videoWrap.no-video {
+  text-align: center;
+  padding: 2rem;
+}
+.videoWrap.no-video::before {
+  content: "";
+  display: block;
+  background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23666'  viewBox='0 0 16 16'%3E%3Cpath d='M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0'/%3E%3Cpath d='M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6'/%3E%3Cpath d='M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'/%3E%3C/svg%3E") no-repeat;
+  width: 5rem;
+  height: 5rem;
+  margin: auto;
+}
+.videoWrap.no-video::after {
+  content: "";
+  display: block;
+  content: "영상을 등록해주세요";
+  font-weight: 700;
+  margin-top: 2rem;
+}
+.videoWrap video, .videoWrap iframe {
+  width: 100%;
+  height: 100%;
+}
+.videoWrap + .btnWrap {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center !important;
 }
 
 /* cropper 모달팝업 */
@@ -1232,73 +1311,6 @@ header {
 }
 .cropModalWrap .btnLabel ~ .btn {
   margin-left: 0.5rem;
-}
-
-.imgWrap img {
-  max-width: 100%;
-}
-
-.img-container {
-  text-align: center;
-}
-.img-container img {
-  max-width: 100%;
-  margin: auto;
-}
-
-.no-img {
-  text-align: center;
-  padding: 2rem;
-}
-.no-img::before {
-  content: "";
-  display: block;
-  background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0'/%3E%3Cpath d='M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z'/%3E%3C/svg%3E") no-repeat;
-  width: 5rem;
-  height: 5rem;
-  margin: auto;
-}
-.no-img::after {
-  content: "";
-  display: block;
-  content: "이미지를 등록해주세요";
-  margin-top: 2rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-.swiper-slide {
-  background: moccasin;
-}
-
-.videoWrap.no-video {
-  text-align: center;
-  padding: 2rem;
-}
-.videoWrap.no-video::before {
-  content: "";
-  display: block;
-  background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23666'  viewBox='0 0 16 16'%3E%3Cpath d='M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0'/%3E%3Cpath d='M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6'/%3E%3Cpath d='M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'/%3E%3C/svg%3E") no-repeat;
-  width: 5rem;
-  height: 5rem;
-  margin: auto;
-}
-.videoWrap.no-video::after {
-  content: "";
-  display: block;
-  content: "영상을 등록해주세요";
-  font-weight: 700;
-  margin-top: 2rem;
-}
-.videoWrap video, .videoWrap iframe {
-  width: 100%;
-  height: 100%;
-}
-.videoWrap + .btnWrap {
-  padding: 0;
-  margin-top: 0;
-  margin-bottom: 2rem;
-  text-align: center !important;
 }
 
 /* cropper style */

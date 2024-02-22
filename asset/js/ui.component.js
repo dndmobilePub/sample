@@ -5,11 +5,11 @@ var COMPONENT_UI = (function (cp, $) {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
 
-    cp.module = {
+/*     cp.module = {
         init: function () {
             $('.md').not(':last').append('<hr class="devide" />');
         },
-    }
+    } */
 
     cp.imgCrop = {
         init: function () {
@@ -41,7 +41,7 @@ var COMPONENT_UI = (function (cp, $) {
             var avatar = $('#' + avatarId)[0];
             var $image = $('#' + imgId)[0];
             var $input = $('#' + inputId)[0];
-            var $alert = $mdImg.siblings('.alert');
+            //var $alert = $mdImg.siblings('.alert');
             var $modal = $('#' + modalId);
             var cropper;
 
@@ -118,8 +118,9 @@ var COMPONENT_UI = (function (cp, $) {
                     });
                     initialAvatarURL = avatar.src;
                     avatar.src = canvas.toDataURL();
-                    $alert.removeClass('alert-success alert-warning');
                     /*
+                    $alert.removeClass('alert-success alert-warning');
+                    
                     서버전송관련
                     canvas.toBlob(function (blob) {
                         var formData = new FormData();
@@ -397,7 +398,7 @@ var COMPONENT_UI = (function (cp, $) {
         cp.videoModule.init();
         cp.moduleDrag.init();
         cp.txtEdit.init();
-        cp.module.init();
+        // cp.module.init();
         // cp.moduleAdd.init();
         cp.moduleDelete.init();
     };

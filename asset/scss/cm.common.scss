@@ -37,60 +37,70 @@ header {
 .container {
   padding:6rem 3rem 3rem;
   .section {
-    border:1px $color-gray5 solid;
-    max-width:36rem; margin:2rem auto;
+    border:1px $color-gray8 solid;
+    background: #ddd;
+    max-width:var(--section); margin:2rem auto;
 
-    [data-type="goods"]{
+    [data-type="goods"] .swiper{
       display: flex;
     }
     .md {
       position: relative;
-      // background:$color-gray6;
+      background:$color-white;
       min-height:10rem;
       cursor: pointer;
-      & ~ .md {margin-top: 1rem;}
+      & ~ .md {margin-top: 1.5rem;}
 
-      & > hr.devide {
-        @include pos-offset-b(-1rem, 0){}
-        @include display(block);
-        @include el-size(100%, 1rem);
-        background:$color-gray6;
-        border:none;
-        padding:0; margin:0;
+      &:hover {
+        border: 3px dashed #c82b00;
+
+        .deleteBtn{
+          display: block;
+        }
       }
 
-      // &-txt {border:5px solid $color-blue;}
-      // &-img {border:5px solid $color-pk; font-size: 0;}
-      // &-video {border:5px solid $color-green;}
-      // &-goods {border:5px solid $color-brown;}
+      .txt {
+        padding: 2.4rem;
+        font-size: 1.4rem;
+        color: $color-black;
 
-      .alert {
+        h1 {
+          font-size: 2.8rem;
+        }
+        >*:not(:first-child) {
+          margin-top: 1rem;
+        }
+
+        & + .imgWrap {
+          margin: 0 2.4rem;
+        }
+      }
+
+      .txtEdit {
+        padding: 2.4rem;
+      }
+
+      .swiper{
+        &-slide{
+          .txtEdit {
+            padding: 1.2rem .8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+          }
+        }
+      }
+/*       .alert {
         display: none;
         padding: 0.75rem 1.25rem;
         border-radius: 0.25rem;
         background-color: #fff3cd;
         font-size: 1rem;
         color: #856404;
-      }
-      &-goods{
-        // display: flex;
-      }
+      } */
+
       [contenteditable=true] {
         cursor: text;
       }
-      // .btnWrap {
-      //   margin:0; padding:0;
-      //   @include pos-offset-r(2.5rem, -10rem){
-      //     z-index:2;
-      //   }
-      // }
-      
-      &:hover{
-        .deleteBtn{
-          display: block;
-        }
-      }
-      
     }
   }
 }
@@ -107,6 +117,59 @@ header {
     @include pos-offset-r(-.5rem, -.5rem){z-index:2;}
     margin:0;
     display: none;
+  }
+}
+
+.imgWrap {
+  img {
+    max-width: 100%;
+  }
+}
+.img-container{
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+.no-img {
+  @include display(flex);
+  @include flex($direction:column, $j-content:center);
+  height: 16.3rem;
+  background: #f3f4f6;
+  text-align:center;
+
+  @include el-content(before){
+    /* background:svgIconForm(no-img, 666); */
+    background: url('https://cdn.icon-icons.com/icons2/197/PNG/96/image_24009.png') no-repeat center/ cover;
+    @include el-size(3.2rem, 3.2rem);
+    opacity: .2;
+  }
+  @include el-content(after){
+    content:'이미지 영역';
+    margin-top:.5rem;
+    font-size: 1.4rem;
+    font-weight:700;
+    color: #d2d5da;
+  }
+}
+
+.videoWrap {
+  &.no-video {
+    text-align:center; padding:2rem;
+    @include el-content(before){
+      background:svgIconForm(no-video, 666);
+      @include el-size(5rem, 5rem); margin:auto;
+    }
+    @include el-content(after){
+      content:'영상을 등록해주세요';
+      font-weight:700;
+      margin-top:2rem;
+    }
+  }
+  video, iframe {@include el-size(100%, 100%);}
+  & + .btnWrap {
+    margin-top:0; margin-bottom:0;
+    @include align(text, center);
   }
 }
 
@@ -162,57 +225,6 @@ header {
     }
   }
 
-}
-.imgWrap {
-  img {
-    max-width: 100%;
-  }
-}
-.img-container{
-  text-align: center;
-  img {
-    max-width: 100%;
-    margin: auto;
-  }
-}
-.no-img {
-  text-align:center; padding:2rem;
-  @include el-content(before){
-    background:svgIconForm(no-img, 666);
-    @include el-size(5rem, 5rem); margin:auto;
-  }
-  @include el-content(after){
-    content:'이미지를 등록해주세요';
-    margin-top:2rem;
-    font-size: 1.4rem;
-    font-weight:700;
-  }
-}
-
-.swiper{
-  &-slide{
-    background: moccasin;
-  }
-}
-
-.videoWrap {
-  &.no-video {
-    text-align:center; padding:2rem;
-    @include el-content(before){
-      background:svgIconForm(no-video, 666);
-      @include el-size(5rem, 5rem); margin:auto;
-    }
-    @include el-content(after){
-      content:'영상을 등록해주세요';
-      font-weight:700;
-      margin-top:2rem;
-    }
-  }
-  video, iframe {@include el-size(100%, 100%);}
-  & + .btnWrap {
-    padding:0; margin-top:0; margin-bottom:2rem;
-    @include align(text, center);
-  }
 }
 
 /* cropper style */
