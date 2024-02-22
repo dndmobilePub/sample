@@ -226,37 +226,47 @@
             <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
           </div>`;
       var swiperAreaHTML = `
-      <div class="btnWrap">
-            <button class="btn btn-size xs shadow swiperAddBtn">상품 항목추가</button>
+          <div class="txtEdit">
+            <h1 contenteditable="true">대제목</h1>
           </div>
-        <div class="swiper">
-          <ul class="swiper-wrapper">
-            <li class="swiper-slide">
-              <div class="swiper-box">
-                <div class="no-img"><img src="" alt=""></div>
-              </div>
-              <div class="swiper-box">
-                <div class="txtEdit" contenteditable="false">
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+          <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="swiper-box">
+                  <div class="no-img"><img src="" alt=""></div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit">
+                    <p>브랜드명</p>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit editDone">
+                    <p>가격</p>
+                  </div>
                 </div>
               </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="swiper-box">
-                <div class="no-img"><img src="" alt=""></div>
-              </div>
-              <div class="swiper-box">
-                <div class="txtEdit" contenteditable="false">
-                  <p>텍스트 영역</p>
+              <div class="swiper-slide">
+                <div class="swiper-box">
+                  <div class="no-img"><img src="" alt=""></div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit">
+                    <p>브랜드명</p>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit editDone">
+                    <p>가격</p>
+                  </div>
                 </div>
               </div>
-            </li>
-          </ul>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
-        </div>
-        
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
       `;
       
       // 버튼 클릭 이벤트 핸들러
@@ -298,9 +308,10 @@
       // 동적으로 생성된 스와이퍼에 대한 초기화 함수
       function initializeSwiper(swiperContainer) {
         var newSwiper = new Swiper(swiperContainer, {
-          loop: false,
+          loop: true,
           slidesPerView: 2, 
           spaceBetween: 10, 
+          autoplay: true,
           pagination: {
             el: '.swiper-pagination',
           },
@@ -320,6 +331,7 @@
           });
           closePop();
           initializeSwiper('.swiper');
+          $('.product-list input[type="checkbox"]').prop('checked', false);
       });
 
       // 모달 닫기 함수
