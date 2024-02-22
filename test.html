@@ -372,10 +372,14 @@
       }
 
       $('.btn-registration-pop').on('click', function() {
+          var thisData = $(this).closest('.modalPop').attr('modal-target');
+          console.log(thisData);
+          var dataElem = $('.md').find('.swiperAddBtn[data-modal="' + thisData + '"]');
+          
           $('.product-list input[type="checkbox"]:checked').each(function() {
               var parentLi = $(this).closest('li');
               var clonedSlide = parentLi.find('.swiper-slide').clone();
-              $('.swiper-wrapper').append(clonedSlide);
+              dataElem.siblings('.swiper').find('.swiper-wrapper').append(clonedSlide);
           });
           closePop();
           initializeSwiper('.swiper');
