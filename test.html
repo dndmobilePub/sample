@@ -315,10 +315,7 @@
           loop: true,
           slidesPerView: 2, 
           spaceBetween: 10, 
-          autoplay: {
-            delay: 60000, // 1분에 해당하는 밀리초
-            disableOnInteraction: false,
-          },
+          autoplay: true,
           pagination: {
             el: '.swiper-pagination',
           },
@@ -341,14 +338,7 @@
               dataElem.siblings('.swiper').find('.swiper-wrapper').append(clonedSlide);
           });
           closePop();
-
-          // 스와이퍼 파기 및 다시 초기화
-          var swiperContainer = dataElem.siblings('.swiper')[0];
-          var existingSwiper = $(swiperContainer).data('swiper');
-          if (existingSwiper) {
-              existingSwiper.destroy(); // 이전 스와이퍼 파기
-          }
-          initializeSwiper(swiperContainer); // 새로운 스와이퍼 초기화
+          initializeSwiper('.swiper');
           $('.product-list input[type="checkbox"]').prop('checked', false);
       });
 
