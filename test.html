@@ -277,6 +277,7 @@
           <div class="txtEdit">
             <h1 contenteditable="true">대제목</h1>
           </div>
+          <div class="btn btn-size xs shadow dragBtn">드래그</div>
           <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
           <div class="swiper">
             <div class="swiper-wrapper">
@@ -359,7 +360,10 @@
           loop: true,
           slidesPerView: 2, 
           spaceBetween: 10, 
-          autoplay: true,
+          autoplay: {
+            delay: 60000, // 1분에 해당하는 밀리초
+            disableOnInteraction: false,
+          },
           pagination: {
             el: '.swiper-pagination',
           },
@@ -382,7 +386,14 @@
               dataElem.siblings('.swiper').find('.swiper-wrapper').append(clonedSlide);
           });
           closePop();
-          initializeSwiper('.swiper');
+
+          // 스와이퍼 파기 및 다시 초기화
+          var swiperContainer = dataElem.siblings('.swiper')[0];
+          var existingSwiper = $(swiperContainer).data('swiper');
+          if (existingSwiper) {
+              existingSwiper.destroy(); // 이전 스와이퍼 파기
+          }
+          initializeSwiper(swiperContainer); // 새로운 스와이퍼 초기화
           $('.product-list input[type="checkbox"]').prop('checked', false);
       });
 
