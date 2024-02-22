@@ -1127,6 +1127,7 @@ header {
 }
 .container .section .md {
   position: relative;
+  outline: 3px dashed transparent;
   background: #fff;
   min-height: 10rem;
   cursor: pointer;
@@ -1143,7 +1144,7 @@ header {
   margin-top: 1.5rem;
 }
 .container .section .md:hover {
-  border: 3px dashed #c82b00;
+  outline-color: #c82b00;
 }
 .container .section .md:hover .deleteBtn {
   display: block;
@@ -1159,12 +1160,12 @@ header {
 .container .section .md .txtEdit > *:not(:first-child) {
   margin-top: 1rem;
 }
-.container .section .md .txtEdit + .imgWrap {
-  margin: 0 2.4rem;
-}
 .container .section .md [contenteditable=true] {
   cursor: text;
   outline: 0;
+}
+.container .section .md .box-pd {
+  padding: 0 2.4rem 2.4rem;
 }
 .container .section .md .swiper-slide .txtEdit {
   padding: 1.2rem 0.8rem;

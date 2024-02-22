@@ -46,13 +46,14 @@ header {
     }
     .md {
       position: relative;
+      outline: 3px dashed transparent;
       background:$color-white;
       min-height:10rem;
       cursor: pointer;
       & ~ .md {margin-top: 1.5rem;}
 
       &:hover {
-        border: 3px dashed #c82b00;
+        outline-color: #c82b00;
 
         .deleteBtn{
           display: block;
@@ -70,15 +71,15 @@ header {
         >*:not(:first-child) {
           margin-top: 1rem;
         }
-
-        & + .imgWrap {
-          margin: 0 2.4rem;
-        }
       }
       
       [contenteditable=true] {
         cursor: text;
         outline: 0;
+      }
+
+      .box-pd {
+        padding: 0 2.4rem 2.4rem;
       }
 
       .swiper{
