@@ -120,6 +120,51 @@
             <div class="swiper-pagination"></div>
           </div>
         </div>
+        <div class="md md-goods" data-type="goods">
+          <div class="txtEdit">
+            <h1 contenteditable="true">대제목</h1>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="btn btn-size xs shadow dragBtn">드래그</div>
+          <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal2">상품 항목추가</button>
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="swiper-box">
+                  <div class="no-img"><img src="" alt=""></div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit" contenteditable="false">
+                    <p>브랜드명</p>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit editDone">
+                    <p>가격</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="swiper-box">
+                  <div class="no-img"><img src="" alt=""></div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit" contenteditable="false">
+                    <p>브랜드명</p>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit editDone">
+                    <p>가격</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
         <div class="md md-video" data-type="video">
           <div class="videoWrap no-video"></div>
           <div class="btnWrap">
@@ -355,6 +400,12 @@
           var swiperInstance = initializeSwiper(this);
           $(this).data('swiper', swiperInstance);
         });
+      });
+
+      $('body').on('click', '.swiperAddBtn', function() {
+        var targetModal = $(this).data('modal'); // 버튼의 data-modal 속성 값 가져오기
+        $('.modalPop').attr('modal-target', targetModal); // modal-target 속성 업데이트
+        COMPONENT_UI.modalPop.showModal($(this)); // 모달을 열도록 modalPop 호출
       });
 
     } );
