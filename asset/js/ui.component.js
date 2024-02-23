@@ -221,20 +221,6 @@ var COMPONENT_UI = (function (cp, $) {
             }
         }
     };
-    // cp.videoModule.init();
-
-    cp.moduleDrag = {
-        init: function () {
-            // 드래그앤드롭 초기화
-            $(".section").sortable({
-                tolerance: 'pointer', 
-                distance: 20,
-            });
-        },
-        dragFn: function () {
-            // dragFn 함수 코드 작성
-        }
-    };
 
     cp.txtEdit = {
         init: function () {
@@ -260,8 +246,7 @@ var COMPONENT_UI = (function (cp, $) {
             });
         }
     };
-    
-    
+        
     cp.modalPop = {
         constEl: {
             btnModal: "._modalBtn",
@@ -603,27 +588,210 @@ var COMPONENT_UI = (function (cp, $) {
             });
         }
         
-    },
+    };
     
-    cp.moduleDelete = {
+    cp.moduleBox = {
         init: function() {
-            // 삭제버튼
+            this.dragFn();
+            this.mdBoxDel();
+            this.mdBoxAddClk();
+            this.initializeSwiper();
+            this.mdGoodsAdd();
+            this.mdGoodsPopClose();
+            this.mdGoodPopSel();
+        },
+        dragFn: function () {
+            $(".section").sortable({
+                tolerance: 'pointer', 
+                distance: 20,
+            });
+        },
+        mdBoxDel:function() {
             $(document).on('click', '.deleteBtn', function() {
                 $(this).closest('.md').remove();
             });
-        }
+        },
+        mdBoxAddCont: function() {
+            var content = {
+                textAreaHTML: `
+                    <div class="txtEdit" contenteditable="false">
+                        <p>텍스트 영역</p>
+                    </div>
+                `,
+                imgAreaHTML: `
+                    <div class="imgWrap no-img"><img src=""></div>
+                `,
+                videoAreaHTML: `
+                    <div class="videoWrap no-video"></div>
+                    <div class="btnWrap">
+                        <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
+                        <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
+                    </div>
+                `,
+                swiperAreaHTML: `
+                    <div class="txtEdit">
+                        <h1 contenteditable="true">대제목</h1>
+                    </div>
+                    <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="swiper-box">
+                                    <div class="no-img"><img src="" alt=""></div>
+                                </div>
+                                <div class="swiper-box">
+                                    <div class="txtEdit">
+                                        <p>브랜드명</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-box">
+                                    <div class="txtEdit editDone">
+                                        <p>가격</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="swiper-box">
+                                    <div class="no-img"><img src="" alt=""></div>
+                                </div>
+                                <div class="swiper-box">
+                                    <div class="txtEdit">
+                                        <p>브랜드명</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-box">
+                                    <div class="txtEdit editDone">
+                                        <p>가격</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                `
+            };
+        
+            return content;
+        },
+
+        mdBoxAddClk: function() {
+            $('.btnWrap').one('click', 'a', function(e) { // .on() 메소드를 사용하여 클릭할 때마다 이벤트 실행
+                e.preventDefault();
+                var dataType = $(this).data('type');
+                var newMd = $('<div class="md"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button></div>');
+                newMd.addClass('md-' + dataType);
+                newMd.attr('data-type', dataType);
+        
+                var contentHTML = cp.moduleBox.mdBoxAddCont(); // 수정된 부분
+        
+                var newContentHTML;
+                if(dataType === 'img') {
+                    newContentHTML = contentHTML.imgAreaHTML;
+                } else if(dataType === 'goods') {
+                    newContentHTML = contentHTML.swiperAreaHTML;
+                } else if(dataType === 'txt') {
+                    newContentHTML = contentHTML.textAreaHTML;
+                } else if(dataType === 'video') {
+                    newContentHTML = contentHTML.videoAreaHTML;
+                }
+                newMd.append(newContentHTML);
+                $('.container .section').append(newMd);
+                // cropperOpen();
+                COMPONENT_UI.init();
+        
+                // 새로 생성된 스와이퍼에 대한 초기화
+                if (dataType === 'goods') {
+                    var newSwiperContainer = newMd.find('.swiper')[0];
+                    var newSwiperInstance = initializeSwiper(newSwiperContainer);
+                    $(newSwiperContainer).data('swiper', newSwiperInstance);
+                }
+        
+                // 페이지 하단으로 스크롤
+                $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+                
+            });
+        },
+
+        // 상품
+        initializeSwiper: function(swiperContainer) {
+        var newSwiper = new Swiper(swiperContainer, {
+            loop: true,
+            slidesPerView: 2, 
+            spaceBetween: 10, 
+            autoplay: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            });
+            return newSwiper;
+        },
+        mdGoodsAdd:function() {
+            $('body').on('click', '.swiperAddBtn', function() {
+                var targetModal = $(this).data('modal'); // 버튼의 data-modal 속성 값 가져오기
+                $('.modalPop').attr('modal-target', targetModal); // modal-target 속성 업데이트
+                cp.modalPop.showModal($(this)); // 모달을 열도록 modalPop 호출
+                // $('.modalPop').find('.btn-registration-pop').addClass('btn-close-pop');
+            });
+        },
+        
+       // mdGoodsPopClose 함수 정의
+        mdGoodsPopClose: function() {
+            const productCheckboxes = $('.product-list input[type="checkbox"]');
+            const registrationButton = $('.btn-registration-pop');
+            
+            // 체크박스 상태 변경 이벤트 핸들러 등록
+            productCheckboxes.on('change', function() {
+                const checkedCount = productCheckboxes.filter(':checked').length;
+
+                // 체크된 체크박스가 하나 이상인 경우
+                if (checkedCount > 0) {
+                    registrationButton.addClass('btn-close-pop');
+                } else { // 체크된 체크박스가 없는 경우
+                    registrationButton.removeClass('btn-close-pop');
+                }
+            });
+        },
+
+        mdGoodPopSel:function(){
+            $('.btn-registration-pop').on('click', function() {  
+                // 
+                $('.product-list input[type="checkbox"]:checked').each(function() {
+                    var parentLi = $(this).closest('li');
+                    var clonedSlide = parentLi.find('.swiper-slide').clone();
+                    $('.swiper-wrapper').append(clonedSlide);
+                });
+                cp.moduleBox.initializeSwiper('.swiper');
+                cp.modalPop.closePop($(this));
+
+                $('.product-list input[type="checkbox"]').prop('checked', false);
+            });
+        },
+        
     };
-    
 
     cp.init = function () {
         cp.imgCrop.init();
         cp.videoModule.init();
-        cp.moduleDrag.init();
         cp.txtEdit.init();
-        cp.moduleDelete.init();
+        cp.moduleBox.init();
         cp.modalPop.init();
     };
 
     cp.init();
     return cp;
 }(window.COMPONENT_UI || {}, jQuery));
+
+// $(document).ready(function() {
+//     // 초기에 존재하는 스와이퍼 객체에 대해서 초기화
+//     var initialSwipers = $('.section .swiper');
+//         initialSwipers.each(function() {
+//         var swiperInstance = initializeSwiper(this);
+//         $(this).data('swiper', swiperInstance);
+//     });
+//   });
