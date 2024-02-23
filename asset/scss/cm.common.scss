@@ -36,7 +36,6 @@ header {
   padding:6rem 3rem 3rem;
   .section {
     @include border(border, 1px, solid, $color-gray8);
-    //border:1px $color-gray8 solid;
     background: $color-gray6;
     max-width:var(--section); margin:2rem auto;
 
@@ -46,7 +45,6 @@ header {
     .md {
       position: relative;
       @include border(outline, 3px, dashed, transparent);
-      //outline: 3px dashed transparent;
       background:$color-white;
       min-height:10rem;
       cursor: pointer;
@@ -56,10 +54,10 @@ header {
         outline-color: $flag-pk;
 
         .deleteBtn{
-          display: block;
+          @include display(block);
         }
         .dragBtn {
-          display: block;
+          @include display(block);
         }
       }
 
@@ -131,13 +129,12 @@ header {
 /*상품추가 모달팝업*/
 .modalWrap{
   .product-list{
-    display: flex;
-    gap: 10px;
+    @include display(flex){gap: 10px;};
     & > li{
       width: calc((100% - 20px)/3)
     }
     .swiper-slide{
-      display: block;
+      @include display(block);
     }
   }
 }
@@ -145,7 +142,7 @@ header {
 
 .imgWrap {
   img {
-    display: block;
+    @include display(block);
     width: 100%;
   }
 }
@@ -209,28 +206,26 @@ header {
     }
     .modalWrap {
       max-width: 500px;
-      position: relative;
-      top: 50%; left: 50%;
-      z-index: 9991;
+      @include pos(relative) {top: 50%; left: 50%; z-index: 9991;}
       transform: translate(-50%, -50%);
     }
   }
 
   .ico-pop-close {
-    display: inline-block;
+    @include display(inline-block);
     width: 2.4rem; height: 2.4rem;
     background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z' /%3E%3C/svg%3E") no-repeat;
     word-break: keep-all;
   }
 
   .btnLabel {
-    display: inline-block;
-    position: relative;
+    @include display(inline-block);
+    @include pos(relative);
     padding: 1rem;
-    border: 1px solid #007bff;
+    @include border(border, 1px, solid, $color-blue);
     border-radius: .25rem;
     font-size: 1.4rem;
-    color: #007bff;
+    color: $color-blue;
     vertical-align: middle;
     text-align: center;
     cursor: pointer;

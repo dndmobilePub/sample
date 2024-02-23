@@ -1318,10 +1318,10 @@ header {
   display: inline-block;
   position: relative;
   padding: 1rem;
-  border: 1px solid #007bff;
+  border: 1px solid #4b90df;
   border-radius: 0.25rem;
   font-size: 1.4rem;
-  color: #007bff;
+  color: #4b90df;
   vertical-align: middle;
   text-align: center;
   cursor: pointer;
