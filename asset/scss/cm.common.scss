@@ -35,7 +35,8 @@ header {
 .container {
   padding:6rem 3rem 3rem;
   .section {
-    border:1px $color-gray8 solid;
+    @include border(border, 1px, solid, $color-gray8);
+    //border:1px $color-gray8 solid;
     background: $color-gray6;
     max-width:var(--section); margin:2rem auto;
 
@@ -44,7 +45,8 @@ header {
     }
     .md {
       position: relative;
-      outline: 3px dashed transparent;
+      @include border(outline, 3px, dashed, transparent);
+      //outline: 3px dashed transparent;
       background:$color-white;
       min-height:10rem;
       cursor: pointer;
@@ -145,7 +147,6 @@ header {
   img {
     display: block;
     width: 100%;
-    max-width: 100%;
   }
 }
 .img-container{

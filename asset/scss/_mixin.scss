@@ -284,6 +284,14 @@
         @content;
     }
 }
+
+@mixin border($type, $width, $style, $color) {
+    @if ($type == "border") {
+        border: $width $style $color
+    } @else if ($type == 'outline') {
+        outline: $width $style $color
+    }
+}
 // FORM SVG ICON
 @function svgIconForm($iconName, $color: 666, $backgroundRepeat: no-repeat) {
     $iconList: (
