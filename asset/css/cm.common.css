@@ -1096,8 +1096,8 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 1000;
+  width: 100%;
   background: #333;
 }
 
@@ -1117,7 +1117,7 @@ header {
   padding: 6rem 3rem 3rem;
 }
 .container .section {
-  border: 1px #ccc solid;
+  border: 1px solid #ccc;
   background: #ddd;
   max-width: var(--section);
   margin: 2rem auto;
@@ -1221,7 +1221,7 @@ header {
 
 .imgWrap img {
   display: block;
-  max-width: 100%;
+  width: 100%;
 }
 
 .img-container {

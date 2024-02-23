@@ -16,11 +16,9 @@
 @import '_cp.popup';
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+  @include pos-offset-l(0,0,fixed){z-index: 1000;}
+  @include width(100%);
+  
   background:$color-gray2;
 }
 .btnWrap {
@@ -37,16 +35,18 @@ header {
 .container {
   padding:6rem 3rem 3rem;
   .section {
-    border:1px $color-gray8 solid;
-    background: #ddd;
+    @include border(border, 1px, solid, $color-gray8);
+    //border:1px $color-gray8 solid;
+    background: $color-gray6;
     max-width:var(--section); margin:2rem auto;
 
     [data-type="goods"] .swiper{
-      display: flex;
+      @include display(flex);
     }
     .md {
       position: relative;
-      outline: 3px dashed transparent;
+      @include border(outline, 3px, dashed, transparent);
+      //outline: 3px dashed transparent;
       background:$color-white;
       min-height:10rem;
       cursor: pointer;
@@ -146,7 +146,7 @@ header {
 .imgWrap {
   img {
     display: block;
-    max-width: 100%;
+    width: 100%;
   }
 }
 .img-container{
