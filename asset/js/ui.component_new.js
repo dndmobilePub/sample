@@ -161,52 +161,61 @@ var COMPONENT_UI = (function (cp, $) {
     };
 
     cp.videoModule = {
+        constEl: {
+            btnVideoFile: ".addVideo-file",
+            btnYoutube: ".addVideo-utube"
+        },
         init: function () {
-            $(document).off('click', '.addVideo-file').on('click', '.addVideo-file', function () {
-                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-                cp.videoModule.addVideo($videoWrap);
-            });
+            this.addVideo();
+            this.addYoutube();
+        },
+        addVideo: function () {
+            const btnVideo = $(this.constEl.btnVideoFile);
 
-            $(document).off('click', '.addVideo-utube').on('click', '.addVideo-utube', function () {
+            btnVideo.off('click').on('click', function () {
                 var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-                cp.videoModule.addYuetube($videoWrap);
+
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'video/*';
+                input.style.display = 'none';
+                input.onchange = function(event) {
+                    var file = event.target.files[0];
+                    var videoURL = URL.createObjectURL(file);
+                    var videoElement = $('<video controls></video>');
+                    videoElement.attr('src', videoURL);
+                    $videoWrap.html(videoElement);
+                    $videoWrap.removeClass('no-video');
+                };
+                
+                $('input[type="file"]').remove(); 
+    
+                document.body.appendChild(input);
+                input.click();
             });
         },
-        addVideo: function ($videoWrap) {
-            var input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'video/*';
-            input.style.display = 'none';
-            input.onchange = function(event) {
-                var file = event.target.files[0];
-                var videoURL = URL.createObjectURL(file);
-                var videoElement = $('<video controls></video>');
-                videoElement.attr('src', videoURL);
-                $videoWrap.html(videoElement);
-                $videoWrap.removeClass('no-video');
-            };
-            
-            $('input[type="file"]').remove(); 
+        addYoutube: function () {
+            const btnYoutube = $(this.constEl.btnYoutube);
 
-            document.body.appendChild(input);
-            input.click();
-        },
-        addYuetube: function ($container) {
-            var inputURL = prompt("Please enter YouTube video URL:");
-            if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
-                var videoId;
-                if (inputURL.includes("youtube.com")) {
-                    videoId = inputURL.split('v=')[1];
-                } else if (inputURL.includes("youtu.be")) {
-                    videoId = inputURL.split('/').pop();
+            btnYoutube.off('click').on('click', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+
+                var inputURL = prompt("Please enter YouTube video URL:");
+                if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
+                    var videoId;
+                    if (inputURL.includes("youtube.com")) {
+                        videoId = inputURL.split('v=')[1];
+                    } else if (inputURL.includes("youtu.be")) {
+                        videoId = inputURL.split('/').pop();
+                    }
+                    var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
+                    iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+                    $videoWrap.html(iframe);
+                    $videoWrap.removeClass('no-video');
+                } else {
+                    alert("Invalid YouTube video URL.");
                 }
-                var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
-                iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
-                $container.html(iframe);
-                $container.removeClass('no-video');
-            } else {
-                alert("Invalid YouTube video URL.");
-            }
+            });
         }
     };
 
