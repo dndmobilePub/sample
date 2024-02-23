@@ -6,30 +6,33 @@ var COMPONENT_UI = (function (cp, $) {
 
     cp.imgCrop = {
         init: function () {
-            $('.imgWrap').click(this.openCropImg);
+            this.openCropImg();
         },
         openCropImg: function () {
-            var $imgWrap = $(this);
+            $('.imgWrap').on('click', function(){
+                var $imgWrap = $(this);
 
-            $('.cropModalWrap').load('modal.html', function () {
-                var uniqueId = generateUniqueId();
-
-                var avatarId = 'avatar_' + uniqueId;
-                var inputId = 'input_' + uniqueId;
-                var modalId = 'modal_' + uniqueId;
-                var imgId = 'img_' + uniqueId;
-                var cropId = 'crop_' + uniqueId;
-                
-                $imgWrap.children('img').attr('id', avatarId);
-                $('.cropInput').attr('id', inputId);
-                $('.cropModalWrap').children('.modalPop').attr('id', modalId);
-                $('.img-container img').attr('id', imgId);
-                $('.btnCrop').attr('id', cropId);
-
-                cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap);
-            });
+                $('.cropModalWrap').load('modal.html', function () {
+                    var cropModalWrap = $(this);
+                    var uniqueId = generateUniqueId();
+    
+                    var avatarId = 'avatar_' + uniqueId;
+                    var inputId = 'input_' + uniqueId;
+                    var modalId = 'modal_' + uniqueId;
+                    var imgId = 'img_' + uniqueId;
+                    var cropId = 'crop_' + uniqueId;
+                    
+                    $imgWrap.children('img').attr('id', avatarId);
+                    cropModalWrap.find('.cropInput').attr('id', inputId);
+                    cropModalWrap.children('.modalPop').attr('id', modalId);
+                    cropModalWrap.find('.img-container img').attr('id', imgId);
+                    cropModalWrap.find('.btnCrop').attr('id', cropId);
+    
+                    cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap);
+                });
+            })
         },
-        iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap) {
+        iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap) {
             var avatar = $('#' + avatarId)[0];
             var $image = $('#' + imgId)[0];
             var $input = $('#' + inputId)[0];
@@ -44,7 +47,7 @@ var COMPONENT_UI = (function (cp, $) {
                     initializeCropper();
                 };
             } else {
-                $('.cropModalWrap .img-container').addClass("no-img");
+                cropModalWrap.find('.img-container').addClass("no-img");
             }
             
             function initializeCropper() {
@@ -65,7 +68,7 @@ var COMPONENT_UI = (function (cp, $) {
                 var file;
                 var url;
 
-                $('.cropModalWrap .img-container').removeClass("no-img");
+                cropModalWrap.find('.img-container').removeClass("no-img");
 
                 if (files && files.length > 0) {
                     file = files[0];
@@ -90,7 +93,6 @@ var COMPONENT_UI = (function (cp, $) {
 
             // cropper 실행 후(crop 버튼 클릭 후)
             $('#' + cropId).on('click', function () {
-                var imgIndex =  $('#modal').attr('img-index');
                 var initialAvatarURL;
                 var canvas;
                 
@@ -221,20 +223,18 @@ var COMPONENT_UI = (function (cp, $) {
 
     cp.txtEdit = {
         init: function () {
-            $(document).on('click', '[contenteditable]', function(e) {
-                if ($(this).hasClass('editDone')) {
-                    return;
+            this.editable();
+        },
+        editable: function() {
+            var self = this; 
+        
+            $(document).on('click focusout', '[contenteditable]', function(event) {
+                if (event.type === 'click') {
+                    $(this).attr('contenteditable', 'true');
+                    $(this).focus();
+                } else if (event.type === 'focusout') {
+                    $(this).attr('contenteditable', 'false');
                 }
-    
-                $(this).attr('contenteditable', 'true');
-                $(this).focus(); 
-            });
-            $(document).on('focusout', '[contenteditable]', function() {
-                if ($(this).hasClass('editDone')) {
-                    return;
-                }
-    
-                $(this).attr('contenteditable', 'false');
             });
         }
     };
