@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title> SAMPLE | M mall </title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./asset/css/cm.common.css">
+    <script type="text/javascript" src="./asset/js/lib.jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="./asset/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="./asset/js/pg.cropper.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script type="text/javascript" src="./asset/js/ui.component_pickr.js"></script>
+
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="btnWrap">
+        <a href="#;" data-type="img">사진</a>
+        <a href="" data-type="video">동영상</a>
+        <a href="" data-type="txt">텍스트</a>
+        <a href="" data-type="goods">상품</a>
+      </div>
+    </header>
+    <div class="container">
+      <section class="section">
+        <div class="md md-txt" data-type="txt">
+          <div class="txt txtEdit">
+            <h1 contenteditable="true">대제목</h1>
+            <h3 contenteditable="true">소제목</h3>
+            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+        <div class="md md-txt" data-type="txt">
+          <div class="txtEdit">
+            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+        <div class="md md-img" data-type="img">
+          <div class="imgWrap no-img"><img src=""></div>
+          <div class="txtEdit">
+            <h1 contenteditable="true">대제목</h1>
+            <h3 contenteditable="true">소제목</h3>
+            <p contenteditable="true">2024.01.25 - 02.25</p>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+        <div class="md md-img" data-type="img">
+          <div class="imgWrap no-img"><img src=""></div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+        <div class="md md-img" data-type="img">
+          <div class="txtEdit">
+            <h1 contenteditable="true">대제목</h1>
+          </div>
+          <div class="box-pd">
+            <div class="imgWrap no-img"><img src=""></div>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+        <div class="md md-img" data-type="img">
+          <div class="imgWrap"><img src="https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg" alt="avatar"></div>
+         
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+        <div class="md md-goods" data-type="goods">
+          <div class="txtEdit">
+            <h1 contenteditable="true">대제목</h1>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="btn btn-size xs shadow dragBtn">드래그</div>
+          <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="swiper-box">
+                  <div class="no-img"><img src="" alt=""></div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit">
+                    <p>브랜드명</p>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit editDone">
+                    <p>가격</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="swiper-box">
+                  <div class="no-img"><img src="" alt=""></div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit">
+                    <p>브랜드명</p>
+                  </div>
+                </div>
+                <div class="swiper-box">
+                  <div class="txtEdit editDone">
+                    <p>가격</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="md md-video" data-type="video">
+          <div class="videoWrap no-video"></div>
+          <div class="btnWrap">
+            <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
+            <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+        <div class="md md-txt" data-type="txt">
+          <div class="txtEdit" contenteditable="false">
+            <p>텍스트 영역</p>
+          </div>          
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="modalPop _center" modal-target="modal">
+    <div class="modalWrap">
+      <div class="modal-header">
+        <h5 class="mp-title dep01">상품추가하기</h5>
+        <a href="#" class="btn-close-pop ico ico-pop-close" role="button"><span class="hide">창닫기</span></a>
+      </div>
+      <div class="modal-container">
+        <ul class="product-list">
+          <li>
+            <input type="checkbox">
+            <div class="swiper-slide">
+              <div class="swiper-box">
+                <div class="no-img"><img src="" alt=""></div>
+              </div>
+              <div class="swiper-box">
+                <div class="txtEdit editDone">
+                  <p>상품명</p>
+                </div>
+              </div>
+              <div class="swiper-box">
+                <div class="txtEdit editDone">
+                  <p>가격</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <input type="checkbox">
+            <div class="swiper-slide">
+              <div class="swiper-box">
+                <div class="no-img"><img src="" alt=""></div>
+              </div>
+              <div class="swiper-box">
+                <div class="txtEdit">
+                <p>상품명</p>
+                </div>
+              </div>
+              <div class="swiper-box">
+                <div class="txtEdit">
+                <p>가격</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <input type="checkbox">
+            <div class="swiper-slide">
+              <div class="swiper-box">
+                <div class="no-img"><img src="" alt=""></div>
+              </div>
+              <div class="swiper-box">
+                <div class="txtEdit">
+                <p>상품명</p>
+                </div>
+              </div>
+              <div class="swiper-box">
+                <div class="txtEdit">
+                <p>가격</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="btnWrap grow">
+          <button class="btn btn-size type2 bg btn-registration-pop">확인</button>
+          <button class="btn btn-size bg btn-close-pop">취소</button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="dimmed"></div> -->
+  </div>
+
+  <!-- S: cropper modal -->
+  <div class="cropModalWrap"></div>
+  <!-- E: cropper modal -->
+
+</body>
+</html>
