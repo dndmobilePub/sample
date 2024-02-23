@@ -770,6 +770,10 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.modalPop.closePop($(this));
 
                 $('.product-list input[type="checkbox"]').prop('checked', false);
+
+                setTimeout(function() {
+                    $('.btn-registration-pop').removeClass('btn-close-pop');
+                }, 100); // 1초 후에 실행
             });
         },
         
@@ -786,12 +790,3 @@ var COMPONENT_UI = (function (cp, $) {
     cp.init();
     return cp;
 }(window.COMPONENT_UI || {}, jQuery));
-
-// $(document).ready(function() {
-//     // 초기에 존재하는 스와이퍼 객체에 대해서 초기화
-//     var initialSwipers = $('.section .swiper');
-//         initialSwipers.each(function() {
-//         var swiperInstance = initializeSwiper(this);
-//         $(this).data('swiper', swiperInstance);
-//     });
-//   });

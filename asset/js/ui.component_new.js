@@ -597,7 +597,7 @@ var COMPONENT_UI = (function (cp, $) {
             this.mdBoxAddClk();
             this.initializeSwiper();
             this.mdGoodsAdd();
-            this.mdGoodsChoice();
+            this.mdGoodsPopClose();
             this.mdGoodPopSel();
         },
         dragFn: function () {
@@ -735,21 +735,15 @@ var COMPONENT_UI = (function (cp, $) {
             $('body').on('click', '.swiperAddBtn', function() {
                 var targetModal = $(this).data('modal'); // 버튼의 data-modal 속성 값 가져오기
                 $('.modalPop').attr('modal-target', targetModal); // modal-target 속성 업데이트
-                
                 cp.modalPop.showModal($(this)); // 모달을 열도록 modalPop 호출
-                cp.module.checkedCount = 0;                
-            });
-
-            $('.modalPop').change('hide', function () {
-                $('.btn-registration-pop').removeClass('btn-close-pop');
+                // $('.modalPop').find('.btn-registration-pop').addClass('btn-close-pop');
             });
         },
         
        // mdGoodsPopClose 함수 정의
-        mdGoodsChoice: function() {
+        mdGoodsPopClose: function() {
             const productCheckboxes = $('.product-list input[type="checkbox"]');
             const registrationButton = $('.btn-registration-pop');
-            $('.product-list input[type="checkbox"]').prop('checked', false);
             
             // 체크박스 상태 변경 이벤트 핸들러 등록
             productCheckboxes.on('change', function() {
@@ -765,19 +759,21 @@ var COMPONENT_UI = (function (cp, $) {
         },
 
         mdGoodPopSel:function(){
-        
             $('.btn-registration-pop').on('click', function() {  
+                // 
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');
                     var clonedSlide = parentLi.find('.swiper-slide').clone();
                     $('.swiper-wrapper').append(clonedSlide);
-                });                
-                
+                });
                 cp.moduleBox.initializeSwiper('.swiper');
                 cp.modalPop.closePop($(this));
-        
-                // $('.product-list input[type="checkbox"]').prop('checked', false);
-                cp.module.checkedCount = 0;
+
+                $('.product-list input[type="checkbox"]').prop('checked', false);
+
+                setTimeout(function() {
+                    $('.btn-registration-pop').removeClass('btn-close-pop');
+                }, 100); // 1초 후에 실행
             });
         },
         
