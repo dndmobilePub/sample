@@ -16,11 +16,9 @@
 @import '_cp.popup';
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+  @include pos-offset-l(0,0,fixed){z-index: 1000;}
+  @include width(100%);
+  
   background:$color-gray2;
 }
 .btnWrap {
@@ -38,11 +36,11 @@ header {
   padding:6rem 3rem 3rem;
   .section {
     border:1px $color-gray8 solid;
-    background: #ddd;
+    background: $color-gray6;
     max-width:var(--section); margin:2rem auto;
 
     [data-type="goods"] .swiper{
-      display: flex;
+      @include display(flex);
     }
     .md {
       position: relative;
