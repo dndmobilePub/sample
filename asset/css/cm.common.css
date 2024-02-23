@@ -142,6 +142,10 @@ body, th, td, input, select, textarea, button {
   letter-spacing: -0.5px;
 }
 
+input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
+  background: #f6f6f6;
+}
+
 input[type=text]:read-only, input[type=password]:read-only,
 input[type=text]:disabled, input[type=password]:disabled {
   background: #f6f6f6;
@@ -1175,6 +1179,13 @@ header {
   font-size: 1.2rem;
   font-weight: 700;
 }
+.container .section .md .swiper-slide .swiper-box {
+  text-align: center;
+}
+.container .section .md .swiper-slide .swiper-box img {
+  max-width: 30rem;
+  width: 100%;
+}
 
 .btn.swiperAddBtn {
   position: absolute;
@@ -1217,6 +1228,9 @@ header {
 }
 .modalWrap .product-list .swiper-slide {
   display: block;
+}
+.modalWrap .product-list .swiper-slide img {
+  width: 20rem;
 }
 
 .imgWrap img {
@@ -1291,6 +1305,11 @@ header {
   text-align: center !important;
 }
 
+/* 모달팝업 */
+.modalPop._center {
+  width: auto;
+}
+
 /* cropper 모달팝업 */
 .cropModalWrap .modalPop {
   width: 100%;
@@ -1347,11 +1366,9 @@ header {
   font-size: 0;
   line-height: 0;
   position: relative;
-  -ms-touch-action: none;
   touch-action: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .cropper-container img {

@@ -90,6 +90,13 @@ header {
             font-size: 1.2rem;
             font-weight: 700;
           }
+          .swiper-box{
+            text-align: center;
+            img{
+              max-width: 30rem;
+              width: 100%;
+            }
+          }
         }
       }
 /*       .alert {
@@ -135,6 +142,9 @@ header {
     }
     .swiper-slide{
       @include display(block);
+      img{
+        width: 20rem;
+      }
     }
   }
 }
@@ -194,6 +204,12 @@ header {
   & + .btnWrap {
     margin:0; padding: 2.4rem;
     @include align(text, center);
+  }
+}
+/* 모달팝업 */
+.modalPop {
+  &._center {
+    width: auto;
   }
 }
 
