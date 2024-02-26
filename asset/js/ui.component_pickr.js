@@ -782,7 +782,7 @@ var COMPONENT_UI = (function (cp, $) {
                             hsva: true,
                             cmyk: true,
                             input: true,
-                            clear: true,
+                            clear: false,
                             save: true
                         }
                     }
