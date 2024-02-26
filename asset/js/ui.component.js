@@ -1120,42 +1120,19 @@ var COMPONENT_UI = (function (cp, $) {
 
     cp.colorEdit = {
         init: function() {
-            this.pickrEdit();
+            this.spectrumColor();
         },
-        pickrEdit: function() {
+        spectrumColor: function(initialColor) {
             $(document).ready(function(){
-                const pickr = Pickr.create({
-                    el: '#editColor', // 색상 선택기를 적용할 input 요소
-                    theme: 'nano', // 테마 설정
-                    default: '#000000', // 초기 색상 설정
-                    swatches: [ // 미리 정의된 색상 swatch 설정
-                        '#000000',
-                        '#ff0000',
-                        '#0000ff'
-                    ],
-                    components: { // 선택할 수 있는 컬러 피커 컴포넌트 설정
-                        preview: true,
-                        opacity: true,
-                        hue: true,
-                        interaction: {
-                            hex: true,
-                            rgba: true,
-                            hsla: true,
-                            hsva: true,
-                            cmyk: true,
-                            input: true,
-                            clear: false,
-                            save: true
-                        }
+                $("#editColor").spectrum({
+                    flat: false,
+                    showInput: true,
+                    color: initialColor,
+                    change: function(color) {
+                        var selectedColor = color.toHexString();
+                        cp.colorEdit.fontColor(selectedColor);
                     }
                 });
-        
-                // 색상이 변경될 때 이벤트 처리
-                pickr.on('save', (color, instance) => {
-                    instance.hide();
-                    const editColor = color.toHEXA().toString();
-                    cp.colorEdit.fontColor(editColor);
-                }); 
             });
         },
         fontColor: function(editColor) {
@@ -1209,6 +1186,7 @@ var COMPONENT_UI = (function (cp, $) {
         editOpen: function() {
             $(document).on('click', '[contenteditable]', function() {
                 var $this = $(this);
+                var thisColor = $this.css('color');
 
                 if (!$this.has('.textEditerWrap').length) {
                     $('.textEditerWrap').remove();
@@ -1218,8 +1196,7 @@ var COMPONENT_UI = (function (cp, $) {
                     
                         $this.attr('edit-target', targetData);
                         $(this).show();
-                        //$(this).addClass('show');
-                        cp.colorEdit.pickrEdit();
+                        cp.colorEdit.spectrumColor(thisColor);
                     })
                 }
             });
