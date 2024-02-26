@@ -3,6 +3,7 @@ var COMPONENT_UI = (function (cp, $) {
     function generateUniqueId() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
+    cp.generateUniqueId = generateUniqueId;
 
     cp.imgCrop = {
         init: function () {
@@ -580,6 +581,7 @@ var COMPONENT_UI = (function (cp, $) {
             this.mdBoxDel();
             this.mdBoxAddClk();
             this.initializeSwiper();
+            this.resetSwipers();
             this.mdGoodsAdd();
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
@@ -596,6 +598,8 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
         mdBoxAddCont: function() {
+            var uniqueData = generateUniqueId();
+            var swiperDataModal = 'swiper_' + uniqueData;
             var content = {
                 textAreaHTML: `
                     <div class="txtEdit" contenteditable="false">
@@ -616,7 +620,8 @@ var COMPONENT_UI = (function (cp, $) {
                     <div class="txtEdit">
                         <h1 contenteditable="true">대제목</h1>
                     </div>
-                    <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
+                    <div class="btn btn-size xs shadow dragBtn">드래그</div>
+                    <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="${swiperDataModal}">상품 항목추가</button></button>
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
@@ -629,7 +634,7 @@ var COMPONENT_UI = (function (cp, $) {
                                     </div>
                                 </div>
                                 <div class="swiper-box">
-                                    <div class="txtEdit editDone">
+                                    <div class="txtEdit">
                                         <p>가격</p>
                                     </div>
                                 </div>
@@ -644,7 +649,7 @@ var COMPONENT_UI = (function (cp, $) {
                                     </div>
                                 </div>
                                 <div class="swiper-box">
-                                    <div class="txtEdit editDone">
+                                    <div class="txtEdit">
                                         <p>가격</p>
                                     </div>
                                 </div>
@@ -696,23 +701,39 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
 
-        // 상품
         initializeSwiper: function(swiperContainer) {
-        var newSwiper = new Swiper(swiperContainer, {
-            loop: true,
-            slidesPerView: 2, 
-            spaceBetween: 10, 
-            autoplay: true,
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            $(swiperContainer).each(function() {
+                var slidesCount = $(this).find('.swiper-slide').length;
+                var slidesPerView = slidesCount > 1 ? 2 : 1; 
+                var loopEnabled = slidesPerView > 1 && slidesCount >= 3;
+                var loopOption = loopEnabled ? true : false;
+            
+                new Swiper(this, {
+                    loop: loopOption,
+                    slidesPerView: slidesPerView,  
+                    spaceBetween: 10, 
+                    autoplay: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
             });
-            return newSwiper;
+        }, 
+
+        resetSwipers: function() {
+            $(document).ready(function() {
+                var initialSwipers = $('.section .swiper');
+                initialSwipers.each(function() {
+                    var swiperInstance = COMPONENT_UI.moduleBox.initializeSwiper(this);
+                    $(this).data('swiper', swiperInstance); 
+                });
+            });
         },
+
         mdGoodsAdd:function() {
             $('body').on('click', '.swiperAddBtn', function() {
                 var targetModal = $(this).data('modal');
@@ -736,18 +757,22 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
 
-        mdGoodPopSel:function(){
+        mdGoodPopSel: function() {
             $('.btn-registration-pop').on('click', function() {
+                var thisData = $(this).closest('.modalPop').attr('modal-target');
+                var dataElem = $('.md').find('.swiperAddBtn[data-modal="' + thisData + '"]');
+                dataElem.siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');
                     var clonedSlide = parentLi.find('.swiper-slide').clone();
-                    $('.swiper-wrapper').append(clonedSlide);
+                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
                 });
                 cp.moduleBox.initializeSwiper('.swiper');
                 cp.modalPop.closePop($(this));
-
+        
                 $('.product-list input[type="checkbox"]').prop('checked', false);
-
+        
                 setTimeout(function() {
                     $('.btn-registration-pop').removeClass('btn-close-pop');
                 }, 100);
