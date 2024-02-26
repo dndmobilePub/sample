@@ -16,25 +16,40 @@
 @import '_cp.tab';
 @import '_cp.popup';
 
+.wrap {
+}
+
 header {
   @include pos-offset-l(0,0,fixed){z-index: 1000;}
-  @include width(100%);
+  @include el-size(20%, 100%);
+  min-width:20rem;
   
   background:$color-gray2;
 }
 .btnWrap {
   padding:.5rem;
   & > a {
+    @include display(block);
     padding:.5rem 1rem;
-    color:$color-gray1; text-decoration:none;
-    background:$color-yellow;
+    color:$color-gray6; text-decoration:none;
+    background:$color-gray3;
+    border:1px solid $color-gray4;
     font-size:var(--space-ms);
     border-radius: .3rem;
+
+    & ~ a {margin-top:.5rem;}
+    &:hover {
+      color:$color-gray1;
+      font-weight:bold;
+      background:$color-white;
+    }
   }
 }
 
 .container {
-  padding:6rem 3rem 3rem;
+  @include width(calc(100% - 20rem));
+  margin-left:22rem;
+  padding:3rem;
   .section {
     @include border(border, 1px, solid, $color-gray8);
     background: $color-gray6;
