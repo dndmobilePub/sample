@@ -1360,6 +1360,7 @@ header {
   display: flex;
   align-items: center;
   padding: 1rem;
+  color: #333 !important;
 }
 .textEditerWrap .edit-box .btn-edit {
   display: flex;

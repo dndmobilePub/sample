@@ -789,7 +789,8 @@ var COMPONENT_UI = (function (cp, $) {
                 });
         
                 // 색상이 변경될 때 이벤트 처리
-                pickr.on('save', (color) => {
+                pickr.on('save', (color, instance) => {
+                    instance.hide();
                     const editColor = color.toHEXA().toString();
                     cp.colorEdit.fontColor(editColor);
                 }); 
@@ -848,19 +849,45 @@ var COMPONENT_UI = (function (cp, $) {
             $(document).on('click', '[contenteditable]', function() {
                 var $this = $(this);
 
-                $('<div class="textEditerWrap"></div>').insertBefore($this);
-                $(this).prev('.textEditerWrap').load('text-edit.html', function(){
-                    var targetData = $('.edit-box').data('edit');
-                
-                    $this.attr('edit-target', targetData);
-                    $(this).show();
-                    cp.colorEdit.pickrEdit();
-                })
+                if (!$this.has('.textEditerWrap').length) {
+                    $('.textEditerWrap').remove();
+                    $('<div class="textEditerWrap"></div>').insertBefore($this);
+                    $(this).prev('.textEditerWrap').load('text-edit.html', function(){
+                        var targetData = $('.edit-box').data('edit');
+                    
+                        $this.attr('edit-target', targetData);
+                        $(this).show();
+                        //$(this).addClass('show');
+                        cp.colorEdit.pickrEdit();
+                    })
+                }
             });
-/*             $(document).on('focusout', '[contenteditable]', function() {
-                $(this).remove('edit-target');
-                $('.textEditerWrap').remove();
+/*             $(document).on('focusout', '[contenteditable]', function(event) {
+                var textEditerWrap = $this.prev('.textEditerWrap');
+                var $this = $(this);
+                var clickedElement = $(event.relatedTarget);
+
+                if (!textEditerWrap.is(':focus') && !$this.is(':focus')) {
+                    $this.removeAttr('edit-target');
+                    textEditerWrap.remove();
+                }
             }); */
+            $(document).on('click', function(event) {
+                var clickedElement = $(event.target);
+                var contentEditableElement = clickedElement.closest('[contenteditable]');
+                var pcrAppElement = clickedElement.closest('.pcr-app');
+                var textEditerWrapElement = clickedElement.closest('.textEditerWrap');
+            
+                // 클릭된 요소가 contenteditable 요소, pcr-app, textEditerWrap 또는 그 하위 요소인 경우 무시
+                if (contentEditableElement.length > 0 || pcrAppElement.length > 0 || textEditerWrapElement.length > 0) {
+                    return;
+                }
+            
+                if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
+                    $('[contenteditable]').removeAttr('edit-target');
+                    $('.textEditerWrap').remove();
+                }
+            });
         }
     }
 

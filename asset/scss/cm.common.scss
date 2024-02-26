@@ -267,6 +267,7 @@ header {
   .edit-box {
     @include display(flex){align-items: center};
     padding: 1rem;
+    color: #333 !important;
     .btn-edit {
       display: flex;
       position: relative;
