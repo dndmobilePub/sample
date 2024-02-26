@@ -1,0 +1,48 @@
+#{$lst} {
+  &-goods {
+    @include display(flex);
+    flex-wrap:wrap;
+    gap:2rem;
+    & > li {
+      @include width(calc(100%/2 - 1rem));
+    }
+  }
+}
+
+// 상품
+.goods {
+  &Wrap {
+    .item {
+      padding:.3rem 0;
+      &.brand {
+        font-size:var(--space-xs);
+      }
+      &.name {
+        font-weight:bold;
+      }
+      &.price {
+        font-size:var(--space-xs);
+      }
+    }
+  }
+  &-category {
+    font-size:var(--space-mx);
+    font-weight:bold;
+    margin:1rem 0;
+  }
+  &-img {
+    background:$color-gray6;
+    border-radius:1rem;
+    @include overflow(both, hidden);
+    margin-bottom:1rem;
+  }
+}
+
+.label {
+  &.point {
+    font-size:var(--space-3xs);
+    background:$color-gray7;
+    border-radius:.5rem;
+    padding:.3rem .5rem;
+  }
+}

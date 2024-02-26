@@ -10,7 +10,7 @@
 /* flag */
 :root {
   --space-4xs: .4rem;
-  --space-3xs: .8rem;
+  --space-3xs: .9rem;
   --space-2xs: 1rem;
   --space-xs: 1.1rem;
   --space-sm: 1.2rem;
@@ -1137,7 +1137,7 @@ legend, caption {
   border: 0.1rem solid #4b90df;
 }
 .tab-contents {
-  padding: 3rem 5rem 5rem;
+  padding: 0 2rem 2rem;
   min-height: 20rem;
 }
 .tab-contents:nth-child(even) {
@@ -1152,10 +1152,6 @@ legend, caption {
 .tab-sticky .tab-contents-wrap {
   border: none;
 }
-.tab-sticky .tab-contents {
-  padding: 8rem 5rem;
-}
-
 @-webkit-keyframes widthAct {
   0% {
     width: 0;
@@ -1166,7 +1162,6 @@ legend, caption {
     left: 0;
   }
 }
-
 @keyframes widthAct {
   0% {
     width: 0;
@@ -1179,6 +1174,49 @@ legend, caption {
 }
 .aos_old .tab-sticky .tab-list-wrap {
   position: relative;
+}
+
+.lst-goods {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 2rem;
+}
+.lst-goods > li {
+  width: calc(50% - 1rem);
+}
+
+.goodsWrap .item {
+  padding: 0.3rem 0;
+}
+.goodsWrap .item.brand {
+  font-size: var(--space-xs);
+}
+.goodsWrap .item.name {
+  font-weight: bold;
+}
+.goodsWrap .item.price {
+  font-size: var(--space-xs);
+}
+.goods-category {
+  font-size: var(--space-mx);
+  font-weight: bold;
+  margin: 1rem 0;
+}
+.goods-img {
+  background: #ddd;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.label.point {
+  font-size: var(--space-3xs);
+  background: #eee;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.5rem;
 }
 
 .modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap {

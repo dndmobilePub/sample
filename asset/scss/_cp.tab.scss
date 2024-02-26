@@ -215,7 +215,7 @@
 	}
 
 	&-contents {
-		padding: 3rem 5rem 5rem;
+		padding: 0 2rem 2rem;
 		min-height: 20rem;
 
 		&:nth-child(even) {
@@ -235,7 +235,7 @@
 				border: none;
 			}
 			&-contents {
-				padding: 8rem 5rem;
+				// padding: 8rem 5rem;
 			}
 		}
 	}
