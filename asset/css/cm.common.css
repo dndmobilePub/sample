@@ -1493,7 +1493,9 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
-  width: 100%;
+  width: 20%;
+  height: 100%;
+  min-width: 20rem;
   background: #333;
 }
 
@@ -1501,16 +1503,28 @@ header {
   padding: 0.5rem;
 }
 .btnWrap > a {
+  display: block;
   padding: 0.5rem 1rem;
-  color: #242424;
+  color: #ddd;
   text-decoration: none;
-  background: #fc0;
+  background: #666;
+  border: 1px solid #999;
   font-size: var(--space-ms);
   border-radius: 0.3rem;
 }
+.btnWrap > a ~ a {
+  margin-top: 0.5rem;
+}
+.btnWrap > a:hover {
+  color: #242424;
+  font-weight: bold;
+  background: #fff;
+}
 
 .container {
-  padding: 6rem 3rem 3rem;
+  width: calc(100% - 20rem);
+  margin-left: 22rem;
+  padding: 3rem;
 }
 .container .section {
   border: 1px solid #ccc;
