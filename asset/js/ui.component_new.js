@@ -789,6 +789,7 @@ var COMPONENT_UI = (function (cp, $) {
             this.tabSetting();
             this.tabClick();
             this.scrollEventHandler();
+            this.addTab();
         },
         tabSetting: function() {
             /**
@@ -1101,7 +1102,20 @@ var COMPONENT_UI = (function (cp, $) {
                 let newTop = 0;
                 self.tabSel($this, $tabWrap);
             });
-        }
+        },
+        
+        addTab: function() {
+            const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
+            const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
+                      _tabCont = $('<div class="tab-contents" contenteditable="true">탭컨텐츠 추가</div>');
+
+            $(_addTab).one('click', function() {
+                
+                $(this).closest('li').before(_tabLi);
+                $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
+                cp.tab.init();
+            });
+        },
     };
 
     cp.init = function () {

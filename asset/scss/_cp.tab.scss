@@ -88,6 +88,24 @@
 				}
 			}
 		}
+		& > li {
+			&._addTab {
+				& > a {
+					@include pos(relative);
+					@include el-size(2rem, 2rem);
+					background:$color-blue;
+					border-radius:100%;
+					@include el-content(both) {
+						@include pos-offset-l(calc(50% - .2rem/2), calc(50% - 1rem/2));
+						@include el-size(1rem, .2rem);
+						background:$color-white;
+					}
+					@include el-content(after) {
+						transform: rotate(90deg)
+					}
+				}
+			}
+		}
 	}
 
 	&-wrap {
@@ -130,6 +148,7 @@
 					&-contents {
 						@include overflow (both, auto);
 						@include height(100%);
+						min-height: 20rem;
 					}
 				}
 			}

@@ -1002,6 +1002,39 @@ legend, caption {
   -webkit-animation: widthAct 0.3s linear forwards;
           animation: widthAct 0.3s linear forwards;
 }
+.tab-list > li._addTab > a {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  background: #4b90df;
+  border-radius: 100%;
+}
+.tab-list > li._addTab > a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(50% - 0.1rem);
+  left: calc(50% - 0.5rem);
+  width: 1rem;
+  height: 0.2rem;
+  background: #fff;
+}
+.tab-list > li._addTab > a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(50% - 0.1rem);
+  left: calc(50% - 0.5rem);
+  width: 1rem;
+  height: 0.2rem;
+  background: #fff;
+}
+.tab-list > li._addTab > a::after {
+  content: "";
+  display: block;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
 .tab-wrap {
   position: relative;
 }
@@ -1061,6 +1094,7 @@ legend, caption {
 .tab-wrap.tab-vertical .tab-contents {
   overflow: auto;
   height: 100%;
+  min-height: 20rem;
 }
 .tab-wrap.tab-scroll .tab-contents-wrap, .tab-wrap.tab-scroll-height .tab-contents-wrap {
   overflow-y: scroll;
