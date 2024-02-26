@@ -1118,6 +1118,130 @@ var COMPONENT_UI = (function (cp, $) {
         },
     };
 
+    cp.colorEdit = {
+        init: function() {
+            this.pickrEdit();
+        },
+        pickrEdit: function() {
+            $(document).ready(function(){
+                const pickr = Pickr.create({
+                    el: '#editColor', // 색상 선택기를 적용할 input 요소
+                    theme: 'nano', // 테마 설정
+                    default: '#000000', // 초기 색상 설정
+                    swatches: [ // 미리 정의된 색상 swatch 설정
+                        '#000000',
+                        '#ff0000',
+                        '#0000ff'
+                    ],
+                    components: { // 선택할 수 있는 컬러 피커 컴포넌트 설정
+                        preview: true,
+                        opacity: true,
+                        hue: true,
+                        interaction: {
+                            hex: true,
+                            rgba: true,
+                            hsla: true,
+                            hsva: true,
+                            cmyk: true,
+                            input: true,
+                            clear: false,
+                            save: true
+                        }
+                    }
+                });
+        
+                // 색상이 변경될 때 이벤트 처리
+                pickr.on('save', (color, instance) => {
+                    instance.hide();
+                    const editColor = color.toHEXA().toString();
+                    cp.colorEdit.fontColor(editColor);
+                }); 
+            });
+        },
+        fontColor: function(editColor) {
+            var targetData = $('.edit-box').data('edit');
+            var thisWrap = $('.edit-color').closest('.textEditerWrap');
+            
+            thisWrap.next('[contenteditable]').each(function() {
+                if ($(this).attr('edit-target') === targetData) {
+                    $(this).css('color', editColor);
+                }
+            });
+        },
+    };
+
+    cp.fontEditer = {
+        init: function() {
+            this.fontBold();
+            this.fontSize();
+            this.editOpen();
+        },
+        fontBold: function() {
+            $(document).off('click').on('click', '.editBold', function(){
+                var targetData = $('.edit-box').data('edit');
+                var thisWrap = $(this).closest('.textEditerWrap');
+                var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
+
+                if (contentEditable.length) {
+                    if (contentEditable.hasClass('fontBold')) {
+                        contentEditable.removeClass('fontBold');
+                    } else {
+                        contentEditable.addClass('fontBold');
+                    }
+                }
+            })
+        },
+        fontSize: function() {
+            $(document).on('change', '.editSize', function(){
+                var newSize = parseInt($(this).val().trim());
+                var targetData = $('.edit-box').data('edit');
+                var thisWrap = $(this).closest('.textEditerWrap');
+
+                thisWrap.next('[contenteditable]').each(function() {
+                    if ($(this).attr('edit-target') === targetData) {                        
+                        if (!isNaN(newSize) && newSize > 0) {
+                            $(this).css('font-size', newSize + 'px');
+                        }
+                    }
+                })
+            })
+        },
+        editOpen: function() {
+            $(document).on('click', '[contenteditable]', function() {
+                var $this = $(this);
+
+                if (!$this.has('.textEditerWrap').length) {
+                    $('.textEditerWrap').remove();
+                    $('<div class="textEditerWrap"></div>').insertBefore($this);
+                    $(this).prev('.textEditerWrap').load('text-edit.html', function(){
+                        var targetData = $('.edit-box').data('edit');
+                    
+                        $this.attr('edit-target', targetData);
+                        $(this).show();
+                        //$(this).addClass('show');
+                        cp.colorEdit.pickrEdit();
+                    })
+                }
+            });
+            
+            $(document).on('click', function(event) {
+                var clickedElement = $(event.target);
+                var contentEditableElement = clickedElement.closest('[contenteditable]');
+                var pcrAppElement = clickedElement.closest('.pcr-app');
+                var textEditerWrapElement = clickedElement.closest('.textEditerWrap');
+                
+                if (contentEditableElement.length > 0 || pcrAppElement.length > 0 || textEditerWrapElement.length > 0) {
+                    return;
+                }
+            
+                if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
+                    $('[contenteditable]').removeAttr('edit-target');
+                    $('.textEditerWrap').remove();
+                }
+            });
+        }
+    };
+
     cp.init = function () {
         cp.imgCrop.init();
         cp.videoModule.init();
@@ -1125,6 +1249,8 @@ var COMPONENT_UI = (function (cp, $) {
         cp.moduleBox.init();
         cp.modalPop.init();
         cp.tab.init();
+        cp.colorEdit.init();
+        cp.fontEditer.init();
     };
 
     cp.init();
