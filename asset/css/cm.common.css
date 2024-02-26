@@ -1094,7 +1094,6 @@ legend, caption {
 .tab-wrap.tab-vertical .tab-contents {
   overflow: auto;
   height: 100%;
-  min-height: 20rem;
 }
 .tab-wrap.tab-scroll .tab-contents-wrap, .tab-wrap.tab-scroll-height .tab-contents-wrap {
   overflow-y: scroll;
@@ -1139,6 +1138,7 @@ legend, caption {
 }
 .tab-contents {
   padding: 3rem 5rem 5rem;
+  min-height: 20rem;
 }
 .tab-contents:nth-child(even) {
   background: #eee;
@@ -1551,6 +1551,7 @@ header {
   display: block;
 }
 .container .section .md .txtEdit {
+  position: relative;
   padding: 2.4rem;
   font-size: 1.4rem;
   color: #000;
@@ -1561,7 +1562,11 @@ header {
 .container .section .md .txtEdit > *:not(:first-child) {
   margin-top: 1rem;
 }
+.container .section .md .txtEdit .fontBold {
+  font-weight: 700;
+}
 .container .section .md [contenteditable=true] {
+  position: relative;
   cursor: text;
   outline: 0;
 }
@@ -1765,6 +1770,63 @@ header {
 }
 .cropModalWrap .btnLabel ~ .btn {
   margin-left: 0.5rem;
+}
+
+/* textEditerWrap */
+.textEditerWrap {
+  display: none;
+  width: 100%;
+  width: calc(100% + 4.8rem);
+  margin: 0 -2.4rem 0.5rem;
+  background: #f3f4f6;
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+.textEditerWrap .edit-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+  color: #333 !important;
+}
+.textEditerWrap .edit-box .btn-edit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+.textEditerWrap .edit-box .btn-edit ~ .btn-edit {
+  margin-left: 1rem;
+}
+.textEditerWrap .edit-box .btn-edit .edit-bold {
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.textEditerWrap .edit-box .btn-edit .edit-size {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.4rem 1rem;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.textEditerWrap .edit-box .btn-edit .edit-size-input {
+  margin-left: 0.5rem;
+  width: 3rem;
+  height: 2rem;
+  border: 1px solid #000;
+}
+.textEditerWrap .edit-box .btn-edit .edit-color {
+  position: relative;
+  border-radius: 0.3rem;
 }
 
 /* cropper style */

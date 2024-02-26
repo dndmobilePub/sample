@@ -3,7 +3,6 @@ var COMPONENT_UI = (function (cp, $) {
     function generateUniqueId() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
-    cp.generateUniqueId = generateUniqueId;
 
     cp.imgCrop = {
         init: function () {
@@ -581,7 +580,6 @@ var COMPONENT_UI = (function (cp, $) {
             this.mdBoxDel();
             this.mdBoxAddClk();
             this.initializeSwiper();
-            this.resetSwipers();
             this.mdGoodsAdd();
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
@@ -598,8 +596,6 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
         mdBoxAddCont: function() {
-            var uniqueData = generateUniqueId();
-            var swiperDataModal = 'swiper_' + uniqueData;
             var content = {
                 textAreaHTML: `
                     <div class="txtEdit" contenteditable="false">
@@ -620,8 +616,7 @@ var COMPONENT_UI = (function (cp, $) {
                     <div class="txtEdit">
                         <h1 contenteditable="true">대제목</h1>
                     </div>
-                    <div class="btn btn-size xs shadow dragBtn">드래그</div>
-                    <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="${swiperDataModal}">상품 항목추가</button></button>
+                    <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
@@ -634,7 +629,7 @@ var COMPONENT_UI = (function (cp, $) {
                                     </div>
                                 </div>
                                 <div class="swiper-box">
-                                    <div class="txtEdit">
+                                    <div class="txtEdit editDone">
                                         <p>가격</p>
                                     </div>
                                 </div>
@@ -649,7 +644,7 @@ var COMPONENT_UI = (function (cp, $) {
                                     </div>
                                 </div>
                                 <div class="swiper-box">
-                                    <div class="txtEdit">
+                                    <div class="txtEdit editDone">
                                         <p>가격</p>
                                     </div>
                                 </div>
@@ -701,39 +696,23 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
 
+        // 상품
         initializeSwiper: function(swiperContainer) {
-            $(swiperContainer).each(function() {
-                var slidesCount = $(this).find('.swiper-slide').length;
-                var slidesPerView = slidesCount > 1 ? 2 : 1; 
-                var loopEnabled = slidesPerView > 1 && slidesCount >= 3;
-                var loopOption = loopEnabled ? true : false;
-            
-                new Swiper(this, {
-                    loop: loopOption,
-                    slidesPerView: slidesPerView,  
-                    spaceBetween: 10, 
-                    autoplay: true,
-                    pagination: {
-                        el: '.swiper-pagination',
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                });
+        var newSwiper = new Swiper(swiperContainer, {
+            loop: true,
+            slidesPerView: 2, 
+            spaceBetween: 10, 
+            autoplay: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
             });
-        }, 
-
-        resetSwipers: function() {
-            $(document).ready(function() {
-                var initialSwipers = $('.section .swiper');
-                initialSwipers.each(function() {
-                    var swiperInstance = COMPONENT_UI.moduleBox.initializeSwiper(this);
-                    $(this).data('swiper', swiperInstance); 
-                });
-            });
+            return newSwiper;
         },
-
         mdGoodsAdd:function() {
             $('body').on('click', '.swiperAddBtn', function() {
                 var targetModal = $(this).data('modal');
@@ -757,22 +736,18 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
 
-        mdGoodPopSel: function() {
+        mdGoodPopSel:function(){
             $('.btn-registration-pop').on('click', function() {
-                var thisData = $(this).closest('.modalPop').attr('modal-target');
-                var dataElem = $('.md').find('.swiperAddBtn[data-modal="' + thisData + '"]');
-                dataElem.siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
-
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');
                     var clonedSlide = parentLi.find('.swiper-slide').clone();
-                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
+                    $('.swiper-wrapper').append(clonedSlide);
                 });
                 cp.moduleBox.initializeSwiper('.swiper');
                 cp.modalPop.closePop($(this));
-        
+
                 $('.product-list input[type="checkbox"]').prop('checked', false);
-        
+
                 setTimeout(function() {
                     $('.btn-registration-pop').removeClass('btn-close-pop');
                 }, 100);
@@ -781,342 +756,140 @@ var COMPONENT_UI = (function (cp, $) {
         
     };
 
-    cp.tab = {
-        constEl: {
-            tab: '.tab > a'
+    cp.colorEdit = {
+        init: function() {
+            this.pickrEdit();
         },
-        init() {
-            this.tabSetting();
-            this.tabClick();
-            this.scrollEventHandler();
-            this.addTab();
-        },
-        tabSetting: function() {
-            /**
-             * 탭 초기 설정
-             * @contentsIdx 클릭한 탭의 index와 같은 index의 content
-             */
-            const self = this;
-            
-            $('.tab-moving .tab-list-wrap').append($('<span class="highlight"></span>'));
-            $('.tab-scroll .tab-contents').scrollTop();
-    
-            // 접근성
-            $('.tab').children('a').attr('aria-selected', 'false');
-            $('.tab._is-active').children('a').attr('aria-selected', 'true');
-            $('.tab').attr('roll', 'tab');
-            $('.tab-list').attr('roll', 'tablist');
-            $('.tab-contents').attr('roll', 'tabpanel');
-    
-            $(document).ready(function() {
-                $('.tab-wrap').each(function () {
-                    var $tabWrap = $(this);
-    
-                    // id 부여
-                    $tabWrap.find('.tab').each(function (index) {
-                        var tabId = $tabWrap.attr('id') + '_' + 'tab' + (index + 1);
-                        $(this).attr('aria-controls', tabId);
-                    });
-    
-                    $tabWrap.find('.tab-contents').each(function (index) {
-                        var panelId = $tabWrap.attr('id') + '_' + 'tab' + (index + 1);
-                        $(this).attr('id', panelId);
-                    });
-    
-                    // highlight 너비(높이) 부여
-                    $tabWrap.find('.highlight').each(function () {
-                        self.moveHighLight($tabWrap);
-                    });
-                })
-            })
-    
-            // resize 체크
-            let resizeTimeout;
-            $(window).on('resize', function() {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function() {
-                    $('.tab-wrap').each(function () {
-                        var $tabWrap = $(this);
-                        
-                        // highlight 너비(높이) 부여
-                        $tabWrap.find('.highlight').each(function () {
-                            self.moveHighLight($tabWrap);
-                        });
-                    });
-                }, 200);
-            });
-    
-            let isTabClick; // 중복 호출 방지를 위한 플래그 변수
-    
-            // tabpanel 스크롤 이벤트 처리
-            $('.tab-scroll .tab-contents-wrap').on('scroll', self.scrollEventHandler);
-    
-            self.tabSticky(isTabClick);
-        },
-        tabSel: function($this, $tabWrap) {
-            /**
-             * 가로/세로 탭 선택 함수
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * @next 가로/세로 형식으로 바뀌는 컨텐츠 wrapper
-             * sel-h-v 클래스 있는 tab 메뉴에서 data-type에 따라 $next highlight 초기화
-             */
-    
-            if ($tabWrap.hasClass('sel-h-v')) {
-                const $next = $tabWrap.next('.tab-wrap'); //실제 tabWrap
-                const $activeTab = $next.find('._is-active');
-                const newHeight = $next.find('.tab').outerHeight();
-                const newWidth = $next.find('.tab').outerWidth();
-                const nextHighlight = $next.find('.highlight');
-                const newTop = $activeTab.position().top;
-    
-                if ($this.attr('data-type') === 'vertical') { 
-                    //탭메뉴 세로 버전일때
-                    $next.addClass('tab-vertical').find('.tab-list').attr('aria-orientation', 'vertical');
-                    
-                    nextHighlight.css({ 
-                        left: '', 
-                        width: '', 
-                        top: newTop + 'px', 
-                        height: newHeight + 'px' 
-                    });
-                } else { 
-                    //탭메뉴 가로 버전일때
-                    $next.removeClass('tab-vertical').find('.tab-list').removeAttr('aria-orientation');
-    
-                    nextHighlight.css({ 
-                        top: '', 
-                        height: '', 
-                        width: newWidth + 'px' 
-                    });
-                }
-                
-                /* 탭활성화 초기화 */
-                $next.find('.tab, .tab-contents').removeClass('_is-active').eq(0).addClass('_is-active');
-            } 
-        },
-        moveHighLight: function($tabWrap, $this, callback) {
-            /**
-             * 선택된 탭 highlight action 함수
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * tab-moving 클래스 있는 tab 메뉴에서 tab-vertical 클래스에 따라 highlight 스타일 변화
-             */
-    
-            if ($tabWrap.hasClass('tab-moving') && $tabWrap.hasClass('tab-vertical')) { 
-                // 세로 버전일때
-                $this = $tabWrap.find('._is-active, .active');
-                const $tabLstWrap = $tabWrap.find('.tab-list-wrap');
-                const num = $tabLstWrap.offset().top; 
-                const elemTop = Math.ceil($this.offset().top);
-                const scrollTop = $tabLstWrap.scrollTop();
-                const thisElem = Math.ceil($this.outerHeight());
-                const centerScroll = elemTop + scrollTop - num - $tabLstWrap.height() / 2 + thisElem / 2;
-    
-                const $highLight = $tabWrap.find('.highlight');
-                const newHeight = $this.outerHeight();
-                
-                $highLight.css('left', '');
-                $highLight.css('width', '');
-    
-                $highLight.stop().animate({ // 활성화 된 탭의 높이와 위치로 변경
-                    height: newHeight,
-                    top: elemTop - num + scrollTop
-                });
-                $tabLstWrap.stop().animate({ // 활성화 된 탭 가운데 스크롤 이동
-                    scrollTop: centerScroll
-                }, 500);
-            } else if ($tabWrap.hasClass('tab-moving') && !$tabWrap.hasClass('tab-vertical')) { 
-                // 가로 버전일때
-                const $tabLstWrap = $tabWrap.find('.tab-list-wrap');
-                const $this = $tabLstWrap.find('._is-active, .active');
-                const num = $tabLstWrap.offset().left; 
-                const elemLeft = Math.ceil($this.offset().left);
-                const scrollLeft = $tabLstWrap.scrollLeft();
-                const thisElem = Math.ceil($this.outerWidth());
-                const centerScroll = elemLeft + scrollLeft - num - $tabLstWrap.width() / 2 + thisElem / 2;
-    
-                const $highLight = $tabWrap.find('.highlight');
-                const newWidth = Math.floor($this.outerWidth());
-                
-                // 활성화 된 탭의 너비와 위치로 변경
-                $highLight.css({ 
-                    top: '', 
-                    height: '' 
-                }).stop().animate({ 
-                    width: newWidth, 
-                    left: elemLeft - num + scrollLeft 
-                });
-    
-                $tabLstWrap.stop().animate({ // 활성화 된 탭 가운데로 스크롤 이동
-                    scrollLeft: centerScroll
-                }, 500);
-            }
-            if (callback && typeof callback === 'function') {
-                callback($tabWrap, $this); // 콜백 호출
-            }
-        },
-        tabSticky: function(isTabClick) {
-            /**
-             * tab sticky 이벤트
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * window 스크롤시 해당 content와 tab 활성화
-             */
-            const self = this;
-            const $tabWrap = $('.tab-sticky');
-            
-            $(window).on('scroll', function(){
-                if (!isTabClick) {
-                    isTabClick = true;
-    
-                    $(".tab-contents").each(function () {
-                        const contentTop = $(this).offset().top;
-                        const contentBottom = contentTop + $(this).outerHeight();
-                        const tabHeight = $('.tab').outerHeight() + 2;
-    
-                        if (!$('html, body').is(':animated')) {
-                            if (window.scrollY >= contentTop - tabHeight && window.scrollY <= contentBottom) {
-                                const targetId = $(this).attr("id");
-                                const targetTab = $('.tab[aria-controls="' + targetId + '"]');
-    
-                                targetTab.closest('li').addClass("_is-active").siblings().removeClass("_is-active");
-                                targetTab.siblings().find('.tab').children('a').attr('aria-selected', 'false');
-                                targetTab.children('a').attr('aria-selected', 'true');
-                                $(this).addClass("_is-active").siblings().removeClass("_is-active");
-    
-                                self.moveHighLight($tabWrap, targetTab);
-                            }
+        pickrEdit: function() {
+            $(document).ready(function(){
+                const pickr = Pickr.create({
+                    el: '#editColor', // 색상 선택기를 적용할 input 요소
+                    theme: 'nano', // 테마 설정
+                    default: '#000000', // 초기 색상 설정
+                    swatches: [ // 미리 정의된 색상 swatch 설정
+                        '#000000',
+                        '#ff0000',
+                        '#0000ff'
+                    ],
+                    components: { // 선택할 수 있는 컬러 피커 컴포넌트 설정
+                        preview: true,
+                        opacity: true,
+                        hue: true,
+                        interaction: {
+                            hex: true,
+                            rgba: true,
+                            hsla: true,
+                            hsva: true,
+                            cmyk: true,
+                            input: true,
+                            clear: true,
+                            save: true
                         }
-    
-                        setTimeout(function () {
-                            isTabClick = false;
-                        }, 10);
-                    });
-                }
-            });
-        },
-        scrollEventHandler: function() {
-            /**
-             * tab scroll 이벤트
-             * @thisWrap 스크롤 중인 컨텐츠 상위 wrapper
-             * 스크롤시 해당 content와 tab 활성화
-             */
-            const $thisWrap = $(this);
-    
-            $thisWrap.children('.tab-contents').each(function() {
-                const panelTop = $(this).position().top;
-                const $tabWrap = $(this).closest('.tab-scroll');
-    
-                if (panelTop <= -20 && panelTop > -$thisWrap.height() / 2) {
-                    const tabId = $(this).attr('id');
-    
-                    $tabWrap.find('.tab').removeClass('_is-active');
-                    $tabWrap.find('.tab').children('a').attr('aria-selected', 'false');
-                    $tabWrap.find('.tab[aria-controls="' + tabId + '"]').addClass('_is-active');
-                    $tabWrap.find('.tab[aria-controls="' + tabId + '"]').children('a').attr('aria-selected', 'true');
-                    $(this).siblings().removeClass('_is-active');
-                    $(this).addClass('_is-active');
-    
-                    const $this = $tabWrap.find('.tab[aria-controls="' + tabId + '"]');
-                    cp.tab.moveHighLight($tabWrap, $this);
-                }
-            });
-        },
-        tabClick: function() {
-            /**
-             * 선택된 탭 _is-active 함수
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * @contentsIdx 클릭한 탭의 index와 같은 index의 content
-             */
-            const self = this;
-    
-            $(document).on('click', this.constEl.tab, function(e) {
-                e.preventDefault();
-    
-                const $this = $(this).parent('.tab');
-                const $index = $this.index();
-                const $tabWrap = $this.closest('.tab-wrap');
-                const $contentsWrap = $tabWrap.children('.tab-contents-wrap');
-                const $contents = $contentsWrap.children('.tab-contents');
-                const $contentsIdx = $contentsWrap.children('.tab-contents').eq($index);
-    
-                const tabAttr = function () { 
-                    // 탭 클릭시 활성화
-                    $this.siblings('.tab').removeClass('_is-active');
-                    $this.siblings('.tab').children('a').attr('aria-selected', 'false');
-                    $this.addClass('_is-active');
-                    $this.children('a').attr('aria-selected', 'true');
-                    $contents.removeClass('_is-active');
-                    $contentsIdx.addClass('_is-active');
-                    $contents.removeAttr('tabindex');
-                    $contentsIdx.attr('tabindex','0');
-                }
-    
-                if ($tabWrap.attr('data-roll') === 'tab' && $tabWrap.hasClass('tab-scroll')){ 
-                    // tab-scroll 일 경우
-                    tabAttr();
-                    self.moveHighLight($tabWrap);
-    
-                    // tabpanel 영역 안 스크롤 이동
-                    $('.tab-scroll .tab-contents-wrap').off('scroll', self.scrollEventHandler); // 스크롤 이벤트 핸들러 제거
-    
-                    const $targetHref = $('#' + $this.attr('aria-controls'));
-                    const $targetWrap = $targetHref.parent('.tab-contents-wrap');
-                    const location = $targetHref.position().top;
-    
-                    $targetWrap.stop().animate({
-                        scrollTop: $targetWrap.scrollTop() + location
-                    }, 300);
-    
-                    setTimeout(function() {
-                        $('.tab-scroll .tab-contents-wrap').on('scroll', self.scrollEventHandler);
-                    }, 400);
-                } else if ($tabWrap.attr('data-roll') === 'tab' && $tabWrap.hasClass('tab-sticky')) { 
-                    // tab-sticky 일 경우
-                    isTabClick = false;
-                    if (!isTabClick) {
-                        isTabClick = true;          
-                        
-                        tabAttr();       
-                        self.moveHighLight($tabWrap, $this, function() {
-                            const target = $this.attr('aria-controls');
-                            const $target = $('#' + target);
-                            const tabHeight = $this.outerHeight();
-                            const targetTop = $target.offset().top - tabHeight;
-    
-                            $('html,body').stop().animate({
-                                'scrollTop': targetTop
-                            }, 600, 'swing', function() {
-                                isTabClick = false; // 스크롤이동 끝난 후 false 부여
-                            });   
-                        });
                     }
-                } else if ($tabWrap.attr('data-roll') === 'tab' && !$tabWrap.hasClass('tab-sticky')) {
-                    tabAttr();
-                    $contentsIdx.removeAttr('hidden');
-                    self.moveHighLight($tabWrap);
-                }
-                
-                let newTop = 0;
-                self.tabSel($this, $tabWrap);
+                });
+        
+                // 색상이 변경될 때 이벤트 처리
+                pickr.on('save', (color, instance) => {
+                    instance.hide();
+                    const editColor = color.toHEXA().toString();
+                    cp.colorEdit.fontColor(editColor);
+                }); 
             });
         },
-        
-        addTab: function() {
-            const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
-            const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
-                      _tabCont = $('<div class="tab-contents" contenteditable="true">탭컨텐츠 추가</div>');
-
-            $(_addTab).one('click', function() {
-                
-                $(this).closest('li').before(_tabLi);
-                $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
-                cp.tab.init();
+        fontColor: function(editColor) {
+            var targetData = $('.edit-box').data('edit');
+            var thisWrap = $('.edit-color').closest('.textEditerWrap');
+            
+            thisWrap.next('[contenteditable]').each(function() {
+                if ($(this).attr('edit-target') === targetData) {
+                    $(this).css('color', editColor);
+                }
             });
         },
     };
+
+    cp.fontEditer = {
+        init: function() {
+            this.fontBold();
+            this.fontSize();
+            this.editOpen();
+        },
+        fontBold: function() {
+            $(document).on('click', '.editBold', function(){
+                var targetData = $('.edit-box').data('edit');
+                var thisWrap = $(this).closest('.textEditerWrap');
+
+                thisWrap.next('[contenteditable]').each(function() {
+                    if ($(this).attr('edit-target') === targetData) {
+                        if ($(this).hasClass('fontBold')) {
+                            $(this).removeClass('fontBold');
+                        } else {
+                            $(this).addClass('fontBold');
+                        }
+                    }
+                })
+            })
+        },
+        fontSize: function() {
+            $(document).on('change', '.editSize', function(){
+                var newSize = parseInt($(this).val().trim());
+                var targetData = $('.edit-box').data('edit');
+                var thisWrap = $(this).closest('.textEditerWrap');
+
+                thisWrap.next('[contenteditable]').each(function() {
+                    if ($(this).attr('edit-target') === targetData) {                        
+                        if (!isNaN(newSize) && newSize > 0) {
+                            $(this).css('font-size', newSize + 'px');
+                        }
+                    }
+                })
+            })
+        },
+        editOpen: function() {
+            $(document).on('click', '[contenteditable]', function() {
+                var $this = $(this);
+
+                if (!$this.has('.textEditerWrap').length) {
+                    $('.textEditerWrap').remove();
+                    $('<div class="textEditerWrap"></div>').insertBefore($this);
+                    $(this).prev('.textEditerWrap').load('text-edit.html', function(){
+                        var targetData = $('.edit-box').data('edit');
+                    
+                        $this.attr('edit-target', targetData);
+                        $(this).show();
+                        //$(this).addClass('show');
+                        cp.colorEdit.pickrEdit();
+                    })
+                }
+            });
+/*             $(document).on('focusout', '[contenteditable]', function(event) {
+                var textEditerWrap = $this.prev('.textEditerWrap');
+                var $this = $(this);
+                var clickedElement = $(event.relatedTarget);
+
+                if (!textEditerWrap.is(':focus') && !$this.is(':focus')) {
+                    $this.removeAttr('edit-target');
+                    textEditerWrap.remove();
+                }
+            }); */
+            $(document).on('click', function(event) {
+                var clickedElement = $(event.target);
+                var contentEditableElement = clickedElement.closest('[contenteditable]');
+                var pcrAppElement = clickedElement.closest('.pcr-app');
+                var textEditerWrapElement = clickedElement.closest('.textEditerWrap');
+            
+                // 클릭된 요소가 contenteditable 요소, pcr-app, textEditerWrap 또는 그 하위 요소인 경우 무시
+                if (contentEditableElement.length > 0 || pcrAppElement.length > 0 || textEditerWrapElement.length > 0) {
+                    return;
+                }
+            
+                if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
+                    $('[contenteditable]').removeAttr('edit-target');
+                    $('.textEditerWrap').remove();
+                }
+            });
+        }
+    }
 
     cp.init = function () {
         cp.imgCrop.init();
@@ -1124,7 +897,8 @@ var COMPONENT_UI = (function (cp, $) {
         cp.txtEdit.init();
         cp.moduleBox.init();
         cp.modalPop.init();
-        cp.tab.init();
+        cp.colorEdit.init();
+        cp.fontEditer.init();
     };
 
     cp.init();

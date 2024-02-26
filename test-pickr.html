@@ -5,14 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title> SAMPLE | M mall </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
     <link rel="stylesheet" type="text/css" href="./asset/css/cm.common.css">
     <script type="text/javascript" src="./asset/js/lib.jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="./asset/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="./asset/js/pg.cropper.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="./asset/js/ui.component.js"></script>
-    <!-- <script src="./asset/js/common.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script type="text/javascript" src="./asset/js/ui.component_pickr.js"></script>
 
 </head>
 
@@ -28,28 +29,20 @@
     </header>
     <div class="container">
       <section class="section">
-        <!-- [S] 탭컨텐츠 -->
-        <div class="md md-tab">
-          <div class="tab-wrap tab-scroll" data-roll="tab" id="tab">
-            <div class="tab-list-wrap">
-              <ul class="tab-list">
-                <li class="tab _is-active"><a href="javascript:void(0);">기본탭</a></li>
-                <li class="_addTab"><a href="javascript:void(0);"><span class="hide">탭추가</span></a></li>
-              </ul>
-            </div>
-  
-            <div class="tab-contents-wrap">
-              <div class="tab-contents">
-                <h3 class="hide">Tab 01</h3>
-                tabpn-1
-                <p>Where does it come from?
-                  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical </p>
-              </div>
-            </div> 
+        <div class="md md-txt" data-type="txt">
+          <div class="txt txtEdit">
+            <h1 contenteditable="true">대제목</h1>
+            <h3 contenteditable="true">소제목</h3>
+            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
           </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div>
-        <!--// [E] 탭컨텐츠-->
-        
+        <div class="md md-txt" data-type="txt">
+          <div class="txtEdit">
+            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+          </div>
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
         <div class="md md-img" data-type="img">
           <div class="imgWrap no-img"><img src=""></div>
           <div class="txtEdit">
@@ -75,26 +68,6 @@
         <div class="md md-img" data-type="img">
           <div class="imgWrap"><img src="https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg" alt="avatar"></div>
          
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-        </div>
-        <div class="md md-txt" data-type="txt">
-          <div class="txt txtEdit">
-            <h1 contenteditable="true">대제목</h1>
-            <h3 contenteditable="true">소제목</h3>
-            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
-          </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-        </div>
-        <div class="md md-txt" data-type="txt">
-          <div class="txtEdit">
-            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
-          </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-        </div>
-        <div class="md md-txt" data-type="txt">
-          <div class="txtEdit" contenteditable="false">
-            <p>텍스트 영역</p>
-          </div>          
           <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div>
         <div class="md md-goods" data-type="goods">
@@ -150,11 +123,16 @@
           </div>
           <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
         </div> -->
+        <div class="md md-txt" data-type="txt">
+          <div class="txtEdit" contenteditable="false">
+            <p>텍스트 영역</p>
+          </div>          
+          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+        </div>
       </section>
     </div>
   </div>
 
-  <!-- S: 항목추가 modal -->
   <div class="modalPop _center" modal-target="modal">
     <div class="modalWrap">
       <div class="modal-header">
@@ -167,16 +145,16 @@
             <input type="checkbox">
             <div class="swiper-slide">
               <div class="swiper-box">
-                <div><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=http%3A%2F%2Fshop1.phinf.naver.net%2F20210421_284%2F1618964180859FC6NQ_JPEG%2F55099797074620053_2029617427.jpeg" alt=""></div>
+                <div class="no-img"><img src="" alt=""></div>
               </div>
               <div class="swiper-box">
                 <div class="txtEdit editDone">
-                  <p>핑크배경</p>
+                  <p>상품명</p>
                 </div>
               </div>
               <div class="swiper-box">
                 <div class="txtEdit editDone">
-                  <p>강아지1</p>
+                  <p>가격</p>
                 </div>
               </div>
             </div>
@@ -185,16 +163,16 @@
             <input type="checkbox">
             <div class="swiper-slide">
               <div class="swiper-box">
-                <div><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=https%3A%2F%2Fshop-phinf.pstatic.net%2F20171022_298%2FshowindowCommon_1508673491292GN4A4_JPEG%2F55023studiolim3465.jpg" alt=""></div>
+                <div class="no-img"><img src="" alt=""></div>
               </div>
               <div class="swiper-box">
                 <div class="txtEdit">
-                <p>그레이배경</p>
+                <p>상품명</p>
                 </div>
               </div>
               <div class="swiper-box">
                 <div class="txtEdit">
-                <p>강아지2</p>
+                <p>가격</p>
                 </div>
               </div>
             </div>
@@ -203,16 +181,16 @@
             <input type="checkbox">
             <div class="swiper-slide">
               <div class="swiper-box">
-                <div><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fshop.phinf%2Fshop%2F20230102_280%2F1672588025136k8rKc_JPEG%2F4C68C940-01B2-49D3-8530-93B84A1ECA34.jpeg" alt=""></div>
+                <div class="no-img"><img src="" alt=""></div>
               </div>
               <div class="swiper-box">
                 <div class="txtEdit">
-                <p>초록배경</p>
+                <p>상품명</p>
                 </div>
               </div>
               <div class="swiper-box">
                 <div class="txtEdit">
-                <p>강아지3</p>
+                <p>가격</p>
                 </div>
               </div>
             </div>
@@ -228,17 +206,10 @@
     </div>
     <!-- <div class="dimmed"></div> -->
   </div>
-  <!-- E: 항목추가 modal -->
 
   <!-- S: cropper modal -->
   <div class="cropModalWrap"></div>
   <!-- E: cropper modal -->
 
-
-  <script>
-    $( function() {
-      COMPONENT_UI.init();
-    } );
-  </script>
 </body>
 </html>
