@@ -14,10 +14,8 @@
 @import 'reset';
 @import '_cp.button';
 @import '_cp.tab';
+@import '_cp.list';
 @import '_cp.popup';
-
-.wrap {
-}
 
 header {
   @include pos-offset-l(0,0,fixed){z-index: 1000;}
