@@ -782,7 +782,7 @@ var COMPONENT_UI = (function (cp, $) {
                             hsva: true,
                             cmyk: true,
                             input: true,
-                            clear: true,
+                            clear: false,
                             save: true
                         }
                     }
@@ -815,19 +815,18 @@ var COMPONENT_UI = (function (cp, $) {
             this.editOpen();
         },
         fontBold: function() {
-            $(document).on('click', '.editBold', function(){
+            $(document).off('click').on('click', '.editBold', function(){
                 var targetData = $('.edit-box').data('edit');
                 var thisWrap = $(this).closest('.textEditerWrap');
+                var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
 
-                thisWrap.next('[contenteditable]').each(function() {
-                    if ($(this).attr('edit-target') === targetData) {
-                        if ($(this).hasClass('fontBold')) {
-                            $(this).removeClass('fontBold');
-                        } else {
-                            $(this).addClass('fontBold');
-                        }
+                if (contentEditable.length) {
+                    if (contentEditable.hasClass('fontBold')) {
+                        contentEditable.removeClass('fontBold');
+                    } else {
+                        contentEditable.addClass('fontBold');
                     }
-                })
+                }
             })
         },
         fontSize: function() {
@@ -862,23 +861,13 @@ var COMPONENT_UI = (function (cp, $) {
                     })
                 }
             });
-/*             $(document).on('focusout', '[contenteditable]', function(event) {
-                var textEditerWrap = $this.prev('.textEditerWrap');
-                var $this = $(this);
-                var clickedElement = $(event.relatedTarget);
-
-                if (!textEditerWrap.is(':focus') && !$this.is(':focus')) {
-                    $this.removeAttr('edit-target');
-                    textEditerWrap.remove();
-                }
-            }); */
+            
             $(document).on('click', function(event) {
                 var clickedElement = $(event.target);
                 var contentEditableElement = clickedElement.closest('[contenteditable]');
                 var pcrAppElement = clickedElement.closest('.pcr-app');
                 var textEditerWrapElement = clickedElement.closest('.textEditerWrap');
-            
-                // 클릭된 요소가 contenteditable 요소, pcr-app, textEditerWrap 또는 그 하위 요소인 경우 무시
+                
                 if (contentEditableElement.length > 0 || pcrAppElement.length > 0 || textEditerWrapElement.length > 0) {
                     return;
                 }
@@ -889,7 +878,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         }
-    }
+    };
 
     cp.init = function () {
         cp.imgCrop.init();
