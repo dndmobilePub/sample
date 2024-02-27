@@ -221,24 +221,6 @@ var COMPONENT_UI = (function (cp, $) {
             });
         }
     };
-
-    cp.txtEdit = {
-        init: function () {
-            this.editable();
-        },
-        editable: function() {
-            var self = this; 
-        
-            $(document).on('click focusout', '[contenteditable]', function(event) {
-                if (event.type === 'click') {
-                    $(this).attr('contenteditable', 'true');
-                    $(this).focus();
-                } else if (event.type === 'focusout') {
-                    $(this).attr('contenteditable', 'false');
-                }
-            });
-        }
-    };
         
     cp.modalPop = {
         constEl: {
@@ -1207,21 +1189,27 @@ var COMPONENT_UI = (function (cp, $) {
             })
         },
         editOpen: function() {
-            $(document).on('click', '[contenteditable]', function() {
+            $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
                 var thisColor = $this.css('color');
+
+                if (event.type === 'click') {
+                    $this.attr('contenteditable', 'true');
+                    $this.focus();
+                }
 
                 if (!$this.has('.textEditerWrap').length) {
                     $('.textEditerWrap').remove();
                     $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $(this).prev('.textEditerWrap').load('text-edit.html', function(){
+                    $this.prev('.textEditerWrap').load('text-edit.html', function(){
                         var targetData = $('.edit-box').data('edit');
                     
                         $this.attr('edit-target', targetData);
-                        $(this).show();
+                        $this.show();
                         cp.colorEdit.spectrumColor(thisColor);
                     })
                 }
+                
             });
             
             $(document).on('click', function(event) {
@@ -1235,7 +1223,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             
                 if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
-                    $('[contenteditable]').removeAttr('edit-target');
+                    $('[contenteditable]').removeAttr('edit-target').attr('contenteditable', 'false');
                     $('.textEditerWrap').remove();
                 }
             });
@@ -1245,7 +1233,7 @@ var COMPONENT_UI = (function (cp, $) {
     cp.init = function () {
         cp.imgCrop.init();
         cp.videoModule.init();
-        cp.txtEdit.init();
+        // cp.txtEdit.init();
         cp.moduleBox.init();
         cp.modalPop.init();
         cp.tab.init();
