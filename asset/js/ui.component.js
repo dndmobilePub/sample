@@ -568,118 +568,106 @@ var COMPONENT_UI = (function (cp, $) {
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
         },
+        
         dragFn: function () {
             $(".section").sortable({
                 tolerance: 'pointer', 
                 distance: 20,
             });
         },
+
         mdBoxDel:function() {
             $(document).on('click', '.deleteBtn', function() {
                 $(this).closest('.md').remove();
             });
         },
-        mdBoxAddCont: function() {
-            var uniqueData = generateUniqueId();
-            var swiperDataModal = 'swiper_' + uniqueData;
-            var content = {
-                textAreaHTML: `
-                    <div class="txtEdit" contenteditable="false">
-                        <p>텍스트 영역</p>
-                    </div>
-                `,
-                imgAreaHTML: `
-                    <div class="imgWrap no-img"><img src=""></div>
-                `,
-                videoAreaHTML: `
-                    <div class="videoWrap no-video"></div>
-                    <div class="btnWrap">
-                        <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
-                        <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
-                    </div>
-                `,
-                swiperAreaHTML: `
-                    <div class="txtEdit">
-                        <h1 contenteditable="true">대제목</h1>
-                    </div>
-                    <div class="btn btn-size xs shadow dragBtn">드래그</div>
-                    <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="${swiperDataModal}">상품 항목추가</button></button>
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="swiper-box">
-                                    <div class="no-img"><img src="" alt=""></div>
-                                </div>
-                                <div class="swiper-box">
-                                    <div class="txtEdit">
-                                        <p>브랜드명</p>
-                                    </div>
-                                </div>
-                                <div class="swiper-box">
-                                    <div class="txtEdit">
-                                        <p>가격</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="swiper-box">
-                                    <div class="no-img"><img src="" alt=""></div>
-                                </div>
-                                <div class="swiper-box">
-                                    <div class="txtEdit">
-                                        <p>브랜드명</p>
-                                    </div>
-                                </div>
-                                <div class="swiper-box">
-                                    <div class="txtEdit">
-                                        <p>가격</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                `
-            };
-        
-            return content;
-        },
 
+        mdBoxAddCont: function(callback) {
+            Promise.all([
+                fetch('textArea.html').then(response => response.text()),
+                fetch('imgArea.html').then(response => response.text()),
+                fetch('videoArea.html').then(response => response.text()),
+                fetch('swiperArea.html').then(response => response.text())
+            ]).then(([textArea, imgAreaHTML, videoArea, swiperArea]) => {
+                var uniqueData = generateUniqueId();
+                var swiperDataModal = 'swiper_' + uniqueData;
+                swiperArea = swiperArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
+                
+                function ImgAreaByCase(caseValue) {
+                    var pattern = new RegExp('<!-- 이미지 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 이미지 컨텐츠 ' + caseValue + ' -->', 'g');
+                    var matches = [];
+                    var match;
+                    while ((match = pattern.exec(imgAreaHTML)) !== null) {
+                        matches.push(match[0]);
+                    }
+                    return matches.join('');
+                }
+                
+                
+                console.log('type02HTML:', ImgAreaByCase('type01'));
+                console.log('type02HTML:', ImgAreaByCase('type02'));
+                console.log('type02HTML:', ImgAreaByCase('type03'));
+                callback({
+                    textArea: textArea,
+                    imgArea: {
+                        type01HTML: ImgAreaByCase('type01'),
+                        type02HTML: ImgAreaByCase('type02'),
+                        type03HTML: ImgAreaByCase('type03')
+                    },
+                    videoArea: videoArea,
+                    swiperArea: swiperArea
+                });
+            });
+        },
+        
         mdBoxAddClk: function() {
-            $('.btnWrap').one('click', 'a', function(e) {
+            //console.log("mdBoxAddClk 함수 호출됨");
+            $('.btnWrap').off('click').on('click', 'a', function(e) {
                 e.preventDefault();
                 var dataType = $(this).data('type');
+                var caseValue = $(this).data('case');
                 var newMd = $('<div class="md"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button></div>');
                 newMd.addClass('md-' + dataType);
                 newMd.attr('data-type', dataType);
-        
-                var contentHTML = cp.moduleBox.mdBoxAddCont();
-        
-                var newContentHTML;
-                if(dataType === 'img') {
-                    newContentHTML = contentHTML.imgAreaHTML;
-                } else if(dataType === 'goods') {
-                    newContentHTML = contentHTML.swiperAreaHTML;
-                } else if(dataType === 'txt') {
-                    newContentHTML = contentHTML.textAreaHTML;
-                } else if(dataType === 'video') {
-                    newContentHTML = contentHTML.videoAreaHTML;
-                }
-                newMd.append(newContentHTML);
-                $('.container .section').append(newMd);
-                //COMPONENT_UI.init();
-                cp.init();
-                
-                if (dataType === 'goods') {
-                    var newSwiperContainer = newMd.find('.swiper')[0];
-                    var newSwiperInstance = cp.moduleBox.initializeSwiper(newSwiperContainer);
-                    $(newSwiperContainer).data('swiper', newSwiperInstance);
-                }
-                
-                $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
-                
+                newMd.attr('data-case', caseValue);
+                cp.moduleBox.mdBoxAddCont(function(content) {
+                    var newContentHTML;
+                    if (dataType === 'img') {
+                        var imgAreaContent;
+                        switch (caseValue) {
+                            case 'type01':
+                                imgAreaContent = content.imgArea.type01HTML;
+                                break;
+                            case 'type02':
+                                imgAreaContent = content.imgArea.type02HTML;
+                                break;
+                            case 'type03':
+                                imgAreaContent = content.imgArea.type03HTML;
+                                break;
+                            default:
+                                imgAreaContent = '';
+                        }
+                        newContentHTML = imgAreaContent;
+                    } else if(dataType === 'goods') {
+                        newContentHTML = content.swiperArea;
+                    } else if(dataType === 'txt') {
+                        newContentHTML = content.textArea;
+                    } else if(dataType === 'video') {
+                        newContentHTML = content.videoArea;
+                    }
+                    newMd.append(newContentHTML);
+                    $('.container .section').append(newMd);
+                    //COMPONENT_UI.init();
+                    cp.init();
+                    
+                    if (dataType === 'goods') {
+                        var newSwiperContainer = newMd.find('.swiper')[0];
+                        var newSwiperInstance = cp.moduleBox.initializeSwiper(newSwiperContainer);
+                        $(newSwiperContainer).data('swiper', newSwiperInstance);
+                    }
+                    
+                    $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+                });
             });
         },
 
@@ -743,14 +731,22 @@ var COMPONENT_UI = (function (cp, $) {
             $('.btn-registration-pop').on('click', function() {
                 var thisData = $(this).closest('.modalPop').attr('modal-target');
                 var dataElem = $('.md').find('.swiperAddBtn[data-modal="' + thisData + '"]');
+                
+                var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
+                if (existingSwiper && existingSwiper.swiper) {
+                    existingSwiper.swiper.destroy();
+                }
+                
+                dataElem.closest('.md').find('.swiper-notification').remove();
                 dataElem.siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
-
+        
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');
                     var clonedSlide = parentLi.find('.swiper-slide').clone();
                     dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
                 });
-                cp.moduleBox.initializeSwiper('.swiper');
+                
+                cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
                 cp.modalPop.closePop($(this));
         
                 $('.product-list input[type="checkbox"]').prop('checked', false);
