@@ -1205,7 +1205,7 @@ var COMPONENT_UI = (function (cp, $) {
                         var targetData = $('.edit-box').data('edit');
                     
                         $this.attr('edit-target', targetData);
-                        $this.show();
+                        $(this).show();
                         cp.colorEdit.spectrumColor(thisColor);
                     })
                 }
