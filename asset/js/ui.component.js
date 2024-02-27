@@ -576,8 +576,10 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
 
-        mdBoxDel:function() {
-            $(document).on('click', '.deleteBtn', function() {
+        mdBoxDel: function() {
+            $(".section").on('click', '.deleteBtn', function(e) {
+                e.stopPropagation(); // 이벤트 버블링 중단
+        
                 $(this).closest('.md').remove();
             });
         },
