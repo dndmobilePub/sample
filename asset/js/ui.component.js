@@ -594,7 +594,17 @@ var COMPONENT_UI = (function (cp, $) {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
                 swiperArea = swiperArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
-                
+
+                function TxtAreaByCase(caseValue) {
+                    var pattern = new RegExp('<!-- 텍스트 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 텍스트 컨텐츠 ' + caseValue + ' -->', 'g');
+                    var matches = [];
+                    var match;
+                    while ((match = pattern.exec(textArea)) !== null) {
+                        matches.push(match[0]);
+                    }
+                    return matches.join('');
+                }
+
                 function ImgAreaByCase(caseValue) {
                     var pattern = new RegExp('<!-- 이미지 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 이미지 컨텐츠 ' + caseValue + ' -->', 'g');
                     var matches = [];
@@ -604,13 +614,12 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                     return matches.join('');
                 }
-                
-                
-                console.log('type02HTML:', ImgAreaByCase('type01'));
-                console.log('type02HTML:', ImgAreaByCase('type02'));
-                console.log('type02HTML:', ImgAreaByCase('type03'));
+                console.log(TxtAreaByCase('type01'));
                 callback({
-                    textArea: textArea,
+                    txtArea: {
+                        type01HTML: TxtAreaByCase('type01'),
+                        type02HTML: TxtAreaByCase('type02')
+                    },
                     imgArea: {
                         type01HTML: ImgAreaByCase('type01'),
                         type02HTML: ImgAreaByCase('type02'),
@@ -653,7 +662,16 @@ var COMPONENT_UI = (function (cp, $) {
                     } else if(dataType === 'goods') {
                         newContentHTML = content.swiperArea;
                     } else if(dataType === 'txt') {
-                        newContentHTML = content.textArea;
+                        switch (caseValue) {
+                            case 'type01':
+                                newContentHTML = content.txtArea.type01HTML;
+                                break;
+                            case 'type02':
+                                newContentHTML = content.txtArea.type02HTML;
+                                break;
+                            default:
+                                newContentHTML = '';
+                        }
                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     }
