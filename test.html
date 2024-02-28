@@ -53,7 +53,7 @@
             <h3 contenteditable="true">소제목</h3>
             <p contenteditable="true">2024.01.25 - 02.25</p>
           </div>
-          <div class="module-toption">
+          <div class="module-option">
             <button class="btn btn-size xs shadow optionBtn">설정</button>
             <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
           </div>
@@ -63,7 +63,7 @@
         <!-- [S] 이미지 컨텐츠 TYPE2 -->
         <div class="md md-img" data-type="img" data-module="onlyImg">
           <div class="imgWrap no-img"><img src=""></div>
-          <div class="module-toption">
+          <div class="module-option">
             <button class="btn btn-size xs shadow optionBtn">설정</button>
             <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
           </div>
@@ -71,19 +71,22 @@
         <!--// [E] 이미지 컨텐츠 TYPE2 -->
 
         <!-- [S] 이미지 컨텐츠 TYPE3 -->
-        <div class="md md-img" data-type="img">
+        <div class="md md-img" data-type="img" data-module="titleImg">
           <div class="txtEdit">
             <h1 contenteditable="true">대제목</h1>
           </div>
           <div class="box-pd">
             <div class="imgWrap no-img"><img src=""></div>
           </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-option">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
         </div>
         <!--// [E] 이미지 컨텐츠 TYPE3 -->        
 
         <!-- [S] 탭컨텐츠 -->
-        <div class="md md-tab">
+        <div class="md md-tab" data-module="anchorTab">
           <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
             <div class="tab-list-wrap">
               <ul class="tab-list">
@@ -141,54 +144,30 @@
           </div>
         </div>
         <!--// [E] 탭컨텐츠-->
-        
-        <!-- [S] 이미지 컨텐츠 TYPE2 -->
-        <div class="md md-img" data-type="img">
-          <div class="imgWrap no-img"><img src=""></div>
-          <div class="txtEdit">
-            <h1 contenteditable="true" class="fontBold">대제목</h1>
-            <h3 contenteditable="true" class="fontBold">소제목</h3>
-            <p contenteditable="true">2024.01.25 - 02.25</p>
-          </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-        </div>
-        <div class="md md-img" data-type="img">
-          <div class="imgWrap no-img"><img src=""></div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-        </div>
-        <div class="md md-img" data-type="img">
-          <div class="txtEdit">
-            <h1 contenteditable="true" class="fontBold">대제목</h1>
-          </div>
-          <div class="box-pd">
-            <div class="imgWrap no-img"><img src=""></div>
-          </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-        </div>
-        <div class="md md-img" data-type="img">
-          <div class="imgWrap"><img src="https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg" alt="avatar"></div>
-         
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-        </div>
-        <!--// [E] 이미지 컨텐츠 TYPE2 -->
 
         <!-- [S] 텍스트 컨텐츠 TYPE1 -->
-        <div class="md md-txt" data-type="txt">
+        <div class="md md-txt" data-type="txt" data-module="TitleTxt">
           <div class="txt txtEdit">
             <h1 contenteditable="true" class="fontBold">대제목</h1>
             <h3 contenteditable="true" class="fontBold">소제목</h3>
             <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
           </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-option">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
         </div>
         <!--// [E] 텍스트 컨텐츠 TYPE1 -->
 
         <!-- [S] 텍스트 컨텐츠 TYPE2 -->
-        <div class="md md-txt" data-type="txt">
+        <div class="md md-txt" data-type="txt" data-module="onlyTxt">
           <div class="txtEdit">
             <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
           </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-option">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
         </div>
         <!--// [E] 텍스트 컨텐츠 TYPE2 -->
 
@@ -197,16 +176,22 @@
           <div class="txtEdit" contenteditable="false">
             <p>텍스트 영역</p>
           </div>          
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-option">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
         </div>
         <!--// [E] 텍스트 컨텐츠 TYPE3 -->
         
         <!-- [S] 상품 컨텐츠 TYPE1 -->
-        <div class="md md-goods" data-type="goods">
+        <div class="md md-goods" data-type="goods" data-module="swiper">
           <div class="txtEdit">
             <h1 contenteditable="true" class="fontBold">대제목</h1>
           </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-option">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
           <div class="btn btn-size xs shadow dragBtn">드래그</div>
           <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
           <div class="swiper">
@@ -256,7 +241,10 @@
             <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
             <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
           </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-option">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
         </div> -->
         <!--// [E] 동영상 컨텐츠 -->
       </section>

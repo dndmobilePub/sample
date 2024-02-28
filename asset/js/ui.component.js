@@ -1157,7 +1157,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         },
-        spectrumBgColor: function(moduleType) {
+        spectrumBgColor: function(moduleType, bgColor) {
             $(document).ready(function(){
                 $(".colorInput").spectrum({
                     flat: false,
@@ -1167,7 +1167,7 @@ var COMPONENT_UI = (function (cp, $) {
                     showPalette: true,
                     showSelectionPalette: true,
                     maxPaletteSize: 10,
-                    color: '#fff',
+                    color: bgColor,
                     change: function(color) {
                         var selectedBgColor = color.toHexString();
                         cp.colorEdit.bgColor(selectedBgColor, moduleType);
@@ -1271,10 +1271,11 @@ var COMPONENT_UI = (function (cp, $) {
             $(document).on('click', '.optionBtn', function() {
                 const $thisMd = $(this).closest('.md');
                 const moduleData = $thisMd.data('module');
+                const bgColor = $thisMd.css('background-color');
 
                 $('.option-wrap').show();
                 $('.option-wrap').attr('data-type', moduleData);
-                cp.colorEdit.spectrumBgColor(moduleData);
+                cp.colorEdit.spectrumBgColor(moduleData, bgColor);
             })
         }
     }

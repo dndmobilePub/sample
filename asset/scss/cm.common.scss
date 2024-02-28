@@ -43,10 +43,10 @@
 }
 
 .container {
-  @include display(flex);
   .option-wrap {
     @include display(none);
-    width: 30%;
+    @include pos(fixed) {left: 0;top: 0;}
+    width: 30%; height: 100vh;
     padding: 2rem;
     @include border(border, 1px, solid, $color-gray4);
 
@@ -79,7 +79,7 @@
       &:hover {
         outline-color: $flag-pk;
 
-        .module-toption {
+        .module-option {
           @include display(block);
           @include pos-offset-l(0, -5rem){z-index:2;}
           padding: 1rem;
