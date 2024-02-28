@@ -110,7 +110,7 @@
 .toast {
     &Wrap {
         @include display(flex) {justify-content: space-between; align-items:center;}
-        @include pos-offset-b(0,0, fixed); margin:1rem; width:calc(100% - 2rem);
+        @include pos-offset-b(2%,0, fixed); margin:1rem; width:calc(100% - 2rem);
         background-color: rgba(0, 0, 0, 0.5); border-radius:1rem;
         
         & > a {

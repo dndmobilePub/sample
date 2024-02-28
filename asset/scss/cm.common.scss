@@ -18,7 +18,7 @@
 @import '_cp.popup';
 
 .module-add-box {
-  @include pos-offset-r(70%,0,fixed){z-index: 1000;}
+  @include pos-offset-b(10%, auto, fixed){right:2%; z-index: 1000;}
   min-width:15rem;
   background:$color-gray2;
 }
