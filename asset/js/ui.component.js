@@ -237,7 +237,7 @@ var COMPONENT_UI = (function (cp, $) {
         openPop: function () {
             const self = this,
                 btnModal = this.constEl.btnModal;
-            $(document).on('click', btnModal, function() {
+            $('html').on('click', btnModal, function() {
                 $(this).addClass('_rtFocus');
                 self.showModal($(this));
                 self.layerFocusControl($(this));
@@ -371,35 +371,9 @@ var COMPONENT_UI = (function (cp, $) {
             $('body').addClass('no-scroll').append(dimmedEl);            
         },
         
-        // 접근성 포커스 반영
-        layerFocusControl: function ($btn) {
-            const target = $btn.attr('data-modal') || $btn.attr('data-select');
-            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
-            var $modalWrap = $modal.find("> .modalWrap");
-            
-            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
-            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
-            
-            $modalWrap.on("keydown", function (e) {
-                if (e.keyCode == 9) {
-                if (e.shiftKey) { // shift + tab
-                    if ($(e.target).is($firstEl)) {
-                        $lastEl.focus();
-                        e.preventDefault();
-                        }
-                    } else { // tab
-                        if ($(e.target).is($lastEl)) {
-                        $firstEl.focus();
-                        e.preventDefault();
-                        }
-                    }
-                }
-            });
-        },
-        
         closePop: function() {
             const self = this;
-            $(document).on('click', '.modalPop .btn-close-pop', function() {
+            $('.modalPop').on('click', '.btn-close-pop', function() {
                 var $modal = $(this).closest('.modalPop');
                 var $modalWrap = $modal.find("> .modalWrap");
                 var modalWrapClass = $modal.attr('class');
@@ -467,6 +441,32 @@ var COMPONENT_UI = (function (cp, $) {
                 $('body').removeClass('no-scroll');
                 $(this).closest('.modalPop').prev().focus();
                 $('.dimmed').remove();
+            });
+        },
+        
+        // 접근성 포커스 반영
+        layerFocusControl: function ($btn) {
+            const target = $btn.attr('data-modal') || $btn.attr('data-select');
+            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
+            var $modalWrap = $modal.find("> .modalWrap");
+            
+            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
+            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
+            
+            $modalWrap.on("keydown", function (e) {
+                if (e.keyCode == 9) {
+                if (e.shiftKey) { // shift + tab
+                    if ($(e.target).is($firstEl)) {
+                        $lastEl.focus();
+                        e.preventDefault();
+                        }
+                    } else { // tab
+                        if ($(e.target).is($lastEl)) {
+                        $firstEl.focus();
+                        e.preventDefault();
+                        }
+                    }
+                }
             });
         },
 
@@ -564,7 +564,6 @@ var COMPONENT_UI = (function (cp, $) {
             this.mdBoxAddClk();
             this.initializeSwiper();
             this.resetSwipers();
-            this.mdGoodsAdd();
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
         },
@@ -721,14 +720,6 @@ var COMPONENT_UI = (function (cp, $) {
                     var swiperInstance = COMPONENT_UI.moduleBox.initializeSwiper(this);
                     $(this).data('swiper', swiperInstance); 
                 });
-            });
-        },
-
-        mdGoodsAdd:function() {
-            $('body').on('click', '.swiperAddBtn', function() {
-                var targetModal = $(this).data('modal');
-                $('.modalPop').attr('modal-target', targetModal);
-                cp.modalPop.showModal($(this));
             });
         },
         
