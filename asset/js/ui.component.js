@@ -238,10 +238,20 @@ var COMPONENT_UI = (function (cp, $) {
             const self = this,
                 btnModal = this.constEl.btnModal;
             $('html').on('click', btnModal, function() {
-                $(this).addClass('_rtFocus');
-                self.showModal($(this));
+               
+                self.mdGoodsPop($(this));
+                    self.showModal($(this));
+                $(this).addClass('_rtFocus');                
                 self.layerFocusControl($(this));
             });
+        },
+
+        mdGoodsPop:function() {
+            $('.modalPop[module-type="goods"]').each(function() {
+                var targetModal = $(this).data('modal');
+                $(this).attr('modal-target', targetModal);
+            });
+            // cp.modalPop.showModal($(this));
         },
         
         showModal: function ($btn) {
@@ -722,7 +732,7 @@ var COMPONENT_UI = (function (cp, $) {
                 });
             });
         },
-        
+
         mdGoodsPopClose: function() {
             const productCheckboxes = $('.product-list input[type="checkbox"]');
             const registrationButton = $('.btn-registration-pop');
