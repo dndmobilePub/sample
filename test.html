@@ -39,9 +39,37 @@
         <div class="option-box">
           <h3>배경색상</h3><input type="color" class="colorInput">
         </div>
-        <div class="option-box"></div>
-        <div class="option-box"></div>
+        <div class="option-box">
+          <h3>폰트굵기</h3><a href="#" class="edit-bold editBold">B</a>
+        </div>
+        <div class="option-box">
+          <h3>폰트크기</h3><input type="text" class="edit-size-input editSize">
+        </div>
+        <div class="option-box">
+          <h3>폰트색상</h3><input type="color" id="editColor">
+        </div>
+        <div class="option-box">
+          <h3>이미지색상</h3>
+          <article class="img-color-wrap"> 
 
+          <!-- 이미지 업로드 영역 -->
+          <label id="del-upload" for="btn-upload"><span>이미지 선택</span>
+              <input type="file" id="btn-upload" hidden accept="image/png, image/jpeg" />
+
+              <!-- 이미지 컨테이너 (figure) -->
+              <figure class="ct-img">
+                  <!-- 메인 이미지 (썸네일) (#thumnail) -->
+                  <img class="img-main" id="thumnail" decoding="async" loading="lazy" />
+
+                  <!-- 색상표 (palette) -->
+                  <figcaption id="palette"></figcaption>
+              </figure>
+          </label>
+          
+          <!-- canvas : 메인 캔버스(canvas) -->
+          <canvas id="canvas-main" hidden></canvas>
+        </article>
+      </div>
       </div>
       <!--// [E] 상세설정 -->
       <section class="section">

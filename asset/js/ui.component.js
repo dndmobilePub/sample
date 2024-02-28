@@ -1190,10 +1190,25 @@ var COMPONENT_UI = (function (cp, $) {
             this.fontSize();
             this.editOpen();
         },
-        fontBold: function() {
+/*         fontBold: function() {
             $(document).off('click').on('click', '.editBold', function(){
                 var targetData = $('.edit-box').data('edit');
                 var thisWrap = $(this).closest('.textEditerWrap');
+                var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
+
+                if (contentEditable.length) {
+                    if (contentEditable.hasClass('fontBold')) {
+                        contentEditable.removeClass('fontBold');
+                    } else {
+                        contentEditable.addClass('fontBold');
+                    }
+                }
+            })
+        }, */
+        fontBold: function() {
+            $(document).off('click').on('click', '.editBold', function(){
+                var targetData = $('.edit-box').data('edit');
+                var thisWrap = $(this).closest('.option-wrap');
                 var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
 
                 if (contentEditable.length) {
@@ -1266,6 +1281,7 @@ var COMPONENT_UI = (function (cp, $) {
     cp.optionEdit = {
         init: function() {
             this.optionOpen();
+            this.imgColor();
         },
         optionOpen: function() {
             $(document).on('click', '.optionBtn', function() {
@@ -1277,6 +1293,126 @@ var COMPONENT_UI = (function (cp, $) {
                 $('.option-wrap').attr('data-type', moduleData);
                 cp.colorEdit.spectrumBgColor(moduleData, bgColor);
             })
+        },
+        imgColor: function() {
+            // 파일 업로드 이벤트 바인딩
+            $("#btn-upload").change(function() {
+                ex_file_upload.call(this);
+            });
+    
+            // 메인 이미지 변경 이벤트 바인딩
+            $("#thumnail").on("load", function() {
+                ex_img_onload.call(this);
+            });
+
+            function ex_file_upload() {
+                var self = this;
+                var filelist = this.files;
+                if (filelist.length == 0) return;
+    
+                var fileReader = new FileReader();
+                fileReader.onload = function() {
+                    $(self).parent().attr("data-file", "1");
+                    $("#thumnail").attr("src", this.result);
+                };
+                fileReader.readAsDataURL(filelist[0]);
+            }
+            function ex_img_onload() {
+                // 캔버스 요소와 그래픽 컨텍스트 생성
+                var cnv = document.getElementById("canvas-main");
+                var ctx = cnv.getContext("2d");
+            
+                // 캔버스 크기를 이미지의 크기로 설정
+                cnv.setAttribute("width", this.width);
+                cnv.setAttribute("height", this.height);
+            
+                // 이미지를 캔버스에 그림
+                ctx.drawImage(this, 0, 0, this.width, this.height);
+            
+                // 캔버스의 이미지 데이터를 가져옴
+                var imgData = ctx.getImageData(0, 0, cnv.width, cnv.height);
+            
+                // 이미지의 색상 데이터를 저장할 배열 및 변수들 초기화
+                var colors = [];
+                var blocksize = 1;
+                var count = 0;
+                var i = -4;
+            
+                // 이미지의 각 픽셀을 순회하며 색상 데이터를 추출
+                while ((i += blocksize * 4) < imgData.data.length) {
+                    ++count;
+                    var v_rgba = [imgData.data[i], imgData.data[i + 1], imgData.data[i + 2], imgData.data[i + 3]];
+                    var v_hex = v_rgba.map(function(color_val) {
+                        var _hex = color_val.toString(16);
+                        return _hex.length == 1 ? "0" + _hex : _hex;
+                    });
+                    v_hex = v_hex.join("");
+                    colors.push(v_hex);
+                }
+            
+                // 색상 별로 발생한 횟수를 계산하여 객체에 저장
+                var picaker = {};
+                var old_color = null;
+                colors.sort().forEach(function(colorhex, arrindx, arr) {
+                    if (old_color != colorhex) {
+                        picaker[colorhex] = 0;
+                        old_color = colorhex;
+                    }
+                    return picaker[colorhex] = (picaker[colorhex] || 0) + 1;
+                });
+            
+                // 색상 별로 정렬하여 배열에 저장
+                colors = picaker;
+                picaker = [];
+                for (var color in colors) {
+                    picaker.push([color, colors[color]]);
+                }
+                picaker.sort(function(a, b) {
+                    return a[1] - b[1];
+                });
+                picaker.reverse();
+            
+                // 상위 5개의 색상 데이터만 선택
+                picaker = picaker.slice(0, 5);
+            
+                // 그라디언트를 생성할 문자열 및 색상 팔레트 요소 초기화
+                var color_gradient = "";
+                var palette = $("#palette");
+                palette.empty();
+            
+                // 각 색상에 대해 그라디언트를 생성하고 색상 팔레트에 추가
+                picaker.forEach(function(item) {
+                    var _color = item[0];
+                    if (color_gradient != "") color_gradient += ",";
+                    color_gradient += " #" + _color;
+                    var _div = $("<div></div>").css("background-color", "#" + _color);
+                    palette.append(_div);
+                });
+            }
+            function rgbToHex(rgb) {
+                var rgbValues = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+                
+                function hex(x) {
+                    return ("0" + parseInt(x).toString(16)).slice(-2);
+                }
+                
+                return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
+            }
+            $('#palette').on('click', 'div', function(event){
+                if ($(event.target).is('div')) {
+                    var rgbColor = $(event.target).css('background-color');
+                    
+                    var hexColor = rgbToHex(rgbColor);
+                    
+                    var $p = $('<p></p>').text('Selected color (HEX): ' + hexColor);
+                    
+                    $('#palette').append($p);
+                }
+                
+                event.preventDefault();
+                event.stopPropagation();
+            })
+
         }
     }
 
