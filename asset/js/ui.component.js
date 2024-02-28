@@ -546,7 +546,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }, 3000);
             }
             
-            $('._toastBtn').on('click', function() {
+            $('._toastBtn').one('click', function() {
                 $('._toastBtn._rtFocus').removeClass('_rtFocus');
                 $(this).addClass('_rtFocus');
             
