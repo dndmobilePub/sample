@@ -1119,7 +1119,6 @@ var COMPONENT_UI = (function (cp, $) {
     cp.colorEdit = {
         init: function() {
             this.spectrumColor();
-            //this.spectrumBgColor();
         },
         spectrumColor: function(initialColor) {
             $(document).ready(function(){
@@ -1167,7 +1166,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         },
-/*         spectrumBgColor: function(initialColor) {
+        spectrumBgColor: function(moduleType) {
             $(document).ready(function(){
                 $(".colorInput").spectrum({
                     flat: false,
@@ -1177,21 +1176,21 @@ var COMPONENT_UI = (function (cp, $) {
                     showPalette: true,
                     showSelectionPalette: true,
                     maxPaletteSize: 10,
-                    color: initialColor,
+                    color: '#fff',
                     change: function(color) {
                         var selectedBgColor = color.toHexString();
-                        cp.colorEdit.bgColor(selectedBgColor);
+                        cp.colorEdit.bgColor(selectedBgColor, moduleType);
                     }
                 });
             });
-        }, */
-/*         bgColor: function() {
-            thisWrap.next('[contenteditable]').each(function() {
-                if ($(this).attr('edit-target') === targetData) {
-                    $(this).css('color', editColor);
+        },
+        bgColor: function(selectedBgColor, moduleType) {
+            $('.section').find('.md').each(function() {
+                if ($(this).data('module') === moduleType) {
+                    $(this).css('background-color', selectedBgColor);
                 }
             });
-        } */
+        }
     };
 
     cp.fontEditer = {
@@ -1279,12 +1278,12 @@ var COMPONENT_UI = (function (cp, $) {
         },
         optionOpen: function() {
             $(document).on('click', '.optionBtn', function() {
-                var $thisModule = $(this).closest('.md');
-                var $moduleData = $thisModule.data('module');
-                console.log($moduleData)
+                const $thisMd = $(this).closest('.md');
+                const moduleData = $thisMd.data('module');
 
                 $('.option-wrap').show();
-                $('.option-wrap').attr('module-type', $moduleData);
+                $('.option-wrap').attr('data-type', moduleData);
+                cp.colorEdit.spectrumBgColor(moduleData);
             })
         }
     }
