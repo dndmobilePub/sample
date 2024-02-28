@@ -1119,6 +1119,7 @@ var COMPONENT_UI = (function (cp, $) {
     cp.colorEdit = {
         init: function() {
             this.spectrumColor();
+            //this.spectrumBgColor();
         },
         spectrumColor: function(initialColor) {
             $(document).ready(function(){
@@ -1166,6 +1167,31 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         },
+/*         spectrumBgColor: function(initialColor) {
+            $(document).ready(function(){
+                $(".colorInput").spectrum({
+                    flat: false,
+                    showInput: true,
+                    preferredFormat: "hex",
+                    showInitial: true,
+                    showPalette: true,
+                    showSelectionPalette: true,
+                    maxPaletteSize: 10,
+                    color: initialColor,
+                    change: function(color) {
+                        var selectedBgColor = color.toHexString();
+                        cp.colorEdit.bgColor(selectedBgColor);
+                    }
+                });
+            });
+        }, */
+/*         bgColor: function() {
+            thisWrap.next('[contenteditable]').each(function() {
+                if ($(this).attr('edit-target') === targetData) {
+                    $(this).css('color', editColor);
+                }
+            });
+        } */
     };
 
     cp.fontEditer = {
@@ -1208,6 +1234,7 @@ var COMPONENT_UI = (function (cp, $) {
             $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
                 var thisColor = $this.css('color');
+                var optionWrap = $('.option-wrap');
 
                 if (event.type === 'click') {
                     $this.attr('contenteditable', 'true');
@@ -1246,6 +1273,22 @@ var COMPONENT_UI = (function (cp, $) {
         }
     };
 
+    cp.optionEdit = {
+        init: function() {
+            this.optionOpen();
+        },
+        optionOpen: function() {
+            $(document).on('click', '.optionBtn', function() {
+                var $thisModule = $(this).closest('.md');
+                var $moduleData = $thisModule.data('module');
+                console.log($moduleData)
+
+                $('.option-wrap').show();
+                $('.option-wrap').attr('module-type', $moduleData);
+            })
+        }
+    }
+
     cp.init = function () {
         cp.imgCrop.init();
         cp.videoModule.init();
@@ -1255,6 +1298,7 @@ var COMPONENT_UI = (function (cp, $) {
         cp.tab.init();
         cp.colorEdit.init();
         cp.fontEditer.init();
+        cp.optionEdit.init();
     };
 
     cp.init();

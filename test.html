@@ -18,7 +18,7 @@
 
 <body>
   <div class="wrap">
-    <header>
+    <div class="module-add-box">
       <div class="btnWrap">
         <a href="#;" data-type="img" data-case="type01">사진 - type01</a><!-- 이미지, 대제목, 소제목, 날짜-->
         <a href="#;" data-type="img" data-case="type02">사진 - type02</a><!-- only 이미지 -->
@@ -28,25 +28,42 @@
         <a href="" data-type="txt" data-case="type02">텍스트 - type02</a><!-- only 텍스트 -->
         <a href="" data-type="goods">상품</a>
       </div>
-    </header>
+    </div>
     <div class="container">
+        <!-- [S] 상세설정 -->
+      <div class="option-wrap" module-type="">
+        <h2>상세설명</h2>
+        <div class="option-box">
+          <h3>배경색상</h3><input type="color" class="colorInput">
+        </div>
+        <div class="option-box"></div>
+        <div class="option-box"></div>
+
+      </div>
+      <!--// [E] 상세설정 -->
       <section class="section">
         <!-- [S] 이미지 컨텐츠 TYPE1 -->
-        <div class="md md-img" data-type="img">
+        <div class="md md-img" data-type="img" data-module="default">
           <div class="imgWrap no-img"><img src=""></div>
           <div class="txtEdit">
             <h1 contenteditable="true">대제목</h1>
             <h3 contenteditable="true">소제목</h3>
             <p contenteditable="true">2024.01.25 - 02.25</p>
           </div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-toption">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
         </div>
         <!--// [E] 이미지 컨텐츠 TYPE1 -->
 
         <!-- [S] 이미지 컨텐츠 TYPE2 -->
-        <div class="md md-img" data-type="img">
+        <div class="md md-img" data-type="img" data-module="onlyImg">
           <div class="imgWrap no-img"><img src=""></div>
-          <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          <div class="module-toption">
+            <button class="btn btn-size xs shadow optionBtn">설정</button>
+            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+          </div>
         </div>
         <!--// [E] 이미지 컨텐츠 TYPE2 -->
 

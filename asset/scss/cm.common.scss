@@ -17,11 +17,9 @@
 @import '_cp.list';
 @import '_cp.popup';
 
-header {
-  @include pos-offset-l(0,0,fixed){z-index: 1000;}
-  @include el-size(20%, 100%);
-  min-width:20rem;
-  
+.module-add-box {
+  @include pos-offset-r(70%,0,fixed){z-index: 1000;}
+  min-width:15rem;
   background:$color-gray2;
 }
 .btnWrap {
@@ -31,7 +29,7 @@ header {
     padding:.5rem 1rem;
     color:$color-gray6; text-decoration:none;
     background:$color-gray3;
-    border:1px solid $color-gray4;
+    @include border(border, 1px, solid, $color-gray4);
     font-size:var(--space-ms);
     border-radius: .3rem;
 
@@ -45,13 +43,27 @@ header {
 }
 
 .container {
-  @include width(calc(100% - 20rem));
-  margin-left:22rem;
-  padding:3rem;
+  @include display(flex);
+  .option-wrap {
+    @include display(none);
+    width: 30%;
+    padding: 2rem;
+    @include border(border, 1px, solid, $color-gray4);
+
+    .option-box {
+      margin-top: 2rem;
+
+      h3 {
+        @include display(inline-block);
+        margin-right: 1rem;
+      }
+    }
+  }
+
   .section {
     @include border(border, 1px, solid, $color-gray8);
-    background: $color-gray6;
     max-width:var(--section); margin:2rem auto;
+    background: $color-gray6;
 
     [data-type="goods"] .swiper{
       @include display(flex);
@@ -67,10 +79,14 @@ header {
       &:hover {
         outline-color: $flag-pk;
 
-        .deleteBtn{
+        .module-toption {
           @include display(block);
+          @include pos-offset-l(0, -5rem){z-index:2;}
+          padding: 1rem;
+          background:$color-white;
+          @include border(border, 1px, dashed, $color-black);
         }
-        .dragBtn {
+        .deleteBtn, .dragBtn, .optionBtn {
           @include display(block);
         }
       }
@@ -140,6 +156,10 @@ header {
     border-radius:100%;
     background: $color-white;
     color:$color-gray3;
+  }
+  &.optionBtn {
+    display: none;
+    margin-top: 1.5rem;
   }
   &.deleteBtn{
     @include pos-offset-r(-.5rem, -.5rem){z-index:2;}
