@@ -1322,24 +1322,24 @@ var COMPONENT_UI = (function (cp, $) {
         currentModuleData: null,
         optionOpen: function() {
             cp.optionEdit.currentModuleData = null;
-            $(document).on('click', '.optionBtn', function() {
+            $('body').on('click', '.optionBtn', function() {
                 const $thisMd = $(this).closest('.md');
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const bgColor = $thisMd.css('background-color');
     
                 $('.option-wrap').show().attr('data-type', cp.optionEdit.currentModuleData);
+                cp.optionEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
                 cp.optionEdit.imgColor();
                 cp.optionEdit.imgColorSelect(cp.optionEdit.currentModuleData);
             });
         },
         optionClose: function() {
-            $(document).on('click', '.optionClsBtn', function(){
+            $('body').on('click', '.optionClsBtn', function(){
                 const $optionWrap = $(this).closest('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
                 $optionWrap.attr('data-type','').hide();
                 cp.optionEdit.resetImgColor();
-                console.log(cp.optionEdit.currentModuleData)
             });
         },
         resetImgColor: function() {
@@ -1448,7 +1448,7 @@ var COMPONENT_UI = (function (cp, $) {
             }
         },
         imgColorSelect: function(dataType) {
-            $(document).one('click', '#palette div', function(event){
+            $(document).off('click').on('click', '#palette div', function(event){
                 if ($(event.target).is('div')) {
                     var rgbColor = $(event.target).css('background-color');
                     var selectedBgColor = rgbToHex(rgbColor);
