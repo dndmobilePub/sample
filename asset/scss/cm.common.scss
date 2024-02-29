@@ -43,18 +43,21 @@
 }
 
 .container {
-  .option-wrap {
-    //@include display(none);
-    @include pos(fixed) {left: 0;top: 0;}
-    width: 30%; height: 100vh;
-    padding: 2rem;
-    @include border(border, 1px, solid, $color-gray4);
-
-    .option-box {
+  .option {
+    &-wrap {
+      @include display(none);
+      @include pos(fixed) {left: 0;top: 0;}
+      width: 30%; height: 100vh;
+      padding: 2rem;
+      @include border(border, 1px, solid, $color-gray4);
+    }
+    &-box {
+      @include display(flex);
       margin-top: 2rem;
 
       h3 {
         @include display(inline-block);
+        min-width: 7rem;
         margin-right: 1rem;
         vertical-align: top;
       }
@@ -358,6 +361,53 @@
   }
 }
 
+/* 이미지 칼라 추출 */
+.img-color-wrap {
+  @include display(block);
+  margin-top: 2rem;
+  #del-upload {
+    @include display(block);
+    padding: 1rem;
+    @include border(border, 1px, dashed, #C8C8C8);
+    cursor: pointer; 
+  }
+  .ct-img {
+    @include display(block);
+    margin: 0;
+    .img-main {
+      @include display(block);
+      width: 100%;
+      clear: both; 
+      &:not([src]) {
+        @include display(none);
+
+        & + #palette {
+          @include display(none);
+        }
+      }
+    }
+  }
+
+  #palette {
+    width: inherit;
+    height: 40px;
+    max-height: 40px;
+    padding: 10px 0;
+    text-align: center; 
+
+    div {
+      @include display(inline-block);
+      background-color: #ddd;
+      width: 20px;
+      height: 20px;
+      @include border(border, 1px, solid, #CCCCCC);
+      cursor: pointer;
+
+      &+ div{ margin-left: 5px; }
+    }
+  }
+  #canvas-main { position: absolute; }
+}
 
 /* cropper style */
 .cropper {
@@ -637,43 +687,3 @@
     width: 5px;
   }
 }
-
-.img-color-wrap {
-  display: inline-block;
-  max-width: calc(100% - 100px);
-}
-.img-color-wrap > #del-upload {
-    display: block;
-    padding: 1rem;
-    cursor: pointer; 
-}
-.img-color-wrap > #del-upload .ct-img {
-    display: block; 
-}
-.img-color-wrap > #del-upload .ct-img > img.img-main {
-    display: block;
-    width: 100%;
-    clear: both; 
-}
-.img-color-wrap > #del-upload .ct-img > img.img-main:not([src]) {
-    display: none; 
-}
-.img-color-wrap > #del-upload .ct-img > #palette {
-    width: inherit;
-    height: 40px;
-    max-height: 40px;
-    padding: 10px 0;
-    text-align: center; 
-}
-.img-color-wrap > #del-upload .ct-img > #palette > div {
-    background-color: #ddd;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    border: 1px solid #CCCCCC; 
-}
-.img-color-wrap > #del-upload .ct-img > #palette > div + div{ margin-left: 5px; }
-.img-color-wrap > #del-upload:not([data-file]) { border: 1px dashed #C8C8C8; }
-.img-color-wrap > #del-upload:not([data-file]) > .ct-img { display: none; }
-.img-color-wrap > #del-upload[data-file] { border: 1px solid #C8C8C8; }
-.img-color-wrap #canvas-main { position: absolute; }

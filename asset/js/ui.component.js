@@ -1168,21 +1168,20 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
         spectrumBgColor: function(moduleType, bgColor) {
-            $(document).ready(function(){
-                $(".colorInput").spectrum({
-                    flat: false,
-                    showInput: true,
-                    preferredFormat: "hex",
-                    showInitial: true,
-                    showPalette: true,
-                    showSelectionPalette: true,
-                    maxPaletteSize: 10,
-                    color: bgColor,
-                    change: function(color) {
-                        var selectedBgColor = color.toHexString();
-                        cp.colorEdit.bgColor(selectedBgColor, moduleType);
-                    }
-                });
+            var self = this;
+            $(".colorInput").spectrum({
+                flat: false,
+                showInput: true,
+                preferredFormat: "hex",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxPaletteSize: 10,
+                color: bgColor,
+                change: function(color) {
+                    var selectedBgColor = color.toHexString();
+                    self.bgColor(selectedBgColor, moduleType);
+                }
             });
         },
         bgColor: function(selectedBgColor, moduleType) {
@@ -1249,7 +1248,6 @@ var COMPONENT_UI = (function (cp, $) {
             $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
                 var thisColor = $this.css('color');
-                var optionWrap = $('.option-wrap');
 
                 if (event.type === 'click') {
                     $this.attr('contenteditable', 'true');
@@ -1267,7 +1265,6 @@ var COMPONENT_UI = (function (cp, $) {
                         cp.colorEdit.spectrumColor(thisColor);
                     })
                 }
-                
             });
             
             $(document).on('click', function(event) {
@@ -1291,41 +1288,60 @@ var COMPONENT_UI = (function (cp, $) {
     cp.optionEdit = {
         init: function() {
             this.optionOpen();
-            this.imgColor();
+            this.optionClose();
         },
+        currentModuleData: null,
         optionOpen: function() {
+            cp.optionEdit.currentModuleData = null;
             $(document).on('click', '.optionBtn', function() {
                 const $thisMd = $(this).closest('.md');
-                const moduleData = $thisMd.data('module');
+                cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const bgColor = $thisMd.css('background-color');
-
-                $('.option-wrap').show();
-                $('.option-wrap').attr('data-type', moduleData);
-                cp.colorEdit.spectrumBgColor(moduleData, bgColor);
-            })
+    
+                $('.option-wrap').show().attr('data-type', cp.optionEdit.currentModuleData);
+                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
+                cp.optionEdit.imgColor();
+                cp.optionEdit.imgColorSelect(cp.optionEdit.currentModuleData);
+            });
+        },
+        optionClose: function() {
+            $(document).on('click', '.optionClsBtn', function(){
+                const $optionWrap = $(this).closest('.option-wrap');
+                cp.optionEdit.currentModuleData = null;
+                $optionWrap.attr('data-type','').hide();
+                cp.optionEdit.resetImgColor();
+                console.log(cp.optionEdit.currentModuleData)
+            });
+        },
+        resetImgColor: function() {
+            $("#btn-upload").val("");
+            $("#thumnail").removeAttr("src");
+        
+            // canvas 초기화 (있는 경우)
+            var canvas = document.getElementById("canvas-main");
+            if (canvas) {
+                var ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        
+            $("#palette").empty();
         },
         imgColor: function() {
             // 파일 업로드 이벤트 바인딩
-            $("#btn-upload").change(function() {
-                ex_file_upload.call(this);
-            });
+            $("#btn-upload").off('change').on('change', ex_file_upload);
     
             // 메인 이미지 변경 이벤트 바인딩
-            $("#thumnail").on("load", function() {
-                ex_img_onload.call(this);
-            });
+            $("#thumnail").off('load').on("load", ex_img_onload);
 
             function ex_file_upload() {
-                var self = this;
-                var filelist = this.files;
-                if (filelist.length == 0) return;
+                var file = this.files[0];
+                if (!file) return;
     
                 var fileReader = new FileReader();
                 fileReader.onload = function() {
-                    $(self).parent().attr("data-file", "1");
                     $("#thumnail").attr("src", this.result);
                 };
-                fileReader.readAsDataURL(filelist[0]);
+                fileReader.readAsDataURL(file);
             }
             function ex_img_onload() {
                 // 캔버스 요소와 그래픽 컨텍스트 생성
@@ -1386,12 +1402,14 @@ var COMPONENT_UI = (function (cp, $) {
                 picaker = picaker.slice(0, 5);
             
                 // 그라디언트를 생성할 문자열 및 색상 팔레트 요소 초기화
+                generateGradientAndPalette(picaker);
+            }
+            function generateGradientAndPalette(colors) {
+                // 색상 별로 그라디언트 생성 및 팔레트에 추가
                 var color_gradient = "";
-                var palette = $("#palette");
-                palette.empty();
-            
-                // 각 색상에 대해 그라디언트를 생성하고 색상 팔레트에 추가
-                picaker.forEach(function(item) {
+                var palette = $("#palette").empty();
+    
+                colors.forEach(function(item) {
                     var _color = item[0];
                     if (color_gradient != "") color_gradient += ",";
                     color_gradient += " #" + _color;
@@ -1399,6 +1417,23 @@ var COMPONENT_UI = (function (cp, $) {
                     palette.append(_div);
                 });
             }
+        },
+        imgColorSelect: function(dataType) {
+            $(document).one('click', '#palette div', function(event){
+                if ($(event.target).is('div')) {
+                    var rgbColor = $(event.target).css('background-color');
+                    var selectedBgColor = rgbToHex(rgbColor);
+                    var $p = $('<p></p>').text('Selected color: ' + selectedBgColor);
+                    
+                    $('#palette p').remove();
+                    $('#palette').append($p);
+
+                    cp.colorEdit.bgColor(selectedBgColor, dataType);
+                }
+                
+                event.preventDefault();
+                event.stopPropagation();
+            })
             function rgbToHex(rgb) {
                 var rgbValues = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
                 
@@ -1408,21 +1443,6 @@ var COMPONENT_UI = (function (cp, $) {
                 
                 return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
             }
-            $('#palette').on('click', 'div', function(event){
-                if ($(event.target).is('div')) {
-                    var rgbColor = $(event.target).css('background-color');
-                    
-                    var hexColor = rgbToHex(rgbColor);
-                    
-                    var $p = $('<p></p>').text('Selected color (HEX): ' + hexColor);
-                    
-                    $('#palette').append($p);
-                }
-                
-                event.preventDefault();
-                event.stopPropagation();
-            })
-
         }
     }
 

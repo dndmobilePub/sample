@@ -1385,6 +1385,7 @@ legend, caption {
 }
 
 .container .option-wrap {
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -1393,11 +1394,13 @@ legend, caption {
   padding: 2rem;
   border: 1px solid #999;
 }
-.container .option-wrap .option-box {
+.container .option-box {
+  display: flex;
   margin-top: 2rem;
 }
-.container .option-wrap .option-box h3 {
+.container .option-box h3 {
   display: inline-block;
+  min-width: 7rem;
   margin-right: 1rem;
   vertical-align: top;
 }
@@ -1705,6 +1708,54 @@ legend, caption {
   border-radius: 0.3rem;
 }
 
+/* 이미지 칼라 추출 */
+.img-color-wrap {
+  display: block;
+  margin-top: 2rem;
+}
+.img-color-wrap #del-upload {
+  display: block;
+  padding: 1rem;
+  border: 1px dashed #C8C8C8;
+  cursor: pointer;
+}
+.img-color-wrap .ct-img {
+  display: block;
+  margin: 0;
+}
+.img-color-wrap .ct-img .img-main {
+  display: block;
+  width: 100%;
+  clear: both;
+}
+.img-color-wrap .ct-img .img-main:not([src]) {
+  display: none;
+}
+.img-color-wrap .ct-img .img-main:not([src]) + #palette {
+  display: none;
+}
+.img-color-wrap #palette {
+  width: inherit;
+  height: 40px;
+  max-height: 40px;
+  padding: 10px 0;
+  text-align: center;
+}
+.img-color-wrap #palette div {
+  display: inline-block;
+  background-color: #ddd;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #CCCCCC;
+  cursor: pointer;
+}
+.img-color-wrap #palette div + div {
+  margin-left: 5px;
+}
+.img-color-wrap #canvas-main {
+  position: absolute;
+}
+
 /* cropper style */
 .cropper-container {
   direction: ltr;
@@ -1933,64 +1984,4 @@ legend, caption {
     opacity: 0.75;
     width: 5px;
   }
-}
-.img-color-wrap {
-  display: inline-block;
-  max-width: calc(100% - 100px);
-}
-
-.img-color-wrap > #del-upload {
-  display: block;
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.img-color-wrap > #del-upload .ct-img {
-  display: block;
-}
-
-.img-color-wrap > #del-upload .ct-img > img.img-main {
-  display: block;
-  width: 100%;
-  clear: both;
-}
-
-.img-color-wrap > #del-upload .ct-img > img.img-main:not([src]) {
-  display: none;
-}
-
-.img-color-wrap > #del-upload .ct-img > #palette {
-  width: inherit;
-  height: 40px;
-  max-height: 40px;
-  padding: 10px 0;
-  text-align: center;
-}
-
-.img-color-wrap > #del-upload .ct-img > #palette > div {
-  background-color: #ddd;
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  border: 1px solid #CCCCCC;
-}
-
-.img-color-wrap > #del-upload .ct-img > #palette > div + div {
-  margin-left: 5px;
-}
-
-.img-color-wrap > #del-upload:not([data-file]) {
-  border: 1px dashed #C8C8C8;
-}
-
-.img-color-wrap > #del-upload:not([data-file]) > .ct-img {
-  display: none;
-}
-
-.img-color-wrap > #del-upload[data-file] {
-  border: 1px solid #C8C8C8;
-}
-
-.img-color-wrap #canvas-main {
-  position: absolute;
 }
