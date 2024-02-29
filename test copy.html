@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> SAMPLE | M mall </title>
+  <link rel="stylesheet" type="text/css" href="./asset/css/spectrum.css">
+  <link rel="stylesheet" type="text/css" href="./asset/css/cm.common.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script type="text/javascript" src="./asset/js/plugin/lib.jquery-3.7.1.min.js"></script>
+  <script type="text/javascript" src="./asset/js/plugin/lib.jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script type="text/javascript" src="./asset/js/plugin/pg.cropper.js"></script>
+  <script type="text/javascript" src="./asset/js/plugin/pg.spectrum.js"></script>
+  <script type="text/javascript" src="./asset/js/ui.component copy.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="btnWrap">
+        <a href="#;" data-type="img" data-case="type01">사진 - type01</a>
+        <a href="#;" data-type="img" data-case="type02">사진 - type02</a>
+        <a href="#;" data-type="img" data-case="type03">사진 - type03</a>
+        <a href="" data-type="txt" data-case="type01">텍스트 - type01</a>
+        <a href="" data-type="txt" data-case="type02">텍스트 - type02</a>
+        <a href="" data-type="goods">상품</a>
+      </div>
+    </header>
+    <div class="container">
+      <section class="section">
+        <div class="md md-goods" data-type="goods" data-case="goodsTab">
+          <a href="#;" class="settingBtn">설정</a>
+          <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
+            <div class="goods-top txtEdit" data-case="goodsSwiper">
+              <h1 contenteditable="true" class="fontBold">대제목</h1>
+            </div>
+            <div class="goods-top tab-list-wrap" data-case="goodsTab">
+              <ul class="tab-list">
+                <li class="tab _is-active"><a href="javascript:void(0);">기본탭</a></li>
+                <li class="_addTab"><a href="javascript:void(0);"><span class="hide">탭추가</span></a></li>
+              </ul>
+            </div>
+            <div class="btn btn-size xs shadow dragBtn">드래그</div>
+            <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
+            <div class="tab-contents-wrap">
+              <div class="goods-content-wrap tab-contents swiper">
+                <p class="goods-category">iPad</p>
+                <ul class="swiper-wrapper">
+                  <li class="swiper-slide">
+                    <dl class="goodsWrap">
+                      <dt class="goods-img">
+                        <div class="no-img"></div>
+                      </dt>
+                      <dd class="item brand">애플</dd>
+                      <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                      <dd class="item price">1,249,000 원</dd>
+                      <dd class="item benefit">
+                        <span class="label point">최대 50% M 포인트</dd>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li class="swiper-slide">
+                    <dl class="goodsWrap">
+                      <dt class="goods-img">
+                        <div class="no-img"></div>
+                      </dt>
+                      <dd class="item brand">애플</dd>
+                      <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                      <dd class="item price">1,249,000 원</dd>
+                      <dd class="item benefit">
+                        <span class="label point">최대 50% M 포인트</dd>
+                      </dd>
+                    </dl>
+                  </li>
+                </ul>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+         <div class="md md-goods" data-type="goods" data-case="goodsTab">
+          <a href="#;" class="settingBtn">설정</a>
+          <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
+            <div class="goods-top txtEdit" data-case="goodsSwiper">
+              <h1 contenteditable="true" class="fontBold">대제목</h1>
+            </div>
+            <div class="goods-top tab-list-wrap" data-case="goodsTab">
+              <ul class="tab-list">
+                <li class="tab _is-active"><a href="javascript:void(0);">기본탭</a></li>
+                <li class="_addTab"><a href="javascript:void(0);"><span class="hide">탭추가</span></a></li>
+              </ul>
+            </div>
+            <div class="btn btn-size xs shadow dragBtn">드래그</div>
+            <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal">상품 항목추가</button>
+            <div class="tab-contents-wrap">
+              <div class="goods-content-wrap tab-contents swiper">
+                <p class="goods-category">iPad</p>
+                <ul class="swiper-wrapper">
+                  <li class="swiper-slide">
+                    <dl class="goodsWrap">
+                      <dt class="goods-img">
+                        <div class="no-img"></div>
+                      </dt>
+                      <dd class="item brand">애플</dd>
+                      <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                      <dd class="item price">1,249,000 원</dd>
+                      <dd class="item benefit">
+                        <span class="label point">최대 50% M 포인트</dd>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li class="swiper-slide">
+                    <dl class="goodsWrap">
+                      <dt class="goods-img">
+                        <div class="no-img"></div>
+                      </dt>
+                      <dd class="item brand">애플</dd>
+                      <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                      <dd class="item price">1,249,000 원</dd>
+                      <dd class="item benefit">
+                        <span class="label point">최대 50% M 포인트</dd>
+                      </dd>
+                    </dl>
+                  </li>
+                </ul>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+    $(function() {
+      COMPONENT_UI.init();
+    });
+
+  </script>
+</body>
+
+</html>

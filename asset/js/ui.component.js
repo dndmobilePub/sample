@@ -598,11 +598,11 @@ var COMPONENT_UI = (function (cp, $) {
                 fetch('textArea.html').then(response => response.text()),
                 fetch('imgArea.html').then(response => response.text()),
                 fetch('videoArea.html').then(response => response.text()),
-                fetch('swiperArea.html').then(response => response.text())
-            ]).then(([textArea, imgAreaHTML, videoArea, swiperArea]) => {
+                fetch('goodsArea.html').then(response => response.text())
+            ]).then(([textArea, imgAreaHTML, videoArea, goodsArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
-                swiperArea = swiperArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
+                goodsArea = goodsArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
 
                 function TxtAreaByCase(caseValue) {
                     var pattern = new RegExp('<!-- 텍스트 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 텍스트 컨텐츠 ' + caseValue + ' -->', 'g');
@@ -635,21 +635,23 @@ var COMPONENT_UI = (function (cp, $) {
                         type03HTML: ImgAreaByCase('type03')
                     },
                     videoArea: videoArea,
-                    swiperArea: swiperArea
+                    goodsArea: goodsArea
                 });
             });
         },
         
         mdBoxAddClk: function() {
-            //console.log("mdBoxAddClk 함수 호출됨");
             $('.btnWrap').off('click').on('click', 'a', function(e) {
                 e.preventDefault();
+                var moduleId = generateUniqueId();
+                
                 var dataType = $(this).data('type');
                 var caseValue = $(this).data('case');
                 var newMd = $('<div class="md"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button></div>');
                 newMd.addClass('md-' + dataType);
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
+                newMd.attr('data-module', moduleId);
                 cp.moduleBox.mdBoxAddCont(function(content) {
                     var newContentHTML;
                     if (dataType === 'img') {
@@ -669,7 +671,7 @@ var COMPONENT_UI = (function (cp, $) {
                         }
                         newContentHTML = imgAreaContent;
                     } else if(dataType === 'goods') {
-                        newContentHTML = content.swiperArea;
+                        newContentHTML = content.goodsArea;
                     } else if(dataType === 'txt') {
                         switch (caseValue) {
                             case 'type01':
@@ -697,6 +699,33 @@ var COMPONENT_UI = (function (cp, $) {
                     
                     $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
                 });
+
+                $(".option-box a").click(function(e) {
+                    e.preventDefault();
+                    
+                    var newCase = $(this).closest('.option-wrap').attr("data-type");
+                    var goodsOption = $(this).attr("goods-option");
+                    var $md = $(".md[data-module='" + newCase + "']");
+                    var $goodsTopTab = $md.find(".goods-top[data-case='goodsTab']");
+                    var $goodsTopSwiper = $md.find(".goods-top[data-case='goodsSwiper']");
+                    var $goodsCategory = $md.find(".goods-category");
+                    var $goodsContentWrap = $md.find(".goods-content-wrap");
+                
+                    $md.attr("data-case", goodsOption);
+                
+                    if (goodsOption === 'goodsTab') {
+                        $goodsTopTab.show();
+                        $goodsTopSwiper.hide();
+                        $goodsCategory.show();
+                        $goodsContentWrap.removeClass("swiper").addClass("tab-contents");
+                    } else if (goodsOption === 'goodsSwiper') {
+                        $goodsTopTab.hide();
+                        $goodsTopSwiper.show();
+                        $goodsCategory.hide();
+                        $goodsContentWrap.removeClass("tab-contents").addClass("swiper");
+                    }
+                });
+                    
             });
         },
 
