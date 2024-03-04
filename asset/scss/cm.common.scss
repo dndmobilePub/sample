@@ -61,20 +61,17 @@
       }
     }
     &-box {
-      @include display(none);
-      @include flex($al-items:top);
-      margin-top: 2rem;
-
-      &.show {
-        @include display(flex);
-      }
-
-      h3 {
-        @include display(inline-block);
-        min-width: 7rem;
-        margin-right: 1rem;
-        vertical-align: top;
-      }
+      @include display(block);
+      margin-top: 4rem;
+    }
+    &-tit {
+      @include display(block);
+      min-width: 7rem;
+      margin-right: 1.5rem;
+      vertical-align: top;
+    }
+    &-cont {
+      margin-top: 1rem;
     }
   }
 
@@ -382,9 +379,9 @@
 /* 이미지 칼라 추출 */
 .img-color-wrap {
   @include display(block);
-  margin-top: 2rem;
+  margin-top: 1rem;
   #del-upload {
-    @include display(block);
+    @include display(inline-block);
     padding: 1rem;
     @include border(border, 1px, dashed, #C8C8C8);
     cursor: pointer; 
@@ -736,6 +733,8 @@
 /* radio input */
 label {
   padding: 0.2rem;
+   vertical-align: middle;
+  cursor: pointer;
   input {
     margin-right: 0.5rem;
   }

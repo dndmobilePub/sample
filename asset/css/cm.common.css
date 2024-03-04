@@ -1404,21 +1404,17 @@ legend, caption {
   left: 0;
 }
 .container .option-box {
-  display: none;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: top;
-  margin-top: 2rem;
+  display: block;
+  margin-top: 4rem;
 }
-.container .option-box.show {
-  display: flex;
-}
-.container .option-box h3 {
-  display: inline-block;
+.container .option-tit {
+  display: block;
   min-width: 7rem;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   vertical-align: top;
+}
+.container .option-cont {
+  margin-top: 1rem;
 }
 .container .section {
   border: 1px solid #ccc;
@@ -1725,10 +1721,10 @@ legend, caption {
 /* 이미지 칼라 추출 */
 .img-color-wrap {
   display: block;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .img-color-wrap #del-upload {
-  display: block;
+  display: inline-block;
   padding: 1rem;
   border: 1px dashed #C8C8C8;
   cursor: pointer;
@@ -2027,6 +2023,8 @@ legend, caption {
 /* radio input */
 label {
   padding: 0.2rem;
+  vertical-align: middle;
+  cursor: pointer;
 }
 label input {
   margin-right: 0.5rem;

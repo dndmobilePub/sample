@@ -1332,9 +1332,9 @@ var COMPONENT_UI = (function (cp, $) {
                 const bgColor = $thisMd.css('background-color');
     
                 $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
-                $('.option-box').removeClass('hide');
-                $('.option-box:not([data-type])').addClass('show');
-                $('.option-box[data-type="'+dataType+'"]').addClass('show');
+                $('.option-box').hide();
+                $('.option-box:not([data-type])').show();
+                $('.option-box[data-type="'+dataType+'"]').show();
                 cp.optionEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
                 cp.optionEdit.imgColor();
@@ -1456,7 +1456,7 @@ var COMPONENT_UI = (function (cp, $) {
             }
         },
         imgColorSelect: function(dataType) {
-            $(document).off('click').on('click', '#palette div', function(event){
+            $('body').off('click').on('click', '#palette div', function(event){
                 if ($(event.target).is('div')) {
                     var rgbColor = $(event.target).css('background-color');
                     var selectedBgColor = rgbToHex(rgbColor);
