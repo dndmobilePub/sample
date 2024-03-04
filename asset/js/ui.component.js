@@ -1149,6 +1149,7 @@ var COMPONENT_UI = (function (cp, $) {
     cp.colorEdit = {
         init: function() {
             this.spectrumColor();
+            this.colorSelect();
         },
         spectrumColor: function(initialColor) {
             $(document).ready(function(){
@@ -1218,6 +1219,14 @@ var COMPONENT_UI = (function (cp, $) {
                 if ($(this).data('module') === moduleType) {
                     $(this).css('background-color', selectedBgColor);
                 }
+            });
+        },
+        colorSelect: function() {
+            $('.color-selbox input[name="colorSelect"]').change(function() {
+                var selectedOption = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+
+                $('.md[data-module="' + dataType + '"]').find('.tab a').css('color', selectedOption);
             });
         }
     };
@@ -1452,6 +1461,7 @@ var COMPONENT_UI = (function (cp, $) {
                     $('#palette').append($p);
 
                     cp.colorEdit.bgColor(selectedBgColor, dataType);
+                    cp.colorEdit.spectrumBgColor(dataType, selectedBgColor);
                 }
                 
                 event.preventDefault();

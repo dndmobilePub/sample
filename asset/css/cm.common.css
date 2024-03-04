@@ -2014,3 +2014,11 @@ legend, caption {
 .guide-box p ~ p {
   margin-top: 2rem;
 }
+
+/* radio input */
+label {
+  padding: 0.2rem;
+}
+label input {
+  margin-right: 0.5rem;
+}
