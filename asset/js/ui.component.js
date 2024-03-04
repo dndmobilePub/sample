@@ -571,6 +571,7 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.dragFn();
             this.mdBoxDel();
+            this.mdOption();
             this.mdBoxAddClk();
             this.initializeSwiper();
             this.resetSwipers();
@@ -593,13 +594,60 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
 
+        mdOption: function(){
+            var mdOption = {
+                initializePageOnLoad: function() {
+                    $(".md-goods").each(function() {
+                        var $md = $(this);
+                        mdOption.handleMdGoods($md);
+                    });
+                },
+                handleMdGoods: function($md) {
+                    var caseValue = $md.attr("data-case");
+                    var $goodsTopTab = $md.find(".goods-top[data-case='goodsTab']");
+                    var $goodsTopSwiper = $md.find(".goods-top[data-case='goodsSwiper']");
+                    var $goodsCategory = $md.find(".goods-category");
+                    var $goodsContentWrap = $md.find(".goods-content-wrap");
+                    var $goodsWrapper = $md.find(".goods-wrapper");
+                    var $goodsNextBtn = $md.find(".swiper-button-next");
+                    var $goodsPrevBtn = $md.find(".swiper-button-prev");
+            
+                    if (caseValue === 'goodsTab') {
+                        $goodsTopTab.show();
+                        $goodsTopSwiper.hide();
+                        $goodsCategory.show();
+                        $goodsNextBtn.hide();
+                        $goodsPrevBtn.hide();
+                        $goodsContentWrap.removeClass("swiper").addClass("tab-contents");
+                        $goodsWrapper.removeClass("swiper-wrapper").addClass("lst-goods");
+                        cp.tab.init();
+                    } else if (caseValue === 'goodsSwiper') {
+                        $goodsTopTab.hide();
+                        $goodsTopSwiper.show();
+                        $goodsCategory.hide();
+                        $goodsContentWrap.removeClass("tab-contents").addClass("swiper");
+                        $goodsWrapper.removeClass("lst-goods").addClass("swiper-wrapper");
+                    }
+                },
+                init: function() {
+                    mdOption.initializePageOnLoad();
+                }
+            };
+            
+            $(document).ready(function() {
+                mdOption.init();
+            });
+            
+            
+        },
+
         mdBoxAddCont: function(callback) {
             Promise.all([
-                fetch('textArea.html').then(response => response.text()),
-                fetch('imgArea.html').then(response => response.text()),
-                fetch('videoArea.html').then(response => response.text()),
-                fetch('goodsArea.html').then(response => response.text())
-            ]).then(([textArea, imgAreaHTML, videoArea, goodsArea]) => {
+                fetch('module_txt.html').then(response => response.text()),
+                fetch('module_img.html').then(response => response.text()),
+                fetch('module_video.html').then(response => response.text()),
+                fetch('module_goods.html').then(response => response.text())
+            ]).then(([txtArea, imgArea, videoArea, goodsArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
                 goodsArea = goodsArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
@@ -608,7 +656,7 @@ var COMPONENT_UI = (function (cp, $) {
                     var pattern = new RegExp('<!-- 텍스트 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 텍스트 컨텐츠 ' + caseValue + ' -->', 'g');
                     var matches = [];
                     var match;
-                    while ((match = pattern.exec(textArea)) !== null) {
+                    while ((match = pattern.exec(txtArea)) !== null) {
                         matches.push(match[0]);
                     }
                     return matches.join('');
@@ -618,61 +666,74 @@ var COMPONENT_UI = (function (cp, $) {
                     var pattern = new RegExp('<!-- 이미지 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 이미지 컨텐츠 ' + caseValue + ' -->', 'g');
                     var matches = [];
                     var match;
-                    while ((match = pattern.exec(imgAreaHTML)) !== null) {
+                    while ((match = pattern.exec(imgArea)) !== null) {
                         matches.push(match[0]);
                     }
                     return matches.join('');
                 }
-                console.log(TxtAreaByCase('type01'));
+
+                function goodsAreaByCase(caseValue) {
+                    var pattern = new RegExp('<!-- 상품 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 상품 컨텐츠 ' + caseValue + ' -->', 'g');
+                    var matches = [];
+                    var match;
+                    while ((match = pattern.exec(goodsArea)) !== null) {
+                        matches.push(match[0]);
+                    }
+                    return matches.join('');
+                }
                 callback({
                     txtArea: {
-                        type01HTML: TxtAreaByCase('type01'),
-                        type02HTML: TxtAreaByCase('type02')
+                        type01HTML: TxtAreaByCase('detailTxt'),
+                        type02HTML: TxtAreaByCase('titleTxt')
                     },
                     imgArea: {
-                        type01HTML: ImgAreaByCase('type01'),
-                        type02HTML: ImgAreaByCase('type02'),
-                        type03HTML: ImgAreaByCase('type03')
+                        type01HTML: ImgAreaByCase('detailImg'),
+                        type02HTML: ImgAreaByCase('onlyImg'),
+                        type03HTML: ImgAreaByCase('titleImg')
                     },
                     videoArea: videoArea,
-                    goodsArea: goodsArea
+                    goodsArea: {
+                        type01HTML: goodsAreaByCase('goodsSwiper'),
+                        type02HTML: goodsAreaByCase('goodsTab')
+                    },
                 });
             });
         },
         
         mdBoxAddClk: function() {
-            $('.btnWrap').off('click').on('click', 'a', function(e) {
+            $('.btnWrap').off('click').on('click', 'a[data-type]', function(e) {
                 e.preventDefault();
                 var moduleId = generateUniqueId();
                 
                 var dataType = $(this).data('type');
                 var caseValue = $(this).data('case');
-                var newMd = $('<div class="md"><div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div></div>');
+                var newMd = $('<div class="md"></div>');
                 newMd.addClass('md-' + dataType);
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
                 newMd.attr('data-module', moduleId);
+                if (dataType === 'goods') {
+                    newMd.attr('data-case', 'goodsSwiper');
+                }
+
                 cp.moduleBox.mdBoxAddCont(function(content) {
                     var newContentHTML;
                     if (dataType === 'img') {
-                        var imgAreaContent;
                         switch (caseValue) {
                             case 'type01':
-                                imgAreaContent = content.imgArea.type01HTML;
+                                newContentHTML = content.imgArea.type01HTML;
                                 break;
                             case 'type02':
-                                imgAreaContent = content.imgArea.type02HTML;
+                                newContentHTML = content.imgArea.type02HTML;
                                 break;
                             case 'type03':
-                                imgAreaContent = content.imgArea.type03HTML;
+                                newContentHTML = content.imgArea.type03HTML;
                                 break;
                             default:
-                                imgAreaContent = '';
+                                newContentHTML = content.imgArea.type01HTML;
                         }
-                        newContentHTML = imgAreaContent;
-                    } else if(dataType === 'goods') {
-                        newContentHTML = content.goodsArea;
-                    } else if(dataType === 'txt') {
+                    } 
+                     else if(dataType === 'txt') {
                         switch (caseValue) {
                             case 'type01':
                                 newContentHTML = content.txtArea.type01HTML;
@@ -681,49 +742,35 @@ var COMPONENT_UI = (function (cp, $) {
                                 newContentHTML = content.txtArea.type02HTML;
                                 break;
                             default:
-                                newContentHTML = '';
+                                newContentHTML = content.txtArea.type01HTML;
                         }
-                    } else if(dataType === 'video') {
+                    }else if(dataType === 'goods') {
+                        // newContentHTML = content.txtArea;
+                         switch (caseValue) {
+                             case 'type01':
+                                 newContentHTML = content.goodsArea.type01HTML;
+                                 break;
+                             case 'type02':
+                                 newContentHTML = content.goodsArea.type02HTML;
+                                 break;
+                             default:
+                                 newContentHTML = content.goodsArea.type01HTML;
+                         }
+                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
                     //COMPONENT_UI.init();
                     cp.init();
-                    
-                    if (dataType === 'goods') {
-                        var newSwiperContainer = newMd.find('.swiper')[0];
-                        var newSwiperInstance = cp.moduleBox.initializeSwiper(newSwiperContainer);
-                        $(newSwiperContainer).data('swiper', newSwiperInstance);
-                    }
+                                       
                     
                     $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
                 });
 
-                $(".option-box a").click(function(e) {
-                    e.preventDefault();
-                    
-                    var newCase = $(this).closest('.option-wrap').attr("data-type");
-                    var goodsOption = $(this).attr("goods-option");
-                    var $md = $(".md[data-module='" + newCase + "']");
-                    var $goodsTopTab = $md.find(".goods-top[data-case='goodsTab']");
-                    var $goodsTopSwiper = $md.find(".goods-top[data-case='goodsSwiper']");
-                    var $goodsCategory = $md.find(".goods-category");
-                    var $goodsContentWrap = $md.find(".goods-content-wrap");
-                
-                    $md.attr("data-case", goodsOption);
-                
-                    if (goodsOption === 'goodsTab') {
-                        $goodsTopTab.show();
-                        $goodsTopSwiper.hide();
-                        $goodsCategory.show();
-                        $goodsContentWrap.removeClass("swiper").addClass("tab-contents");
-                    } else if (goodsOption === 'goodsSwiper') {
-                        $goodsTopTab.hide();
-                        $goodsTopSwiper.show();
-                        $goodsCategory.hide();
-                        $goodsContentWrap.removeClass("tab-contents").addClass("swiper");
-                    }
+
+                $(".goods-box a").click(function(e) {
+
                 });
                     
             });
