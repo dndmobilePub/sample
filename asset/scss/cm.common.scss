@@ -62,7 +62,7 @@
     }
     &-box {
       @include display(none);
-      @include flex;
+      @include flex($al-items:top);
       margin-top: 2rem;
 
       &.show {

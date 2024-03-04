@@ -1333,6 +1333,7 @@ var COMPONENT_UI = (function (cp, $) {
     
                 $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
                 $('.option-box').removeClass('hide');
+                $('.option-box:not([data-type])').addClass('show');
                 $('.option-box[data-type="'+dataType+'"]').addClass('show');
                 cp.optionEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
