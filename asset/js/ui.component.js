@@ -1328,9 +1328,12 @@ var COMPONENT_UI = (function (cp, $) {
             $('body').on('click', '.optionBtn', function() {
                 const $thisMd = $(this).closest('.md');
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
+                const dataType = $thisMd.data('type');
                 const bgColor = $thisMd.css('background-color');
     
                 $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
+                $('.option-box').removeClass('hide');
+                $('.option-box[data-type="'+dataType+'"]').addClass('show');
                 cp.optionEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
                 cp.optionEdit.imgColor();

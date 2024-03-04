@@ -1404,8 +1404,15 @@ legend, caption {
   left: 0;
 }
 .container .option-box {
-  display: flex;
+  display: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   margin-top: 2rem;
+}
+.container .option-box.show {
+  display: flex;
 }
 .container .option-box h3 {
   display: inline-block;
@@ -1449,6 +1456,7 @@ legend, caption {
   top: 0;
   left: -5rem;
   z-index: 2;
+  z-index: 101;
   padding: 1rem;
   background: #fff;
   border: 1px dashed #000;

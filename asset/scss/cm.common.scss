@@ -61,8 +61,13 @@
       }
     }
     &-box {
-      @include display(flex);
+      @include display(none);
+      @include flex;
       margin-top: 2rem;
+
+      &.show {
+        @include display(flex);
+      }
 
       h3 {
         @include display(inline-block);
@@ -95,6 +100,7 @@
         .module-option {
           @include display(block);
           @include pos-offset-l(0, -5rem){z-index:2;}
+          z-index: 101;
           padding: 1rem;
           background:$color-white;
           @include border(border, 1px, dashed, $color-black);
