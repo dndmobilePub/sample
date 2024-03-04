@@ -1226,12 +1226,12 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.fontBold();
             this.fontSize();
-            //this.editOpen();
+            this.editOpen();
         },
-/*         fontBold: function() {
+        fontBold: function() {
             $(document).off('click').on('click', '.editBold', function(){
                 var targetData = $('.edit-box').data('edit');
-                var thisWrap = $(this).closest('.option-wrap');
+                var thisWrap = $(this).closest('.textEditerWrap');
                 var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
     
                 if (contentEditable.length) {
@@ -1242,8 +1242,8 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                 }
             })
-        }, */
-        fontBold: function() {
+        },
+/*         fontBold: function() {
             $('body').on('click', '.editBold', function(){
                 const $optionWrap = $(this).closest('.option-wrap');
                 const dataType = $optionWrap.data('type');
@@ -1251,7 +1251,7 @@ var COMPONENT_UI = (function (cp, $) {
         
                 $('.md[data-module="' + dataType + '"]').find('[data-text="' + font + '"]').toggleClass('fontBold');
             });
-        },
+        }, */
         fontSize: function() {
             $(document).on('change', '.editSize', function(){
                 var newSize = parseInt($(this).val().trim());
@@ -1266,8 +1266,8 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                 })
             })
-        }
-        /* editOpen: function() {
+        },
+        editOpen: function() {
             $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
                 var thisColor = $this.css('color');
@@ -1305,7 +1305,7 @@ var COMPONENT_UI = (function (cp, $) {
                     $('.textEditerWrap').remove();
                 }
             });
-        } */
+        }
     };
 
     cp.optionEdit = {

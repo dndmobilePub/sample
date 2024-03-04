@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="container">
-        <!-- [S] 상세설정 -->
+      <!-- [S] 상세설정 -->
       <div class="option-wrap" data-type="">
         <h2>상세설정</h2>
         <div class="option-box">
@@ -67,41 +67,20 @@
           </div>
         </div>
         <div class="option-box">
-          <h3 class="option-tit">대제목</h3>
-          <div class="option-cont">
-            <!-- S: text editer -->
-            <div class="edit-box" data-font="mainTitle">
-              <div class="btn-edit">
-                <a href="#" class="edit-bold editBold">B</a>
-              </div>
-              <div class="btn-edit">
-                <div class="edit-size">size
-                  <input type="text" class="edit-size-input editSize">
-                </div>
-              </div>
-              <div class="btn-edit edit-color">
-                <input type="color" id="editColor">
-              </div>
-            </div>
-            <!-- E: text editer -->
-          </div>
-        </div>
-        <div class="option-box">
-          <h3 class="option-tit">폰트굵기</h3>
-          <div class="option-cont"><a href="#" class="edit-bold editBold">B</a></div>
-        </div>
-        <div class="option-box">
-          <h3 class="option-tit">폰트크기</h3>
-          <div class="option-cont"><input type="text" class="edit-size-input editSize"></div>
-        </div>
-        <div class="option-box">
-          <h3 class="option-tit">폰트색상</h3>
-          <div class="option-cont"><input type="color" id="editColor"></div>
+          <h3 class="option-tit">탭 제목 색상</h3>
+          <div class="option-cont">내용무</div>
         </div>
         <button class="optionClsBtn">확인</button>
       </div>
       <!--// [E] 상세설정 -->
       <section class="section">
+        <!-- [S] notice/guide -->
+        <div class="guide-box">
+          <p>각각의 모듈과 모듈에 해당하는 상세설정창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-module)</strong> : <strong>상세설정(data-type)</strong> 매칭</p>
+          <p>각각의 텍스트와 텍스트에 해당하는 폰트에디터 연결방식은 data-roll을 사용하며 고정값 <strong>thisEdit</strong>로 생성/삭제됩니다. (따로 설정할 필요없음)<br> - <strong>텍스트(edit-target)</strong> : <strong>폰트에디터(data-edit)</strong> 매칭</p>
+        </div>
+        <!-- [E] notice/guide -->
+
 
         <button class="btn btn-size md bg _modalBtn" data-modal="modal2222">Center Modal</button>
 
@@ -117,8 +96,7 @@
                   <button class="btn btn-size md type2 bg btn-close-pop">확인</button>
               </div>
           </div>
-      </div>
-
+        </div>
 
         <!-- [S] 이미지 컨텐츠 TYPE1 -->
         <div class="md md-img" data-type="img" data-module="default">

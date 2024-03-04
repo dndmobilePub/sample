@@ -1404,6 +1404,11 @@ legend, caption {
   margin-right: 1rem;
   vertical-align: top;
 }
+.container .optionClsBtn {
+  margin-top: 10rem;
+  padding: 2rem;
+  border: 1px solid #000;
+}
 .container .section {
   border: 1px solid #ccc;
   max-width: var(--section);
@@ -1984,4 +1989,28 @@ legend, caption {
     opacity: 0.75;
     width: 5px;
   }
+}
+/* notice/guide */
+.guide-box {
+  padding: 2rem;
+  background-color: pink;
+  word-break: break-all;
+}
+.guide-box p::before {
+  content: "";
+  display: block;
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  margin-right: 5px;
+  margin-top: -2px;
+  border-radius: 100%;
+  background-color: #000;
+  vertical-align: middle;
+}
+.guide-box p strong {
+  font-weight: bold;
+}
+.guide-box p ~ p {
+  margin-top: 2rem;
 }
