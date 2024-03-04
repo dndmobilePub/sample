@@ -647,7 +647,7 @@ var COMPONENT_UI = (function (cp, $) {
                 
                 var dataType = $(this).data('type');
                 var caseValue = $(this).data('case');
-                var newMd = $('<div class="md"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button></div>');
+                var newMd = $('<div class="md"><div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div></div>');
                 newMd.addClass('md-' + dataType);
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
@@ -1483,7 +1483,6 @@ var COMPONENT_UI = (function (cp, $) {
     cp.init = function () {
         cp.imgCrop.init();
         cp.videoModule.init();
-        // cp.txtEdit.init();
         cp.moduleBox.init();
         cp.modalPop.init();
         cp.tab.init();

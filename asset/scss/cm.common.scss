@@ -49,6 +49,7 @@
       width: 30%; height: 100vh;
       padding: 2rem;
       @include border(border, 1px, solid, $color-gray4);
+      background-color: $color-white;
       transition: left 1s ease;
 
       .ico-pop-close {
@@ -169,22 +170,21 @@
     background: $color-white;
     color:$color-gray3;
   }
-  &.optionBtn {
-    display: none;
-    margin-top: 1.5rem;
-  }
   &.deleteBtn{
-    @include pos-offset-r(-.5rem, -.5rem){z-index:2;}
+    @include display(none);
     margin:0;
-    display: none;
+  }
+  &.optionBtn {
+    @include display(none);
+    width: 100%;
+    margin: .5rem 0 0;
   }
   &.dragBtn {
-    @include pos-offset-r(2.1rem, -.5rem){z-index:2;}
-    padding: .85rem 1.15rem;
+    @include display(none);
+    margin: .5rem 0 0;
+    padding: 1rem 1.15rem;
     background: $color-violet;
     border-color: $color-violet;
-    margin:0;
-    display: none;
   }
 }
 

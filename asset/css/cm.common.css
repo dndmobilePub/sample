@@ -1392,6 +1392,7 @@ legend, caption {
   height: 100vh;
   padding: 2rem;
   border: 1px solid #999;
+  background-color: #fff;
   transition: left 1s ease;
 }
 .container .option-wrap .ico-pop-close {
@@ -1504,28 +1505,21 @@ legend, caption {
   background: #fff;
   color: #666;
 }
+.btn.deleteBtn {
+  display: none;
+  margin: 0;
+}
 .btn.optionBtn {
   display: none;
-  margin-top: 1.5rem;
-}
-.btn.deleteBtn {
-  position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
-  z-index: 2;
-  margin: 0;
-  display: none;
+  width: 100%;
+  margin: 0.5rem 0 0;
 }
 .btn.dragBtn {
-  position: absolute;
-  top: 2.1rem;
-  right: -0.5rem;
-  z-index: 2;
-  padding: 0.85rem 1.15rem;
+  display: none;
+  margin: 0.5rem 0 0;
+  padding: 1rem 1.15rem;
   background: #8b4bdf;
   border-color: #8b4bdf;
-  margin: 0;
-  display: none;
 }
 
 /* icon */
