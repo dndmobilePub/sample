@@ -1226,14 +1226,14 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.fontBold();
             this.fontSize();
-            this.editOpen();
+            //this.editOpen();
         },
 /*         fontBold: function() {
             $(document).off('click').on('click', '.editBold', function(){
                 var targetData = $('.edit-box').data('edit');
-                var thisWrap = $(this).closest('.textEditerWrap');
+                var thisWrap = $(this).closest('.option-wrap');
                 var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
-
+    
                 if (contentEditable.length) {
                     if (contentEditable.hasClass('fontBold')) {
                         contentEditable.removeClass('fontBold');
@@ -1244,19 +1244,13 @@ var COMPONENT_UI = (function (cp, $) {
             })
         }, */
         fontBold: function() {
-            $(document).off('click').on('click', '.editBold', function(){
-                var targetData = $('.edit-box').data('edit');
-                var thisWrap = $(this).closest('.option-wrap');
-                var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
-
-                if (contentEditable.length) {
-                    if (contentEditable.hasClass('fontBold')) {
-                        contentEditable.removeClass('fontBold');
-                    } else {
-                        contentEditable.addClass('fontBold');
-                    }
-                }
-            })
+            $('body').on('click', '.editBold', function(){
+                const $optionWrap = $(this).closest('.option-wrap');
+                const dataType = $optionWrap.data('type');
+                const font = $(this).closest('.edit-box').data('font');
+        
+                $('.md[data-module="' + dataType + '"]').find('[data-text="' + font + '"]').toggleClass('fontBold');
+            });
         },
         fontSize: function() {
             $(document).on('change', '.editSize', function(){
@@ -1272,8 +1266,8 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                 })
             })
-        },
-        editOpen: function() {
+        }
+        /* editOpen: function() {
             $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
                 var thisColor = $this.css('color');
@@ -1311,7 +1305,7 @@ var COMPONENT_UI = (function (cp, $) {
                     $('.textEditerWrap').remove();
                 }
             });
-        }
+        } */
     };
 
     cp.optionEdit = {
@@ -1473,7 +1467,7 @@ var COMPONENT_UI = (function (cp, $) {
                 return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
             }
         }
-    }
+    };
 
     cp.init = function () {
         cp.imgCrop.init();

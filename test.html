@@ -67,6 +67,26 @@
           </div>
         </div>
         <div class="option-box">
+          <h3 class="option-tit">대제목</h3>
+          <div class="option-cont">
+            <!-- S: text editer -->
+            <div class="edit-box" data-font="mainTitle">
+              <div class="btn-edit">
+                <a href="#" class="edit-bold editBold">B</a>
+              </div>
+              <div class="btn-edit">
+                <div class="edit-size">size
+                  <input type="text" class="edit-size-input editSize">
+                </div>
+              </div>
+              <div class="btn-edit edit-color">
+                <input type="color" id="editColor">
+              </div>
+            </div>
+            <!-- E: text editer -->
+          </div>
+        </div>
+        <div class="option-box">
           <h3 class="option-tit">폰트굵기</h3>
           <div class="option-cont"><a href="#" class="edit-bold editBold">B</a></div>
         </div>
@@ -104,9 +124,9 @@
         <div class="md md-img" data-type="img" data-module="default">
           <div class="imgWrap no-img"><img src=""></div>
           <div class="txtEdit">
-            <h1 contenteditable="true">대제목</h1>
-            <h3 contenteditable="true">소제목</h3>
-            <p contenteditable="true">2024.01.25 - 02.25</p>
+            <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
+            <h3 contenteditable="true" data-text="subTitle">소제목</h3>
+            <p contenteditable="true" data-text="date">2024.01.25 - 02.25</p>
           </div>
           <div class="module-option">
             <button class="btn btn-size xs shadow optionBtn">설정</button>
@@ -128,7 +148,7 @@
         <!-- [S] 이미지 컨텐츠 TYPE3 -->
         <div class="md md-img" data-type="img" data-module="titleImg">
           <div class="txtEdit">
-            <h1 contenteditable="true">대제목</h1>
+            <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
           </div>
           <div class="box-pd">
             <div class="imgWrap no-img"><img src=""></div>

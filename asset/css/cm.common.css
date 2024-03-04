@@ -1671,39 +1671,39 @@ legend, caption {
   font-size: 1.4rem;
   font-weight: normal;
 }
-.textEditerWrap .edit-box {
+
+.edit-box {
   display: flex;
   align-items: center;
-  padding: 1rem;
   color: #333 !important;
 }
-.textEditerWrap .edit-box .btn-edit {
+.edit-box .btn-edit {
   display: flex;
   position: relative;
 }
-.textEditerWrap .edit-box .btn-edit ~ .btn-edit {
+.edit-box .btn-edit ~ .btn-edit {
   margin-left: 1rem;
 }
-.textEditerWrap .edit-box .btn-edit .edit-bold {
+.edit-box .btn-edit .edit-bold {
   padding: 0.5rem 1rem;
   font-weight: 700;
   border: 1px solid #000;
   border-radius: 0.3rem;
 }
-.textEditerWrap .edit-box .btn-edit .edit-size {
+.edit-box .btn-edit .edit-size {
   display: flex;
   align-items: center;
   padding: 0.4rem 1rem;
   border: 1px solid #000;
   border-radius: 0.3rem;
 }
-.textEditerWrap .edit-box .btn-edit .edit-size-input {
+.edit-box .btn-edit .edit-size-input {
   margin-left: 0.5rem;
   width: 3rem;
   height: 2rem;
   border: 1px solid #000;
 }
-.textEditerWrap .edit-box .btn-edit .edit-color {
+.edit-box .btn-edit .edit-color {
   position: relative;
   border-radius: 0.3rem;
 }
