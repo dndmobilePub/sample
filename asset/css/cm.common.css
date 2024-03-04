@@ -1385,14 +1385,22 @@ legend, caption {
 }
 
 .container .option-wrap {
-  display: none;
   position: fixed;
-  left: 0;
+  left: -31%;
   top: 0;
   width: 30%;
   height: 100vh;
   padding: 2rem;
   border: 1px solid #999;
+  transition: left 1s ease;
+}
+.container .option-wrap .ico-pop-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+.container .option-wrap.show {
+  left: 0;
 }
 .container .option-box {
   display: flex;
@@ -1403,11 +1411,6 @@ legend, caption {
   min-width: 7rem;
   margin-right: 1rem;
   vertical-align: top;
-}
-.container .optionClsBtn {
-  margin-top: 10rem;
-  padding: 2rem;
-  border: 1px solid #000;
 }
 .container .section {
   border: 1px solid #ccc;
@@ -1525,6 +1528,17 @@ legend, caption {
   display: none;
 }
 
+/* icon */
+.ico {
+  display: inline-block;
+  word-break: keep-all;
+}
+.ico-pop-close {
+  width: 2.4rem;
+  height: 2.4rem;
+  background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z' /%3E%3C/svg%3E") no-repeat;
+}
+
 /*상품추가 모달팝업*/
 .modalWrap .product-list {
   display: flex;
@@ -1632,13 +1646,6 @@ legend, caption {
   left: 50%;
   z-index: 9991;
   transform: translate(-50%, -50%);
-}
-.cropModalWrap .ico-pop-close {
-  display: inline-block;
-  width: 2.4rem;
-  height: 2.4rem;
-  background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z' /%3E%3C/svg%3E") no-repeat;
-  word-break: keep-all;
 }
 .cropModalWrap .btnLabel {
   display: inline-block;

@@ -1330,18 +1330,19 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const bgColor = $thisMd.css('background-color');
     
-                $('.option-wrap').show().attr('data-type', cp.optionEdit.currentModuleData);
+                $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
                 cp.optionEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
                 cp.optionEdit.imgColor();
                 cp.optionEdit.imgColorSelect(cp.optionEdit.currentModuleData);
+                cp.fontEditer.init();
             });
         },
         optionClose: function() {
             $('body').on('click', '.optionClsBtn', function(){
                 const $optionWrap = $(this).closest('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
-                $optionWrap.attr('data-type','').hide();
+                $optionWrap.attr('data-type','').removeClass('show');
                 cp.optionEdit.resetImgColor();
             });
         },
