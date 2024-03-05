@@ -7,10 +7,10 @@
   <title> SAMPLE | M mall </title>
   <link rel="stylesheet" type="text/css" href="./asset/css/spectrum.css">
   <link rel="stylesheet" type="text/css" href="./asset/css/cm.common.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/><!--코드정리 후 삭제-->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.css"/><!--코드정리 후 삭제-->
   <script type="text/javascript" src="./asset/js/plugin/lib.jquery-3.7.1.min.js"></script>
   <script type="text/javascript" src="./asset/js/plugin/lib.jquery-ui.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><!-- ./asset/js/plugin/pg.swiper 으로 적용-->
+  <script type="text/javascript" src="./asset/js/plugin/swiper-bundle.min.js"></script>
   <script type="text/javascript" src="./asset/js/plugin/pg.cropper.js"></script>
   <script type="text/javascript" src="./asset/js/plugin/pg.spectrum.js"></script>
   <script type="text/javascript" src="./asset/js/ui.component.js"></script>
@@ -20,15 +20,13 @@
   <div class="wrap">
     <div class="module-add-box">
       <div class="btnWrap">
+        <a href="javascript:void(0);" data-type="txt">텍스트</a>
+        <a href="javascript:void(0);" data-type="goods">상품</a>
         <a href="javascript:void(0);" data-type="img" data-case="type01">사진 - type01</a><!-- 이미지, 대제목, 소제목, 날짜-->
         <a href="javascript:void(0);" data-type="img" data-case="type02">사진 - type02</a><!-- only 이미지 -->
         <a href="javascript:void(0);" data-type="img" data-case="type03">사진 - type03</a><!-- 대제목, 이미지 -->
         <!-- <a href="" data-type="video">동영상</a> -->
-        <a href="javascript:void(0);" data-type="txt" data-case="type01">텍스트 - type01</a><!-- 대제목, 소제목, 텍스트 -->
-        <a href="javascript:void(0);" data-type="txt" data-case="type02">텍스트 - type02</a><!-- only 텍스트 -->
         <a href="javascript:void(0);" data-type="gap">공백</a><!-- 공백 -->
-        <a href="javascript:void(0);" data-type="goods" data-case="type01">상품-스와이퍼</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="type02">상품-탭</a>
 
         <!-- 임시저장 시 토스트팝업 생성 -->
         <a href="javascript:void(0);" class="btn btn-size md bg _toastBtn" data-toast="임시 저장 되었습니다.">토스트팝업</a>
@@ -40,11 +38,14 @@
       <div class="option-wrap" data-type="">
         <h2>상세설정</h2>
         <!-- [S] 상세설정 상품 -->
-        <div class="option-box" data-type="goods">
-          <h3 class="option-tit">상품타입</h3>
-          <div class="option-cont type-select-wrap">
-            <a href="" class="type-select" goods-option="goodsTab">탭</a>
-            <a href="" class="type-select" goods-option="goodsSwiper">스와이퍼</a>
+        <div class="option-box goods-box" data-type="goods">
+          <h3>상품타입</h3>
+          <div class="goods-box-inner">
+            <a href="#;" goods-option="goodsSwiper" data-swiper="type01">정사각형 스와이프<br/>(최대 10개)</a>
+            <a href="#;" goods-option="goodsSwiper" data-swiper="type02">세로형 스와이프<br/>(최대 10개)</a>
+            <a href="#;" goods-option="goodsSwiper" data-swiper="type03">가로형 스와이프<br/>(최대 5개)</a>
+            <a href="#;" goods-option="goodsTab">1열 리스트</a>
+            <a href="#;" goods-option="goodsTab">2열 리스트</a>
           </div>
         </div>
         <div class="option-box" data-type="goodsTab">
@@ -65,13 +66,12 @@
         </div>
         <!-- [E] 상세설정 상품 -->
         <!-- [S] 상세설정 텍스트 -->
-        <div class="option-box" data-type="txt">
-          <h3 class="option-tit">텍스트타입</h3>
+        <div class="option-box txt-box" data-type="txt">
+          <h3>상품타입</h3>
           <div class="option-cont type-select-wrap">
-            <a href="" class="type-select">대제목<br>소제목<br>본문</a>
-            <a href="" class="type-select">대제목<br>본문</a>
-            <a href="" class="type-select">소제목<br>본문</a>
-            <a href="" class="type-select">본문</a>
+            <a href="#;" class="type-select" goods-option="bigTxt">대제목</a>
+            <a href="#;" class="type-select" goods-option="smallTxt">소제목</a>
+            <a href="#;" class="type-select" goods-option="bodyTxt">본문</a>
           </div>
         </div>
         <!-- [E] 상세설정 텍스트 -->
@@ -318,52 +318,54 @@
           <!--// [E] 텍스트 컨텐츠 TYPE3 -->
           
           <!-- [S] 상품 컨텐츠 TYPE1 -->
-          <div class="md md-goods" data-type="goods" data-module="swiper">
+          <div class="md md-goods" data-type="goods" data-case="goodsSwiper" data-module="swiper">
             <div class="txtEdit">
               <h1 contenteditable="true" class="fontBold">대제목</h1>
             </div>
             <div class="module-option">
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
               <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
               <div class="btn btn-size xs shadow dragBtn">드래그</div>
-              <button class="btn btn-size xs shadow optionBtn">설정</button>
             </div>
-            <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal_Goods">상품 항목추가</button>
             <div class="swiper">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <div class="swiper-box">
-                    <div class="no-img"><img src="" alt=""></div>
-                  </div>
-                  <div class="swiper-box">
-                    <div class="txtEdit">
-                      <p>브랜드명</p>
-                    </div>
-                  </div>
-                  <div class="swiper-box">
-                    <div class="txtEdit editDone">
-                      <p>가격</p>
-                    </div>
-                  </div>
+                  <dl class="goodsWrap">
+                    <dt class="goods-img">
+                      <div class="no-img"><img src="" alt=""></div>
+                    </dt>
+                    <dd class="item brand">애플</dd>
+                    <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                    <dd class="item price">1,249,000 원</dd>
+                    <dd class="item benefit">
+                      <span class="label point">최대 50% M 포인트</dd>
+                    </dd>
+                  </dl>
                 </div>
                 <div class="swiper-slide">
-                  <div class="swiper-box">
-                    <div class="no-img"><img src="" alt=""></div>
-                  </div>
-                  <div class="swiper-box">
-                    <div class="txtEdit">
-                      <p>브랜드명</p>
-                    </div>
-                  </div>
-                  <div class="swiper-box">
-                    <div class="txtEdit editDone">
-                      <p>가격</p>
-                    </div>
-                  </div>
+                  <dl class="goodsWrap">
+                    <dt class="goods-img">
+                      <div class="no-img"><img src="" alt=""></div>
+                    </dt>
+                    <dd class="item brand">애플</dd>
+                    <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                    <dd class="item price">1,249,000 원</dd>
+                    <dd class="item benefit">
+                      <span class="label point">최대 50% M 포인트</dd>
+                    </dd>
+                  </dl>
                 </div>
               </div>
               <div class="swiper-button-next"></div>
               <div class="swiper-button-prev"></div>
               <div class="swiper-pagination"></div>
+            </div>
+            <div class="btnWrap">
+              <button class="btn btn-size xs shadow goodsAddBtn bg _modalBtn" data-modal="modal_Goods">상품추가</button>
+            </div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
             </div>
           </div>
           <!--// [E] 상품 컨텐츠 TYPE1 -->

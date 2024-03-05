@@ -917,7 +917,6 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.dragFn();
             this.mdBoxDel();
-            this.mdOption();
             this.mdBoxAddClk();
             this.initializeSwiper();
             this.resetSwipers();
@@ -938,53 +937,6 @@ var COMPONENT_UI = (function (cp, $) {
         
                 $(this).closest('.md').remove();
             });
-        },
-
-        mdOption: function(){
-            var mdOption = {
-                initializePageOnLoad: function() {
-                    $(".md-goods").each(function() {
-                        var $md = $(this);
-                        mdOption.handleMdGoods($md);
-                    });
-                },
-                handleMdGoods: function($md) {
-                    var caseValue = $md.attr("data-case");
-                    var $goodsTopTab = $md.find(".goods-top[data-case='goodsTab']");
-                    var $goodsTopSwiper = $md.find(".goods-top[data-case='goodsSwiper']");
-                    var $goodsCategory = $md.find(".goods-category");
-                    var $goodsContentWrap = $md.find(".goods-content-wrap");
-                    var $goodsWrapper = $md.find(".goods-wrapper");
-                    var $goodsNextBtn = $md.find(".swiper-button-next");
-                    var $goodsPrevBtn = $md.find(".swiper-button-prev");
-            
-                    if (caseValue === 'goodsTab') {
-                        $goodsTopTab.show();
-                        $goodsTopSwiper.hide();
-                        $goodsCategory.show();
-                        $goodsNextBtn.hide();
-                        $goodsPrevBtn.hide();
-                        $goodsContentWrap.removeClass("swiper").addClass("tab-contents");
-                        $goodsWrapper.removeClass("swiper-wrapper").addClass("lst-goods");
-                        cp.tab.init();
-                    } else if (caseValue === 'goodsSwiper') {
-                        $goodsTopTab.hide();
-                        $goodsTopSwiper.show();
-                        $goodsCategory.hide();
-                        $goodsContentWrap.removeClass("tab-contents").addClass("swiper");
-                        $goodsWrapper.removeClass("lst-goods").addClass("swiper-wrapper");
-                    }
-                },
-                init: function() {
-                    mdOption.initializePageOnLoad();
-                }
-            };
-            
-            $(document).ready(function() {
-                mdOption.init();
-            });
-            
-            
         },
 
         mdBoxAddCont: function(callback) {
@@ -1029,8 +981,9 @@ var COMPONENT_UI = (function (cp, $) {
                 }
                 callback({
                     txtArea: {
-                        type01HTML: TxtAreaByCase('detailTxt'),
-                        type02HTML: TxtAreaByCase('titleTxt')
+                        type01HTML: TxtAreaByCase('bigTxt'),
+                        type02HTML: TxtAreaByCase('smallTxt'),
+                        type03HTML: TxtAreaByCase('bodyTxt')
                     },
                     imgArea: {
                         type01HTML: ImgAreaByCase('detailImg'),
@@ -1066,13 +1019,13 @@ var COMPONENT_UI = (function (cp, $) {
                     var newContentHTML;
                     if (dataType === 'img') {
                         switch (caseValue) {
-                            case 'type01':
+                            case 'detailImg':
                                 newContentHTML = content.imgArea.type01HTML;
                                 break;
-                            case 'type02':
+                            case 'onlyImg':
                                 newContentHTML = content.imgArea.type02HTML;
                                 break;
-                            case 'type03':
+                            case 'titleImg':
                                 newContentHTML = content.imgArea.type03HTML;
                                 break;
                             default:
@@ -1081,31 +1034,31 @@ var COMPONENT_UI = (function (cp, $) {
                     } 
                      else if(dataType === 'txt') {
                         switch (caseValue) {
-                            case 'type01':
+                            case 'bigTxt':
                                 newContentHTML = content.txtArea.type01HTML;
                                 break;
-                            case 'type02':
+                            case 'smallTxt':
                                 newContentHTML = content.txtArea.type02HTML;
+                                break;
+                            case 'bodyTxt':
+                                newContentHTML = content.txtArea.type03HTML;
                                 break;
                             default:
                                 newContentHTML = content.txtArea.type01HTML;
                         }
                     }else if(dataType === 'goods') {
-                        // newContentHTML = content.txtArea;
-                        switch (caseValue) {
-                            case 'type01':
-                                newContentHTML = content.goodsArea.type01HTML;
-                                break;
-                            case 'type02':
-                                newContentHTML = content.goodsArea.type02HTML;
-                                break;
-                            default:
-                                newContentHTML = content.goodsArea.type01HTML;
-                        }
-                    } else if(dataType === 'video') {
+                         switch (caseValue) {
+                             case 'goodsSwiper':
+                                 newContentHTML = content.goodsArea.type01HTML;
+                                 break;
+                             case 'goodsTab':
+                                 newContentHTML = content.goodsArea.type02HTML;
+                                 break;
+                             default:
+                                 newContentHTML = content.goodsArea.type01HTML;
+                         }
+                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
-                    } else if(dataType === 'gap') {
-                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -1114,22 +1067,77 @@ var COMPONENT_UI = (function (cp, $) {
                                        
                     
                     $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+
+                    $('.option-box a').click(function(e) {
+                        e.preventDefault();
+                        
+                        var optionCase = $(this).attr('goods-option');
+                        var optionSwiper = $(this).attr('data-swiper');
+                        console.log(optionSwiper);
+                        var optiondataType = $('.option-wrap').attr('data-type');
+                        
+                        $('.md[data-module="' + optiondataType + '"]').attr('data-case', optionCase);
+                        $('.md[data-module="' + optiondataType + '"]').attr('data-swiper', optionSwiper);
+                            
+                        if(dataType === 'txt') {
+                            switch (optionCase) {
+                                case 'bigTxt':
+                                    newContentHTML = content.txtArea.type01HTML;
+                                break;
+                                case 'smallTxt':
+                                    newContentHTML = content.txtArea.type02HTML;
+                                break;
+                                case 'bodyTxt':
+                                    newContentHTML = content.txtArea.type03HTML;
+                                break;
+                                default:
+                                    newContentHTML = content.txtArea.type01HTML;
+                            }
+                        }else if(dataType === 'goods') {
+                            switch (optionCase) {
+                                case 'goodsSwiper':
+                                    newContentHTML = content.goodsArea.type01HTML;
+                                    //cp.moduleBox.init();
+                                break;
+                                case 'goodsTab':
+                                    newContentHTML = content.goodsArea.type02HTML;
+                                    //cp.tab.init();
+                                break;
+                                default:
+                                    newContentHTML = content.goodsArea.type01HTML;
+                                }
+                            }
+                        $('.md[data-module="' + optiondataType + '"]').empty().append(newContentHTML);
+                        
+                    });
+
                 });
 
 
-                $(".goods-box a").click(function(e) {
-
-                });
                     
             });
         },
 
         initializeSwiper: function(swiperContainer) {
+            
             $(swiperContainer).each(function() {
                 var slidesCount = $(this).find('.swiper-slide').length;
                 var slidesPerView = slidesCount > 1 ? 2 : 1; 
                 var loopEnabled = slidesPerView > 1 && slidesCount >= 3;
                 var loopOption = loopEnabled ? true : false;
+                var swiperType = $(this).parents(".md").data('swiper');
+
+                if (slidesCount === 1) {
+                    slidesPerView = 1;
+                } else {
+                    if (swiperType === 'type01') {
+                        slidesPerView = 2;
+                    } else if (swiperType === 'type02') {
+                        slidesPerView = 1.5;
+                    } else if (swiperType === 'type03') {
+                        slidesPerView = 1;
+                    }
+                }
             
                 new Swiper(this, {
                     loop: loopOption,
@@ -1144,7 +1152,9 @@ var COMPONENT_UI = (function (cp, $) {
                         prevEl: '.swiper-button-prev',
                     },
                 });
+                console.log('dd');
             });
+
         }, 
 
         resetSwipers: function() {
@@ -1175,7 +1185,8 @@ var COMPONENT_UI = (function (cp, $) {
         mdGoodPopSel: function() {
             $('.btn-registration-pop').on('click', function() {
                 var thisData = $(this).closest('.modalPop').attr('modal-target');
-                var dataElem = $('.md').find('.swiperAddBtn[data-modal="' + thisData + '"]');
+                var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
+                console.log(dataElem);
                 
                 var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
                 if (existingSwiper && existingSwiper.swiper) {
@@ -1183,7 +1194,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }
                 
                 dataElem.closest('.md').find('.swiper-notification').remove();
-                dataElem.siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
         
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');

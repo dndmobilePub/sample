@@ -67,6 +67,24 @@
     &-box {
       @include display(block);
       margin-top: 4rem;
+
+      &.goods-box{
+        .goods-box-inner{
+          @include display(flex);
+          flex-wrap: wrap;
+          gap:1.6rem;
+
+          a{
+            @include display(block);
+            padding: 1.65rem;
+            width: calc((100% - 3.2rem)/3);
+            @include border(border, 1px, solid, $color-black);
+            border-radius: 1.4rem;
+            font-size: 1.2rem;
+            text-align: center;
+          }
+        }
+      }
     }
     &-tit {
       @include display(block);
@@ -115,8 +133,35 @@
     margin:2rem auto;
     background: $color-gray6;
 
-    [data-type="goods"] .swiper{
-      @include display(flex);
+    [data-type="goods"] {
+      .swiper{
+        @include display(flex);
+        padding: 0 2rem 2rem;
+        min-height: 20rem;
+        img{
+          max-width: 30rem;
+          width: 100%;
+        }
+      }
+      &[data-swiper="type03"]{
+        .goodsWrap{
+          &:after{
+            content:'';
+            @include display(block);
+            clear: both;
+          }
+         .goods-img{
+           width: 50%;
+           float: left;
+           margin-right: 1.6rem;
+           margin-bottom: 0;
+          }
+          .item{
+            width: calc(50% - 1.6rem);
+            float:left;
+          }
+        }
+      }
     }
     .md {
       position: relative;
@@ -207,12 +252,13 @@
 
 /* 버튼 */
 .btn {
-  &.swiperAddBtn{
-    @include pos-offset-r(calc(50% - 2.5rem), -2.5rem){z-index:2;}
-    @include el-size(5rem, 5rem);
-    border-radius:100%;
-    background: $color-white;
-    color:$color-gray3;
+  &.goodsAddBtn{
+    width: 100%;
+    padding: 1.15rem 1.6rem;
+    border-radius:5rem;
+    background: $color-black;
+    color:$color-white;
+    font-size:1.6rem;
   }
   &.deleteBtn{
     @include display(none);
