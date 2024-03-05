@@ -1372,7 +1372,7 @@ var COMPONENT_UI = (function (cp, $) {
         currentModuleData: null,
         optionOpen: function() {
             cp.optionEdit.currentModuleData = null;
-            $('body').on('click', '.optionBtn', function() {
+            $('html, body').on('click', '.optionBtn', function() {
                 const $thisMd = $(this).closest('.md');
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const dataType = $thisMd.data('type');
@@ -1390,7 +1390,7 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
         optionClose: function() {
-            $('body').on('click', '.optionClsBtn', function(){
+            $('html, body').on('click', '.optionClsBtn', function(){
                 const $optionWrap = $(this).closest('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
                 $optionWrap.attr('data-type','').removeClass('show');

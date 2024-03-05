@@ -1416,6 +1416,21 @@ legend, caption {
 .container .option-cont {
   margin-top: 1rem;
 }
+.container .option-cont.type-select-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+}
+.container .option-cont .type-select {
+  padding: 1rem;
+  border: 1px solid #999;
+  border-radius: 1rem;
+  text-align: center;
+  flex-grow: 1;
+}
 .container .section {
   border: 1px solid #ccc;
   max-width: var(--section);

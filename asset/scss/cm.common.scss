@@ -72,6 +72,19 @@
     }
     &-cont {
       margin-top: 1rem;
+      
+      &.type-select-wrap {
+        @include display(flex);
+        @include flex($al-items:stretch) {gap: 1rem};
+      }
+
+      .type-select {
+        padding: 1rem;
+        @include border(border, 1px, solid, $color-gray4);
+        border-radius: 1rem;
+        text-align: center;
+        flex-grow: 1;
+      }
     }
   }
 
