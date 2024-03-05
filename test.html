@@ -26,6 +26,7 @@
         <!-- <a href="" data-type="video">동영상</a> -->
         <a href="javascript:void(0);" data-type="txt" data-case="type01">텍스트 - type01</a><!-- 대제목, 소제목, 텍스트 -->
         <a href="javascript:void(0);" data-type="txt" data-case="type02">텍스트 - type02</a><!-- only 텍스트 -->
+        <a href="javascript:void(0);" data-type="gap">공백</a><!-- 공백 -->
         <a href="javascript:void(0);" data-type="goods" data-case="type01">상품-스와이퍼</a>
         <a href="javascript:void(0);" data-type="goods" data-case="type02">상품-탭</a>
 
@@ -33,31 +34,82 @@
         <a href="javascript:void(0);" class="btn btn-size md bg _toastBtn" data-toast="임시 저장 되었습니다.">토스트팝업</a>
       </div>
     </div>
+
     <div class="container">
       <!-- [S] 상세설정 -->
       <div class="option-wrap" data-type="">
         <h2>상세설정</h2>
+        <!-- [S] 상세설정 상품 -->
         <div class="option-box" data-type="goods">
           <h3 class="option-tit">상품타입</h3>
-          <div class="option-cont">
+          <div class="option-cont type-select-wrap">
             <a href="" class="type-select" goods-option="goodsTab">탭</a>
             <a href="" class="type-select" goods-option="goodsSwiper">스와이퍼</a>
           </div>
         </div>
         <div class="option-box" data-type="goodsTab">
           <h3 class="option-tit">상품타입</h3>
-          <div class="option-cont">
+          <div class="option-cont type-select-wrap">
             <a href="" class="type-select" goods-option="goodsTab">탭</a>
             <a href="" class="type-select" goods-option="goodsSwiper">스와이퍼</a>
           </div>
         </div>
+        <div class="option-box" data-type="goodsTab">
+          <h3 class="option-tit">색상 선택</h3>
+          <div class="option-cont">
+            <div class="color-selbox">
+              <label for="colorBlack"><input type="radio" name="colorSelect" id="colorBlack" value="black">검정색(Black)</label>
+              <label for="colorWhite"><input type="radio" name="colorSelect" id="colorWhite" value="white">흰색(White)</label>
+            </div>
+          </div>
+        </div>
+        <!-- [E] 상세설정 상품 -->
+        <!-- [S] 상세설정 텍스트 -->
         <div class="option-box" data-type="txt">
           <h3 class="option-tit">텍스트타입</h3>
           <div class="option-cont type-select-wrap">
-            <a href="" class="type-select" goods-option="">대제목<br>소제목<br>본문</a>
-            <a href="" class="type-select" goods-option="">본문</a>
+            <a href="" class="type-select">대제목<br>소제목<br>본문</a>
+            <a href="" class="type-select">대제목<br>본문</a>
+            <a href="" class="type-select">소제목<br>본문</a>
+            <a href="" class="type-select">본문</a>
           </div>
         </div>
+        <!-- [E] 상세설정 텍스트 -->
+        <!-- [S] 상세설정 공백 -->
+        <div class="option-box" data-type="gap">
+          <h3 class="option-tit">공백</h3>
+          <div class="option-cont field">
+            <div class="field-outline">
+              <div class="field-input grow _input">
+                <input type="text" placeholder="기본동작 INPUT" title="" class="gap-height">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- [E] 상세설정 공백 -->
+        <!-- [S] 상세설정 이미지 -->
+        <div class="option-box" data-type="img">
+          <h3 class="option-tit">이미지타입</h3>
+          <div class="option-cont type-select-wrap">
+            <a href="" class="type-select">대제목<br>소제목<br>본문</a>
+            <a href="" class="type-select">대제목</a>
+            <a href="" class="type-select">이미지만</a>
+          </div>
+        </div>
+        <div class="option-box" data-type="img">
+          <h3 class="option-tit">이미지 대체 텍스트</h3>
+          <div class="option-cont">
+            <input type="text" placeholder="이미지 대체 텍스트 입력">
+          </div>
+        </div>
+        <div class="option-box" data-type="img">
+          <h3 class="option-tit">링크 URL</h3>
+          <div class="option-cont">
+            <input type="text" placeholder="링크 URL 입력">
+          </div>
+        </div>
+        <!-- [E] 상세설정 이미지 -->
+        <!-- [S] 상세설정 공통 -->
         <div class="option-box">
           <h3 class="option-tit">배경색상</h3>
           <div class="option-cont"><input type="color" class="colorInput">
@@ -78,258 +130,251 @@
             </article>
           </div>
         </div>
-        <div class="option-box" data-type="goodsTab">
-          <h3 class="option-tit">색상 선택</h3>
-          <div class="option-cont">
-            <div class="color-selbox">
-              <label for="colorBlack"><input type="radio" name="colorSelect" id="colorBlack" value="black">검정색(Black)</label>
-              <label for="colorWhite"><input type="radio" name="colorSelect" id="colorWhite" value="white">흰색(White)</label>
-            </div>
-          </div>
-        </div>
         <div class="option-box">
-          <h3 class="option-tit">SoldOut 배지 적용</h3>
+          <h3 class="option-tit">전시기간 노출여부</h3>
           <div class="option-cont">
-            <div class="">
-              <label for="use"><input type="radio" name="soldOut" id="use" value="use">사용</label>
-              <label for="disuse"><input type="radio" name="soldOut" id="disuse" value="disuse">미사용</label>
+            <div class="input-box">
+              <label for="use"><input type="radio" name="exhibition" id="use" value="use">사용</label>
+              <label for="disuse"><input type="radio" name="exhibition" id="disuse" value="disuse">미사용</label>
             </div>
           </div>
         </div>
+        <!-- [E] 상세설정 공통 -->
         <a href="javascript:void(0);" class="ico ico-pop-close optionClsBtn" role="button"><span class="hide">창닫기</span></a>
       </div>
       <!--// [E] 상세설정 -->
-
-      <!-- [S] notice/guide -->
-      <div class="guide-box">
-        <p>각각의 모듈과 모듈에 해당하는 상세설정창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-module)</strong> : <strong>상세설정(data-type)</strong> 매칭</p>
-        <p>각각의 텍스트와 텍스트에 해당하는 폰트에디터 연결방식은 data-roll을 사용하며 고정값 <strong>thisEdit</strong>로 생성/삭제됩니다. (따로 설정할 필요없음)<br> - <strong>텍스트(edit-target)</strong> : <strong>폰트에디터(data-edit)</strong> 매칭</p>
-      </div>
-      <!-- [E] notice/guide -->
-      <section class="section">
-        <!-- <button class="btn btn-size md bg _modalBtn" data-modal="modal2222">Center Modal</button> -->
-
-        <div class="modalPop _center" modal-target="modal2222" aria-hidden="true">
-          <div class="modalWrap" role="dialog" aria-modal="false">
-              <div class="modal-header">
-                  <!-- <a href="javascript:void(0);" class="ico ico-his-prev" role="button"><span class="hide">이전페이지</span></a> -->
-                  <h1 class="mp-title dep01">Center Modal</h1>
-                  <a href="javascript:void(0);" class="btn-close-pop ico ico-pop-close" role="button"><span class="hide">창닫기</span></a>
-              </div>
-              <div class="modal-container"><p>Center Modal Content</p></div>
-              <div class="btnWrap grow">
-                  <button class="btn btn-size md type2 bg btn-close-pop">확인</button>
-              </div>
-          </div>
+      <div class="moduel-wrap">
+        <!-- [S] notice/guide -->
+        <div class="guide-box">
+          <p>각각의 모듈과 모듈에 해당하는 상세설정창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-module)</strong> : <strong>상세설정(data-type)</strong> 매칭</p>
+          <p>각각의 텍스트와 텍스트에 해당하는 폰트에디터 연결방식은 data-roll을 사용하며 고정값 <strong>thisEdit</strong>로 생성/삭제됩니다. (따로 설정할 필요없음)<br> - <strong>텍스트(edit-target)</strong> : <strong>폰트에디터(data-edit)</strong> 매칭</p>
         </div>
-
-        <!-- [S] 이미지 컨텐츠 TYPE1 -->
-        <div class="md md-img" data-type="img" data-module="default">
-          <div class="imgWrap no-img"><img src=""></div>
-          <div class="txtEdit">
-            <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
-            <h3 contenteditable="true" data-text="subTitle">소제목</h3>
-            <p contenteditable="true" data-text="date">2024.01.25 - 02.25</p>
-          </div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-        </div>
-        <!--// [E] 이미지 컨텐츠 TYPE1 -->
-
-        <!-- [S] 이미지 컨텐츠 TYPE2 -->
-        <div class="md md-img" data-type="img" data-module="onlyImg">
-          <div class="imgWrap no-img"><img src=""></div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-        </div>
-        <!--// [E] 이미지 컨텐츠 TYPE2 -->
-
-        <!-- [S] 이미지 컨텐츠 TYPE3 -->
-        <div class="md md-img" data-type="img" data-module="titleImg">
-          <div class="txtEdit">
-            <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
-          </div>
-          <div class="box-pd">
-            <div class="imgWrap no-img"><img src=""></div>
-          </div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-        </div>
-        <!--// [E] 이미지 컨텐츠 TYPE3 -->        
-
-        <!-- [S] 탭컨텐츠 -->
-        <div class="md md-tab" data-type="goodsTab" data-module="anchorTab">
-          <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
-            <div class="tab-list-wrap">
-              <ul class="tab-list">
-                <li class="tab _is-active"><a href="javascript:void(0);">기본탭</a></li>
-                <li class="_addTab"><a href="javascript:void(0);"><span class="hide">탭추가</span></a></li>
-              </ul>
-            </div>
+        <!-- [E] notice/guide -->
+        <section class="section">
+          <!-- <button class="btn btn-size md bg _modalBtn" data-modal="modal2222">Center Modal</button> -->
   
-            <div class="tab-contents-wrap">
-              <div class="tab-contents">
-                <p class="goods-category">iPad</p>
-                <ul class="lst lst-goods">
-                  <li>
-                    <dl class="goodsWrap">
-                      <dt class="goods-img">
-                        <div class="no-img"></div>
-                      </dt>
-                      <dd class="item brand">애플</dd>
-                      <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                      <dd class="item price">1,249,000 원</dd>
-                      <dd class="item benefit">
-                        <span class="label point">최대 50% M 포인트</dd>
-                      </dd>
-                    </dl>
-                  </li>
-                  <li>
-                    <dl class="goodsWrap">
-                      <dt class="goods-img">
-                        <div class="no-img"></div>
-                      </dt>
-                      <dd class="item brand">애플</dd>
-                      <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                      <dd class="item price">1,249,000 원</dd>
-                      <dd class="item benefit">
-                        <span class="label point">최대 50% M 포인트</dd>
-                      </dd>
-                    </dl>
-                  </li>
-                  <li>
-                    <dl class="goodsWrap">
-                      <dt class="goods-img">
-                        <div class="no-img"></div>
-                      </dt>
-                      <dd class="item brand">애플</dd>
-                      <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                      <dd class="item price">1,249,000 원</dd>
-                      <dd class="item benefit">
-                        <span class="label point">최대 50% M 포인트</dd>
-                      </dd>
-                    </dl>
-                  </li>
+          <div class="modalPop _center" modal-target="modal2222" aria-hidden="true">
+            <div class="modalWrap" role="dialog" aria-modal="false">
+                <div class="modal-header">
+                    <!-- <a href="javascript:void(0);" class="ico ico-his-prev" role="button"><span class="hide">이전페이지</span></a> -->
+                    <h1 class="mp-title dep01">Center Modal</h1>
+                    <a href="javascript:void(0);" class="btn-close-pop ico ico-pop-close" role="button"><span class="hide">창닫기</span></a>
+                </div>
+                <div class="modal-container"><p>Center Modal Content</p></div>
+                <div class="btnWrap grow">
+                    <button class="btn btn-size md type2 bg btn-close-pop">확인</button>
+                </div>
+            </div>
+          </div>
+  
+          <!-- [S] 이미지 컨텐츠 TYPE1 -->
+          <div class="md md-img" data-type="img" data-module="default">
+            <div class="imgWrap no-img"><img src=""></div>
+            <div class="txtEdit">
+              <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
+              <h3 contenteditable="true" data-text="subTitle">소제목</h3>
+              <p contenteditable="true" data-text="date">2024.01.25 - 02.25</p>
+            </div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
+          </div>
+          <!--// [E] 이미지 컨텐츠 TYPE1 -->
+  
+          <!-- [S] 이미지 컨텐츠 TYPE2 -->
+          <div class="md md-img" data-type="img" data-module="onlyImg">
+            <div class="imgWrap no-img"><img src=""></div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
+          </div>
+          <!--// [E] 이미지 컨텐츠 TYPE2 -->
+  
+          <!-- [S] 이미지 컨텐츠 TYPE3 -->
+          <div class="md md-img" data-type="img" data-module="titleImg">
+            <div class="txtEdit">
+              <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
+            </div>
+            <div class="box-pd">
+              <div class="imgWrap no-img"><img src=""></div>
+            </div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
+          </div>
+          <!--// [E] 이미지 컨텐츠 TYPE3 -->        
+  
+          <!-- [S] 탭컨텐츠 -->
+          <div class="md md-tab" data-type="goodsTab" data-module="anchorTab">
+            <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
+              <div class="tab-list-wrap">
+                <ul class="tab-list">
+                  <li class="tab _is-active"><a href="javascript:void(0);">기본탭</a></li>
+                  <li class="_addTab"><a href="javascript:void(0);"><span class="hide">탭추가</span></a></li>
                 </ul>
               </div>
-            </div> 
-          </div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-        </div>
-        <!--// [E] 탭컨텐츠-->
-
-        <!-- [S] 텍스트 컨텐츠 TYPE1 -->
-        <div class="md md-txt" data-type="txt" data-module="TitleTxt">
-          <div class="txt txtEdit">
-            <h1 contenteditable="true" class="fontBold">대제목</h1>
-            <h3 contenteditable="true" class="fontBold">소제목</h3>
-            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
-          </div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-        </div>
-        <!--// [E] 텍스트 컨텐츠 TYPE1 -->
-
-        <!-- [S] 텍스트 컨텐츠 TYPE2 -->
-        <div class="md md-txt" data-type="txt" data-module="onlyTxt">
-          <div class="txtEdit">
-            <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
-          </div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-        </div>
-        <!--// [E] 텍스트 컨텐츠 TYPE2 -->
-
-        <!-- [S] 텍스트 컨텐츠 TYPE3 -->
-        <div class="md md-txt" data-type="txt">
-          <div class="txtEdit">
-            <p contenteditable="false">텍스트 영역</p>
-          </div>          
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-        </div>
-        <!--// [E] 텍스트 컨텐츠 TYPE3 -->
-        
-        <!-- [S] 상품 컨텐츠 TYPE1 -->
-        <div class="md md-goods" data-type="goods" data-module="swiper">
-          <div class="txtEdit">
-            <h1 contenteditable="true" class="fontBold">대제목</h1>
-          </div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <div class="btn btn-size xs shadow dragBtn">드래그</div>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
-          </div>
-          <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal_Goods">상품 항목추가</button>
-          <div class="swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="swiper-box">
-                  <div class="no-img"><img src="" alt=""></div>
+    
+              <div class="tab-contents-wrap">
+                <div class="tab-contents">
+                  <p class="goods-category">iPad</p>
+                  <ul class="lst lst-goods">
+                    <li>
+                      <dl class="goodsWrap">
+                        <dt class="goods-img">
+                          <div class="no-img"></div>
+                        </dt>
+                        <dd class="item brand">애플</dd>
+                        <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                        <dd class="item price">1,249,000 원</dd>
+                        <dd class="item benefit">
+                          <span class="label point">최대 50% M 포인트</dd>
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <dl class="goodsWrap">
+                        <dt class="goods-img">
+                          <div class="no-img"></div>
+                        </dt>
+                        <dd class="item brand">애플</dd>
+                        <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                        <dd class="item price">1,249,000 원</dd>
+                        <dd class="item benefit">
+                          <span class="label point">최대 50% M 포인트</dd>
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <dl class="goodsWrap">
+                        <dt class="goods-img">
+                          <div class="no-img"></div>
+                        </dt>
+                        <dd class="item brand">애플</dd>
+                        <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                        <dd class="item price">1,249,000 원</dd>
+                        <dd class="item benefit">
+                          <span class="label point">최대 50% M 포인트</dd>
+                        </dd>
+                      </dl>
+                    </li>
+                  </ul>
                 </div>
-                <div class="swiper-box">
-                  <div class="txtEdit">
-                    <p>브랜드명</p>
-                  </div>
-                </div>
-                <div class="swiper-box">
-                  <div class="txtEdit editDone">
-                    <p>가격</p>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="swiper-box">
-                  <div class="no-img"><img src="" alt=""></div>
-                </div>
-                <div class="swiper-box">
-                  <div class="txtEdit">
-                    <p>브랜드명</p>
-                  </div>
-                </div>
-                <div class="swiper-box">
-                  <div class="txtEdit editDone">
-                    <p>가격</p>
-                  </div>
-                </div>
-              </div>
+              </div> 
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
           </div>
-        </div>
-        <!--// [E] 상품 컨텐츠 TYPE1 -->
-
-        <!-- [S] 동영상 컨텐츠 -->
-<!--         <div class="md md-video" data-type="video">
-          <div class="videoWrap no-video"></div>
-          <div class="btnWrap">
-            <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
-            <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
+          <!--// [E] 탭컨텐츠-->
+  
+          <!-- [S] 텍스트 컨텐츠 TYPE1 -->
+          <div class="md md-txt" data-type="txt" data-module="TitleTxt">
+            <div class="txt txtEdit">
+              <h1 contenteditable="true" class="fontBold">대제목</h1>
+              <h3 contenteditable="true" class="fontBold">소제목</h3>
+              <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+            </div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
           </div>
-          <div class="module-option">
-            <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-            <button class="btn btn-size xs shadow optionBtn">설정</button>
+          <!--// [E] 텍스트 컨텐츠 TYPE1 -->
+  
+          <!-- [S] 텍스트 컨텐츠 TYPE2 -->
+          <div class="md md-txt" data-type="txt" data-module="onlyTxt">
+            <div class="txtEdit">
+              <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
+            </div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
           </div>
-        </div> -->
-        <!--// [E] 동영상 컨텐츠 -->
-      </section>
+          <!--// [E] 텍스트 컨텐츠 TYPE2 -->
+  
+          <!-- [S] 텍스트 컨텐츠 TYPE3 -->
+          <div class="md md-txt" data-type="txt">
+            <div class="txtEdit">
+              <p contenteditable="false">텍스트 영역</p>
+            </div>          
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
+          </div>
+          <!--// [E] 텍스트 컨텐츠 TYPE3 -->
+          
+          <!-- [S] 상품 컨텐츠 TYPE1 -->
+          <div class="md md-goods" data-type="goods" data-module="swiper">
+            <div class="txtEdit">
+              <h1 contenteditable="true" class="fontBold">대제목</h1>
+            </div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <div class="btn btn-size xs shadow dragBtn">드래그</div>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
+            <button class="btn btn-size xs shadow swiperAddBtn bg _modalBtn" data-modal="modal_Goods">상품 항목추가</button>
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="swiper-box">
+                    <div class="no-img"><img src="" alt=""></div>
+                  </div>
+                  <div class="swiper-box">
+                    <div class="txtEdit">
+                      <p>브랜드명</p>
+                    </div>
+                  </div>
+                  <div class="swiper-box">
+                    <div class="txtEdit editDone">
+                      <p>가격</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="swiper-box">
+                    <div class="no-img"><img src="" alt=""></div>
+                  </div>
+                  <div class="swiper-box">
+                    <div class="txtEdit">
+                      <p>브랜드명</p>
+                    </div>
+                  </div>
+                  <div class="swiper-box">
+                    <div class="txtEdit editDone">
+                      <p>가격</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+          <!--// [E] 상품 컨텐츠 TYPE1 -->
+  
+          <!-- [S] 동영상 컨텐츠 -->
+  <!--         <div class="md md-video" data-type="video">
+            <div class="videoWrap no-video"></div>
+            <div class="btnWrap">
+              <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
+              <button class="btn btn-size s bg type3 addVideo-utube">유투브 파일추가</button>
+            </div>
+            <div class="module-option">
+              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <button class="btn btn-size xs shadow optionBtn">설정</button>
+            </div>
+          </div> -->
+          <!--// [E] 동영상 컨텐츠 -->
+        </section>
+      </div>
     </div>
   </div>
 

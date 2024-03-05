@@ -1,5 +1,351 @@
 var COMPONENT_UI = (function (cp, $) {
     
+    cp.form = {
+        constEl: {
+            inputDiv: $("._input"),
+            inputSelector: "._input > input:not([type='radio']):not([type='checkbox']):not(.exp input)",
+            clearSelector: "._input-clear",
+            clearBtnEl: $('<button type="button" class="field-btn _input-clear _active"><span class="hide">입력값삭제</span></button>'),
+            labelDiv: $("._label")
+        },
+        
+        init: function() {
+            this.input();
+            // this.inputSetting();
+            this.inpClearBtn();
+            this.secureTxt();
+            this.inpReadonly();
+            this.lbPlaceHolder();
+        },
+
+        inputSetting:function(){
+            const inputSelector = this.constEl.inputSelector
+            $(inputSelector).each(function() {
+                const inputId = $(this).attr('id'),
+                    parentInput = $(this).closest('._input'),
+                    labelElOut = parentInput.parent().siblings("label"),
+                    labelElIn = parentInput.siblings("label");
+                // var labelElement = $('label[for="' + inputId + '"]');
+                var placeholderValue = $(this).attr('placeholder');
+
+                parentInput.attr('data-target', inputId);                
+                
+                labelElOut.attr({'for': inputId, 'data-name': inputId});
+            
+                // Set the title attribute to the placeholder value
+                $(this).attr('title', placeholderValue);
+            });
+        },
+
+        // _label 붙은 input타입 스크립트
+        lbPlaceHolder: function() {
+            const labelDiv = this.constEl.labelDiv.find(".field-label");
+        
+            $(labelDiv).each(function() {
+                const $fieldLabel = $(this),
+                    $fieldBox = $fieldLabel.parent().find(".field-outline"),
+                    $labelTxt = $fieldLabel.text(),
+                    $fieldInputs = $fieldBox.find("input"),
+                    inputCount = $fieldInputs.length,
+                    inputId = $fieldBox.find("._input:first-child > input").attr('id'),
+                    $newFieldLabel = $('<label class="field-label" for="' + inputId +'" data-name="' + inputId +'">' + $labelTxt + '</label>'); 
+        
+                $fieldLabel.remove();
+                $fieldBox.prepend($newFieldLabel);
+                
+
+                //input 오류 사항 체크
+                function applyInputConditions() {
+                    const hasInvalidInput = $fieldInputs.toArray().some(input => $(input).val() === ""); //한개 이상 비었음
+                    if (hasInvalidInput) {//비었으면 실행
+                    }else { //비어있지 않으면 실행
+                        $fieldBox.removeClass('_inputLen');
+                    }
+                    if (!$fieldInputs.toArray().some(input => $(input).val() !== "")) {//모두 비어있으면 실행
+                        $newFieldLabel.removeClass('_is-active'); 
+                        
+                    }
+                }
+                
+                // label 클릭 이벤트
+                $newFieldLabel.on("click", function () {
+                    $(this).addClass('_is-active');
+                    if (inputCount > 1) {
+                        $fieldInputs.not(":first").prop("readonly", true);
+                        $fieldBox.addClass('_inputLen');
+            
+                        $fieldInputs.first().on('input', function() {
+                            $fieldInputs.not(":first").prop("readonly", false);
+                        });
+            
+                        $fieldInputs.not(":first").on('input', function() {
+                            const currentIndex = $fieldInputs.index(this);
+                            if (currentIndex < inputCount - 1) {
+                                $fieldInputs.eq(currentIndex + 1).prop("readonly", false);
+                            }
+                        });
+            
+                        if ($fieldBox.hasClass('_inputLen')) {
+                            $fieldInputs.on('blur', applyInputConditions);
+                        }
+                    }
+                });
+        
+                // input blur 이벤트
+                $fieldInputs.on('blur', function () {
+                    applyInputConditions();
+                });
+            });
+        },
+
+        /* lbPlaceHolder: function() {
+            const labelDiv = this.constEl.labelDiv.find(".field-label");
+        
+            $(labelDiv).each(function() {
+                const $fieldLabel = $(this),
+                    $fieldBox = $fieldLabel.parent().find(".field-outline"),
+                    $labelTxt = $fieldLabel.text(),
+                    $fieldInput = $fieldBox.find("input"),
+                    inputId = $fieldBox.find("._input:first-child > input").attr('id'),
+                    $newFieldLabel = $('<label class="field-label" for="' + inputId +'" data-name="' + inputId +'">' + $labelTxt + '</label>'); 
+
+                $fieldLabel.remove();
+                $fieldBox.prepend($newFieldLabel);
+        
+                // .field-label 클릭 이벤트 처리
+                $newFieldLabel.on('click', function () {
+                    $(this).addClass('_is-active');
+                });
+                $fieldInput.on('blur', function () {
+                    const inputVal = $fieldInput.val(),
+                        inputValLength = inputVal.length,
+                        inputLength = $fieldInput.parent("._input").length;
+                    
+                    // if(inputLength === 1) {
+
+                    // }
+                    // if(!inputVal) {
+                    //     $(this).parent().siblings("label").removeClass('_is-active');
+                    // }
+                    
+                });
+            
+            });
+        }, */
+        
+        
+        
+        /* lbPlaceHolder: function () {
+            const labelDiv = this.constEl.labelDiv;
+            $(labelDiv).each(function () {
+                const $placeHolder = $(this),
+                $fieldLabel = $placeHolder.find(".field-label"),
+                $fieldBox = $placeHolder.find(".field-outline"),
+                $labelTxt = $fieldLabel.text();
+
+                $fieldLabel.remove();
+                $fieldBox.prepend('<label class="field-label">' + $labelTxt + '</label>');
+
+                // $fieldBox
+                // .on("keyup focus click", function () {
+                //     $(this).find(".field-label").addClass("_is-active");
+                // })
+                // .on("blur focusout", function () {
+                //     let inputField = $placeHolder.find("input"),
+                //         value = inputField.val();
+                        
+                //     if(value > 0) {
+                //     } else {
+                //         $(this).find(".field-label").removeClass("_is-active");
+                //     }
+                // });
+
+                // .field-label 클릭 이벤트 처리
+                $fieldLabel.on('click', function () {
+                    $(this).addClass('_is-active');
+                });
+
+                // .field-outline input 초점 이벤트 처리
+                $fieldBox.find('input')
+                .on('focus', function () {
+                    $fieldLabel.addClass('_is-active');
+                })
+
+                // .field-outline input 값 변화 이벤트 처리
+                .on('input', function () {
+                    if ($(this).val().trim() === '') {
+                        $fieldLabel.removeClass('_is-active');
+                    } else {
+                        $fieldLabel.addClass('_is-active');
+                    }
+                });
+            });
+        }, */
+    
+
+        // input Btn Clear
+        input: function () {
+            const inputSelector = this.constEl.inputSelector,
+                clearSelector = this.constEl.clearSelector,
+                clearBtnEl = this.constEl.clearBtnEl;
+
+            $(inputSelector).each(function () {
+                const $inputTxt = $(this);
+
+                if ($inputTxt.prop("readonly") || $inputTxt.prop("disabled")) {
+                    return;
+                }
+
+                function activateClearBtn() {
+                    const $clearBtn = $inputTxt.parent().find(clearSelector);
+                
+                    if ($inputTxt.val()) {
+                        $clearBtn.addClass("_active");
+                        if (!$inputTxt.parent().find(clearSelector + "._active").length) {
+                            $inputTxt.css({width:"calc(100% - 2.5rem)"}).parent().append(clearBtnEl);
+                        }
+                    } else {
+                        $clearBtn.removeClass("_active");
+                        $inputTxt.css({width:""}).parent().find(clearSelector).remove();
+                    }
+                }
+                
+
+                $inputTxt
+                .on("keyup focus input", function () {
+                    activateClearBtn();
+                })
+                .on("blur", function () {
+                    setTimeout(function() {
+                        $inputTxt.css({width:""}).parent().find(clearSelector).remove();
+                    }, 1000);
+                });
+
+                activateClearBtn();
+            });
+        },
+        inpClearBtn: function () {
+            const inputSelector = this.constEl.inputSelector,
+                clearSelector = this.constEl.clearSelector;
+
+            $(document).on("mousedown touchstart keydown", clearSelector + "._active", function (e) {
+                if (e.type === "keydown" && e.which !== 13) return;
+                e.preventDefault();
+                var clearBtn = $(this),
+                    inputTxt = clearBtn.siblings(inputSelector);
+                inputTxt.css({width:"calc(100% - 2.4rem)"}).val('').focus();
+                setTimeout(function() {
+                    clearBtn.remove();
+                    inputTxt.css({width:""});
+                }, 1000);
+            });
+
+        },
+        
+        // 비밀번호 특수문자 모양
+        secureTxt: function() {
+            $('._secureTxt').each(function() {
+                function handleInputFocus(event) {
+                    var secureField = $(event.target).closest("._secureTxt");
+                    var inputField = secureField.find("input");
+                    secureField.find("i._line").css({ opacity: ".5" }).removeClass("_is-active");
+                    var value = inputField.val();
+                    var activeLines = secureField
+                                    .find("i._line")
+                                    .removeClass("_is-active")
+                                    .css({ opacity: ".5" });
+
+                    for (var i = 0; i < value.length && i < secureLine; i++) {
+                        activeLines.eq(i).addClass("_is-active").css({ opacity: "" });
+                    }
+                }
+
+                function handleInputChange(event) {
+                    var secureField = $(event.target).closest("._secureTxt");
+                    var inputField = secureField.find("input");
+                    var value = inputField.val();
+                    var activeLines = secureField.find("i._line").removeClass("_is-active").css({ opacity: ".5" });
+
+                    for (var i = 0; i < value.length && i < secureLine; i++) {
+                        activeLines.eq(i).addClass("_is-active").css({ opacity: "" });
+                    }
+                
+                    if (secureField.hasClass("_num")) {
+                        secureField.find("i._is-active, i._line")[value ? "hide" : "show"]();
+                    }
+                }
+                
+                function handleInputKeyUp(event) {
+                    if (event.keyCode === 8) {
+                        var secureField = $(event.target).closest("._secureTxt");
+                        secureField.find("i._line").eq(event.target.value.length).removeClass("_is-active");
+                    }
+                }
+                
+                var secureLine = parseInt($(this).attr("data-secureLine"));
+                var length = parseInt($(this).attr("data-length"));
+                var secureField = $(this);
+                var iTag = "";
+                
+                for (var i = 0; i < length; i++) {
+                    iTag += '<i aria-hidden="true"></i>';
+                }
+                secureField.append(iTag);
+                
+                var left = 0;
+                var space = 13;
+                var inputField = secureField.find("input");
+                
+                secureField.find("i").each(function (index) {
+                var $this = $(this);
+                $this.width($this.height());
+                $this.css("left", left + "px");
+                
+                if (index < secureLine) {
+                    $this.addClass("_line");
+                }
+                
+                left += space;
+                space = 16;
+                });
+                
+                if (secureField.hasClass("_num")) {
+                    inputField.attr("type", "tel");
+                }
+                
+                inputField.on("focus", handleInputFocus)
+                    .on("input", handleInputChange)
+                    .on("keyup", handleInputKeyUp)
+                    .on("blur", function () {
+                    if (!inputField.val()) {
+                            secureField.find("i._line").css({ opacity: "" }).removeClass("_is-active");
+                    }
+                });
+            });
+        },
+        
+        // input:radio, input:checkbox readonly
+        inpReadonly:function() {
+            // radio, checkbox input 요소에 대한 이벤트 리스너를 등록합니다.
+            $('input[type=radio], input[type=checkbox]').each(function() {
+                // input 요소가 readonly 상태인지 확인합니다.
+                if ($(this).prop('readonly')) {
+                // input 요소의 기존 checked 상태를 저장합니다.
+                var checked = $(this).prop('checked');
+            
+                // input 요소에 대한 click 이벤트를 등록합니다.
+                $(this).on('click', function(event) {
+                    // input 요소가 readonly 상태이면, 이벤트를 취소하고 기존 checked 상태를 유지합니다.
+                    if ($(this).prop('readonly')) {
+                    event.preventDefault();
+                    $(this).prop('checked', checked);
+                    }
+                });
+                }
+            });
+
+        }
+    };
     function generateUniqueId() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
@@ -746,18 +1092,20 @@ var COMPONENT_UI = (function (cp, $) {
                         }
                     }else if(dataType === 'goods') {
                         // newContentHTML = content.txtArea;
-                         switch (caseValue) {
-                             case 'type01':
-                                 newContentHTML = content.goodsArea.type01HTML;
-                                 break;
-                             case 'type02':
-                                 newContentHTML = content.goodsArea.type02HTML;
-                                 break;
-                             default:
-                                 newContentHTML = content.goodsArea.type01HTML;
-                         }
-                     } else if(dataType === 'video') {
+                        switch (caseValue) {
+                            case 'type01':
+                                newContentHTML = content.goodsArea.type01HTML;
+                                break;
+                            case 'type02':
+                                newContentHTML = content.goodsArea.type02HTML;
+                                break;
+                            default:
+                                newContentHTML = content.goodsArea.type01HTML;
+                        }
+                    } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
+                    } else if(dataType === 'gap') {
+                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -1368,6 +1716,7 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.optionOpen();
             this.optionClose();
+            this.gapHeight();
         },
         currentModuleData: null,
         optionOpen: function() {
@@ -1382,6 +1731,7 @@ var COMPONENT_UI = (function (cp, $) {
                 $('.option-box').hide();
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
+                $('.moduel-wrap').addClass('_right');
                 cp.optionEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
                 cp.optionEdit.imgColor();
@@ -1394,6 +1744,7 @@ var COMPONENT_UI = (function (cp, $) {
                 const $optionWrap = $(this).closest('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
                 $optionWrap.attr('data-type','').removeClass('show');
+                $('.moduel-wrap').removeClass('_right');
                 cp.optionEdit.resetImgColor();
             });
         },
@@ -1528,10 +1879,17 @@ var COMPONENT_UI = (function (cp, $) {
                 
                 return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
             }
+        },
+        gapHeight: function() {
+            $('.gap-height').on('input', function() {
+                var newHeight = $(this).val() + 'px';
+                $('.md-gap').css('height', newHeight);
+            });
         }
     };
 
     cp.init = function () {
+        cp.form.init();
         cp.imgCrop.init();
         cp.videoModule.init();
         cp.moduleBox.init();

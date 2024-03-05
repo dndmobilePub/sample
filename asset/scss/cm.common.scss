@@ -16,7 +16,9 @@
 @import '_cp.tab';
 @import '_cp.list';
 @import '_cp.popup';
+@import '_cp.input';
 
+/* 모듈 추가 박스 */
 .module-add-box {
   @include pos-offset-b(10%, auto, fixed){right:2%; z-index: 1000;}
   min-width:15rem;
@@ -43,6 +45,8 @@
 }
 
 .container {
+  @include display(flex);
+
   .option {
     &-wrap {
       @include pos(fixed) {left: -31%;top: 0;}
@@ -79,18 +83,36 @@
       }
 
       .type-select {
+        @include display(flex);
+        @include flex($j-content:center);
+        flex-grow: 1;
         padding: 1rem;
         @include border(border, 1px, solid, $color-gray4);
         border-radius: 1rem;
         text-align: center;
-        flex-grow: 1;
+      }
+
+      .input-box, .color-selbox {
+        @include display(flex);
+        @include flex($j-content:space-around) {gap: 1rem};
       }
     }
   }
 
+  .moduel-wrap {
+    width: 100%;
+    transition: all 1s ease;
+
+    &._right {
+      width: 70%;
+      margin-left: 30%;
+    }
+  }
   .section {
     @include border(border, 1px, solid, $color-gray8);
-    max-width:var(--section); margin:2rem auto;
+    max-width:var(--section); 
+    width: 100%;
+    margin:2rem auto;
     background: $color-gray6;
 
     [data-type="goods"] .swiper{
@@ -103,6 +125,11 @@
       min-height:10rem;
       cursor: pointer;
       & ~ .md {margin-top: 1.5rem;}
+
+      &.md-gap {
+        min-height: 0;
+        height: 10rem;
+      }
 
       &:hover {
         outline-color: $flag-pk;
@@ -178,6 +205,7 @@
   }
 }
 
+/* 버튼 */
 .btn {
   &.swiperAddBtn{
     @include pos-offset-r(calc(50% - 2.5rem), -2.5rem){z-index:2;}
@@ -231,7 +259,7 @@
   }
 }
 
-
+/* 이미지 */
 .imgWrap {
   img {
     @include display(block);
@@ -266,6 +294,7 @@
   }
 }
 
+/* 동영상 */
 .videoWrap {
   &.no-video {
     padding: 4.8rem 2.4rem 3.6rem;
@@ -288,6 +317,7 @@
     @include align(text, center);
   }
 }
+
 /* 모달팝업 */
 .modalPop {
   &._center {
@@ -743,7 +773,7 @@
   }
 }
 
-/* radio input */
+/* radio/input */
 label {
   padding: 0.2rem;
    vertical-align: middle;

@@ -1352,6 +1352,296 @@ legend, caption {
   transform: rotate(225deg);
 }
 
+.field {
+  /* FIELD - INPUT */
+  /* FIELD - OUTLINE */
+  /* FIELD - PLACEHOLDER */
+  /* FIELD - GROUP */
+  /* FIELD - VALID */
+  /* FIELD - CURSOR */
+  /* FIELD - DISABLED */
+  /* FIELD - READONLY */
+}
+.field input[type=password] {
+  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
+}
+.field input[type=password]::placeholder {
+  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
+  -webkit-text-security: none;
+  font-size: 2rem;
+}
+.field input[type=password]:read-only {
+  color: #999;
+}
+.field input[type=password]::-webkit-input-placeholder {
+  transform: scale(0.77);
+  transform-origin: 0 50%;
+}
+.field input[type=password]::-moz-placeholder {
+  font-size: 14px;
+  opacity: 1;
+}
+.field input[type=password]:-ms-input-placeholder {
+  font-size: 14px;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+.field.grow, .field .grow {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+}
+.field-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.field-label {
+  display: block;
+  margin-bottom: 1rem;
+}
+.field-txt {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.field-msg {
+  margin-top: 0.5rem;
+}
+.field-info {
+  margin-top: 0.5rem;
+  color: #666;
+}
+.field-input {
+  height: 4rem;
+}
+.field-input input:not([type=checkbox]):not([type=radio]) {
+  padding: 1rem 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background-color: transparent;
+}
+.field-input input:not([type=checkbox]):not([type=radio]):focus {
+  outline: none;
+}
+.field-input input:not([type=checkbox]):not([type=radio])::placeholder {
+  color: #ccc;
+}
+.field-input.right input {
+  text-align: right;
+}
+.field-input.center input {
+  text-align: center;
+}
+.field-input.mid_num {
+  position: relative;
+  max-width: 1.1rem;
+  padding-right: 0;
+}
+.field-input.mid_num input::placeholder {
+  font-family: "pass";
+  font-size: 0.4rem;
+}
+.field-outline {
+  display: flex;
+  align-items: stretch;
+  min-height: 4rem;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0 0.1rem #ccc;
+  background: #fff;
+  transition: box-shadow 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+.field-outline:focus-within {
+  box-shadow: inset 0 0 0 0.2rem #ccc;
+}
+.field-outline.pw-group.type2 > ._input {
+  max-width: 3rem;
+}
+.field-outline.pw-group.type2 > ._input:first-child {
+  padding-right: 0;
+}
+.field-outline.grow {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+}
+.field-outline > * {
+  padding: 0 1rem;
+}
+.field-outline > * + * {
+  padding-left: 0;
+}
+.field-outline.column {
+  flex-direction: column;
+}
+.field-outline.column > * {
+  padding: 1rem;
+}
+.field-outline.column > * + * {
+  padding-top: 0;
+}
+.field-outline.column .right {
+  place-self: flex-end;
+}
+.field-outline.readonly {
+  color: #333;
+  cursor: default;
+  pointer-events: none;
+}
+.field-outline.disabled {
+  opacity: 0.8;
+  cursor: default;
+  pointer-events: none;
+  background: #eee;
+}
+.field-outline .center {
+  place-self: center;
+}
+.field-outline .bottom {
+  place-self: flex-end;
+}
+.field._label > .field-outline {
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+.field._label > .field-outline > .field-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.field._label > .field-outline > .field-label._is-active {
+  position: initial;
+  flex: none;
+  width: 100%;
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: var(--space-xs);
+}
+.field-group {
+  display: flex;
+}
+.field-group + .field-group {
+  margin-top: 1rem;
+}
+.field-group + .field {
+  margin-top: 1rem;
+}
+.field-group .field + .field-group .field {
+  margin-top: 0;
+  margin-left: 1rem;
+}
+.field + .field-group {
+  margin-top: 1rem;
+}
+.field.valid .field-outline {
+  box-shadow: inset 0 0 0 0.1rem #0048ff;
+}
+.field.valid .field-outline:focus-within {
+  box-shadow: inset 0 0 0 0.2rem #0048ff;
+}
+.field.valid + .field-msg, .field.valid .field-msg {
+  color: #0048ff;
+}
+.field.invalid .field-outline {
+  box-shadow: inset 0 0 0 0.1rem #e93c79;
+}
+.field.invalid .field-outline:focus-within {
+  box-shadow: inset 0 0 0 0.2rem #e93c79;
+}
+.field.invalid + .field-msg, .field.invalid .field-msg {
+  color: #e93c79;
+}
+.field-label, .field-checkbox, .field-radio, .field-select select {
+  cursor: pointer;
+}
+.field.disabled .field-outline, .field.disabled .field-checkbox, .field.disabled .field-radio, .field .field-checkbox.disabled, .field .field-radio.disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+.field.disabled .field-outline {
+  background-color: #ddd;
+}
+.field.readonly .field-outline, .field.readonly .field-checkbox, .field.readonly .field-radio, .field .field-checkbox.readonly, .field .field-radio.readonly {
+  cursor: default;
+  pointer-events: none;
+}
+.field.readonly input, .field.readonly textarea, .field.readonly .field-checkbox .field-label, .field.readonly .field-radio .field-label, .field .field-checkbox.readonly .field-label, .field .field-radio.readonly .field-label {
+  color: #333;
+}
+
+/* FIELD - INPUT SCRIPT */
+._input._clear {
+  width: calc(100% - 2.2rem);
+}
+._input-clear {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+._input-clear::before {
+  content: "";
+  display: block;
+  content: "X";
+}
+._input-clear._active {
+  display: inline-flex;
+  width: 2rem;
+  height: 100%;
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+  touch-action: none;
+}
+._input input._password::placeholder {
+  font-weight: 700;
+}
+._input ._secureTxt {
+  position: relative;
+  display: block;
+  height: 4rem;
+}
+._input ._secureTxt > input[type=password] {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+}
+._input ._secureTxt > input[type=password]::placeholder {
+  color: transparent;
+}
+._input ._secureTxt > i {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  z-index: 1;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background: #333;
+  border: 0.1rem solid #333;
+  border-radius: 100%;
+}
+._input ._secureTxt > i + i {
+  margin-left: 0.3rem;
+}
+._input ._secureTxt > i._line {
+  background: #fff;
+  border-color: #666;
+}
+._input ._secureTxt > i._line._is-active {
+  background: #fc0;
+  border-color: #fc0;
+}
+
+/* 모듈 추가 박스 */
 .module-add-box {
   position: fixed;
   bottom: 10%;
@@ -1384,6 +1674,9 @@ legend, caption {
   background: #fff;
 }
 
+.container {
+  display: flex;
+}
 .container .option-wrap {
   position: fixed;
   left: -31%;
@@ -1425,15 +1718,37 @@ legend, caption {
   gap: 1rem;
 }
 .container .option-cont .type-select {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   padding: 1rem;
   border: 1px solid #999;
   border-radius: 1rem;
   text-align: center;
-  flex-grow: 1;
+}
+.container .option-cont .input-box, .container .option-cont .color-selbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+.container .moduel-wrap {
+  width: 100%;
+  transition: all 1s ease;
+}
+.container .moduel-wrap._right {
+  width: 70%;
+  margin-left: 30%;
 }
 .container .section {
   border: 1px solid #ccc;
   max-width: var(--section);
+  width: 100%;
   margin: 2rem auto;
   background: #ddd;
 }
@@ -1457,6 +1772,10 @@ legend, caption {
 }
 .container .section .md ~ .md {
   margin-top: 1.5rem;
+}
+.container .section .md.md-gap {
+  min-height: 0;
+  height: 10rem;
 }
 .container .section .md:hover {
   outline-color: #e93c79;
@@ -1513,6 +1832,7 @@ legend, caption {
   width: 100%;
 }
 
+/* 버튼 */
 .btn.swiperAddBtn {
   position: absolute;
   top: calc(50% - 2.5rem);
@@ -1567,6 +1887,7 @@ legend, caption {
   width: 20rem;
 }
 
+/* 이미지 */
 .imgWrap img {
   display: block;
   width: 100%;
@@ -1608,6 +1929,7 @@ legend, caption {
   color: #d2d5da;
 }
 
+/* 동영상 */
 .videoWrap.no-video {
   padding: 4.8rem 2.4rem 3.6rem;
   background: #f3f4f6;
@@ -2035,7 +2357,7 @@ legend, caption {
   margin-top: 2rem;
 }
 
-/* radio input */
+/* radio/input */
 label {
   padding: 0.2rem;
   vertical-align: middle;

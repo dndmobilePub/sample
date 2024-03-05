@@ -30,6 +30,8 @@ $color-pk: #e93c79;
 $color-green: #4bdf7c;
 $color-violet: #8b4bdf;
 $color-blue: #4b90df;
+$color-valid: #0048ff;
+$color-invalid: #e93c79;
 
 /* flag */
 $flag-gr: #4bdf7c;
@@ -57,6 +59,9 @@ $lst:".lst";
 $btn: '.btn';
 $tab: '.tab';
 $tbl: '.tbl';
+$formLst: '.formLst';
+$field: '.field';
+$fmsg: '.field-msg';
 $isActive:'._is-active';
 
 //-------z-index
