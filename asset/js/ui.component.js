@@ -1059,6 +1059,8 @@ var COMPONENT_UI = (function (cp, $) {
                          }
                      } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
+                    } else if(dataType === 'gap') {
+                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -1092,6 +1094,20 @@ var COMPONENT_UI = (function (cp, $) {
                                 break;
                                 default:
                                     newContentHTML = content.txtArea.type01HTML;
+                            }
+                        }else if(dataType === 'img') {
+                            switch (optionCase) {
+                                case 'detailImg':
+                                    newContentHTML = content.imgArea.type01HTML;
+                                break;
+                                case 'onlyImg':
+                                    newContentHTML = content.imgArea.type02HTML;
+                                break;
+                                case 'titleImg':
+                                    newContentHTML = content.imgArea.type03HTML;
+                                break;
+                                default:
+                                    newContentHTML = content.imgArea.type01HTML;
                             }
                         }else if(dataType === 'goods') {
                             switch (optionCase) {
