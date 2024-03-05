@@ -1603,8 +1603,9 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         },
-        spectrumBgColor: function(moduleType, bgColor) {
+        spectrumBgColor: function(moduleType, bgColor, bgColor2) {
             var self = this;
+            var prevBgColor;
             $(".colorInput").spectrum({
                 flat: false,
                 showInput: true,
@@ -1616,14 +1617,35 @@ var COMPONENT_UI = (function (cp, $) {
                 color: bgColor,
                 change: function(color) {
                     var selectedBgColor = color.toHexString();
-                    self.bgColor(selectedBgColor, moduleType);
+                    self.bgColor(selectedBgColor, bgColor2, moduleType);
+                    bgColor = selectedBgColor;
+                }
+            });
+            $(".colorInput2").spectrum({
+                flat: false,
+                showInput: true,
+                preferredFormat: "hex",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxPaletteSize: 10,
+                color: bgColor2,
+                change: function(color) {
+                    var selectedBgColor2 = color.toHexString();
+                    self.bgColor(bgColor, selectedBgColor2, moduleType);
+                    bgColor2 = selectedBgColor2;
                 }
             });
         },
-        bgColor: function(selectedBgColor, moduleType) {
+        bgColor: function(selectedBgColor, selectedBgColor2, moduleType) {
             $('.section').find('.md').each(function() {
                 if ($(this).data('module') === moduleType) {
-                    $(this).css('background-color', selectedBgColor);
+                    if (selectedBgColor2 === undefined) {
+                        $(this).css('background', 'linear-gradient(to top,' + selectedBgColor + ',' + selectedBgColor + ')');
+                        //$(this).css('background', selectedBgColor);
+                    } else {
+                        $(this).css('background', 'linear-gradient(to top,' + selectedBgColor + ',' + selectedBgColor2 + ')');
+                    }
                 }
             });
         },
@@ -1736,7 +1758,17 @@ var COMPONENT_UI = (function (cp, $) {
                 const $thisMd = $(this).closest('.md');
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const dataType = $thisMd.data('type');
-                const bgColor = $thisMd.css('background-color');
+                const background = $thisMd.css('background');
+                const regex = /rgba?\([^)]+\)|#[0-9a-f]+/gi;
+                const colors = background.match(regex);
+                let bgColor, bgColor2;
+        
+                if (colors.length > 1) {
+                    bgColor = colors[0];
+                    bgColor2 = colors[1];
+                } else {
+                    bgColor = bgColor2 = colors[0];
+                }
     
                 $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
                 $('.option-box').hide();
@@ -1744,7 +1776,7 @@ var COMPONENT_UI = (function (cp, $) {
                 $('.option-box[data-type="'+dataType+'"]').show();
                 $('.moduel-wrap').addClass('_right');
                 cp.optionEdit.resetImgColor();
-                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
+                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor, bgColor2);
                 cp.optionEdit.imgColor();
                 cp.optionEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
@@ -1865,6 +1897,7 @@ var COMPONENT_UI = (function (cp, $) {
             }
         },
         imgColorSelect: function(dataType) {
+            var prevBgColor;
             $('body').off('click').on('click', '#palette div', function(event){
                 if ($(event.target).is('div')) {
                     var rgbColor = $(event.target).css('background-color');
@@ -1873,10 +1906,11 @@ var COMPONENT_UI = (function (cp, $) {
                     
                     $('#palette p').remove();
                     $('#palette').append($p);
-
-                    cp.colorEdit.bgColor(selectedBgColor, dataType);
+            
+                    cp.colorEdit.bgColor(selectedBgColor, prevBgColor, dataType);
                     cp.colorEdit.spectrumBgColor(dataType, selectedBgColor);
                 }
+                prevBgColor = selectedBgColor;
                 
                 event.preventDefault();
                 event.stopPropagation();

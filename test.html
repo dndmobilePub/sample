@@ -120,22 +120,32 @@
         <!-- [S] 상세설정 공통 -->
         <div class="option-box">
           <h3 class="option-tit">배경색상</h3>
-          <div class="option-cont"><input type="color" class="colorInput">
-            <article class="img-color-wrap"> 
-              <!-- 이미지 업로드 영역 -->
-              <label id="del-upload" for="btn-upload"><span>이미지 색상 추출</span>
-                <input type="file" id="btn-upload" hidden accept="image/png, image/jpeg" />
+          <div class="option-cont">
+            <div class="input-box">
+              <label for="bg1"><input type="radio" name="background" id="bg1" value="bg1">단색</label>
+              <label for="bg2"><input type="radio" name="background" id="bg2" value="bg2">그라데이션</label>
+            </div>
+            <div class="option-bg-one">
+              <input type="color" class="colorInput">
+              <article class="img-color-wrap"> 
+                <!-- 이미지 업로드 영역 -->
+                <label id="del-upload" for="btn-upload"><span>이미지 색상 추출</span>
+                  <input type="file" id="btn-upload" hidden accept="image/png, image/jpeg" />
+    
+                </label>
+                <!-- 이미지 컨테이너 (figure) -->
+                <figure class="ct-img">
+                  <img class="img-main" id="thumnail" decoding="async" loading="lazy" />
   
-              </label>
-              <!-- 이미지 컨테이너 (figure) -->
-              <figure class="ct-img">
-                <img class="img-main" id="thumnail" decoding="async" loading="lazy" />
-
-                <!-- 색상표 (palette) -->
-                <figcaption id="palette"></figcaption>
-              </figure>
-              <canvas id="canvas-main" hidden></canvas>
-            </article>
+                  <!-- 색상표 (palette) -->
+                  <figcaption id="palette"></figcaption>
+                </figure>
+                <canvas id="canvas-main" hidden></canvas>
+              </article>
+            </div>
+            <div class="option-bg-two">
+              <input type="color" class="colorInput2">
+            </div>
           </div>
         </div>
         <div class="option-box">
