@@ -583,21 +583,11 @@ var COMPONENT_UI = (function (cp, $) {
         openPop: function () {
             const self = this,
                 btnModal = this.constEl.btnModal;
-            $('html').on('click', btnModal, function() {
-               
-                self.mdGoodsPop($(this));
-                    self.showModal($(this));
-                $(this).addClass('_rtFocus');                
+            $(document).on('click', btnModal, function() {
+                $(this).addClass('_rtFocus');
+                self.showModal($(this));
                 self.layerFocusControl($(this));
             });
-        },
-
-        mdGoodsPop:function() {
-            $('.modalPop[module-type="goods"]').each(function() {
-                var targetModal = $(this).data('modal');
-                $(this).attr('modal-target', targetModal);
-            });
-            // cp.modalPop.showModal($(this));
         },
         
         showModal: function ($btn) {
@@ -727,9 +717,35 @@ var COMPONENT_UI = (function (cp, $) {
             $('body').addClass('no-scroll').append(dimmedEl);            
         },
         
+        // 접근성 포커스 반영
+        layerFocusControl: function ($btn) {
+            const target = $btn.attr('data-modal') || $btn.attr('data-select');
+            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
+            var $modalWrap = $modal.find("> .modalWrap");
+            
+            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
+            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
+            
+            $modalWrap.on("keydown", function (e) {
+                if (e.keyCode == 9) {
+                if (e.shiftKey) { // shift + tab
+                    if ($(e.target).is($firstEl)) {
+                        $lastEl.focus();
+                        e.preventDefault();
+                        }
+                    } else { // tab
+                        if ($(e.target).is($lastEl)) {
+                        $firstEl.focus();
+                        e.preventDefault();
+                        }
+                    }
+                }
+            });
+        },
+        
         closePop: function() {
             const self = this;
-            $('.modalPop').on('click', '.btn-close-pop', function() {
+            $(document).on('click', '.modalPop .btn-close-pop', function() {
                 var $modal = $(this).closest('.modalPop');
                 var $modalWrap = $modal.find("> .modalWrap");
                 var modalWrapClass = $modal.attr('class');
@@ -797,32 +813,6 @@ var COMPONENT_UI = (function (cp, $) {
                 $('body').removeClass('no-scroll');
                 $(this).closest('.modalPop').prev().focus();
                 $('.dimmed').remove();
-            });
-        },
-        
-        // 접근성 포커스 반영
-        layerFocusControl: function ($btn) {
-            const target = $btn.attr('data-modal') || $btn.attr('data-select');
-            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
-            var $modalWrap = $modal.find("> .modalWrap");
-            
-            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
-            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
-            
-            $modalWrap.on("keydown", function (e) {
-                if (e.keyCode == 9) {
-                if (e.shiftKey) { // shift + tab
-                    if ($(e.target).is($firstEl)) {
-                        $lastEl.focus();
-                        e.preventDefault();
-                        }
-                    } else { // tab
-                        if ($(e.target).is($lastEl)) {
-                        $firstEl.focus();
-                        e.preventDefault();
-                        }
-                    }
-                }
             });
         },
 
@@ -902,7 +892,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }, 3000);
             }
             
-            $('._toastBtn').one('click', function() {
+            $('._toastBtn').on('click', function() {
                 $('._toastBtn._rtFocus').removeClass('_rtFocus');
                 $(this).addClass('_rtFocus');
             
@@ -918,10 +908,11 @@ var COMPONENT_UI = (function (cp, $) {
             this.dragFn();
             this.mdBoxDel();
             this.mdBoxAddClk();
-            this.initializeSwiper();
-            this.resetSwipers();
+            this.mdGoodsAdd();
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
+            this.initializeSwiper();
+            this.resetSwipers();
         },
         
         dragFn: function () {
@@ -936,6 +927,14 @@ var COMPONENT_UI = (function (cp, $) {
                 e.stopPropagation(); // 이벤트 버블링 중단
         
                 $(this).closest('.md').remove();
+            });
+        },
+
+        mdGoodsAdd:function() {
+            $('body').on('click', '.goodsAddBtn', function() {
+                var targetModal = $(this).data('modal');
+                $('.modalPop.goodsPop').attr('modal-target', targetModal);
+                cp.modalPop.showModal($(this));
             });
         },
 
@@ -1011,7 +1010,6 @@ var COMPONENT_UI = (function (cp, $) {
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
                 newMd.attr('data-module', moduleId);
-
                 if (dataType === 'goods') {
                     newMd.attr('data-case', 'goodsSwiper');
                 }
@@ -1048,20 +1046,20 @@ var COMPONENT_UI = (function (cp, $) {
                                 newContentHTML = content.txtArea.type01HTML;
                         }
                     }else if(dataType === 'goods') {
-                        switch (caseValue) {
-                            case 'goodsSwiper':
-                                newContentHTML = content.goodsArea.type01HTML;
-                                break;
-                            case 'goodsTab':
-                                newContentHTML = content.goodsArea.type02HTML;
-                                break;
-                            default:
-                                newContentHTML = content.goodsArea.type01HTML;
-                        }
-                    } else if(dataType === 'video') {
+                         switch (caseValue) {
+                             case 'goodsSwiper':
+                                 newContentHTML = content.goodsArea.type01HTML;
+                                 break;
+                             case 'goodsTab':
+                                 newContentHTML = content.goodsArea.type02HTML;
+                                 break;
+                             default:
+                                 newContentHTML = content.goodsArea.type01HTML;
+                         }
+                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
-                            newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
+                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -1096,6 +1094,20 @@ var COMPONENT_UI = (function (cp, $) {
                                 default:
                                     newContentHTML = content.txtArea.type01HTML;
                             }
+                        }else if(dataType === 'img') {
+                            switch (optionCase) {
+                                case 'detailImg':
+                                    newContentHTML = content.imgArea.type01HTML;
+                                break;
+                                case 'onlyImg':
+                                    newContentHTML = content.imgArea.type02HTML;
+                                break;
+                                case 'titleImg':
+                                    newContentHTML = content.imgArea.type03HTML;
+                                break;
+                                default:
+                                    newContentHTML = content.imgArea.type01HTML;
+                            }
                         }else if(dataType === 'goods') {
                             switch (optionCase) {
                                 case 'goodsSwiper':
@@ -1115,8 +1127,55 @@ var COMPONENT_UI = (function (cp, $) {
                     });
 
                 });
+
+
+                    
+            });
+        },
+
+        mdGoodsPopClose: function() {
+            const productCheckboxes = $('.product-list input[type="checkbox"]');
+            const registrationButton = $('.btn-registration-pop');
+            
+            productCheckboxes.on('change', function() {
+                const checkedCount = productCheckboxes.filter(':checked').length;
                 
-                cp.optionEdit.closeOptionWrap();
+                if (checkedCount > 0) {
+                    registrationButton.addClass('btn-close-pop');
+                } else {
+                    registrationButton.removeClass('btn-close-pop');
+                }
+            });
+        },
+
+        mdGoodPopSel: function() {
+            $('.btn-registration-pop').on('click', function() {
+                var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
+                var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
+                console.log(dataElem);
+                
+                var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
+                if (existingSwiper && existingSwiper.swiper) {
+                    existingSwiper.swiper.destroy();
+                }
+                
+                dataElem.closest('.md').find('.swiper-notification').remove();
+                dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+        
+                $('.product-list input[type="checkbox"]:checked').each(function() {
+                    var parentLi = $(this).closest('li');
+                    var clonedSlide = parentLi.find('.swiper-slide').clone();
+                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
+                });
+                
+                cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
+                cp.modalPop.closePop($(this));
+        
+                $('.product-list input[type="checkbox"]').prop('checked', false);
+        
+                setTimeout(function() {
+                    $('.btn-registration-pop').removeClass('btn-close-pop');
+                }, 100);
             });
         },
 
@@ -1166,52 +1225,6 @@ var COMPONENT_UI = (function (cp, $) {
                     var swiperInstance = COMPONENT_UI.moduleBox.initializeSwiper(this);
                     $(this).data('swiper', swiperInstance); 
                 });
-            });
-        },
-
-        mdGoodsPopClose: function() {
-            const productCheckboxes = $('.product-list input[type="checkbox"]');
-            const registrationButton = $('.btn-registration-pop');
-            
-            productCheckboxes.on('change', function() {
-                const checkedCount = productCheckboxes.filter(':checked').length;
-                
-                if (checkedCount > 0) {
-                    registrationButton.addClass('btn-close-pop');
-                } else {
-                    registrationButton.removeClass('btn-close-pop');
-                }
-            });
-        },
-
-        mdGoodPopSel: function() {
-            $('.btn-registration-pop').on('click', function() {
-                var thisData = $(this).closest('.modalPop').attr('modal-target');
-                var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
-                console.log(dataElem);
-                
-                var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
-                if (existingSwiper && existingSwiper.swiper) {
-                    existingSwiper.swiper.destroy();
-                }
-                
-                dataElem.closest('.md').find('.swiper-notification').remove();
-                dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
-        
-                $('.product-list input[type="checkbox"]:checked').each(function() {
-                    var parentLi = $(this).closest('li');
-                    var clonedSlide = parentLi.find('.swiper-slide').clone();
-                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
-                });
-                
-                cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
-                cp.modalPop.closePop($(this));
-        
-                $('.product-list input[type="checkbox"]').prop('checked', false);
-        
-                setTimeout(function() {
-                    $('.btn-registration-pop').removeClass('btn-close-pop');
-                }, 100);
             });
         },
         
