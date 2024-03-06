@@ -359,7 +359,7 @@ var COMPONENT_UI = (function (cp, $) {
             $('.imgWrap').on('click', function(){
                 var $imgWrap = $(this);
 
-                $('.cropModalWrap').load('modal.html', function () {
+                $('.cropModalWrap').load('./module/modal.html', function () {
                     var cropModalWrap = $(this);
                     var uniqueId = generateUniqueId();
     
@@ -940,10 +940,10 @@ var COMPONENT_UI = (function (cp, $) {
 
         mdBoxAddCont: function(callback) {
             Promise.all([
-                fetch('module_txt.html').then(response => response.text()),
-                fetch('module_img.html').then(response => response.text()),
-                fetch('module_video.html').then(response => response.text()),
-                fetch('module_goods.html').then(response => response.text())
+                fetch('./module/module_txt.html').then(response => response.text()),
+                fetch('./module/module_img.html').then(response => response.text()),
+                fetch('./module/module_video.html').then(response => response.text()),
+                fetch('./module/module_goods.html').then(response => response.text())
             ]).then(([txtArea, imgArea, videoArea, goodsArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
