@@ -172,7 +172,7 @@ var guide = {
       $currentName = $('nav a[href^="' + location.pathname.split("/")[5] + '"]'),
       $currentTile = $currentName.text();
     $currentName.closest('li').addClass('active').parents('li').addClass('active'); // 현재 메뉴 활성화
-    if (!$('.btm_btn_set').length) $('body').append('<div class="btm_btn_set"><button type="button" class="btn_guide_top"><span class="hide">TOP</span></button><button type="button" class="btn_light_mode"><i></i><i></i><i></i><i></i><span class="hide">다크모드</span></button></div>');
+    if (!$('.btm_btn_set').length) $('body').append('<div class="btm_btn_set"><button type="button" class="btn_guide_top"><span>TOP</span></button><button type="button" class="btn_light_mode"><i></i><i></i><i></i><i></i><span class="hide">다크모드</span></button></div>');
   },
   slide: function () {
     var $tab = $('.pg_board_tab');

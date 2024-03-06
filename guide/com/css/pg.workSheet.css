@@ -3803,6 +3803,7 @@ html.m .pg_content {
   background-image: svgIcon(btn_guide_top, 48ff);
   -webkit-transform: scale(1);
           transform: scale(1);
+  font-size: var(--space-3xs);
 }
 .btm_btn_set.active .btn_light_mode::after {
   background: #0048ff;

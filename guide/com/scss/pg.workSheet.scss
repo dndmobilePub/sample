@@ -644,7 +644,10 @@ html.util_show {
         &.active{
             width:8.5rem;
             background-color:$color-blue2;
-            .btn_guide_top{background:$color-white; background-image: svgIcon(btn_guide_top, 0048ff); transform:scale(1);}
+            .btn_guide_top{
+                background:$color-white; background-image: svgIcon(btn_guide_top, 0048ff); transform:scale(1);
+                font-size:var(--space-3xs) ;
+            }
             .btn_light_mode::after {background:$color-blue2;}
         }
         button{outline:none;}

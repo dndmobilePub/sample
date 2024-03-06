@@ -617,7 +617,7 @@ var guide = {
       $remark = $('.pg_board .remark'),
       $project = $('body').attr('data-project');
     $currentName.closest('li').addClass('active').parents('li').addClass('active'); // 현재 메뉴 활성화
-    if (!$('.btm_btn_set').length) $('body').append('<div class="btm_btn_set"><button type="button" class="btn_guide_top"><span class="hide">TOP</span></button><button type="button" class="btn_light_mode"><i></i><i></i><i></i><i></i><span class="hide">다크모드</span></button></div>');
+    if (!$('.btm_btn_set').length) $('body').append('<div class="btm_btn_set"><button type="button" class="btn_guide_top"><span>TOP</span></button><button type="button" class="btn_light_mode"><i></i><i></i><i></i><i></i><span class="hide">다크모드</span></button></div>');
     $('.pg_project .pg_list li').each(function () {
       var $this = $(this);
       if ($project.charAt(0).toUpperCase() + $project.slice(1) === $this.text()) {
