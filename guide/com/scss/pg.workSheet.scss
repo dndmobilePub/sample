@@ -1749,29 +1749,6 @@ html.util_show {
             th {background:$color-light-yellow1;}
           }    
       }
-
-      caption {
-        @include pos(relative !important);
-        padding:1.5rem 1rem .5rem !important;
-        background-color:$color-gray6;
-        font-size:var(--space-2xs) !important;
-        @include line(border, 1px $color-gray8 solid !important);
-    
-        @include el-content(before) {
-          @include display(inline-block !important) {content:'Table Caption' !important;}
-          @include pos-offset-l(-.5rem !important, -.5rem !important);
-          padding:.3rem 1rem;
-        }
-    
-        & > p {margin:0 !important;}
-      }
-      legend, caption {
-        @include overflow(both, visible !important);
-        @include el-size(auto !important, auto !important);
-        margin: auto !important;
-        line-height: inherit !important;
-        clip: auto;
-      } 
       
     }
   }
@@ -1779,6 +1756,32 @@ html.util_show {
   .cp-tbl {
     @include display(flex) {justify-content:start;}
     @include fontSize("xs"); font-weight: 400; margin-top:1rem;
+
+    table {
+        caption {
+            @include pos(relative !important);
+            padding:1.5rem 1rem .5rem !important;
+            background-color:$color-gray6;
+            font-size:var(--space-2xs) !important;
+            @include line(border, 1px $color-gray8 solid !important);
+        
+            @include el-content(before) {
+              @include display(inline-block !important) {content:'Table Caption' !important;}
+              @include pos-offset-l(-.5rem !important, -.5rem !important);
+              padding:.3rem 1rem;
+            }
+        
+            & > p {margin:0 !important;}
+          }
+          legend, caption {
+            @include overflow(both, visible !important);
+            @include el-size(auto !important, auto !important);
+            margin: auto !important;
+            line-height: inherit !important;
+            clip: auto;
+          } 
+    }
+
     .desc {
       @include display(none);
       @include width(50rem);

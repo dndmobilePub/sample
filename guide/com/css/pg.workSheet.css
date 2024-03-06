@@ -105,6 +105,7 @@ button {
 table {
   background-color: transparent;
   border-spacing: 0;
+  border-collapse: collapse;
 }
 
 input,
@@ -5441,34 +5442,6 @@ html[light-mode=dark] .frame_device .device .btn_size_set button {
 .tblWrap table tbody th {
   background: #fff4ce;
 }
-.tblWrap caption {
-  position: relative !important;
-  padding: 1.5rem 1rem 0.5rem !important;
-  background-color: #ddd;
-  font-size: var(--space-2xs) !important;
-  border: 1px #ccc solid !important;
-}
-.tblWrap caption::before {
-  content: "";
-  display: block;
-  display: inline-block !important;
-  content: "Table Caption" !important;
-  position: absolute;
-  top: -0.5rem !important;
-  left: -0.5rem !important;
-  padding: 0.3rem 1rem;
-}
-.tblWrap caption > p {
-  margin: 0 !important;
-}
-.tblWrap legend, .tblWrap caption {
-  overflow: visible !important;
-  width: auto !important;
-  height: auto !important;
-  margin: auto !important;
-  line-height: inherit !important;
-  clip: auto;
-}
 
 .cp-tbl {
   display: -webkit-box;
@@ -5480,6 +5453,34 @@ html[light-mode=dark] .frame_device .device .btn_size_set button {
   font-size: 1.2rem;
   font-weight: 400;
   margin-top: 1rem;
+}
+.cp-tbl table caption {
+  position: relative !important;
+  padding: 1.5rem 1rem 0.5rem !important;
+  background-color: #ddd;
+  font-size: var(--space-2xs) !important;
+  border: 1px #ccc solid !important;
+}
+.cp-tbl table caption::before {
+  content: "";
+  display: block;
+  display: inline-block !important;
+  content: "Table Caption" !important;
+  position: absolute;
+  top: -0.5rem !important;
+  left: -0.5rem !important;
+  padding: 0.3rem 1rem;
+}
+.cp-tbl table caption > p {
+  margin: 0 !important;
+}
+.cp-tbl table legend, .cp-tbl table caption {
+  overflow: visible !important;
+  width: auto !important;
+  height: auto !important;
+  margin: auto !important;
+  line-height: inherit !important;
+  clip: auto;
 }
 .cp-tbl .desc {
   display: none;
