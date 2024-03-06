@@ -26,7 +26,7 @@
         <a href="javascript:void(0);" data-type="img" data-case="type01">사진 - type01</a><!-- 이미지, 대제목, 소제목, 날짜-->
         <a href="javascript:void(0);" data-type="img" data-case="type02">사진 - type02</a><!-- only 이미지 -->
         <a href="javascript:void(0);" data-type="img" data-case="type03">사진 - type03</a><!-- 대제목, 이미지 -->
-        <!-- <a href="" data-type="video">동영상</a> -->
+        <!-- <a href="#;" data-type="video">동영상</a> -->
         <a href="javascript:void(0);" data-type="gap">공백</a><!-- 공백 -->
 
         <!-- 임시저장 시 토스트팝업 생성 -->
@@ -52,8 +52,8 @@
         <div class="option-box" data-type="goodsTab">
           <h3 class="option-tit">상품타입</h3>
           <div class="option-cont type-select-wrap">
-            <a href="" class="type-select" goods-option="goodsTab">탭</a>
-            <a href="" class="type-select" goods-option="goodsSwiper">스와이퍼</a>
+            <a href="#;" class="type-select" goods-option="goodsTab">탭</a>
+            <a href="#;" class="type-select" goods-option="goodsSwiper">스와이퍼</a>
           </div>
         </div>
         <div class="option-box" data-type="goodsTab">
@@ -92,9 +92,9 @@
         <div class="option-box" data-type="img">
           <h3 class="option-tit">이미지타입</h3>
           <div class="option-cont type-select-wrap">
-            <a href="" class="type-select" goods-option="detailImg">이미지<br>대제목<br>소제목</a>
-            <a href="" class="type-select" goods-option="titleImg">대제목<br>이미지</a>
-            <a href="" class="type-select" goods-option="onlyImg">이미지만</a>
+            <a href="#;" class="type-select" goods-option="detailImg">이미지<br>대제목<br>소제목</a>
+            <a href="#;" class="type-select" goods-option="titleImg">대제목<br>이미지</a>
+            <a href="#;" class="type-select" goods-option="onlyImg">이미지만</a>
           </div>
         </div>
         <div class="option-box" data-type="img">
@@ -122,38 +122,29 @@
         <div class="option-box">
           <h3 class="option-tit">배경색상</h3>
           <div class="option-cont">
-            <div class="input-box">
-              <label for="bg1"><input type="radio" name="background" id="bg1" value="bg1">단색</label>
-              <label for="bg2"><input type="radio" name="background" id="bg2" value="bg2">그라데이션</label>
-            </div>
-            <div class="option-bg-one">
-              <input type="color" class="colorInput">
-              <article class="img-color-wrap"> 
-                <!-- 이미지 업로드 영역 -->
-                <label id="del-upload" for="btn-upload"><span>이미지 색상 추출</span>
-                  <input type="file" id="btn-upload" hidden accept="image/png, image/jpeg" />
-    
-                </label>
-                <!-- 이미지 컨테이너 (figure) -->
-                <figure class="ct-img">
-                  <img class="img-main" id="thumnail" decoding="async" loading="lazy" />
+            <input type="color" class="colorInput">
+            <article class="img-color-wrap"> 
+              <!-- 이미지 업로드 영역 -->
+              <label id="del-upload" for="btn-upload"><span>이미지 색상 추출</span>
+                <input type="file" id="btn-upload" hidden accept="image/png, image/jpeg" />
   
-                  <!-- 색상표 (palette) -->
-                  <figcaption id="palette"></figcaption>
-                </figure>
-                <canvas id="canvas-main" hidden></canvas>
-              </article>
-            </div>
-            <div class="option-bg-two">
-              <input type="color" class="colorInput2">
-            </div>
+              </label>
+              <!-- 이미지 컨테이너 (figure) -->
+              <figure class="ct-img">
+                <img class="img-main" id="thumnail" decoding="async" loading="lazy" />
+
+                <!-- 색상표 (palette) -->
+                <figcaption id="palette"></figcaption>
+              </figure>
+              <canvas id="canvas-main" hidden></canvas>
+            </article>
           </div>
         </div>
         <div class="option-box">
           <h3 class="option-tit">전시기간 노출여부</h3>
           <div class="option-cont">
             <div class="input-box">
-              <label for="use"><input type="radio" name="exhibition" id="use" value="use">사용</label>
+              <label for="use"><input type="radio" name="exhibition" id="use" value="use" checked>사용</label>
               <label for="disuse"><input type="radio" name="exhibition" id="disuse" value="disuse">미사용</label>
             </div>
           </div>
@@ -333,11 +324,6 @@
             <div class="txtEdit">
               <h1 contenteditable="true" class="fontBold">대제목</h1>
             </div>
-            <div class="module-option">
-              <button class="btn btn-size xs shadow optionBtn">설정</button>
-              <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
-              <div class="btn btn-size xs shadow dragBtn">드래그</div>
-            </div>
             <div class="swiper">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -376,6 +362,7 @@
             </div>
             <div class="module-option">
               <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+              <div class="btn btn-size xs shadow dragBtn">드래그</div>
               <button class="btn btn-size xs shadow optionBtn">설정</button>
             </div>
           </div>

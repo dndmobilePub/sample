@@ -1687,7 +1687,7 @@ legend, caption {
   padding: 2rem;
   border: 1px solid #999;
   background-color: #fff;
-  transition: left 1s ease;
+  transition: left 0.15s ease;
 }
 .container .option-wrap .ico-pop-close {
   position: absolute;
@@ -1754,7 +1754,7 @@ legend, caption {
 }
 .container .moduel-wrap {
   width: 100%;
-  transition: all 1s ease;
+  transition: all 0.15s ease;
 }
 .container .moduel-wrap._right {
   width: 70%;
@@ -1813,10 +1813,7 @@ legend, caption {
   min-height: 0;
   height: 10rem;
 }
-.container .section .md:hover {
-  outline-color: #e93c79;
-}
-.container .section .md:hover .module-option {
+.container .section .md:hover .module-option, .container .section .md._is-active .module-option {
   display: block;
   position: absolute;
   top: 0;
@@ -1827,8 +1824,14 @@ legend, caption {
   background: #fff;
   border: 1px dashed #000;
 }
-.container .section .md:hover .deleteBtn, .container .section .md:hover .dragBtn, .container .section .md:hover .optionBtn {
+.container .section .md:hover .deleteBtn, .container .section .md:hover .dragBtn, .container .section .md:hover .optionBtn, .container .section .md._is-active .deleteBtn, .container .section .md._is-active .dragBtn, .container .section .md._is-active .optionBtn {
   display: block;
+}
+.container .section .md:hover {
+  outline-color: #0048ff;
+}
+.container .section .md._is-active {
+  outline-color: #e93c79;
 }
 .container .section .md .txtEdit {
   position: relative;
@@ -2095,12 +2098,14 @@ legend, caption {
 }
 .img-color-wrap #del-upload {
   display: inline-block;
+  margin-right: 3rem;
   padding: 1rem;
   border: 1px dashed #C8C8C8;
   cursor: pointer;
 }
 .img-color-wrap .ct-img {
-  display: block;
+  display: inline-block;
+  vertical-align: middle;
   margin: 0;
 }
 .img-color-wrap .ct-img .img-main {

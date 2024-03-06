@@ -1011,6 +1011,9 @@ var COMPONENT_UI = (function (cp, $) {
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
                 newMd.attr('data-module', moduleId);
+                
+                cp.optionEdit.closeOptionWrap();
+
                 if (dataType === 'goods') {
                     newMd.attr('data-case', 'goodsSwiper');
                 }
@@ -1047,20 +1050,20 @@ var COMPONENT_UI = (function (cp, $) {
                                 newContentHTML = content.txtArea.type01HTML;
                         }
                     }else if(dataType === 'goods') {
-                         switch (caseValue) {
-                             case 'goodsSwiper':
-                                 newContentHTML = content.goodsArea.type01HTML;
-                                 break;
-                             case 'goodsTab':
-                                 newContentHTML = content.goodsArea.type02HTML;
-                                 break;
-                             default:
-                                 newContentHTML = content.goodsArea.type01HTML;
-                         }
-                     } else if(dataType === 'video') {
+                        switch (caseValue) {
+                            case 'goodsSwiper':
+                                newContentHTML = content.goodsArea.type01HTML;
+                                break;
+                            case 'goodsTab':
+                                newContentHTML = content.goodsArea.type02HTML;
+                                break;
+                            default:
+                                newContentHTML = content.goodsArea.type01HTML;
+                        }
+                    } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
-                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
+                            newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -1095,20 +1098,6 @@ var COMPONENT_UI = (function (cp, $) {
                                 default:
                                     newContentHTML = content.txtArea.type01HTML;
                             }
-                        }else if(dataType === 'img') {
-                            switch (optionCase) {
-                                case 'detailImg':
-                                    newContentHTML = content.imgArea.type01HTML;
-                                break;
-                                case 'onlyImg':
-                                    newContentHTML = content.imgArea.type02HTML;
-                                break;
-                                case 'titleImg':
-                                    newContentHTML = content.imgArea.type03HTML;
-                                break;
-                                default:
-                                    newContentHTML = content.imgArea.type01HTML;
-                            }
                         }else if(dataType === 'goods') {
                             switch (optionCase) {
                                 case 'goodsSwiper':
@@ -1129,8 +1118,6 @@ var COMPONENT_UI = (function (cp, $) {
 
                 });
 
-
-                    
             });
         },
 
@@ -1619,9 +1606,8 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         },
-        spectrumBgColor: function(moduleType, bgColor, bgColor2) {
+        spectrumBgColor: function(moduleType, bgColor) {
             var self = this;
-            var prevBgColor;
             $(".colorInput").spectrum({
                 flat: false,
                 showInput: true,
@@ -1633,35 +1619,14 @@ var COMPONENT_UI = (function (cp, $) {
                 color: bgColor,
                 change: function(color) {
                     var selectedBgColor = color.toHexString();
-                    self.bgColor(selectedBgColor, bgColor2, moduleType);
-                    bgColor = selectedBgColor;
-                }
-            });
-            $(".colorInput2").spectrum({
-                flat: false,
-                showInput: true,
-                preferredFormat: "hex",
-                showInitial: true,
-                showPalette: true,
-                showSelectionPalette: true,
-                maxPaletteSize: 10,
-                color: bgColor2,
-                change: function(color) {
-                    var selectedBgColor2 = color.toHexString();
-                    self.bgColor(bgColor, selectedBgColor2, moduleType);
-                    bgColor2 = selectedBgColor2;
+                    self.bgColor(selectedBgColor, moduleType);
                 }
             });
         },
-        bgColor: function(selectedBgColor, selectedBgColor2, moduleType) {
+        bgColor: function(selectedBgColor, moduleType) {
             $('.section').find('.md').each(function() {
                 if ($(this).data('module') === moduleType) {
-                    if (selectedBgColor2 === undefined) {
-                        $(this).css('background', 'linear-gradient(to top,' + selectedBgColor + ',' + selectedBgColor + ')');
-                        //$(this).css('background', selectedBgColor);
-                    } else {
-                        $(this).css('background', 'linear-gradient(to top,' + selectedBgColor + ',' + selectedBgColor2 + ')');
-                    }
+                    $(this).css('background-color', selectedBgColor);
                 }
             });
         },
@@ -1696,15 +1661,6 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             })
         },
-/*         fontBold: function() {
-            $('body').on('click', '.editBold', function(){
-                const $optionWrap = $(this).closest('.option-wrap');
-                const dataType = $optionWrap.data('type');
-                const font = $(this).closest('.edit-box').data('font');
-        
-                $('.md[data-module="' + dataType + '"]').find('[data-text="' + font + '"]').toggleClass('fontBold');
-            });
-        }, */
         fontSize: function() {
             $(document).on('change', '.editSize', function(){
                 var newSize = parseInt($(this).val().trim());
@@ -1774,38 +1730,33 @@ var COMPONENT_UI = (function (cp, $) {
                 const $thisMd = $(this).closest('.md');
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const dataType = $thisMd.data('type');
-                const background = $thisMd.css('background');
-                const regex = /rgba?\([^)]+\)|#[0-9a-f]+/gi;
-                const colors = background.match(regex);
-                let bgColor, bgColor2;
-        
-                if (colors.length > 1) {
-                    bgColor = colors[0];
-                    bgColor2 = colors[1];
-                } else {
-                    bgColor = bgColor2 = colors[0];
-                }
+                const bgColor = $thisMd.css('background-color');
     
+                $('.md').removeClass('_is-active');
+                $thisMd.addClass('_is-active');
                 $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
                 $('.option-box').hide();
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
                 $('.moduel-wrap').addClass('_right');
                 cp.optionEdit.resetImgColor();
-                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor, bgColor2);
+                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
                 cp.optionEdit.imgColor();
                 cp.optionEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
             });
         },
         optionClose: function() {
-            $('html, body').on('click', '.optionClsBtn', function(){
-                const $optionWrap = $(this).closest('.option-wrap');
+            this.closeOptionWrap = function() {
+                const $optionWrap = $('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
                 $optionWrap.attr('data-type','').removeClass('show');
                 $('.moduel-wrap').removeClass('_right');
                 cp.optionEdit.resetImgColor();
-            });
+                $('.md').removeClass('_is-active');
+            };
+        
+            $('html, body').on('click', '.optionClsBtn', this.closeOptionWrap);
         },
         resetImgColor: function() {
             $("#btn-upload").val("");
@@ -1834,6 +1785,7 @@ var COMPONENT_UI = (function (cp, $) {
                 var fileReader = new FileReader();
                 fileReader.onload = function() {
                     $("#thumnail").attr("src", this.result);
+                    $("#thumnail").hide();
                 };
                 fileReader.readAsDataURL(file);
             }
@@ -1913,7 +1865,6 @@ var COMPONENT_UI = (function (cp, $) {
             }
         },
         imgColorSelect: function(dataType) {
-            var prevBgColor;
             $('body').off('click').on('click', '#palette div', function(event){
                 if ($(event.target).is('div')) {
                     var rgbColor = $(event.target).css('background-color');
@@ -1922,11 +1873,10 @@ var COMPONENT_UI = (function (cp, $) {
                     
                     $('#palette p').remove();
                     $('#palette').append($p);
-            
-                    cp.colorEdit.bgColor(selectedBgColor, prevBgColor, dataType);
+
+                    cp.colorEdit.bgColor(selectedBgColor, dataType);
                     cp.colorEdit.spectrumBgColor(dataType, selectedBgColor);
                 }
-                prevBgColor = selectedBgColor;
                 
                 event.preventDefault();
                 event.stopPropagation();
