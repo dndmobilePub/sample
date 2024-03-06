@@ -305,7 +305,29 @@ label {
       }
 
       .swiper{
+        @include pos(relative);
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        list-style: none;
+        z-index: 1;
+
+        &-wrapper{
+          @include pos(relative){z-index: 1;};
+          @include display(flex);
+          @include el-size(100%, 100%);
+          transition-property: transform;
+          box-sizing: content-box;
+        }
         &-slide{
+          @include pos(relative);
+          @include el-size(100%, 100%);
+          flex-shrink: 0;
+          transition-property: transform;
+          
+          &-invisible-blank {
+              visibility: hidden;
+          }
           .txtEdit {
             padding: 1.2rem .8rem;
             font-size: 1.2rem;
@@ -315,8 +337,85 @@ label {
             text-align: center;
             img{
               max-width: 30rem;
-              width: 100%;
+              @include width(100%);
             }
+          }
+        }
+        &-pagination {
+          @include pos(absolute){z-index: 10;};
+          text-align: center;
+          transition: 300ms opacity;
+          transform: translate3d(0, 0, 0);
+
+          &-bullet{
+            @include display(inline-block);
+            @include el-size(1rem, 1rem);
+            background: $color-gray6;
+            border-radius: 50%;
+            &-active{
+              background: $color-blue;
+            }
+            & + .swiper-pagination-bullet{
+              margin-left: .6rem;
+            }
+          }
+          &-fraction,
+          &-custom,
+          &-bullets,
+          &-horizontal{
+            @include width(100%);
+            @include pos-offset-b(10px, 0);
+          }
+          &.swiper-pagination-hidden {
+            opacity: 0;
+          }
+          &-disabled,
+          &-lock{
+            @include display(none);
+            & > .swiper-pagination{
+              @include display(none);
+            }
+          }
+        }
+        &-button-prev{
+          left: 10px;
+          right: auto;
+          &:after{
+            content: '<';
+          }
+        }
+        &-button-next{
+          right: 10px;
+          left: auto;
+          &:after{
+            content: '>';
+          }
+        }
+        &-button-prev,
+        &-button-next {
+          @include pos-offset-l(50%, auto, $pos:absolute){z-index: 10;}
+          @include display(flex);
+          @include flex( $j-content:center, $al-items:center);
+          cursor: pointer;
+          color: $color-blue;
+
+          &.swiper-button{
+            &-disabled,
+            &-hidden{
+              opacity: 0.35;
+              cursor: auto;
+              pointer-events: none;
+            }
+            &-lock{
+              @include display(none);
+            }
+          }
+          &:after{
+            font-size: 5rem;
+            text-transform: none !important;
+            letter-spacing: 0;
+            font-variant: initial;
+            line-height: 1;
           }
         }
       }
