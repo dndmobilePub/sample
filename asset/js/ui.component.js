@@ -356,13 +356,11 @@ var COMPONENT_UI = (function (cp, $) {
             this.openCropImg();
         },
         openCropImg: function () {
-            $('.imgWrap').on('click', function(){
-                var $imgWrap = $(this);
-
+            function loadCropModal($imgWrap) {
                 $('.cropModalWrap').load('./module/modal.html', function () {
                     var cropModalWrap = $(this);
                     var uniqueId = generateUniqueId();
-    
+        
                     var avatarId = 'avatar_' + uniqueId;
                     var inputId = 'input_' + uniqueId;
                     var modalId = 'modal_' + uniqueId;
@@ -374,10 +372,25 @@ var COMPONENT_UI = (function (cp, $) {
                     cropModalWrap.children('.modalPop').attr('id', modalId);
                     cropModalWrap.find('.img-container img').attr('id', imgId);
                     cropModalWrap.find('.btnCrop').attr('id', cropId);
-    
+        
                     cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap);
                 });
-            })
+            }
+        
+            $('.imgWrap').on('click', function(){
+                var $imgWrap = $(this);
+
+                if (!$imgWrap.is('.img-background')) {
+                    loadCropModal($imgWrap);
+                }
+            });
+        
+            $('.imgAdd').on('click', function(){
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $imgWrap = $('.md[data-module="' + dataType + '"]').find('.imgWrap');
+
+                loadCropModal($imgWrap);
+            });
         },
         iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap) {
             var avatar = $('#' + avatarId)[0];
