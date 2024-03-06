@@ -1,0 +1,1840 @@
+@charset "utf-8";
+/****************************************/
+/*	PART: IMPORT CSS
+/****************************************/
+@import '../../../asset/scss/cm.common';
+/****************************************/
+/*	PART: work sheet PAGE STYLE
+/****************************************/
+//------ name spaces
+$darMode:'html[light-mode="dark"]';
+$htmlM: 'html.m';
+$width-PC: 125rem;
+$width-M: 32rem;
+$pub:'.pub';
+$pg:'.pg';
+$pgHeader:'#pgHeader';
+$pgWrap:'#pgWrap';
+$pgLayout:'.pg_layout';
+$pgContainer:'#pgContainer';
+$pgContent:'.pg_content';
+$pgSection:'.pg_section';
+$pg_h :'[class*=pg_h]';
+$pg_h1:'.pgd_h1';
+$pg_h2:'.pgd_h2';
+$pg_h3:'.pgd_h3';
+$pgNav:'.pg_nav';
+$pgTit:'.pg_titles';
+$pgGuide:'.pg_guide';
+$pgProject:'.pg_project';
+$pgBoard:'.pg_board';
+$pgGrid:'.pg_grid';
+$pgStatus: '.pg_project_status';
+$pgCount:'.pg_count';
+$pgAlert:'.pg_alert';
+$pgTarget:'.pg_target';
+$pgSrch:'.pg_search';
+$pgHisory:'.remark';
+$pgDivice:'.frame_device';
+%transition3s {@include transition(.3s, all, ease-in-out);}
+
+$color-darkMode: #101010;
+$color-darkMode2: #292929;
+$color-darkMode3: #323232;
+$color-darkMode4:#444;
+/*****************************************************************
+  Pub Guide
+*****************************************************************/
+
+#{$pg} {
+    &-tab {
+        border-width:0 0 .1rem;
+        border-style:solid; border-color:$color-gray7;
+        & > ul {
+            white-space:nowrap; overflow:auto;
+            & > li {
+                @include display(inline-block);
+                border-right:.1rem solid $color-gray7; vertical-align:top;
+                & > a{
+                    @include display(block);
+                    @include height(5rem) {line-height:5rem} padding:0 5rem;
+                }
+                &.active {
+                    & > a{background-color:$color-blue3; color:$color-white;}
+                }
+            }
+        }
+    }
+}
+
+#{$pg_h} {
+    color:$color-gray4; margin-top:1rem; margin-bottom:1rem;
+    font-weight:700; line-height:1.3;
+    &:first-child{margin-top:0;}
+    & + #{$pg_h} {margin-top:1rem;}
+    @include el-content(before) {content:'#';}
+    @include el-content(after) {
+        height:0.4em; background:$color-gray7; margin-top:-.4rem; z-index:-1;
+    }
+}
+
+#{$pg_h1}, #{$pg_h2}, #{$pg_h3} {
+    color:#01407e;
+    @include el-content(after) {background-color:#01407e33;}
+}
+#{$pg_h1} {font-size:var(--space-xl);}
+#{$pg_h2} {font-size:var(--space-lg);}
+#{$pg_h3} {font-size:var(--space-mx);}
+
+/*****************************************************************
+  Header
+*****************************************************************/
+#{$pgHeader} {
+    @include display(flex);
+    @include pos-offset-l(0,0) {position:fixed; z-index:100;}
+    @include el-size(100%, 5.4rem);
+    padding:0 2rem;
+    background-color:$color-blue3;
+    box-shadow:0 .2rem .4rem -.1rem rgba(0,0,0,.5);
+
+    #{$pg} {
+        &_util, h1 {
+            @include display(inline-flex) {align-items:center;}
+            width:100%; vertical-align:middle;
+        }
+        &_util {
+            #{$pgSrch}, .switch, .pg_project, .btn_responsive{
+                @include pos(relative);
+                margin-left:2rem;
+            }
+            #{$pg} {
+                &_search{
+                    width:20rem; margin-left:auto;
+                    #btnPgSearch{
+                        @include pos-offset-r(0,0); @include el-size(4rem, 3rem);
+                        background-image: svgIcon(btnPgSearch);
+                        background-size:1.6rem 1.6rem; background-repeat:no-repeat; background-position:50% 50%;
+                        opacity:.5; @extend %transition3s;
+
+                        &:hover, &:focus {opacity:1;}
+                    }
+
+                    input[type=text]{
+                        @include el-size(100%, 3rem); padding:0 6rem 0 1.5rem; outline:none;
+                        background-color:rgba(255, 255, 255, 0.3); border:none; border-radius:3rem;
+                        color:$color-white;
+
+                        &:focus{background-color:rgba(255, 255, 255, 0.6)}
+                        &::placeholder{color:$color-gray6;}
+                        &:-ms-input-placeholder{color:$color-gray6;}
+                        &::-ms-input-placeholder{color:$color-gray6;}
+                    }
+                    .svgIcon {
+                        @include display(inline-block); @include el-size(4rem, 4rem);
+                        
+                        &.check {background-image: icon(check);}
+                    }
+                    .btn_search_del {
+                        @include pos-offset-r(0, 3rem); @include el-size(3rem, 3rem);
+                        background-image: svgIcon(btn_search_cancel, 333);
+                        background-size:1.4rem 1.4rem; background-position:50% 50%; background-repeat:no-repeat;
+                    }
+                }
+            }
+
+            #{$btn} {
+                &_nav {
+                    @include display(none);
+                    @include pos-offset-r(.5rem, 1rem) {z-index:999;}
+                    @include el-size(4rem, 4rem);
+                    background:none;
+    
+                    span{
+                        @include pos-offset-l(50%, 50%) {text-indent:-9999px;}
+                        @include el-size(2.8rem, 2rem);
+                        margin:-.1rem 0 0 -1.4rem;
+                        background-color:rgba(255,255,255,1);
+                        @extend %transition3s;
+    
+                        @include el-content(both) {
+                            @include pos(absolute) {left:0;}
+                            @include el-size(2.8rem, 2rem);
+                            background-color:rgba(255,255,255,1);
+                            @extend %transition3s;
+                        }
+                        &::before{top:-.8rem}
+                        &::after{top:.8rem}
+                    }
+                }
+
+                &_responsive {
+                    @include pos(relative) {left:0;}
+                    @include el-size(2.5rem, 4rem);
+                    border:.1rem solid $color-white; border-radius:.4rem;
+                    background:none; @include overflow(both, hidden);
+                    @extend %transition3s;
+
+                    @include el-content(both) {
+                        @include pos(absolute) {left:0;}
+                        @include el-size(100%, .1rem);
+                        background-color:$color-white;
+                        @extend %transition3s;
+                    }
+                    &::before{top:.7rem;}
+                    &::after{width:100%; bottom:.6rem;}
+                    
+                    & > i {
+                        @include pos(absolute) {top:.3rem; right:.8rem}
+                        @include el-size(.6rem, .1rem);
+                        background-color:$color-white; border-radius:100%;
+                        @extend %transition3s;
+
+                        @include el-content(both) {
+                            @include pos(absolute) {top:0;}
+                            @include el-size(.4rem, .4rem);
+                            background-color:$color-white; border-radius:100%;
+                            @extend %transition3s;
+                        }
+                        &::before{@include el-size(.1rem, .1rem);}
+                        &::after{
+                            transform:scale(0);
+                            @extend %transition3s;
+                        }
+                        & > i{
+                            @include pos(absolute) {top:3.1rem; left:.2rem;}
+                            @include el-size(.2rem, .2rem);
+                            background-color:$color-white; border-radius:100%;transform:scale(1);
+                            @extend %transition3s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+        
+    h1 {
+        @include el-size(11rem, 5.4rem);
+        background:url(./../../data/logo.png) 0 50% no-repeat; background-size:11rem auto;
+        opacity:.5;
+    }
+
+    .switch {
+        @include pos(relative);
+        @include el-size(30rem, 5.4rem);
+        padding:.4rem; @include overflow(both, hidden);
+        box-sizing:border-box;
+
+        @include el-content(after) {
+            @include pos-offset-l(0,0) {right:0; bottom:0; z-index:-2;}  
+        }
+
+        & > .bar {
+            content:'';
+            @include pos(absolute) {top:0; z-index:-1;}
+            height:5.4rem;
+            background-color:$color-gray2;
+            transform:scale(0);
+            transition:left .4s cubic-bezier(.25, .75, .5, 1.25);
+        }
+        
+        
+        & > ul {
+            @include display(flex);
+            & > li {
+                flex:1;
+                & > a {
+                    @include display(block);
+                    @include height(5rem) {line-height:4.8rem;}
+                    font-size:var(--space-ms); color:$color-white;text-align:center; text-decoration:none;
+                    opacity:.7;
+                    @extend %transition3s;
+                }
+                & > a:hover, &.active > a {
+                    color:$color-white; font-weight:700; opacity:1;
+                }
+            }
+        }
+    }
+}
+
+#{$htmlM} {
+    #{$pg} {
+        &_util {
+            #{$btn} {
+                &_responsive{
+                    width:5rem;
+                    @include el-content(before) {top:1.1rem;}
+                    @include el-content(after) {width:0;}
+
+                    & > i {
+                        right:.5rem; @include el-size(.4rem, .4rem);
+                        @include el-content(before) {right:.6rem; @include el-size(.4rem, .4rem);}
+                        @include el-content(after) {right:1.2rem;transform:scale(1)}
+                        &>i{transform:scale(0);}
+                    }
+                }
+            }
+        }
+    }
+}
+
+.no_scroll {
+    @include pos(fixed); @include overflow(both, hidden);
+
+    #{$pg} {
+        &_util {
+            #{$btn} {
+                &_nav span{
+                    background-color:$color-black;
+                    @include el-content(before) {transform:rotate(-45deg) translate(-.6rem, .6rem);}
+                    @include el-content(after) {transform:rotate(45deg) translate(-.5rem, -.6rem);}
+                }
+            }
+        }
+    }
+}
+
+#{$pgProject} {
+    .current {
+        @include pos(relative); @include overflow(both, hidden);
+        @include height(3rem) {line-height:3rem;}
+        padding:0 5rem 0 2.5rem;
+        font-weight:700; color:$color-black; text-align:left;
+        background-color:$color-white; opacity:.6;
+        border-radius:3rem;
+
+        @include el-content(after) {
+            @include pos-offset-r(0,0); @include el-size(.4rem, .3rem);            
+            background-image: svgIcon(currentAfter, 666);            
+            background-size:1.5rem 1.5rem; background-repeat:no-repeat; background-position:50% 50%;
+            transform:rotate(180deg); @extend %transition3s;
+        }
+
+        &.active {
+            @include el-content(after) {transform:rotate(0deg)}
+        }
+    }
+
+    #{$pg} {
+        &_list{
+            @include display(none); @include overflow(both, hidden); 
+            @include pos-offset-l(3.5rem, 0) {right:0; z-index:100;}
+            background-color:$color-white; box-shadow:.2rem .2rem .2rem 0 rgb(0 0 0 / 10%); border-radius:1.5rem;
+            
+
+            li {
+                border-bottom:.1rem solid $color-light-gray1;
+                %lstActive-aColor {
+                    background-color:$color-light-gray2;color:$color-black;
+                    @include el-content(before) {
+                        @include pos-offset-l(0,0) {right:0; bottom:0; z-index:-1;}
+                        background-color:$color-white;
+                    }
+                }
+
+                a {
+                    @include display(block); @include pos(relative);
+                    @include height(3rem) {line-height:3rem;}
+                    padding:0 2.5rem; color:$color-gray3;
+                    &:hover {@extend %lstActive-aColor;}
+                }                
+                &.active a {@extend %lstActive-aColor;}
+            }
+        }
+    }
+}
+
+#{$btn} {
+    &_util{
+        @include display(none);
+        @include pos-offset-r(0, 0) {position:fixed;}
+        @include el-size(6.5rem, 5rem);
+        z-index:101;
+        .bar{
+            fill:none; stroke:$color-white; stroke-width:2;
+            @include transition(.3s, all, cubic-bezier(0.4, 0, 0.2, 1));
+            transition-delay:300ms;
+            &.b1{stroke-dasharray:24 80;}
+            &.b2{stroke-dasharray:19 80;}
+            &.b3{stroke-dasharray:14 14;}
+        }
+    }
+}
+
+html.util_show {
+    #{$btn} {
+        &_util{
+            .bar{
+                stroke:$color-black;
+                &.b1{stroke-dasharray:27 74;stroke-dashoffset:-74;}
+                &.b2{stroke-dasharray:27 72;stroke-dashoffset:-70;}
+                &.b3{stroke-dasharray:14 14;stroke-dashoffset:14;}
+            }
+        }
+    }
+}
+
+/*****************************************************************
+  Nav
+*****************************************************************/
+#{$pgNav} {
+    @include pos-offset-l(6.1rem, 0){position:fixed; bottom:0; z-index:10;}
+    width:20rem;
+    border-right:.1rem solid $color-light-gray1;
+    background-color:$color-white;
+    @include overflow(y, auto);
+
+    &::-webkit-scrollbar {width:.3rem;}
+    &::-webkit-scrollbar-thumb{background-color:$color-gray8; border-radius:.3rem;}
+
+    & > ul{
+        margin-top:2rem;
+        & > li {
+            @include pos(relative);
+
+            & > a{
+                @include display(block); @include pos(relative);
+                padding:1rem 2rem; border-right:0 solid $color-blue2;
+                font-size:var(--space-mx); color:$color-gray3; text-align:right;
+                @extend %transition3s;
+            }
+
+            &:hover {
+                & > a{ border-right-width:.5rem; color:$color-black;}
+            }
+            &.active > a{ border-width:.5rem; font-weight:500; color:$color-blue2;}
+            & > ul {
+                padding:1rem 0; border-style:dotted; border-color:$color-gray6;
+                text-align:right;
+                & > li {
+                    & > a {
+                        @include display(block); @include pos(relative);
+                        padding:.5rem 3rem .5rem 2rem;
+                        font-size:var(--space-ms); color:$color-gray3;
+                    }
+                    &:hover > a, &.active > a{color:$color-blue2;}
+                }
+            }
+
+            &.ex_link{
+                margin-top:2rem; padding:.5rem 2rem;
+
+                &:last-child {margin-top:0;}
+                & > a {
+                    padding:1rem; background-color:$color-light-gray2;
+                    border:.1rem solid $color-light-gray1; border-radius:.5rem;
+                    font-size:var(--space-ms); text-align:center;
+                }
+                &:hover {
+                    & > a{
+                        border:.1rem solid $color-gray3; background-color:$color-gray4; color:$color-white;
+                    }
+                }
+            }
+        }
+    }
+}
+/*****************************************************************
+  Content
+*****************************************************************/
+#{$pgWrap} {
+    padding-top:17.5rem;
+    @extend %transition3s;
+    &.admin #pgContainer{margin-right:0;}
+}
+
+#{$htmlM} {
+    // #{$pgContainer} {margin-right:37rem;}
+}
+
+#{$pgTit} {
+    @include display(flex);
+    @include pos(fixed) {top:5.4rem; left:0; right:0;}
+    padding:.8rem 2rem; background-color:$color-gray2; min-height:4.6rem;
+    @extend %transition3s; transition-duration: .8s;
+    z-index:10;
+    h2, #{$pgStatus} {
+        @include display(inline-flex) {align-items:center;}
+        width:100%; vertical-align:middle; @extend %transition3s;
+    }
+    h2 {
+        @include width(20rem);
+        font-size:var(--space-md); font-weight:700; color:$color-white;
+        text-shadow:.1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+        @extend %transition3s;
+    }
+}
+
+#{$pgNav} + #{$pgContainer} {margin:0 0 0 20rem;}
+#{$pgContent} {padding:3rem 2rem;}
+[data-category='document'] {
+    #{$pgContent} {padding-top:0 !important;}
+}
+
+#{$htmlM} {
+    #{$pgTit}, #{$pgStatus} {padding-right:37rem;}
+    #{$pgContent} {padding-right:6.8rem;}
+}
+
+#{$pgSection} {
+    margin-top:3rem; padding:0 2rem; @include overflow(both, hidden);
+    border:.1rem solid $color-light-gray1; border-radius:1rem;
+
+    & > h3 {
+        @include pos(relative); padding:2rem;
+        border-bottom:.1rem solid $color-light-gray1;background-color:$color-white;
+        font-size:var(--space-mx); font-weight:500; color:$color-gray2;
+    }
+
+    #{$pgGuide} {
+        &_info{
+            margin-top:.3rem; padding:2rem;
+            background-color:$color-white;
+            .pg_item {
+                margin-top:2.5rem;
+                &:first-child {margin-top:0;}
+                &_color .color_box {
+                    .color_item {
+                        &.pgradi1 {
+                            @include bg-gradient(line, to right,#28B886,#53D68D);
+                            // background:linear-gradient(to right,#28B886,#53D68D);background:-webkit-linear-gradient(to right,#28B886,#53D68D);background:-moz-linear-gradient(to right,#28B886,#53D68D);background:-o-linear-gradient(to right,#28B886,#53D68D);
+                        }
+                        &.pgradi2 {
+                            @include bg-gradient(line, to right,#9CC813,#53D68D);
+                            // background:linear-gradient(to right,#9CC813,#53D68D);background:-webkit-linear-gradient(to right,#9CC813,#53D68D);background:-moz-linear-gradient(to right,#9CC813,#53D68D);background:-o-linear-gradient(to right,#9CC813,#53D68D);
+                        }
+                        &.pgradi3 {
+                            @include bg-gradient(line, to right,#0C94E4,#50D2B5);
+                            // background:linear-gradient(to right,#0C94E4,#50D2B5);background:-webkit-linear-gradient(to right,#0C94E4,#50D2B5);background:-moz-linear-gradient(to right,#0C94E4,#50D2B5);background:-o-linear-gradient(to right,#0C94E4,#50D2B5);
+                        }
+                    }
+                }
+
+                .head + ul {margin-top:1rem;}
+
+                .browser {
+                    @include clearfix;
+                    li {
+                        float:left; @include height(5rem){line-height:4.8rem;}
+                        margin:.5rem 1rem 0 0; padding:0 1.5rem 0 5rem;
+                        background-color:rgba(255,255,255,0.3); background-position:1rem 50%; background-repeat:no-repeat; background-size:calc(50rem/10) auto;
+                        border-radius:5rem; box-shadow:.1rem .1rem .1rem 0 rgba(0,0,0,0.3);
+
+                        &.ie{background-image:url(./../../data/ico_browser_ie.png)}
+                        &.chrome{background-image:url(./../../data/ico_browser_chrome.png)}
+                        &.firefox{background-image:url(./../../data/ico_browser_firefox.png)}
+                        &.safari{background-image:url(./../../data/ico_browser_safari.png)}
+                        &.opera{background-image:url(./../../data/ico_browser_opera.png)}
+
+                        span{@include display(inline-block); text-indent:-9999px}
+                    }
+                }
+                
+                h4+.tag{padding-top:.5rem;}
+                .tag li{                    
+                    line-height:2.4rem;
+                    margin-top:.5rem; padding:.8rem 1rem;
+                    border-left:.2rem solid $color-gray3; background-color:$color-light-gray1;
+                    color:$color-black;
+
+                    strong{color:$color-invalid;}
+                }
+
+                .code, .viewer{margin-top:2rem;}
+
+                &_color{
+                    margin-top:2.5rem;
+                    &:first-child{margin-top:0;}
+                    h4 {
+                        padding-bottom:1rem;
+                        border-bottom:.1rem solid rgba(0,0,0,0.3);
+                        font-size:var(--space-mx); font-weight:500; color:$color-black;
+                    }
+                
+                    .color {
+                        &_box{
+                            margin-top:2rem;
+                            @include clearfix;
+                
+                            .color {
+                                &_item{
+                                    @include pos(relative) {float:left; @include overflow(both, hidden);}
+                                    @include el-size(30rem, 12rem);
+                                    margin-right:2rem;
+                                    box-shadow:.1rem .1rem .1rem 0 rgba(0,0,0,0.3);
+                
+                                    @include el-content(before) {
+                                        @include pos(absolute) {top:-2.5rem;right:-2.5rem; height:5rem;}
+                                        background-color:rgba(255,255,255,0.5);transform: rotate(45deg);
+                                    }
+                                    &.pgr{width:20rem;}
+                
+                                    ul {
+                                        padding:1rem 0 0 2rem;
+                                        li {
+                                            padding:.8rem 0;
+                                            span {@include display(block); color:rgba(255,255,255,0.5)}
+                                            strong {@include display(block); margin-top:.5rem; color:$color-white;}
+                                        }
+                                    }
+                
+                                    &.fcb li {
+                                        span{color:rgba(51,51,51,0.5);}
+                                        strong{color:$color-gray2;}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            
+
+            h4 {
+                position:relative; font-size:var(--space-lg); font-weight:500; color:$color-blue3;
+            }
+
+            div + h4 {margin-top:3rem;}
+            .head{font-weight:500; color:$color-black;}
+            .list {
+                li{
+                    @include pos(relative);
+                    line-height:1.8rem; padding:.3rem .5rem .3rem 1rem;color:$color-black;
+                    @include el-content(before) {
+                        @include pos(absolute) {top:1.1rem;left:0;}
+                        @include el-size(.3rem, .3rem);
+                        background-color:$color-black;
+                    }
+
+                    strong {color:$color-invalid;}
+                    .code{margin-top:.5rem;}
+                    .tag li:before{content:none;}
+                    a {color:$color-black; text-decoration:underline;}
+                }
+            }
+        }
+    }
+}
+
+
+.btm {
+    &_guide {
+        margin-top:1rem;
+        font-size:var(--space-sm); color:$color-gray3;
+
+        &_top {
+            @include pos(absolute) {top:.8rem; left:.8rem;}
+            @include el-size(3rem, 3rem);background-color:$color-blue2;
+            background-image: svgIcon(btn_guide_top); background-size:1.5rem 1.5rem;
+            background-repeat:no-repeat; background-position:50% 50%;
+            border-radius:100%;transform:scale(0);
+            @extend %transition3s;
+        }
+    }
+
+    &_btn_set {
+        @include pos(fixed) {bottom:2rem; right:2rem;}
+        @include el-size(4.6rem, 4.6rem);
+        border:.2rem solid $color-blue2;
+        background-color:$color-white; border-radius:1rem;
+        @extend %transition3s;
+        
+        &.active{
+            width:8.5rem;
+            background-color:$color-blue2;
+            .btn_guide_top{background:$color-white; background-image: svgIcon(btn_guide_top, 0048ff); transform:scale(1);}
+            .btn_light_mode::after {background:$color-blue2;}
+        }
+        button{outline:none;}
+    }
+}
+
+// bottom BTN : goTop, modeChange
+#{$btn} {
+    &_guide {
+        &_top {
+            @include pos(absolute) {top:.6rem; left:.6rem;}
+            @include el-size(3rem, 3rem);background-color:$color-blue2;
+            background-image: svgIcon(btn_guide_top); background-size:1.5rem 1.5rem;
+            background-repeat:no-repeat; background-position:50% 50%;
+            border-radius:100%;transform:scale(0);
+            @extend %transition3s;
+        }
+    }
+
+    &_light {
+        &_mode{
+            @include pos(absolute) {top:.6rem; right:.6rem;}
+            @include el-size(3rem, 3rem);
+
+            @include el-content(before) {
+                @include pos-offset-l(.5rem, .5rem);
+                @include el-size(2rem, 2rem);
+                background-color:$color-blue4; border-radius:100%;
+                @extend %transition3s;
+            }
+
+            @include el-content(after) {
+                @include pos-offset-l(0, 1.2rem);
+                @include el-size(2rem, 2rem);
+                background-color:$color-white; border-radius:100%;
+                @extend %transition3s; transform-origin:top right;
+            }
+
+            & > i {
+                @include pos-offset-l(0, 50%);
+                @include el-size(.2rem, 3rem); margin-left:-.1rem;
+
+                &:nth-child(1){transform:rotate(45deg)}
+                &:nth-child(2){transform:rotate(90deg)}
+                &:nth-child(3){transform:rotate(135deg)}
+
+                @include el-content(both) {
+                    @include pos(absolute) {left:0}
+                    @include el-size(.2rem, .3rem);
+                    background-color:$color-yellow3; border-radius:100%;
+                    transform:scale(0); @extend %transition3s;
+                }
+                @include el-content(before) {top:1rem;}
+                @include el-content(after) {bottom:1rem;}
+            }
+        }
+    }
+}
+
+/*****************************************************************
+    Tab
+*****************************************************************/
+#{$pgBoard} {
+    &_tab {
+        @include pos-offset-l(9.9rem, 0) {position:fixed; right:0; @include overflow(both, hidden); z-index:10;}
+        padding:1rem 2rem; background-color:$color-light-blue1;
+        @extend %transition3s;
+
+        ul {
+            @include display(flex); white-space:nowrap;
+            li {
+                box-flex:1; -webkit-box-flex:1;
+                & + li {margin-left:1rem;}
+
+                & > button, & > a {
+                    @include height(4rem) {line-height:3.6rem;} padding:0 2rem;
+                    background-color:$color-white; color:$color-gray3; text-align:center;
+                    border-radius:.5rem;
+                    
+                    // CSS Paint API
+                    --ripple-x: 0; --ripple-y: 0; --ripple-speed: 1.0; --animation-tick: 0;--ripple-color: rgba(255, 255, 255, 0.4);
+                    &.animating{background-image:paint(ripple);
+                    }
+                }
+
+                &.active {
+                    & > button, & > a {
+                        background-color:$color-black;
+                        font-weight:700; color:$color-white;
+                    }
+                }
+            }
+        }
+
+        .swiper-slide {width:auto;}
+    }
+    &_panel{
+        @include display(none);
+        
+    }
+}
+
+.pg_board_panel.active,
+.pg_content.searcher .pg_board_panel{@include display(block);}
+
+#{$htmlM} {
+    #{$pgBoard} {
+        &_tab {right:3.8rem;}
+    }
+}
+
+#{$pgContent} {
+    &.searcher {
+        #{$pgBoard} {
+            &_panel {
+                .pg_status{@include display(none);}
+                &.active .pg_status {@include display(block);}
+            }
+        }
+        .search_title {
+            @include display(block);
+        }
+    }
+    .search_title {display:none;}
+}
+
+/*****************************************************************
+  Status Chart
+*****************************************************************/
+#{$pgStatus} {
+    #{pgCount}, .pg_project_ing {
+        @include display(inline-flex) {align-items:center; vertical-align:middle;}
+    }
+    #{pgCount} {
+        margin-right:2rem; text-align:center;
+        &:first-child{margin-left:auto;}
+        & > span {
+            @include display(block);
+            @include height(2rem) {line-height:2rem;}
+            font-size:var(--space-xs); color:$color-gray6;
+            @extend %transition3s;
+        }
+        & > strong{
+            @include display(block);
+            @include height(3.5rem) {line-height:3.3rem;}
+            margin-left:.5rem;
+            font-size:var(--space-ms); font-weight:bold; color:$color-white;
+            text-shadow:.1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+            @extend %transition3s;
+        }
+    }
+
+    #{$pgProject} {
+        &_ing{
+            @include pos(relative);
+            @include el-size(25rem, 3rem);
+            @extend %transition3s;
+
+            .ing {
+                @include pos-offset-l(.5rem, 0){z-index:10;}
+                @include width;
+                font-size:var(--space-ms); text-align:center; font-weight:500; color:$color-white;
+                text-shadow:.1rem .1rem .1rem rgba(0,0,0,0.4);
+                @extend %transition3s;
+            }
+            .pgraph {
+                @include pos(relative); @include display(block); @include el-size(100%, 100%);
+                background-color:rgba(255,255,255,0.05);
+                box-shadow:inset .1rem .1rem 1.1rem 0 rgba(0,0,0,0.3);
+                @include overflow(both, hidden);
+
+                .bar {
+                    @include pos-offset-l(0, 0); @include el-size(0, 100%); @include overflow(both, hidden);
+                    background:$color-green2; border-radius:.3rem;
+                    box-shadow:.1rem .1rem .1rem 0 rgba(0,0,0,0.3);
+                    @include transition(1s, width, ease-in-out);
+                }
+            }
+        }
+    }
+}
+
+#{$srch} {
+    &_title {
+        @include pos-offset-l(11rem,0){position:fixed; right:0; z-index:10;}
+        @include height(4rem){line-height:4rem;} padding:0 2rem;
+        background-color:$color-black; color:$color-white;
+        animation:titleShow 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        @extend %transition3s;
+        
+        @keyframes titleShow{
+            0%{opacity:0; top:10rem;}
+            100%{opacity:1; top:13.5rem;}
+        }
+
+        .btn_search_cancel {
+            @include pos-offset-r(0, 0); @include height(4rem){line-height:4rem;}
+            padding:0 4.4rem 0 2rem;
+            background-color:$color-valid;
+            color:$color-white; font-weight:700;
+
+            @include el-content(after) {
+                @include pos-offset-r(.6rem, 2rem); @include el-size(2.4rem, 2.4rem);
+                background-image: svgIcon(btn_search_cancel); background-size:1.4rem 1.4rem; background-position:50% 50%; background-repeat:no-repeat;
+            }
+        }
+    }
+}
+
+#{$htmlM} {
+    #{$srch} {
+        &_title {right:36rem;}
+    }
+}
+@keyframes titleShow{
+	0% {opacity:0; top:11rem;}
+	100% {opacity:1; top:15.9rem;}
+}
+
+.panel {
+    &_head{
+        @include pos-offset-l(15.9rem, 0){position:fixed; right:0; z-index:10;}
+        height:4rem; padding:0 52rem 0 2rem;
+        background-color:$color-light-blue1; text-align:right;
+        box-shadow:0 .3rem .5rem -.1rem rgba(0,0,0,.3);
+        @extend %transition3s;
+        
+    }
+}
+
+#{$htmlM} {
+    .panel_head{right:37rem;}
+}
+
+#{$pgAlert} {
+    &_btn_set{
+        text-align:right;
+        button {
+            @include display(inline-block); @include height(3rem) {line-height:2.7rem;}
+            margin-top:-.5rem; padding:0 2rem; border-radius:0 0 .5rem .5rem;
+            font-size:var(--space-ms); color: rgba(255, 255, 255, 0.75);
+            @extend %transition3s;
+
+            & + button {margin-left:1rem;}
+            &.active {
+                @include el-content(after) {
+                    @include display(inline-block); @include el-size(1.8rem, 1.8rem);
+                    margin:-.3rem 0 0 1rem;
+                    background-image: svgIcon(pgAlert_btnActive);
+                    background-size:1.8rem 1.8rem; background-repeat:no-repeat;background-position:50% 50%; vertical-align:middle;
+                }
+            }
+
+            strong{font-size:var(--space-md); color:$color-yellow3; font-weight:700;}
+            &.btn_design{background-color:$color-violet;}
+            &.btn_plan{background-color:$color-green;}
+            &.btn_wa{background-color:$color-brown;}
+        }
+    }
+}
+
+.pg_content.searcher .panel_head{@include display(none);}
+
+#{$pgTarget} {
+    @include pos(relative); height:3rem; padding:.5rem;
+    background-color:$color-white; border-radius:3rem;@include overflow(both, hidden);
+
+    ul {
+        @include display(flex) {white-space:nowrap;}
+        li {
+            & + li {margin-left:.5rem;}
+        }
+    }
+
+    a {
+        @include display(block);
+        @include height(2rem) {line-height:2rem;} padding:0 1rem;background-color:$color-light-blue1; border-radius:2rem;font-size:var(--space-sm); color:$color-gray2;
+
+        &.active{background-color:$color-blue3;color:$color-white;}
+    }
+
+}
+
+#{$pg} {
+    &_status {
+        @include display(flex);
+        @include pos(absolute) {bottom:1.5rem; right:2rem;}
+        height:2rem;
+        
+        & > span {
+            @include display(inline-flex);
+            vertical-align:middle;
+            &.num {
+                @include pos(relative);
+                margin-right:2rem; font-size:var(--space-sm);color:$color-gray3; vertical-align:middle;
+
+                & + .num {
+                    @include el-content(before) {
+                        @include pos-offset-l(.6rem, -1rem);
+                        @include el-size(.2rem, 1rem);
+                        background-color:rgba(0,0,0,.2);
+                    }
+                }
+                strong {
+                    padding-left:.5rem;
+                    font-size:var(--space-ms);color:$color-black; font-weight:700;
+                }
+            }
+        }
+
+        &_box{
+            @include pos(relative);
+            @include el-size(20rem, 2rem);
+            background-color:$color-white; vertical-align:middle;border-radius:3rem; @include overflow(both, hidden);
+
+            .ing {
+                @include pos-offset-l(0, 50%);
+                width:18rem; margin-left:-9rem;
+                text-align:center; font-size:var(--space-sm); font-weight:500; color:$color-black;
+            }
+
+            .bar {
+                @include pos-offset-l(0, 0);
+                @include el-size(0, 2rem);
+                background-color:#fed03a;
+                @extend %transition3s;
+            }
+        }
+    }
+}
+/*****************************************************************
+  Table
+*****************************************************************/
+#{$pgBoard} {
+    margin-top:3rem; border-top:.2rem solid $color-light-gray1;
+    &.catch{cursor:grab;}
+    &.catching{cursor:grabbing;}
+
+    table {
+        text-align:center;
+        thead {
+            th {
+                @include pos(relative); padding:.7rem .5rem;background-color:$color-white;
+                font-weight:700; font-size:var(--space-ms); color:$color-gray3;
+
+                button {
+                    @include pos-offset-r(0, 0);
+                    @include el-size(1.6rem, 1.6rem);background-color:$color-light-gray1;
+
+                    @include el-content(both) {
+                        @include pos-offset-l(50%, 50%);
+                        @include el-size(.8rem, .2rem);
+                        margin:-.1rem 0 0 -.3rem;
+                        background-color:$color-gray3;
+                    }
+                    @include el-content(before) {transform:rotate(-45deg)}
+                    @include el-content(after) {transform:rotate(45deg)}
+                }
+
+                select {
+                    @include el-size(100%, 2.7rem) {line-height:2.5rem;}
+                    border:none; background-color:$color-white;font-weight:700; font-size:var(--space-sm); color:$color-gray3;
+                }
+            }
+
+            th:last-child, td:last-child {border-right:none;}
+        }
+
+        tbody {
+            tr:hover td{background-color:$color-light-gray4; color:$color-gray3;}
+            td {
+                @include pos(relative);
+                line-height:2rem; margin-top:.1rem; padding:.7rem .5rem;
+                background-color:$color-light-gray3;
+                font-size:var(--space-ms); color:$color-gray3;vertical-align:middle; word-break:break-all;
+
+                &.deps, &.name {text-align:left;}
+                %pgTbletdSpan {
+                    @include display(inline-block);
+                    @include el-size(6rem, 2.2rem) {line-height:2rem;}
+                    font-size:var(--space-sm); color:$color-gray3;
+                }
+                &.type {
+                    & > span {
+                        @extend %pgTbletdSpan;
+                        background-color:$color-white;
+                        border:.1rem solid $color-gray4; border-radius:2.2rem;
+                    }
+                }
+                &.complete {
+                    & > span {
+                        @extend %pgTbletdSpan;background-color:$color-light-gray1;
+                        border-radius:2.2rem;
+
+                        &.ing{background-color:$color-light-blue1; color:$color-black;}
+                        &.done{background-color:$color-yellow3; color:$color-black;}
+                        &.del{background-color:$color-gray3; color:$color-white; font-weight:700;}
+                        &.hold{background-color:$color-light-brown1; color:$color-white;font-weight:700;}
+                    }
+                }
+                &.etc{width:15rem;}
+
+                a {
+                    @include display(block);
+                    margin:-.7rem -5rem; padding:.7rem .5rem;
+                    height:100%; font-weight:500; color:$color-black;text-decoration:underline;
+
+                    // &.btn_hover {
+                    //     @include display(none); @include pos-offset-r(0, -5.5rem);
+                    //     @include el-size(50%, 100%);
+                    //     font-size:0; color:transparent; background-color:$color-gray6;
+                    //     margin:0; padding:0; border-radius:0 1rem 1rem 0;
+                    //     background-image: svgIcon(btn_hover, 333); background-position:50% 50%;
+                    //     background-size:3rem 3rem; background-repeat:no-repeat;
+                    // }
+                }
+            }
+            tr.no_data {
+                td{
+                    padding:10rem 0; background-color:$color-gray3;
+                    i.no_data {
+                        @include display(block); @include el-size(2rem, 2rem); margin:0 auto 1rem;
+                        // url(./../img/ico_nodata.gif) no-repeat
+                    }
+                }
+            }
+            tr.del {
+                td {
+                    &.id {
+                        @include el-content(before) {
+                            @include pos-offset-l(0,0) {bottom:0; right:0;}
+                        }
+                    }
+                }
+            }
+            tr.hr {
+                th {
+                    padding:1rem 2rem; background-color:$color-light-yellow1;
+                    font-size:var(--space-ms); color:$color-black; text-align:left;
+                }
+            }
+            .complete {
+                td{
+                    background-color:$color-white; color:$color-gray3;
+                    .id::before{display:none;}
+                }
+            }
+            .focus {
+                td {
+                    background-color:$color-gray2; color:$color-white;transition:0.4s;
+                    & > a {color:$color-white;}
+                }
+            }
+        }
+        .delete{text-decoration:line-through;}
+    }
+
+    .highlight {
+        @include display(inline-block); @include pos(relative);
+
+        @include el-content(after) {
+            height:.5rem; margin-top:-.7rem; background-color:rgba(255,100,0,0.7)
+        }
+    }
+
+    &_scroll {
+        @include display(none); @include pos(fixed) {left:23rem; right:3rem; bottom:0; z-index:1;}
+        background:$color-white; opacity:0.6;
+
+        & > div {
+            @include el-size(0, .5rem);
+            background:$color-green;
+            @extend %transition3s;
+        }
+    }
+    &.catch + .pg_board_scroll{@include display(block);}
+
+    &.list {
+        table {
+            tbody {
+                td, th {
+                    padding:1.2rem 1rem; background-color:$color-white;
+                    text-align:left; vertical-align:middle;
+                }
+            }
+        }
+    }
+}
+
+#{$htmlM} {
+    #{$pgBoard} {
+        table tbody td a.btn_hover{@include display(block);}
+    }
+}
+
+#{$pgGrid} {
+    border-top:.2rem solid $color-brown2;
+    table {
+        thead {
+            th {
+                line-height:1.8rem; padding:1rem;
+                background-color:$color-light-gray2;
+                font-weight:700;color:$color-gray3;
+            }
+        }
+        tbody {
+            th, td {
+                line-height:1.8rem; margin-top:.1rem; padding:1rem;
+                background-color:$color-white; color:$color-gray3;
+                vertical-align:middle; word-break:break-all;
+            }
+
+            tr {
+                &.del td {
+                    @include el-content(after) {
+                        @include pos-offset-l(50%, 0) {right:0;}
+                        height:1rem; margin-top:-.5rem;
+                        background-color:rgba(0,0,0,0.2);
+                    }
+                }
+
+                &.hold td {
+                    @include el-content(after) {
+                        @include pos-offset-l(50%, 0) {right:0;}
+                        height:1rem; margin-top:-.5rem;
+                        background-color:rgba(255,211,56,0.2);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tbf table tbody td, .tbl table tbody td, .tbp table tbody td {background-color:$color-white;}
+.tbp table tbody tr.even td {background-color:$color-light-gray3;}
+
+#{$pgContent} {
+    &.searcher {
+        #{$pgBoard} {
+            border-top:none;
+
+            &_panel {
+                &+& {margin-top:2rem;}
+            }
+        }
+
+        .pg_status {@include display(none!important);}
+    }
+
+    table {
+        #{$pgHisory} {
+            cursor:pointer;
+            & > li {
+                @include display(none); @include pos(relative);
+                padding-right:3rem; text-align:left;
+                @include ellipsis(1, auto);
+
+                @include el-content(after) {
+                    content:'!';
+                    @include pos-offset-r(.2rem, 0);
+                    @include el-size(1.6rem, 1.6rem) {line-height:1.8rem;}
+                    font-size:var(--space-xs); font-weight:700; color:$color-gray4; text-align:center;
+                    background-color:$color-light-gray1; border-radius:100%;
+                }
+                &:first-child{@include display(block);}
+
+                &.design{color:$color-violet; font-weight:700;}
+                &.plan{color:$color-green; font-weight:700;}
+                &.wa{color:$color-brown; font-weight:700;}
+            }
+        }
+    }
+}
+
+#{$pgHisory} {
+    &_pop {
+        @include pos-offset-l(50%, 50%){position:fixed; transform:translate(-50%,-50%); @include overflow(y, auto); z-index:1000;}
+        min-width:25rem; max-width:50rem; max-height:30rem; padding:2rem;
+        background-color:$color-white; border-radius:1rem;
+        box-shadow: .5rem .5rem 15rem .5rem $color-black;
+        -webkit-box-shadow: .5rem .5rem 15rem .5rem $color-black; 
+        animation:remarkPop 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+        & > h2 {
+            padding-bottom:1.5rem; border-bottom:.1rem solid $color-gray6;
+            font-size:var(--space-md); color:$color-black;
+        }
+
+        & > .history{
+            padding-top:1rem;
+            li{
+                @include pos(relative); padding:.5rem 0 .5rem 1rem;
+
+                &.design{color:$color-violet; font-weight:700;}
+                &.plan{color:$color-green; font-weight:700;}
+                &.wa{color:$color-brown; font-weight:700;}
+
+                @include el-content(before) {
+                    @include pos-offset-l(1.1rem, 0);
+                    @include el-size(.3rem, .3rem);
+                    background-color:$color-gray3; border-radius:100%;
+                }
+            }
+        }
+        .btn_search_del {
+            @include pos-offset-r(1rem,1rem);
+            @include el-size(2rem, 2rem);
+            background-image: svgIcon(btn_search_cancel, 666); background-size:2rem;
+        }
+    }
+}
+
+@keyframes remarkPop{
+	0% {opacity:0; margin-top:10rem;}
+	100% {opacity:1; margin-top:0}
+}
+
+%dimBg {
+    @include pos-offset-l(0,0) {position:fixed; @include overflow(both, hidden); z-index:999;}
+    @include el-size(100%, 100%);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.dimmed {
+    @extend %dimBg;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem); -moz-backdrop-filter: blur(1rem); -ms-backdrop-filter: blur(1rem);
+    
+}
+/*****************************************************************
+  Layout
+*****************************************************************/
+#{$pgLayout} {
+    padding-top:3rem;
+    div {
+        @include pos(relative); margin-top:4rem; padding:4rem 1.5rem 1.5rem;
+        border:.2rem solid $color-light-gray1;
+        @extend %transition3s;
+
+        @include el-content(before) {
+            @include pos-offset-l(-2.7rem, -.2rem);
+            @include el-size(13rem, 2.5rem) {line-height:2.5rem;}
+            background-color:$color-light-gray1; border-radius:.8rem .8rem 0 0;
+            color:$color-gray3; text-align:center;
+            @extend %transition3s;
+        }
+    }
+
+    #{$pgLayout} {
+        &_html{
+            padding-top:0;
+            @include el-content(before) {content:'html';}
+        }
+        &_head{
+            @include el-content(before) {content:'head';}
+        }
+        &_body{
+            padding-top:0;
+            @include el-content(before) {content:'body';}
+        }
+        &_wrap{
+            padding-top:0;
+            @include el-content(before) {content:'div#wrap';}
+        }
+        &_header{
+            padding-top:0;
+            @include el-content(before) {content:'div#header';}
+        }
+        &_container{
+            padding-top:0;
+            @include el-content(before) {content:'div#container';}
+        }
+        &_content{
+            padding:1.5rem;
+            & > div {
+                margin:0; padding:8rem 0; border:none; background-color:rgba(255,255,255,0.3);font-size:var(--space-mx); color:$color-white; text-align:center;
+                @extend %transition3s;
+
+                @include el-content(before) {content:'div#contents'; width:1.5rem;}
+            }
+        }
+        &_footer {
+            padding-top:0;
+            @include el-content(before) {content:'div#footer';}
+        }
+    }
+    &.m {
+        #{$pgLayout} {
+        
+            &_header {
+                padding-top:0;
+                @include el-content(before) {content:'header#header';}
+                }
+            &_footer {
+                padding-top:0;
+                @include el-content(before) {content:'footer#footer';}
+                }
+        }
+    }
+}
+
+/*****************************************************************
+  Device Frame
+*****************************************************************/
+#{$pgDivice} {
+    @include pos-offset-r(7rem, -100%) {position:fixed; width:37rem; z-index:11;}
+    @extend %transition3s;
+
+    &.pop {
+        top:50%; left:50%; right:inherit; z-index:100;
+        transition:none; transform:translate(-50%, -50%);
+    }
+    &.fixed .head{cursor:pointer!important;}
+
+    .head {
+        @include pos(relative); @include overflow(both, hidden);
+        height:5rem; padding:0 5.5rem;
+        background-color:$color-brown3;
+
+        @include el-content(after) {
+            @include pos-offset-l(50%, 50%); @include el-size(.2rem, .2rem);
+            border-radius:100%; background-color:rgba(0,0,0,.3); opacity:0;
+            transform:translate(-50%, -50%);
+        }
+        &.active {
+            @include el-content(after) {
+                opacity:1; animation:ripple 0.5s linear;
+            }
+        }
+
+        & > button, & > a {
+            @include pos(absolute) {top:0;} @include el-size(5rem, 5rem);
+        }
+
+        & > a {
+            &.newWindow {
+                left:0;
+                background-image: svgIcon(fd_newWindow);
+                background-position:50% 50%; background-size:3rem 3rem; background-repeat:no-repeat;
+            }
+        }
+
+        & > button {
+            &.disconnect{
+                right:0;
+                background-image: svgIcon(fd_disconnect); background-position:50% 50%;  background-size:3rem 3rem; background-repeat:no-repeat;
+            }
+        }
+
+        & > h2 {
+            padding-top:.9rem; text-align:center;
+            @include ellipsis(1, auto);
+
+            & > span {
+                @include display(block); width:100%; padding:.3rem 0;
+                font-size:var(--space-xs); font-weight:500; color:$color-white;
+                @include ellipsis(1, auto);
+                & + span{font-size:var(--space-xs); }
+            }
+        }
+    }
+
+    .device {
+        @include pos(relative); padding:.5rem; background-color:$color-brown3;
+        .btn_size_set {
+            @include display(flex); width:100%; padding-bottom:.5rem;
+
+            button{
+                box-flex:1; -webkit-box-flex:1; justify-content:center; align-items:center;
+                @include el-size(100%, 2rem); background-color:$color-brown2;
+                font-size:var(--space-xs); font-weight:bold; color:$color-white;
+
+                & + button {margin-left:.3rem;}
+            }
+        }
+        iframe{width:100%; background-color:$color-white;}
+    }
+}
+
+@keyframes ripple {
+    0% {transform:scale(1)}
+    100% {transform:scale(250);opacity:0}
+}
+#{$htmlM} {
+    #{$pgDivice} {right:1rem;}
+}
+
+/*****************************************************************
+  Component
+*****************************************************************/
+.pg {
+    &-contentWrap {padding:2rem;}
+}
+.component {
+    &-lst {
+        @include display(flex);
+        @include flex;
+        flex-wrap:wrap;
+
+        & > li {margin-bottom:4rem;}
+    }
+
+    &-wrap {
+        min-width:375px;
+        & ~ & {margin-left:2rem;}
+        & > iframe {width:100%; height:64rem; border:.2rem $color-gray2 solid;}
+    }
+
+    &-item {
+        margin-bottom:2rem;
+        @include display(flex) {
+            flex-wrap: wrap;
+        };
+        & > * {padding:1.5rem 1rem; border-top:1px $color-gray1 solid; @include webfont("roboto", 400)}
+        & > dt {
+            @include flexbox(0, 0, 20%);
+            
+            &:first-child {
+                border:0;
+                & + dd {border:0;}
+            }
+        }
+        & > dd {
+            @include flexbox(0, 0, 80%);
+        }
+    }
+}
+
+.cp {
+    // title
+    &-tit {
+        &.dep01{@include fontSize("xxl");}
+        &.dep02{
+            @include fontSize("lg");
+            @include el-content(before){
+                // @include display(inline-block);
+                background:$color-green2;
+                width:1.5rem; height:.3rem;
+            }
+        }
+        &.dep03{
+            margin-bottom:1rem;
+            @include fontSize("md");
+            @include el-content(before){
+                color:$color-orange;
+                margin-right:1rem;
+                @include display(inline-block);
+                @include align(vertical, middle);
+                content:"\f02e";
+                @include webfont('iconFont', 900);
+            }
+        }
+
+        & + .btnWrap {margin-top:2rem;}
+    }
+
+
+}
+
+
+#cp {
+    &-wrap {
+        padding:2rem;
+
+        .cp {
+            &-content {
+                & ~ .cp-content {margin-top:3rem;}
+                .btnWrap > .btn {margin-bottom:1rem;}
+
+                & > .toolTip_wrap {margin:2rem 0;}
+                
+                .field + .field {margin:2rem 0;}
+                
+            }
+
+            &-tit {
+                &.dep01{@include fontSize("xxl");padding-bottom:.5rem; margin-bottom:1.5rem;}
+                &.dep02{
+                    @include fontSize("lg"); background:$color-tbl-thead; padding:.5rem 1rem;
+                    @include el-content(before){display:none;}
+                }
+                &.dep03{@include fontSize("md");}
+
+                & + .component {margin-top:.5rem;}
+                & + .field {margin-top:2rem;}
+            }
+        }
+    }
+}
+
+//table
+.tblWrap {
+    margin:1.5rem 0 .5rem;
+    #{$tbl} {
+        width:100%;
+        th, td {
+            padding:1rem;
+            border-top:1px $color-gray1 solid;
+        }
+
+        th {
+            background:$color-light-gray1;
+        }
+        td {
+            background:$color-light-gray2;
+        }
+        
+        tr {
+            &:first-child {
+                & > th, & > td {border-top:0;}
+            }
+        }
+    }
+}
+
+#{$hr} {
+    &.divice {@include display(block); visibility:visible; background:$color-gray5; border:none; height:1px;}
+}
+
+/*****************************************************************
+  Dark Mode
+*****************************************************************/
+#{$darMode} {
+    background-color:$color-darkMode3; color:$color-white;
+    body {background-color:$color-darkMode3; color:$color-white;}
+
+    #{$pgBoard} {
+        border:none;
+        table {
+            background-color:$color-darkMode;
+            thead {
+                th {
+                    select{background-color:$color-darkMode2; color:$color-white;}
+                    button{
+                        background-color:$color-black;
+
+                        @include el-content(both) {background-color:$color-gray4;}
+                    }
+                }
+            }
+
+            tbody {
+                tr.hr th{background-color:$color-darkMode; color:$color-white}
+                td a{color:$color-white;}
+            }
+
+            thead th, tbody td {background-color:$color-darkMode2; color:$color-white; font-weight:400;}
+        }
+        
+        &_tab {
+            background-color:$color-darkMode; border-color:$color-darkMode2;
+            ul li{
+                border-color:$color-darkMode;
+                & > button, & > a {background-color:$color-darkMode; color:$color-white}
+                &.active>button, &.active>a {background-color:$color-darkMode4;}
+            }
+        }
+    }
+
+    #{$pgHeader}, #{$pgTit} {background-color:$color-darkMode3;}
+
+    #{$pgHeader} {
+        #{$pg} {
+            &_util {
+                #{$pgSrch} {
+                    #btnPgSearch{
+                        background-image: svgIcon(btnPgSearchDark, ddd);
+                    }
+    
+                    input[type=text] {
+                        color:$color-white;
+                        background-color:rgba(255, 255, 255, 0.1);
+                        &:focus {background-color:rgba(37, 0, 0, 0.2);color:$color-white;}
+                        &::placeholder, &:-ms-input-placeholder, &::-ms-input-placeholder {color:$color-gray4;}
+                    }
+
+                    .btn_search_del {
+                        background-image: svgIcon(btn_search_cancel, ddd);
+                }
+                }
+            }
+        }
+    }
+
+    #{$pgStatus} {
+        #{$pgCount} {
+            & > span {color:$color-gray4;}
+        }
+
+        #{$pgProject} {
+            &_ing .pgraph .bar{background-color:$color-black;}
+        }
+    }
+
+    #{$pg} {
+        &_status {
+            &_box {
+                background-color:$color-darkMode4;
+                .bar {background-color:$color-darkMode3;}
+            }
+            .num, .ing {color:$color-white;}
+            span.num + span.num::before{background-color:rgba(255,255,255,0.5);}
+        }
+        &_util {
+            #{$pgSrch} {
+                #btnPgSearch{
+                    background-image: svgIcon(btnPgSearchDark, 666);
+                }
+
+                input[type=text] {
+                    color:$color-white;
+                    background-color:rgba(255, 255, 255, 0.1);
+                    &:focus {background-color:rgba(37, 0, 0, 0.2);color:$color-white;}
+                    &::placeholder, &:-ms-input-placeholder, &::-ms-input-placeholder {color:$color-gray4;}
+                }
+            }
+        }
+    }
+    
+    .btm_btn_set{border-color:$color-black;}
+
+    #{$pgGuide} {
+        &_top{background-color:$color-black;}
+    }
+
+    .btn_light_mode {
+        @include el-content(before) {
+            top:.6rem; left:.6rem; width:1.8rem; height:1.8rem;
+            background-color:$color-yellow3; border-radius:100%;
+        }
+        @include el-content(after) {transform:scale(0);}
+
+        & > i {
+            @include el-content(both) {transform:scale(1);}
+            @include el-content(before) {top:0;}
+            @include el-content(after) {bottom:0;}
+        }
+    }
+
+    .panel_head{background-color:$color-darkMode;}
+
+    #{pg_target} {
+        background-color:$color-gray3;
+        a {
+            background-color:$color-darkMode4;color:$color-white;
+            &.active{background-color:$color-black;}
+        }
+    }
+
+    .switch {
+        & > .bar{background-color:$color-black;}
+        & > ul > li {
+            & > a {
+                color:$color-black;
+                &:hover {color:$color-white;}
+            }
+            .active > a {color:$color-white;}
+        }
+    }
+
+    #{$pgDivice} {
+        border:.2rem solid $color-darkMode3;
+        .head, .device {background-color:$color-black;}
+        .device {
+            .btn_size_set button{background-color:$color-darkMode3;}
+        }
+    }
+}
+
+
+.pg {
+    &-docSection {
+        & + hr {display:block; border:0; height:18rem;}
+    }
+}
+
+.code {
+    .container {display:initial;}
+}
+
+/* TABLE */
+#{$tbl} {
+    &Wrap {
+    & > p:first-child {margin-top:0;}
+    p {margin:4rem 0 1rem;}
+      table{
+        @include width;
+        & + table {margin-top:2rem;}
+  
+        th, td {padding:1rem; @include line(border, .1rem $color-gray5 solid);}
+        th {border-color:$color-gray3;}
+  
+        thead {
+          th {background:$color-light-blue2;}
+          & + tbody {
+            & > tr:first-child th, & > tr:first-child td {@include line(border, none, top)}
+          }
+        }    
+        tbody {
+            th {background:$color-light-yellow1;}
+          }    
+      }
+
+      caption {
+        @include pos(relative !important);
+        padding:1.5rem 1rem .5rem !important;
+        background-color:$color-gray6;
+        font-size:var(--space-2xs) !important;
+        @include line(border, 1px $color-gray8 solid !important);
+    
+        @include el-content(before) {
+          @include display(inline-block !important) {content:'Table Caption' !important;}
+          @include pos-offset-l(-.5rem !important, -.5rem !important);
+          padding:.3rem 1rem;
+        }
+    
+        & > p {margin:0 !important;}
+      }
+      legend, caption {
+        @include overflow(both, visible !important);
+        @include el-size(auto !important, auto !important);
+        margin: auto !important;
+        line-height: inherit !important;
+        clip: auto;
+      } 
+      
+    }
+  }
+  
+  .cp-tbl {
+    @include display(flex) {justify-content:start;}
+    @include fontSize("xs"); font-weight: 400; margin-top:1rem;
+    .desc {
+      @include display(none);
+      @include width(50rem);
+      background:$color-light-green1; padding:15px;
+      margin-right:5rem;
+      @include line(border, .1rem $color-light-green2 solid);
+  
+      p {
+        @include el-content(before) {
+          @include display(inline-block);
+          @include el-size(.2rem, 1rem);
+          background-color:$color-orange;
+          margin-right:5px;
+        }
+        & ~ p, & ~ ul {margin-top:10px;}
+      }
+    }
+  
+    ul{
+      p{
+        @include el-content(before){@include display(none);}
+      }
+    }
+  
+    b {color:$color-red;}
+    strong {
+      color:$color-green;
+      font-weight: bold;
+      & + div, & + ul {margin-top:1rem;}
+    }
+  
+    .bul{
+      & > li {
+        @include pos(relative);
+        margin:.2rem 0 0; padding:0 0 .4rem 1.3rem; color:$color-black;
+  
+        @include el-content(before) {
+          @include pos-offset-l(.7rem, .5rem);
+          @include el-size(.3rem, .3rem);
+          border-radius: 100%; background-color:$color-blue2;
+        }
+      }
+    }
+    .case {
+      counter-reset: number 0;
+      & > li {
+        padding:10px 0; @include line(border, .1rem $color-light-green2 solid, top);
+        @include el-content(before) {
+          @include display(inline-block){content:'CASE';}
+          counter-increment: number 1;
+          color:$color-white; font-weight:400; font-size:var(--space-3xs);
+          background-color:$color-green;
+          padding:.3rem .5rem; margin-right:.5rem; border-radius:.3rem;
+          @include align(valign, top);
+        }
+      }
+    }
+    
+  }
+
+// media Query import
+// @import 'mediaquery';

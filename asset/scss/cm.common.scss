@@ -83,7 +83,7 @@ label {
     padding:.5rem 1rem;
     color:$color-gray6; text-decoration:none;
     background:$color-gray3;
-    @include border(border, 1px, solid, $color-gray4);
+    @include line(border, 1px solid $color-gray4);
     font-size:var(--space-ms);
     border-radius: .3rem;
 
@@ -106,7 +106,7 @@ label {
       @include pos(fixed) {left: -31%;top: 0;}
       width: 30%; height: 100vh;
       padding: 2rem;
-      @include border(border, 1px, solid, $color-gray4);
+      @include line(border, 1px solid $color-gray4);
       background-color: $color-white;
       transition: left .15s ease;
 
@@ -132,7 +132,7 @@ label {
             @include display(block);
             padding: 1.65rem;
             width: calc((100% - 3.2rem)/3);
-            @include border(border, 1px, solid, $color-black);
+            @include line(border, 1px solid $color-black);
             border-radius: 1.4rem;
             font-size: 1.2rem;
             text-align: center;
@@ -159,7 +159,7 @@ label {
         @include flex($j-content:center);
         flex-grow: 1;
         padding: 1rem;
-        @include border(border, 1px, solid, $color-gray4);
+        @include line(border, 1px solid $color-gray4);
         border-radius: 1rem;
         text-align: center;
       }
@@ -182,7 +182,7 @@ label {
     }
   }
   .section {
-    @include border(border, 1px, solid, $color-gray8);
+    @include line(border, 1px solid $color-gray8);
     max-width:var(--section); 
     width: 100%;
     margin:2rem auto;
@@ -220,7 +220,7 @@ label {
     }
     .md {
       position: relative;
-      @include border(outline, 3px, dashed, transparent);
+      @include line(outline, 3px dashed transparent);
       background:$color-white;
       min-height:10rem;
       cursor: pointer;
@@ -238,7 +238,7 @@ label {
           z-index: 101;
           padding: 1rem;
           background:$color-white;
-          @include border(border, 1px, dashed, $color-black);
+          @include line(border, 1px dashed $color-black);
         }
         .deleteBtn, .dragBtn, .optionBtn {
           @include display(block);
@@ -458,7 +458,7 @@ label {
     @include display(inline-block);
     @include pos(relative);
     padding: 1rem;
-    @include border(border, 1px, solid, $color-blue);
+    @include line(border, 1px solid $color-blue);
     border-radius: .25rem;
     font-size: 1.4rem;
     color: $color-blue;
@@ -493,7 +493,7 @@ label {
     @include display(inline-block);
     margin-right: 3rem;
     padding: 1rem;
-    @include border(border, 1px, dashed, #C8C8C8);
+    @include line(border, 1px dashed $color-gray8);
     cursor: pointer; 
   }
   .ct-img {
@@ -526,7 +526,7 @@ label {
       background-color: #ddd;
       width: 20px;
       height: 20px;
-      @include border(border, 1px, solid, #CCCCCC);
+      @include line(border, 1px solid $color-gray8);
       cursor: pointer;
 
       &+ div{ margin-left: 5px; }
