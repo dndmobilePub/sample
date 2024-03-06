@@ -929,7 +929,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
         
         dragFn: function () {
-            $(".section").sortable({
+            $(".module-edit").sortable({
                 tolerance: 'pointer', 
                 distance: 20,
             });
@@ -1087,7 +1087,6 @@ var COMPONENT_UI = (function (cp, $) {
                         
                         var optionCase = $(this).attr('goods-option');
                         var optionSwiper = $(this).attr('data-swiper');
-                        console.log(optionSwiper);
                         var optiondataType = $('.option-wrap').attr('data-type');
                         
                         $('.md[data-module="' + optiondataType + '"]').attr('data-case', optionCase);
@@ -1235,11 +1234,14 @@ var COMPONENT_UI = (function (cp, $) {
             $(document).ready(function() {
                 var initialSwipers = $('.section .swiper');
                 initialSwipers.each(function() {
-                    var swiperInstance = COMPONENT_UI.moduleBox.initializeSwiper(this);
-                    $(this).data('swiper', swiperInstance); 
+                    if (!$(this).hasClass('swiper-initialized')) {
+                        var swiperInstance = COMPONENT_UI.moduleBox.initializeSwiper(this);
+                        $(this).addClass('swiper-initialized').data('swiper', swiperInstance); 
+                    }
                 });
             });
         },
+        
         
     };
 

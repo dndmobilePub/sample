@@ -75,38 +75,55 @@ label {
   @include pos-offset-b(10%, auto, fixed){right:2%; z-index: 1000;}
   min-width:15rem;
   background:$color-gray2;
-}
-.btnWrap {
-  padding:.5rem;
-  & > a {
-    @include display(block);
-    padding:.5rem 1rem;
-    color:$color-gray6; text-decoration:none;
-    background:$color-gray3;
-    @include line(border, 1px solid $color-gray4);
-    font-size:var(--space-ms);
-    border-radius: .3rem;
 
-    & ~ a {margin-top:.5rem;}
-    &:hover {
-      color:$color-gray1;
-      font-weight:bold;
-      background:$color-white;
+  .btnWrap {
+    padding:.5rem;
+    & > a {
+      @include display(block);
+      padding:.5rem 1rem;
+      color:$color-gray6; text-decoration:none;
+      background:$color-gray3;
+      @include line(border, 1px solid $color-gray4);
+      font-size:var(--space-ms);
+      border-radius: .3rem;
+  
+      & ~ a {margin-top:.5rem;}
+      &:hover {
+        color:$color-gray1;
+        font-weight:bold;
+        background:$color-white;
+      }
     }
   }
 }
 
 .container {
-  @include display(flex);
+  // @include display(flex);
+  // flex-direction: column;  
+
+  .moduleWrap {
+    @include display(flex);
+    @include height(calc(100% - 10rem));
+    padding-bottom: 10rem;
+  }
+
+  .footer-btnWrap {
+    z-index:101;
+    @include pos-offset-b(0,0,fixed);
+    width:100%; height:7rem;
+    background:#ddd;
+  }
 
   /* 상세설정 */
   .option {
     &-wrap {
       overflow-y: auto;
       @include pos(fixed) {left: -31%;top: 0;}
-      width: 30%; height: 100vh;
+      width: 30%;
+      // height: 100vh;
+      @include height(calc(100vh - 7rem));
       padding: 2rem;
-      @include line(border, 1px solid $color-gray4);
+      @include line(border, 1px solid $color-gray4) {border-bottom:0;}
       background-color: $color-white;
       transition: left .15s ease;
 
@@ -181,7 +198,7 @@ label {
       margin-left: 30%;
     }
   }
-  .section {
+  .module-edit {
     @include line(border, 1px solid $color-gray8);
     max-width:var(--section); 
     width: 100%;
@@ -189,6 +206,7 @@ label {
     background: $color-gray6;
 
     [data-type="goods"] {
+      & > .btnWrap {margin:0; padding:1.5rem 1rem;}
       .swiper{
         @include display(flex);
         padding: 0 2rem 2rem;
@@ -220,25 +238,45 @@ label {
     }
     .md {
       position: relative;
-      @include line(outline, 3px dashed transparent);
+      @include line(outline, .3rem dashed transparent);
       background:$color-white;
       min-height:10rem;
       cursor: pointer;
-      & ~ .md {margin-top: 1.5rem;}
+      // & ~ .md {margin-top: 1.5rem;}
 
       &.md-gap {
         min-height: 0;
         height: 10rem;
+        @include pos(relative);
+        @include line(outline, .1rem dashed $color-light-gray1);
+        z-index:2;
+        &:hover, &._is-active {
+          background:$color-light-gray1;
+          outline-width: .3rem;
+          @include el-content(before) {
+            @include width;
+            @include pos-offset-l(50%, 0) {
+              margin-top:-.9rem;
+            }
+            content:'여백조정 : 모듈의 하단 부분을 드래그 하여 높이조절';
+            @include align(text, center);
+            background:$color-light-gray1;
+          }
+        }
+
+        & + .md-gap {
+          z-index:1;
+          &:hover, &._is-active {z-index:2;}
+        }
       }
 
       &:hover, &._is-active {
         .module-option {
           @include display(block);
-          @include pos-offset-l(0, -5rem){z-index:2;}
-          z-index: 101;
+          @include pos-offset-l(0, -5rem){z-index:101;}
           padding: 1rem;
           background:$color-white;
-          @include line(border, 1px dashed $color-black);
+          @include line(border, .1rem dashed $color-black);
         }
         .deleteBtn, .dragBtn, .optionBtn {
           @include display(block);
@@ -246,9 +284,11 @@ label {
       }
       &:hover {
         outline-color: $color-valid;
+        z-index:5;
       }
       &._is-active {
         outline-color: $flag-pk;
+        z-index:5;
       }
 
       .txtEdit {
@@ -306,7 +346,29 @@ label {
       }
 
       .swiper{
+        @include pos(relative);
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        list-style: none;
+        z-index: 1;
+
+        &-wrapper{
+          @include pos(relative){z-index: 1;};
+          @include display(flex);
+          @include el-size(100%, 100%);
+          transition-property: transform;
+          box-sizing: content-box;
+        }
         &-slide{
+          @include pos(relative);
+          @include el-size(100%, 100%);
+          flex-shrink: 0;
+          transition-property: transform;
+          
+          &-invisible-blank {
+              visibility: hidden;
+          }
           .txtEdit {
             padding: 1.2rem .8rem;
             font-size: 1.2rem;
@@ -316,8 +378,85 @@ label {
             text-align: center;
             img{
               max-width: 30rem;
-              width: 100%;
+              @include width(100%);
             }
+          }
+        }
+        &-pagination {
+          @include pos(absolute){z-index: 10;};
+          text-align: center;
+          transition: 300ms opacity;
+          transform: translate3d(0, 0, 0);
+
+          &-bullet{
+            @include display(inline-block);
+            @include el-size(1rem, 1rem);
+            background: $color-gray6;
+            border-radius: 50%;
+            &-active{
+              background: $color-blue;
+            }
+            & + .swiper-pagination-bullet{
+              margin-left: .6rem;
+            }
+          }
+          &-fraction,
+          &-custom,
+          &-bullets,
+          &-horizontal{
+            @include width(100%);
+            @include pos-offset-b(10px, 0);
+          }
+          &.swiper-pagination-hidden {
+            opacity: 0;
+          }
+          &-disabled,
+          &-lock{
+            @include display(none);
+            & > .swiper-pagination{
+              @include display(none);
+            }
+          }
+        }
+        &-button-prev{
+          left: 10px;
+          right: auto;
+          &:after{
+            content: '<';
+          }
+        }
+        &-button-next{
+          right: 10px;
+          left: auto;
+          &:after{
+            content: '>';
+          }
+        }
+        &-button-prev,
+        &-button-next {
+          @include pos-offset-l(50%, auto, $pos:absolute){z-index: 10;}
+          @include display(flex);
+          @include flex( $j-content:center, $al-items:center);
+          cursor: pointer;
+          color: $color-blue;
+
+          &.swiper-button{
+            &-disabled,
+            &-hidden{
+              opacity: 0.35;
+              cursor: auto;
+              pointer-events: none;
+            }
+            &-lock{
+              @include display(none);
+            }
+          }
+          &:after{
+            font-size: 5rem;
+            text-transform: none !important;
+            letter-spacing: 0;
+            font-variant: initial;
+            line-height: 1;
           }
         }
       }

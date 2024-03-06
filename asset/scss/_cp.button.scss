@@ -74,11 +74,11 @@
             color:$color-white;
             &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):hover {
                 color:$color-white;
-                background:$color-blue; border-color:$color-blue;
+                background:$color-blue2; border-color:$color-blue2;
             }
             &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):focus, &.is-active {
                 color:$color-white;
-                background:$color-blue; border-color:$color-blue;
+                background:$color-blue3; border-color:$color-blue3;
             }
             &[aria-disabled="disabled"], &.disabled {
                 color:$color-white;

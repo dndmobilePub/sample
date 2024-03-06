@@ -3,7 +3,8 @@
 		@include overflow (x, auto);
 		@include pos(relative);
 		@include width(100%);
-		margin: 1.5rem auto;
+		// margin: 1.5rem auto;
+		margin: 0 auto 1.5rem;
 		border: 0.1rem solid $color-light-gray1;
 		border-width: 0 0 0.1rem 0;
 		white-space: nowrap;
