@@ -202,7 +202,7 @@ var COMPONENT_UI = (function (cp, $) {
                     if ($inputTxt.val()) {
                         $clearBtn.addClass("_active");
                         if (!$inputTxt.parent().find(clearSelector + "._active").length) {
-                            $inputTxt.css({width:"calc(100% - 2.5rem)"}).parent().append(clearBtnEl);
+                            $inputTxt.css({width:"calc(373% - 2.5rem)"}).parent().append(clearBtnEl);
                         }
                     } else {
                         $clearBtn.removeClass("_active");
@@ -1011,8 +1011,6 @@ var COMPONENT_UI = (function (cp, $) {
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
                 newMd.attr('data-module', moduleId);
-                
-                cp.optionEdit.closeOptionWrap();
 
                 if (dataType === 'goods') {
                     newMd.attr('data-case', 'goodsSwiper');
@@ -1117,7 +1115,8 @@ var COMPONENT_UI = (function (cp, $) {
                     });
 
                 });
-
+                
+                cp.optionEdit.closeOptionWrap();
             });
         },
 
@@ -1721,7 +1720,7 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.optionOpen();
             this.optionClose();
-            this.gapHeight();
+            this.resizeable();
         },
         currentModuleData: null,
         optionOpen: function() {
@@ -1891,10 +1890,12 @@ var COMPONENT_UI = (function (cp, $) {
                 return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
             }
         },
-        gapHeight: function() {
-            $('.gap-height').on('input', function() {
-                var newHeight = $(this).val() + 'px';
-                $('.md-gap').css('height', newHeight);
+        resizeable: function() {
+            $(".md-gap").resizable({
+                handles: 's',
+                minWidth: 373,
+                maxWidth: 373,
+                minHeight: 10
             });
         }
     };
