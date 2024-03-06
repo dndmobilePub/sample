@@ -869,13 +869,13 @@ legend, caption {
 }
 .btn.bg.type3:not(.disabled):not([disabled]):not([aria-disabled=disabled]):hover {
   color: #fff;
-  background: #4b90df;
-  border-color: #4b90df;
+  background: #0048ff;
+  border-color: #0048ff;
 }
 .btn.bg.type3:not(.disabled):not([disabled]):not([aria-disabled=disabled]):focus, .btn.bg.type3.is-active {
   color: #fff;
-  background: #4b90df;
-  border-color: #4b90df;
+  background: #043b72;
+  border-color: #043b72;
 }
 .btn.bg.type3[aria-disabled=disabled], .btn.bg.type3.disabled {
   color: #fff;
@@ -1691,8 +1691,9 @@ legend, caption {
       -ms-flex-align: center;
           align-items: center;
   position: fixed;
-  bottom: 2%;
+  bottom: 7%;
   left: 0;
+  z-index: 200;
   margin: 1rem;
   width: calc(100% - 2rem);
   background-color: rgba(0, 0, 0, 0.5);
@@ -2314,11 +2315,10 @@ label input {
   min-width: 15rem;
   background: #333;
 }
-
-.btnWrap {
+.module-add-box .btnWrap {
   padding: 0.5rem;
 }
-.btnWrap > a {
+.module-add-box .btnWrap > a {
   display: block;
   padding: 0.5rem 1rem;
   color: #ddd;
@@ -2328,21 +2328,34 @@ label input {
   font-size: var(--space-ms);
   border-radius: 0.3rem;
 }
-.btnWrap > a ~ a {
+.module-add-box .btnWrap > a ~ a {
   margin-top: 0.5rem;
 }
-.btnWrap > a:hover {
+.module-add-box .btnWrap > a:hover {
   color: #242424;
   font-weight: bold;
   background: #fff;
 }
 
 .container {
+  /* 상세설정 */
+  /* 모듈 */
+}
+.container .moduleWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  /* 상세설정 */
-  /* 모듈 */
+  height: calc(100% - 10rem);
+  padding-bottom: 10rem;
+}
+.container .footer-btnWrap {
+  z-index: 101;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 7rem;
+  background: #ddd;
 }
 .container .option-wrap {
   overflow-y: auto;
@@ -2350,9 +2363,10 @@ label input {
   left: -31%;
   top: 0;
   width: 30%;
-  height: 100vh;
+  height: calc(100vh - 7rem);
   padding: 2rem;
   border: 1px solid #999;
+  border-bottom: 0;
   background-color: #fff;
   -webkit-transition: left 0.15s ease;
   transition: left 0.15s ease;
@@ -2463,42 +2477,46 @@ label input {
   width: 70%;
   margin-left: 30%;
 }
-.container .section {
+.container .module-edit {
   border: 1px solid #ccc;
   max-width: var(--section);
   width: 100%;
   margin: 2rem auto;
   background: #ddd;
 }
-.container .section [data-type=goods] .swiper {
+.container .module-edit [data-type=goods] > .btnWrap {
+  margin: 0;
+  padding: 1.5rem 1rem;
+}
+.container .module-edit [data-type=goods] .swiper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 0 2rem 2rem;
   min-height: 20rem;
 }
-.container .section [data-type=goods] .swiper img {
+.container .module-edit [data-type=goods] .swiper img {
   max-width: 30rem;
   width: 100%;
 }
-.container .section [data-type=goods][data-swiper=type03] .goodsWrap:after {
+.container .module-edit [data-type=goods][data-swiper=type03] .goodsWrap:after {
   content: "";
   display: block;
   clear: both;
 }
-.container .section [data-type=goods][data-swiper=type03] .goodsWrap .goods-img {
+.container .module-edit [data-type=goods][data-swiper=type03] .goodsWrap .goods-img {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
   margin-bottom: 0;
 }
-.container .section [data-type=goods][data-swiper=type03] .goodsWrap .item {
+.container .module-edit [data-type=goods][data-swiper=type03] .goodsWrap .item {
   width: calc(50% - 1.6rem);
   float: left;
 }
-.container .section .md {
+.container .module-edit .md {
   position: relative;
-  outline: 3px dashed transparent;
+  outline: 0.3rem dashed transparent;
   background: #fff;
   min-height: 10rem;
   cursor: pointer;
@@ -2511,66 +2529,90 @@ label input {
           color: #856404;
         } */
 }
-.container .section .md.md-gap {
+.container .module-edit .md.md-gap {
   min-height: 0;
   height: 10rem;
+  position: relative;
+  outline: 0.1rem dashed #e6e6e6;
+  z-index: 2;
 }
-.container .section .md:hover .module-option, .container .section .md._is-active .module-option {
+.container .module-edit .md.md-gap:hover, .container .module-edit .md.md-gap._is-active {
+  background: #e6e6e6;
+  outline-width: 0.3rem;
+}
+.container .module-edit .md.md-gap:hover::before, .container .module-edit .md.md-gap._is-active::before {
+  content: "";
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -0.9rem;
+  content: "여백조정 : 모듈의 하단 부분을 드래그 하여 높이조절";
+  text-align: center !important;
+  background: #e6e6e6;
+}
+.container .module-edit .md.md-gap + .md-gap {
+  z-index: 1;
+}
+.container .module-edit .md.md-gap + .md-gap:hover, .container .module-edit .md.md-gap + .md-gap._is-active {
+  z-index: 2;
+}
+.container .module-edit .md:hover .module-option, .container .module-edit .md._is-active .module-option {
   display: block;
   position: absolute;
   top: 0;
   left: -5rem;
-  z-index: 2;
   z-index: 101;
   padding: 1rem;
   background: #fff;
-  border: 1px dashed #000;
+  border: 0.1rem dashed #000;
 }
-.container .section .md:hover .deleteBtn, .container .section .md:hover .dragBtn, .container .section .md:hover .optionBtn, .container .section .md._is-active .deleteBtn, .container .section .md._is-active .dragBtn, .container .section .md._is-active .optionBtn {
+.container .module-edit .md:hover .deleteBtn, .container .module-edit .md:hover .dragBtn, .container .module-edit .md:hover .optionBtn, .container .module-edit .md._is-active .deleteBtn, .container .module-edit .md._is-active .dragBtn, .container .module-edit .md._is-active .optionBtn {
   display: block;
 }
-.container .section .md:hover {
+.container .module-edit .md:hover {
   outline-color: #0048ff;
   z-index: 5;
 }
-.container .section .md._is-active {
+.container .module-edit .md._is-active {
   outline-color: #e93c79;
   z-index: 5;
 }
-.container .section .md .txtEdit {
+.container .module-edit .md .txtEdit {
   position: relative;
   padding: 2.4rem;
   font-size: 1.4rem;
   color: #000;
 }
-.container .section .md .txtEdit h1 {
+.container .module-edit .md .txtEdit h1 {
   font-size: 2.8rem;
   font-weight: normal;
 }
-.container .section .md .txtEdit > *:not(:first-child) {
+.container .module-edit .md .txtEdit > *:not(:first-child) {
   margin-top: 1rem;
   font-weight: normal;
 }
-.container .section .md .txtEdit .fontBold {
+.container .module-edit .md .txtEdit .fontBold {
   font-weight: 700;
 }
-.container .section .md [contenteditable=true] {
+.container .module-edit .md [contenteditable=true] {
   position: relative;
   cursor: text;
   outline: 0;
 }
-.container .section .md .box-pd {
+.container .module-edit .md .box-pd {
   padding: 0 2.4rem 2.4rem;
 }
-.container .section .md .swiper-slide .txtEdit {
+.container .module-edit .md .swiper-slide .txtEdit {
   padding: 1.2rem 0.8rem;
   font-size: 1.2rem;
   font-weight: 700;
 }
-.container .section .md .swiper-slide .swiper-box {
+.container .module-edit .md .swiper-slide .swiper-box {
   text-align: center;
 }
-.container .section .md .swiper-slide .swiper-box img {
+.container .module-edit .md .swiper-slide .swiper-box img {
   max-width: 30rem;
   width: 100%;
 }

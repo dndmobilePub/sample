@@ -866,13 +866,13 @@ legend, caption {
 }
 .btn.bg.type3:not(.disabled):not([disabled]):not([aria-disabled=disabled]):hover {
   color: #fff;
-  background: #4b90df;
-  border-color: #4b90df;
+  background: #0048ff;
+  border-color: #0048ff;
 }
 .btn.bg.type3:not(.disabled):not([disabled]):not([aria-disabled=disabled]):focus, .btn.bg.type3.is-active {
   color: #fff;
-  background: #4b90df;
-  border-color: #4b90df;
+  background: #043b72;
+  border-color: #043b72;
 }
 .btn.bg.type3[aria-disabled=disabled], .btn.bg.type3.disabled {
   color: #fff;
@@ -1688,8 +1688,9 @@ legend, caption {
       -ms-flex-align: center;
           align-items: center;
   position: fixed;
-  bottom: 2%;
+  bottom: 7%;
   left: 0;
+  z-index: 200;
   margin: 1rem;
   width: calc(100% - 2rem);
   background-color: rgba(0, 0, 0, 0.5);
@@ -2311,11 +2312,10 @@ label input {
   min-width: 15rem;
   background: #333;
 }
-
-.btnWrap {
+.module-add-box .btnWrap {
   padding: 0.5rem;
 }
-.btnWrap > a {
+.module-add-box .btnWrap > a {
   display: block;
   padding: 0.5rem 1rem;
   color: #ddd;
@@ -2325,21 +2325,34 @@ label input {
   font-size: var(--space-ms);
   border-radius: 0.3rem;
 }
-.btnWrap > a ~ a {
+.module-add-box .btnWrap > a ~ a {
   margin-top: 0.5rem;
 }
-.btnWrap > a:hover {
+.module-add-box .btnWrap > a:hover {
   color: #242424;
   font-weight: bold;
   background: #fff;
 }
 
 .container {
+  /* 상세설정 */
+  /* 모듈 */
+}
+.container .moduleWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  /* 상세설정 */
-  /* 모듈 */
+  height: calc(100% - 10rem);
+  padding-bottom: 10rem;
+}
+.container .footer-btnWrap {
+  z-index: 101;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 7rem;
+  background: #ddd;
 }
 .container .option-wrap {
   overflow-y: auto;
@@ -2347,9 +2360,10 @@ label input {
   left: -31%;
   top: 0;
   width: 30%;
-  height: 100vh;
+  height: calc(100vh - 7rem);
   padding: 2rem;
   border: 1px solid #999;
+  border-bottom: 0;
   background-color: #fff;
   -webkit-transition: left 0.15s ease;
   transition: left 0.15s ease;
