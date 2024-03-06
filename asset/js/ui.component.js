@@ -356,11 +356,13 @@ var COMPONENT_UI = (function (cp, $) {
             this.openCropImg();
         },
         openCropImg: function () {
-            function loadCropModal($imgWrap) {
+            $('.imgWrap').on('click', function(){
+                var $imgWrap = $(this);
+
                 $('.cropModalWrap').load('./module/modal.html', function () {
                     var cropModalWrap = $(this);
                     var uniqueId = generateUniqueId();
-        
+    
                     var avatarId = 'avatar_' + uniqueId;
                     var inputId = 'input_' + uniqueId;
                     var modalId = 'modal_' + uniqueId;
@@ -372,26 +374,11 @@ var COMPONENT_UI = (function (cp, $) {
                     cropModalWrap.children('.modalPop').attr('id', modalId);
                     cropModalWrap.find('.img-container img').attr('id', imgId);
                     cropModalWrap.find('.btnCrop').attr('id', cropId);
-        
+    
                     cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap);
                 });
-            }
-        
-            $('.imgWrap').on('click', function(){
-                var $imgWrap = $(this);
-
-                if (!$imgWrap.is('.img-background')) {
-                    loadCropModal($imgWrap);
-                }
-            });
-        
-            $('.imgAdd').on('click', function(){
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $imgWrap = $('.md[data-module="' + dataType + '"]').find('.imgWrap');
-
-                loadCropModal($imgWrap);
-            });
-        },        
+            })
+        },
         iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap) {
             var avatar = $('#' + avatarId)[0];
             var $image = $('#' + imgId)[0];
@@ -1584,7 +1571,6 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.spectrumColor();
             this.colorSelect();
-            this.spectrumGrColor();
         },
         spectrumColor: function(initialColor) {
             $(document).ready(function(){
@@ -1715,7 +1701,7 @@ var COMPONENT_UI = (function (cp, $) {
                 if (!$this.has('.textEditerWrap').length) {
                     $('.textEditerWrap').remove();
                     $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $this.prev('.textEditerWrap').load('text-edit.html', function(){
+                    $this.prev('.textEditerWrap').load('./module/text-edit.html', function(){
                         var targetData = $('.edit-box').data('edit');
                     
                         $this.attr('edit-target', targetData);
@@ -1805,13 +1791,13 @@ var COMPONENT_UI = (function (cp, $) {
             $("#thumnail").off('load').on("load", ex_img_onload);
 
             function ex_file_upload() {
-                $("#thumnail").show();
                 var file = this.files[0];
                 if (!file) return;
     
                 var fileReader = new FileReader();
                 fileReader.onload = function() {
                     $("#thumnail").attr("src", this.result);
+                    $("#thumnail").hide();
                 };
                 fileReader.readAsDataURL(file);
             }
@@ -1888,10 +1874,6 @@ var COMPONENT_UI = (function (cp, $) {
                     var _div = $("<div></div>").css("background-color", "#" + _color);
                     palette.append(_div);
                 });
-                setTimeout(function(){
-                    $("#thumnail").hide();
-                })
-                
             }
         },
         imgColorSelect: function(dataType) {
@@ -1921,188 +1903,12 @@ var COMPONENT_UI = (function (cp, $) {
                 return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
             }
         },
-        colorSelect: function() {
-            $('.color-selbox input[name="colorSelect"]').change(function() {
-                var selectedOption = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-
-                $('.md[data-module="' + dataType + '"]').find('.tab a').css('color', selectedOption);
-            });
-        },
-        spectrumGrColor: function(initialColor) {
-            $(document).ready(function(){
-                $(".txtBgColor").spectrum({
-                    flat: false,
-                    showInput: true,
-                    preferredFormat: "hex",
-                    showInitial: true,
-                    showPalette: true,
-                    showSelectionPalette: true,
-                    maxPaletteSize: 10,
-                    color: initialColor,
-                    change: function(color) {
-                        var selectedColor = color.toHexString();
-                        cp.colorEdit.txtBgColor(selectedColor);
-                    }
-                });
-            });
-        },
-        txtBgColor:function(selectedColor) {
-            $('.txtBgColor').on('change', function() {
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
-
-                $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
-            });
-        }
-    };
-
-    cp.fontEditer = {
-        init: function() {
-            this.fontBold();
-            this.fontSize();
-            this.editOpen();
-        },
-        fontBold: function() {
-            $(document).off('click').on('click', '.editBold', function(){
-                var targetData = $('.edit-box').data('edit');
-                var thisWrap = $(this).closest('.textEditerWrap');
-                var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
-    
-                if (contentEditable.length) {
-                    if (contentEditable.hasClass('fontBold')) {
-                        contentEditable.removeClass('fontBold');
-                    } else {
-                        contentEditable.addClass('fontBold');
-                    }
-                }
-            })
-        },
-        fontSize: function() {
-            $(document).on('change', '.editSize', function(){
-                var newSize = parseInt($(this).val().trim());
-                var targetData = $('.edit-box').data('edit');
-                var thisWrap = $(this).closest('.textEditerWrap');
-
-                thisWrap.next('[contenteditable]').each(function() {
-                    if ($(this).attr('edit-target') === targetData) {                        
-                        if (!isNaN(newSize) && newSize > 0) {
-                            $(this).css('font-size', newSize + 'px');
-                        }
-                    }
-                })
-            })
-        },
-        editOpen: function() {
-            $(document).on('click', '[contenteditable]', function(event) {
-                var $this = $(this);
-                var thisColor = $this.css('color');
-
-                if (event.type === 'click') {
-                    $this.attr('contenteditable', 'true');
-                    $this.focus();
-                }
-
-                if (!$this.has('.textEditerWrap').length) {
-                    $('.textEditerWrap').remove();
-                    $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $this.prev('.textEditerWrap').load('text-edit.html', function(){
-                        var targetData = $('.edit-box').data('edit');
-                    
-                        $this.attr('edit-target', targetData);
-                        $(this).show();
-                        cp.colorEdit.spectrumColor(thisColor);
-                    })
-                }
-            });
-            
-            $(document).on('click', function(event) {
-                var clickedElement = $(event.target);
-                var contentEditableElement = clickedElement.closest('[contenteditable]');
-                var pcrAppElement = clickedElement.closest('.pcr-app');
-                var textEditerWrapElement = clickedElement.closest('.textEditerWrap');
-                
-                if (contentEditableElement.length > 0 || pcrAppElement.length > 0 || textEditerWrapElement.length > 0) {
-                    return;
-                }
-            
-                if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
-                    $('[contenteditable]').removeAttr('edit-target').attr('contenteditable', 'false');
-                    $('.textEditerWrap').remove();
-                }
-            });
-        }
-    };
-
-    cp.optionEdit = {
-        init: function() {
-            this.optionOpen();
-            this.optionClose();
-            this.resizeable();
-            this.inpTxtLocation();
-            this.txtBgHeight();
-            //this.txtBgColor();
-        },
-        currentModuleData: null,
-        optionOpen: function() {
-            cp.optionEdit.currentModuleData = null;
-            $('html, body').on('click', '.optionBtn', function() {
-                const $thisMd = $(this).closest('.md');
-                cp.optionEdit.currentModuleData = $thisMd.data('module');
-                const dataType = $thisMd.data('type');
-                const bgColor = $thisMd.css('background-color');
-    
-                $('.md').removeClass('_is-active');
-                $thisMd.addClass('_is-active');
-                $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
-                $('.option-box').hide();
-                $('.option-box:not([data-type])').show();
-                $('.option-box[data-type="'+dataType+'"]').show();
-                $('.moduel-wrap').addClass('_right');
-                cp.colorEdit.resetImgColor();
-                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
-                cp.colorEdit.imgColor();
-                cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
-                cp.fontEditer.init();
-            });
-        },
-        optionClose: function() {
-            this.closeOptionWrap = function() {
-                const $optionWrap = $('.option-wrap');
-                cp.optionEdit.currentModuleData = null;
-                $optionWrap.attr('data-type','').removeClass('show');
-                $('.moduel-wrap').removeClass('_right');
-                cp.colorEdit.resetImgColor();
-                $('.md').removeClass('_is-active');
-            };
-        
-            $('html, body').on('click', '.optionClsBtn', this.closeOptionWrap);
-        },
         resizeable: function() {
             $(".md-gap").resizable({
                 handles: 's',
                 minWidth: 373,
                 maxWidth: 373,
                 minHeight: 10
-            });
-        },
-        inpTxtLocation:function() {
-            $('input[name="location"]').on('change', function() {
-                var locationValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
-
-                $txtEdit.removeClass();
-                $txtEdit.addClass('txtEdit ' + locationValue);
-            });
-        },
-        txtBgHeight:function() {
-            $('.txtBgHeight').on('change', function() {
-                var heightValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
-
-                $txtEditBg.css('height', heightValue);
             });
         }
     };
