@@ -270,6 +270,30 @@ label {
           font-weight: 700;
         }
       }
+      .imgWrap {
+        .txtEdit {
+          @include display(flex);
+          @include flex($direction:column,  $j-content:flex-end);
+          @include pos-offset-l(0,0) {z-index: 1;};
+          width: 100%;
+          height: 100%;
+
+          &.center {
+            @include flex($direction:column,  $j-content:center);
+            text-align: center;
+          }
+          &.leftBottom {
+            @include flex($direction:column,  $j-content:flex-end, $al-items:flex-start);
+            text-align: left;
+          }
+
+          &Bg {
+            @include pos(absolute) {bottom: 0; left: 0; z-index: -1;};
+            width: 100%; height: 30%;
+            background: linear-gradient(to top, #ccc, transparent);
+          }
+        }
+      }
       
       [contenteditable=true] {
         @include pos(relative);
@@ -311,6 +335,7 @@ label {
 
 /* 이미지 */
 .imgWrap {
+  @include pos(relative);
   img {
     @include display(block);
     width: 100%;

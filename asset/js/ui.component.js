@@ -356,13 +356,11 @@ var COMPONENT_UI = (function (cp, $) {
             this.openCropImg();
         },
         openCropImg: function () {
-            $('.imgWrap').on('click', function(){
-                var $imgWrap = $(this);
-
+            function loadCropModal($imgWrap) {
                 $('.cropModalWrap').load('modal.html', function () {
                     var cropModalWrap = $(this);
                     var uniqueId = generateUniqueId();
-    
+        
                     var avatarId = 'avatar_' + uniqueId;
                     var inputId = 'input_' + uniqueId;
                     var modalId = 'modal_' + uniqueId;
@@ -374,11 +372,26 @@ var COMPONENT_UI = (function (cp, $) {
                     cropModalWrap.children('.modalPop').attr('id', modalId);
                     cropModalWrap.find('.img-container img').attr('id', imgId);
                     cropModalWrap.find('.btnCrop').attr('id', cropId);
-    
+        
                     cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap);
                 });
-            })
-        },
+            }
+        
+            $('.imgWrap').on('click', function(){
+                var $imgWrap = $(this);
+
+                if (!$imgWrap.is('.img-background')) {
+                    loadCropModal($imgWrap);
+                }
+            });
+        
+            $('.imgAdd').on('click', function(){
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $imgWrap = $('.md[data-module="' + dataType + '"]').find('.imgWrap');
+
+                loadCropModal($imgWrap);
+            });
+        },        
         iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap) {
             var avatar = $('#' + avatarId)[0];
             var $image = $('#' + imgId)[0];
@@ -1558,6 +1571,7 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.spectrumColor();
             this.colorSelect();
+            this.spectrumGrColor();
         },
         spectrumColor: function(initialColor) {
             $(document).ready(function(){
@@ -1629,12 +1643,175 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         },
+        resetImgColor: function() {
+            $("#btn-upload").val("");
+            $("#thumnail").removeAttr("src");
+        
+            // canvas 초기화 (있는 경우)
+            var canvas = document.getElementById("canvas-main");
+            if (canvas) {
+                var ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        
+            $("#palette").empty();
+        },
+        imgColor: function() {
+            // 파일 업로드 이벤트 바인딩
+            $("#btn-upload").off('change').on('change', ex_file_upload);
+    
+            // 메인 이미지 변경 이벤트 바인딩
+            $("#thumnail").off('load').on("load", ex_img_onload);
+
+            function ex_file_upload() {
+                $("#thumnail").show();
+                var file = this.files[0];
+                if (!file) return;
+    
+                var fileReader = new FileReader();
+                fileReader.onload = function() {
+                    $("#thumnail").attr("src", this.result);
+                };
+                fileReader.readAsDataURL(file);
+            }
+            function ex_img_onload() {
+                // 캔버스 요소와 그래픽 컨텍스트 생성
+                var cnv = document.getElementById("canvas-main");
+                var ctx = cnv.getContext("2d");
+            
+                // 캔버스 크기를 이미지의 크기로 설정
+                cnv.setAttribute("width", this.width);
+                cnv.setAttribute("height", this.height);
+            
+                // 이미지를 캔버스에 그림
+                ctx.drawImage(this, 0, 0, this.width, this.height);
+            
+                // 캔버스의 이미지 데이터를 가져옴
+                var imgData = ctx.getImageData(0, 0, cnv.width, cnv.height);
+            
+                // 이미지의 색상 데이터를 저장할 배열 및 변수들 초기화
+                var colors = [];
+                var blocksize = 1;
+                var count = 0;
+                var i = -4;
+            
+                // 이미지의 각 픽셀을 순회하며 색상 데이터를 추출
+                while ((i += blocksize * 4) < imgData.data.length) {
+                    ++count;
+                    var v_rgba = [imgData.data[i], imgData.data[i + 1], imgData.data[i + 2], imgData.data[i + 3]];
+                    var v_hex = v_rgba.map(function(color_val) {
+                        var _hex = color_val.toString(16);
+                        return _hex.length == 1 ? "0" + _hex : _hex;
+                    });
+                    v_hex = v_hex.join("");
+                    colors.push(v_hex);
+                }
+            
+                // 색상 별로 발생한 횟수를 계산하여 객체에 저장
+                var picaker = {};
+                var old_color = null;
+                colors.sort().forEach(function(colorhex, arrindx, arr) {
+                    if (old_color != colorhex) {
+                        picaker[colorhex] = 0;
+                        old_color = colorhex;
+                    }
+                    return picaker[colorhex] = (picaker[colorhex] || 0) + 1;
+                });
+            
+                // 색상 별로 정렬하여 배열에 저장
+                colors = picaker;
+                picaker = [];
+                for (var color in colors) {
+                    picaker.push([color, colors[color]]);
+                }
+                picaker.sort(function(a, b) {
+                    return a[1] - b[1];
+                });
+                picaker.reverse();
+            
+                // 상위 5개의 색상 데이터만 선택
+                picaker = picaker.slice(0, 5);
+            
+                // 그라디언트를 생성할 문자열 및 색상 팔레트 요소 초기화
+                generateGradientAndPalette(picaker);
+            }
+            function generateGradientAndPalette(colors) {
+                // 색상 별로 그라디언트 생성 및 팔레트에 추가
+                var color_gradient = "";
+                var palette = $("#palette").empty();
+    
+                colors.forEach(function(item) {
+                    var _color = item[0];
+                    if (color_gradient != "") color_gradient += ",";
+                    color_gradient += " #" + _color;
+                    var _div = $("<div></div>").css("background-color", "#" + _color);
+                    palette.append(_div);
+                });
+                setTimeout(function(){
+                    $("#thumnail").hide();
+                })
+                
+            }
+        },
+        imgColorSelect: function(dataType) {
+            $('body').off('click').on('click', '#palette div', function(event){
+                if ($(event.target).is('div')) {
+                    var rgbColor = $(event.target).css('background-color');
+                    var selectedBgColor = rgbToHex(rgbColor);
+                    var $p = $('<p></p>').text('Selected color: ' + selectedBgColor);
+                    
+                    $('#palette p').remove();
+                    $('#palette').append($p);
+
+                    cp.colorEdit.bgColor(selectedBgColor, dataType);
+                    cp.colorEdit.spectrumBgColor(dataType, selectedBgColor);
+                }
+                
+                event.preventDefault();
+                event.stopPropagation();
+            })
+            function rgbToHex(rgb) {
+                var rgbValues = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+                
+                function hex(x) {
+                    return ("0" + parseInt(x).toString(16)).slice(-2);
+                }
+                
+                return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
+            }
+        },
         colorSelect: function() {
             $('.color-selbox input[name="colorSelect"]').change(function() {
                 var selectedOption = $(this).val();
                 var dataType = $(this).closest('.option-wrap').data('type');
 
                 $('.md[data-module="' + dataType + '"]').find('.tab a').css('color', selectedOption);
+            });
+        },
+        spectrumGrColor: function(initialColor) {
+            $(document).ready(function(){
+                $(".txtBgColor").spectrum({
+                    flat: false,
+                    showInput: true,
+                    preferredFormat: "hex",
+                    showInitial: true,
+                    showPalette: true,
+                    showSelectionPalette: true,
+                    maxPaletteSize: 10,
+                    color: initialColor,
+                    change: function(color) {
+                        var selectedColor = color.toHexString();
+                        cp.colorEdit.txtBgColor(selectedColor);
+                    }
+                });
+            });
+        },
+        txtBgColor:function(selectedColor) {
+            $('.txtBgColor').on('change', function() {
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+
+                $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
             });
         }
     };
@@ -1721,6 +1898,9 @@ var COMPONENT_UI = (function (cp, $) {
             this.optionOpen();
             this.optionClose();
             this.resizeable();
+            this.inpTxtLocation();
+            this.txtBgHeight();
+            //this.txtBgColor();
         },
         currentModuleData: null,
         optionOpen: function() {
@@ -1738,10 +1918,10 @@ var COMPONENT_UI = (function (cp, $) {
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
                 $('.moduel-wrap').addClass('_right');
-                cp.optionEdit.resetImgColor();
+                cp.colorEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
-                cp.optionEdit.imgColor();
-                cp.optionEdit.imgColorSelect(cp.optionEdit.currentModuleData);
+                cp.colorEdit.imgColor();
+                cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
             });
         },
@@ -1751,144 +1931,11 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.optionEdit.currentModuleData = null;
                 $optionWrap.attr('data-type','').removeClass('show');
                 $('.moduel-wrap').removeClass('_right');
-                cp.optionEdit.resetImgColor();
+                cp.colorEdit.resetImgColor();
                 $('.md').removeClass('_is-active');
             };
         
             $('html, body').on('click', '.optionClsBtn', this.closeOptionWrap);
-        },
-        resetImgColor: function() {
-            $("#btn-upload").val("");
-            $("#thumnail").removeAttr("src");
-        
-            // canvas 초기화 (있는 경우)
-            var canvas = document.getElementById("canvas-main");
-            if (canvas) {
-                var ctx = canvas.getContext("2d");
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-        
-            $("#palette").empty();
-        },
-        imgColor: function() {
-            // 파일 업로드 이벤트 바인딩
-            $("#btn-upload").off('change').on('change', ex_file_upload);
-    
-            // 메인 이미지 변경 이벤트 바인딩
-            $("#thumnail").off('load').on("load", ex_img_onload);
-
-            function ex_file_upload() {
-                var file = this.files[0];
-                if (!file) return;
-    
-                var fileReader = new FileReader();
-                fileReader.onload = function() {
-                    $("#thumnail").attr("src", this.result);
-                    $("#thumnail").hide();
-                };
-                fileReader.readAsDataURL(file);
-            }
-            function ex_img_onload() {
-                // 캔버스 요소와 그래픽 컨텍스트 생성
-                var cnv = document.getElementById("canvas-main");
-                var ctx = cnv.getContext("2d");
-            
-                // 캔버스 크기를 이미지의 크기로 설정
-                cnv.setAttribute("width", this.width);
-                cnv.setAttribute("height", this.height);
-            
-                // 이미지를 캔버스에 그림
-                ctx.drawImage(this, 0, 0, this.width, this.height);
-            
-                // 캔버스의 이미지 데이터를 가져옴
-                var imgData = ctx.getImageData(0, 0, cnv.width, cnv.height);
-            
-                // 이미지의 색상 데이터를 저장할 배열 및 변수들 초기화
-                var colors = [];
-                var blocksize = 1;
-                var count = 0;
-                var i = -4;
-            
-                // 이미지의 각 픽셀을 순회하며 색상 데이터를 추출
-                while ((i += blocksize * 4) < imgData.data.length) {
-                    ++count;
-                    var v_rgba = [imgData.data[i], imgData.data[i + 1], imgData.data[i + 2], imgData.data[i + 3]];
-                    var v_hex = v_rgba.map(function(color_val) {
-                        var _hex = color_val.toString(16);
-                        return _hex.length == 1 ? "0" + _hex : _hex;
-                    });
-                    v_hex = v_hex.join("");
-                    colors.push(v_hex);
-                }
-            
-                // 색상 별로 발생한 횟수를 계산하여 객체에 저장
-                var picaker = {};
-                var old_color = null;
-                colors.sort().forEach(function(colorhex, arrindx, arr) {
-                    if (old_color != colorhex) {
-                        picaker[colorhex] = 0;
-                        old_color = colorhex;
-                    }
-                    return picaker[colorhex] = (picaker[colorhex] || 0) + 1;
-                });
-            
-                // 색상 별로 정렬하여 배열에 저장
-                colors = picaker;
-                picaker = [];
-                for (var color in colors) {
-                    picaker.push([color, colors[color]]);
-                }
-                picaker.sort(function(a, b) {
-                    return a[1] - b[1];
-                });
-                picaker.reverse();
-            
-                // 상위 5개의 색상 데이터만 선택
-                picaker = picaker.slice(0, 5);
-            
-                // 그라디언트를 생성할 문자열 및 색상 팔레트 요소 초기화
-                generateGradientAndPalette(picaker);
-            }
-            function generateGradientAndPalette(colors) {
-                // 색상 별로 그라디언트 생성 및 팔레트에 추가
-                var color_gradient = "";
-                var palette = $("#palette").empty();
-    
-                colors.forEach(function(item) {
-                    var _color = item[0];
-                    if (color_gradient != "") color_gradient += ",";
-                    color_gradient += " #" + _color;
-                    var _div = $("<div></div>").css("background-color", "#" + _color);
-                    palette.append(_div);
-                });
-            }
-        },
-        imgColorSelect: function(dataType) {
-            $('body').off('click').on('click', '#palette div', function(event){
-                if ($(event.target).is('div')) {
-                    var rgbColor = $(event.target).css('background-color');
-                    var selectedBgColor = rgbToHex(rgbColor);
-                    var $p = $('<p></p>').text('Selected color: ' + selectedBgColor);
-                    
-                    $('#palette p').remove();
-                    $('#palette').append($p);
-
-                    cp.colorEdit.bgColor(selectedBgColor, dataType);
-                    cp.colorEdit.spectrumBgColor(dataType, selectedBgColor);
-                }
-                
-                event.preventDefault();
-                event.stopPropagation();
-            })
-            function rgbToHex(rgb) {
-                var rgbValues = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-                
-                function hex(x) {
-                    return ("0" + parseInt(x).toString(16)).slice(-2);
-                }
-                
-                return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
-            }
         },
         resizeable: function() {
             $(".md-gap").resizable({
@@ -1896,6 +1943,25 @@ var COMPONENT_UI = (function (cp, $) {
                 minWidth: 373,
                 maxWidth: 373,
                 minHeight: 10
+            });
+        },
+        inpTxtLocation:function() {
+            $('input[name="location"]').on('change', function() {
+                var locationValue = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+
+                $txtEdit.removeClass();
+                $txtEdit.addClass('txtEdit ' + locationValue);
+            });
+        },
+        txtBgHeight:function() {
+            $('.txtBgHeight').on('change', function() {
+                var heightValue = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+
+                $txtEditBg.css('height', heightValue);
             });
         }
     };
