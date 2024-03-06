@@ -1210,7 +1210,7 @@ legend, caption {
   overflow-x: auto;
   position: relative;
   width: 100%;
-  margin: 1.5rem auto;
+  margin: 0 auto 1.5rem;
   border: 0.1rem solid #e6e6e6;
   border-width: 0 0 0.1rem 0;
   white-space: nowrap;
@@ -2511,9 +2511,6 @@ label input {
           color: #856404;
         } */
 }
-.container .section .md ~ .md {
-  margin-top: 1.5rem;
-}
 .container .section .md.md-gap {
   min-height: 0;
   height: 10rem;
@@ -2534,9 +2531,11 @@ label input {
 }
 .container .section .md:hover {
   outline-color: #0048ff;
+  z-index: 5;
 }
 .container .section .md._is-active {
   outline-color: #e93c79;
+  z-index: 5;
 }
 .container .section .md .txtEdit {
   position: relative;

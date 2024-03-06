@@ -916,7 +916,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
         
         dragFn: function () {
-            $(".section").sortable({
+            $(".module-edit").sortable({
                 tolerance: 'pointer', 
                 distance: 20,
             });
@@ -1906,9 +1906,9 @@ var COMPONENT_UI = (function (cp, $) {
         resizeable: function() {
             $(".md-gap").resizable({
                 handles: 's',
-                minWidth: 373,
-                maxWidth: 373,
-                minHeight: 10
+                minWidth: '100%',
+                maxWidth: '100%',
+                minHeight: 20
             });
         }
     };
