@@ -1141,7 +1141,7 @@ var COMPONENT_UI = (function (cp, $) {
 
                 });
 
-
+                cp.optionEdit.closeOptionWrap();
                     
             });
         },
@@ -1584,6 +1584,7 @@ var COMPONENT_UI = (function (cp, $) {
         init: function() {
             this.spectrumColor();
             this.colorSelect();
+            this.spectrumGrColor();
         },
         spectrumColor: function(initialColor) {
             $(document).ready(function(){
@@ -1798,6 +1799,32 @@ var COMPONENT_UI = (function (cp, $) {
 
                 $('.md[data-module="' + dataType + '"]').find('.tab a').css('color', selectedOption);
             });
+        },
+        spectrumGrColor: function(initialColor) {
+            $(document).ready(function(){
+                $(".txtBgColor").spectrum({
+                    flat: false,
+                    showInput: true,
+                    preferredFormat: "hex",
+                    showInitial: true,
+                    showPalette: true,
+                    showSelectionPalette: true,
+                    maxPaletteSize: 10,
+                    color: initialColor,
+                    change: function(color) {
+                        var selectedColor = color.toHexString();
+                        cp.colorEdit.txtBgColor(selectedColor);
+                    }
+                });
+            });
+        },
+        txtBgColor:function(selectedColor) {
+            $('.txtBgColor').on('change', function() {
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+
+                $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
+            });
         }
     };
 
@@ -1883,6 +1910,7 @@ var COMPONENT_UI = (function (cp, $) {
             this.optionOpen();
             this.optionClose();
             this.resizeable();
+            this.gapHeight();
             this.inpTxtLocation();
             this.txtBgHeight();
             //this.txtBgColor();
@@ -1927,7 +1955,19 @@ var COMPONENT_UI = (function (cp, $) {
                 handles: 's',
                 minWidth: 373,
                 maxWidth: 373,
-                minHeight: 10
+                minHeight: 10,
+                stop: function(event, ui) {
+                    var newHeight = ui.size.height;
+                    $('.gap-height').val(newHeight);
+                    //const dataType = $(this).data('module');
+                    //$('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
+                }
+            });
+        },
+        gapHeight: function() {
+            $('.gap-height').on('input', function() {
+                var newHeight = $(this).val() + 'px';
+                $('.md-gap').css('height', newHeight);
             });
         },
         inpTxtLocation:function() {
