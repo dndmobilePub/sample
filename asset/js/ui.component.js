@@ -357,7 +357,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
         openCropImg: function () {
             function loadCropModal($imgWrap) {
-                $('.cropModalWrap').load('modal.html', function () {
+                $('.cropModalWrap').load('./module/modal.html', function () {
                     var cropModalWrap = $(this);
                     var uniqueId = generateUniqueId();
         
@@ -596,21 +596,11 @@ var COMPONENT_UI = (function (cp, $) {
         openPop: function () {
             const self = this,
                 btnModal = this.constEl.btnModal;
-            $('html').on('click', btnModal, function() {
-               
-                self.mdGoodsPop($(this));
-                    self.showModal($(this));
-                $(this).addClass('_rtFocus');                
+            $(document).on('click', btnModal, function() {
+                $(this).addClass('_rtFocus');
+                self.showModal($(this));
                 self.layerFocusControl($(this));
             });
-        },
-
-        mdGoodsPop:function() {
-            $('.modalPop[module-type="goods"]').each(function() {
-                var targetModal = $(this).data('modal');
-                $(this).attr('modal-target', targetModal);
-            });
-            // cp.modalPop.showModal($(this));
         },
         
         showModal: function ($btn) {
@@ -740,9 +730,35 @@ var COMPONENT_UI = (function (cp, $) {
             $('body').addClass('no-scroll').append(dimmedEl);            
         },
         
+        // 접근성 포커스 반영
+        layerFocusControl: function ($btn) {
+            const target = $btn.attr('data-modal') || $btn.attr('data-select');
+            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
+            var $modalWrap = $modal.find("> .modalWrap");
+            
+            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
+            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
+            
+            $modalWrap.on("keydown", function (e) {
+                if (e.keyCode == 9) {
+                if (e.shiftKey) { // shift + tab
+                    if ($(e.target).is($firstEl)) {
+                        $lastEl.focus();
+                        e.preventDefault();
+                        }
+                    } else { // tab
+                        if ($(e.target).is($lastEl)) {
+                        $firstEl.focus();
+                        e.preventDefault();
+                        }
+                    }
+                }
+            });
+        },
+        
         closePop: function() {
             const self = this;
-            $('.modalPop').on('click', '.btn-close-pop', function() {
+            $(document).on('click', '.modalPop .btn-close-pop', function() {
                 var $modal = $(this).closest('.modalPop');
                 var $modalWrap = $modal.find("> .modalWrap");
                 var modalWrapClass = $modal.attr('class');
@@ -810,32 +826,6 @@ var COMPONENT_UI = (function (cp, $) {
                 $('body').removeClass('no-scroll');
                 $(this).closest('.modalPop').prev().focus();
                 $('.dimmed').remove();
-            });
-        },
-        
-        // 접근성 포커스 반영
-        layerFocusControl: function ($btn) {
-            const target = $btn.attr('data-modal') || $btn.attr('data-select');
-            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
-            var $modalWrap = $modal.find("> .modalWrap");
-            
-            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
-            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
-            
-            $modalWrap.on("keydown", function (e) {
-                if (e.keyCode == 9) {
-                if (e.shiftKey) { // shift + tab
-                    if ($(e.target).is($firstEl)) {
-                        $lastEl.focus();
-                        e.preventDefault();
-                        }
-                    } else { // tab
-                        if ($(e.target).is($lastEl)) {
-                        $firstEl.focus();
-                        e.preventDefault();
-                        }
-                    }
-                }
             });
         },
 
@@ -915,7 +905,7 @@ var COMPONENT_UI = (function (cp, $) {
                 }, 3000);
             }
             
-            $('._toastBtn').one('click', function() {
+            $('._toastBtn').on('click', function() {
                 $('._toastBtn._rtFocus').removeClass('_rtFocus');
                 $(this).addClass('_rtFocus');
             
@@ -931,10 +921,11 @@ var COMPONENT_UI = (function (cp, $) {
             this.dragFn();
             this.mdBoxDel();
             this.mdBoxAddClk();
-            this.initializeSwiper();
-            this.resetSwipers();
+            this.mdGoodsAdd();
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
+            this.initializeSwiper();
+            this.resetSwipers();
         },
         
         dragFn: function () {
@@ -952,12 +943,20 @@ var COMPONENT_UI = (function (cp, $) {
             });
         },
 
+        mdGoodsAdd:function() {
+            $('body').on('click', '.goodsAddBtn', function() {
+                var targetModal = $(this).data('modal');
+                $('.modalPop.goodsPop').attr('modal-target', targetModal);
+                cp.modalPop.showModal($(this));
+            });
+        },
+
         mdBoxAddCont: function(callback) {
             Promise.all([
-                fetch('module_txt.html').then(response => response.text()),
-                fetch('module_img.html').then(response => response.text()),
-                fetch('module_video.html').then(response => response.text()),
-                fetch('module_goods.html').then(response => response.text())
+                fetch('./module/module_txt.html').then(response => response.text()),
+                fetch('./module/module_img.html').then(response => response.text()),
+                fetch('./module/module_video.html').then(response => response.text()),
+                fetch('./module/module_goods.html').then(response => response.text())
             ]).then(([txtArea, imgArea, videoArea, goodsArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
@@ -1024,7 +1023,6 @@ var COMPONENT_UI = (function (cp, $) {
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
                 newMd.attr('data-module', moduleId);
-
                 if (dataType === 'goods') {
                     newMd.attr('data-case', 'goodsSwiper');
                 }
@@ -1061,20 +1059,20 @@ var COMPONENT_UI = (function (cp, $) {
                                 newContentHTML = content.txtArea.type01HTML;
                         }
                     }else if(dataType === 'goods') {
-                        switch (caseValue) {
-                            case 'goodsSwiper':
-                                newContentHTML = content.goodsArea.type01HTML;
-                                break;
-                            case 'goodsTab':
-                                newContentHTML = content.goodsArea.type02HTML;
-                                break;
-                            default:
-                                newContentHTML = content.goodsArea.type01HTML;
-                        }
-                    } else if(dataType === 'video') {
+                         switch (caseValue) {
+                             case 'goodsSwiper':
+                                 newContentHTML = content.goodsArea.type01HTML;
+                                 break;
+                             case 'goodsTab':
+                                 newContentHTML = content.goodsArea.type02HTML;
+                                 break;
+                             default:
+                                 newContentHTML = content.goodsArea.type01HTML;
+                         }
+                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
-                            newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
+                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -1109,6 +1107,20 @@ var COMPONENT_UI = (function (cp, $) {
                                 default:
                                     newContentHTML = content.txtArea.type01HTML;
                             }
+                        }else if(dataType === 'img') {
+                            switch (optionCase) {
+                                case 'detailImg':
+                                    newContentHTML = content.imgArea.type01HTML;
+                                break;
+                                case 'onlyImg':
+                                    newContentHTML = content.imgArea.type02HTML;
+                                break;
+                                case 'titleImg':
+                                    newContentHTML = content.imgArea.type03HTML;
+                                break;
+                                default:
+                                    newContentHTML = content.imgArea.type01HTML;
+                            }
                         }else if(dataType === 'goods') {
                             switch (optionCase) {
                                 case 'goodsSwiper':
@@ -1128,8 +1140,55 @@ var COMPONENT_UI = (function (cp, $) {
                     });
 
                 });
+
+
+                    
+            });
+        },
+
+        mdGoodsPopClose: function() {
+            const productCheckboxes = $('.product-list input[type="checkbox"]');
+            const registrationButton = $('.btn-registration-pop');
+            
+            productCheckboxes.on('change', function() {
+                const checkedCount = productCheckboxes.filter(':checked').length;
                 
-                cp.optionEdit.closeOptionWrap();
+                if (checkedCount > 0) {
+                    registrationButton.addClass('btn-close-pop');
+                } else {
+                    registrationButton.removeClass('btn-close-pop');
+                }
+            });
+        },
+
+        mdGoodPopSel: function() {
+            $('.btn-registration-pop').on('click', function() {
+                var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
+                var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
+                console.log(dataElem);
+                
+                var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
+                if (existingSwiper && existingSwiper.swiper) {
+                    existingSwiper.swiper.destroy();
+                }
+                
+                dataElem.closest('.md').find('.swiper-notification').remove();
+                dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+        
+                $('.product-list input[type="checkbox"]:checked').each(function() {
+                    var parentLi = $(this).closest('li');
+                    var clonedSlide = parentLi.find('.swiper-slide').clone();
+                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
+                });
+                
+                cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
+                cp.modalPop.closePop($(this));
+        
+                $('.product-list input[type="checkbox"]').prop('checked', false);
+        
+                setTimeout(function() {
+                    $('.btn-registration-pop').removeClass('btn-close-pop');
+                }, 100);
             });
         },
 
@@ -1179,52 +1238,6 @@ var COMPONENT_UI = (function (cp, $) {
                     var swiperInstance = COMPONENT_UI.moduleBox.initializeSwiper(this);
                     $(this).data('swiper', swiperInstance); 
                 });
-            });
-        },
-
-        mdGoodsPopClose: function() {
-            const productCheckboxes = $('.product-list input[type="checkbox"]');
-            const registrationButton = $('.btn-registration-pop');
-            
-            productCheckboxes.on('change', function() {
-                const checkedCount = productCheckboxes.filter(':checked').length;
-                
-                if (checkedCount > 0) {
-                    registrationButton.addClass('btn-close-pop');
-                } else {
-                    registrationButton.removeClass('btn-close-pop');
-                }
-            });
-        },
-
-        mdGoodPopSel: function() {
-            $('.btn-registration-pop').on('click', function() {
-                var thisData = $(this).closest('.modalPop').attr('modal-target');
-                var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
-                console.log(dataElem);
-                
-                var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
-                if (existingSwiper && existingSwiper.swiper) {
-                    existingSwiper.swiper.destroy();
-                }
-                
-                dataElem.closest('.md').find('.swiper-notification').remove();
-                dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
-        
-                $('.product-list input[type="checkbox"]:checked').each(function() {
-                    var parentLi = $(this).closest('li');
-                    var clonedSlide = parentLi.find('.swiper-slide').clone();
-                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
-                });
-                
-                cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
-                cp.modalPop.closePop($(this));
-        
-                $('.product-list input[type="checkbox"]').prop('checked', false);
-        
-                setTimeout(function() {
-                    $('.btn-registration-pop').removeClass('btn-close-pop');
-                }, 100);
             });
         },
         
@@ -1642,6 +1655,134 @@ var COMPONENT_UI = (function (cp, $) {
                     $(this).css('background-color', selectedBgColor);
                 }
             });
+        },
+        colorSelect: function() {
+            $('.color-selbox input[name="colorSelect"]').change(function() {
+                var selectedOption = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+
+                $('.md[data-module="' + dataType + '"]').find('.tab a').css('color', selectedOption);
+            });
+        }
+    };
+
+    cp.fontEditer = {
+        init: function() {
+            this.fontBold();
+            this.fontSize();
+            this.editOpen();
+        },
+        fontBold: function() {
+            $(document).off('click').on('click', '.editBold', function(){
+                var targetData = $('.edit-box').data('edit');
+                var thisWrap = $(this).closest('.textEditerWrap');
+                var contentEditable = thisWrap.next('[contenteditable][edit-target="' + targetData + '"]');
+    
+                if (contentEditable.length) {
+                    if (contentEditable.hasClass('fontBold')) {
+                        contentEditable.removeClass('fontBold');
+                    } else {
+                        contentEditable.addClass('fontBold');
+                    }
+                }
+            })
+        },
+        fontSize: function() {
+            $(document).on('change', '.editSize', function(){
+                var newSize = parseInt($(this).val().trim());
+                var targetData = $('.edit-box').data('edit');
+                var thisWrap = $(this).closest('.textEditerWrap');
+
+                thisWrap.next('[contenteditable]').each(function() {
+                    if ($(this).attr('edit-target') === targetData) {                        
+                        if (!isNaN(newSize) && newSize > 0) {
+                            $(this).css('font-size', newSize + 'px');
+                        }
+                    }
+                })
+            })
+        },
+        editOpen: function() {
+            $(document).on('click', '[contenteditable]', function(event) {
+                var $this = $(this);
+                var thisColor = $this.css('color');
+
+                if (event.type === 'click') {
+                    $this.attr('contenteditable', 'true');
+                    $this.focus();
+                }
+
+                if (!$this.has('.textEditerWrap').length) {
+                    $('.textEditerWrap').remove();
+                    $('<div class="textEditerWrap"></div>').insertBefore($this);
+                    $this.prev('.textEditerWrap').load('text-edit.html', function(){
+                        var targetData = $('.edit-box').data('edit');
+                    
+                        $this.attr('edit-target', targetData);
+                        $(this).show();
+                        cp.colorEdit.spectrumColor(thisColor);
+                    })
+                }
+            });
+            
+            $(document).on('click', function(event) {
+                var clickedElement = $(event.target);
+                var contentEditableElement = clickedElement.closest('[contenteditable]');
+                var pcrAppElement = clickedElement.closest('.pcr-app');
+                var textEditerWrapElement = clickedElement.closest('.textEditerWrap');
+                
+                if (contentEditableElement.length > 0 || pcrAppElement.length > 0 || textEditerWrapElement.length > 0) {
+                    return;
+                }
+            
+                if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
+                    $('[contenteditable]').removeAttr('edit-target').attr('contenteditable', 'false');
+                    $('.textEditerWrap').remove();
+                }
+            });
+        }
+    };
+
+    cp.optionEdit = {
+        init: function() {
+            this.optionOpen();
+            this.optionClose();
+            this.resizeable();
+        },
+        currentModuleData: null,
+        optionOpen: function() {
+            cp.optionEdit.currentModuleData = null;
+            $('html, body').on('click', '.optionBtn', function() {
+                const $thisMd = $(this).closest('.md');
+                cp.optionEdit.currentModuleData = $thisMd.data('module');
+                const dataType = $thisMd.data('type');
+                const bgColor = $thisMd.css('background-color');
+    
+                $('.md').removeClass('_is-active');
+                $thisMd.addClass('_is-active');
+                $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
+                $('.option-box').hide();
+                $('.option-box:not([data-type])').show();
+                $('.option-box[data-type="'+dataType+'"]').show();
+                $('.moduel-wrap').addClass('_right');
+                cp.optionEdit.resetImgColor();
+                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
+                cp.optionEdit.imgColor();
+                cp.optionEdit.imgColorSelect(cp.optionEdit.currentModuleData);
+                cp.fontEditer.init();
+            });
+        },
+        optionClose: function() {
+            this.closeOptionWrap = function() {
+                const $optionWrap = $('.option-wrap');
+                cp.optionEdit.currentModuleData = null;
+                $optionWrap.attr('data-type','').removeClass('show');
+                $('.moduel-wrap').removeClass('_right');
+                cp.optionEdit.resetImgColor();
+                $('.md').removeClass('_is-active');
+            };
+        
+            $('html, body').on('click', '.optionClsBtn', this.closeOptionWrap);
         },
         resetImgColor: function() {
             $("#btn-upload").val("");

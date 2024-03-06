@@ -47,36 +47,36 @@
     }
 }
 
-@mixin el-content($el-type) {
+@mixin el-content($el-type, $display:block) {
     @if ($el-type == "after") {
         &::after {
             content: "";
-            display: block;
+            display:$display;
             @content;
         }
     } @else if ($el-type == "before") {
         &::before {
             content: "";
-            display: block;
+            display:$display;
             @content;
         }
     } @else if ($el-type == "both") {
         &::before {
             content: "";
-            display: block;
+            display:$display;
             @content;
         }
         &::after {
             content: "";
-            display: block;
+            display:$display;
             @content;
         }
     }
 }
 
 // effect
-@mixin transition($el, $time, $effect) {
-    transition:$el $time $effect;
+@mixin transition($time, $el, $effect) {
+    transition:$time $el $effect;
     @content;
 }
 
@@ -94,7 +94,6 @@
         @content;
     }
 }
-
 // width, height
 @mixin width ($width:100%) {
     width:$width;
@@ -126,10 +125,38 @@
     }
 }
 
+@mixin auto-center-align($pos) {
+    position: $pos;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50%);
+}
+
+@mixin auto-offset-align($top, $left) {
+    top: $top;
+    left: $left;
+    transform: translate( -$top, -$left);
+}
+
+@mixin auto-vertical-align {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    @content;
+}
+
+@mixin auto-horizontal-align($pos) {
+    position: $pos;
+    left: 50%;
+    transform: translateX(-50%);
+    @content;
+}
+
 @mixin pos($type) {position:$type; @content;}
 @mixin pos-offset-l($top, $left, $pos:absolute) {position:$pos; top:$top; left:$left; @content;}
 @mixin pos-offset-r($top, $right, $pos:absolute) {position:$pos; top:$top; right:$right; @content;}
 @mixin pos-offset-b($bottom, $left, $pos:absolute) {position:$pos; bottom:$bottom; left:$left; @content;}
+@mixin float($type) {float:$type;}
 @mixin flex($direction:row, $wrap:nowrap, $j-content:flex-start, $al-items:center) {
     flex-direction:$direction; // row, row-reverse, column, column-reverse
     flex-wrap:$wrap; // nowrap, wrap, wrap-reverse
@@ -285,25 +312,120 @@
     }
 }
 
-@mixin border($type, $width, $style, $color) {
-    @if ($type == "border") {
-        border: $width $style $color
-    } @else if ($type == 'outline') {
-        outline: $width $style $color
+@mixin tooltip-arrow($direction, $offest1, $offest2, $translate1, $translate2) {
+    @include pos(absolute);
+    border:.3rem solid transparent;    
+
+    @if($direction == top){
+        transform: translate($translate1, $translate2);
+        bottom:$offest1; 
+        left:$offest2;
+        border-top: .4rem solid $color-gray5;
+        border-bottom:none;
+
+    } @else if($direction == bottom){
+        transform: translate($translate1, $translate2);
+        top:$offest1; 
+        left:$offest2;
+        border-bottom: .4rem solid $color-gray5;
+        border-top:none;
+    } @else if($direction == left){
+        transform: translate($translate1, $translate2);
+        top:$offest1; 
+        right:$offest2;
+        border-left: .4rem solid $color-gray5;
+        border-right:none;
+    } @else if($direction == right){
+        transform: translate($translate1, $translate2);
+        top:$offest1; 
+        left:$offest2;
+        border-right: .4rem solid $color-gray5;
+        border-left:none;
     }
 }
+
+//border
+@mixin line($attribute, $argument, $direction:all){
+    @if($attribute == "border"){
+        @if($direction == "all"){
+            border: $argument;
+        } @else if ($direction == "top"){
+            border-top: $argument;
+        } @else if($direction == "left"){
+            border-left: $argument;
+        } @else if($direction == "bottom"){
+            border-bottom: $argument;
+        } @else if($direction == "right"){
+            border-right: $argument;
+        }
+    } @else if($attribute == "outline"){
+        @if($direction == "all"){
+            outline: $argument;
+        } @else if ($direction == "top"){
+            outline-top: $argument;
+        } @else if($direction == "left"){
+            outline-left: $argument;
+        } @else if($direction == "bottom"){
+            outline-bottom: $argument;
+        } @else if($direction == "right"){
+            outline-right: $argument;
+        }
+    }
+    @content;
+}
+
 // FORM SVG ICON
 @function svgIconForm($iconName, $color: 666, $backgroundRepeat: no-repeat) {
     $iconList: (
-    no-img:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0'/%3E%3Cpath d='M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z'/%3E%3C/svg%3E",
-    no-video:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}'  viewBox='0 0 16 16'%3E%3Cpath d='M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0'/%3E%3Cpath d='M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6'/%3E%3Cpath d='M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'/%3E%3C/svg%3E",
+    chk-line:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z'/%3E%3C/svg%3E",
+
+    chk-line-lg:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z'/%3E%3C/svg%3E",
+
+    chk-line-circle:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'/%3E%3Cpath d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'/%3E%3C/svg%3E",
+
+    chk-circle: "%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z'/%3E%3C/svg%3E",
+
+    chk-circle-fill:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'/%3E%3C/svg%3E",
+
+    chk-line-square:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z'/%3E%3Cpath d='m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z'/%3E%3C/svg%3E",
+
+    chk-square:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z'/%3E%3Cpath d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z'/%3E%3C/svg%3E",
+
+    chk-square-fill:"%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23#{$color}' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z'/%3E%3C/svg%3E",
+
     );
     $svgIcon: map-get($iconList, $iconName);
     $backgroundImage: url("data:image/svg+xml;charset=utf8,#{$svgIcon}");
     @return $backgroundImage $backgroundRepeat;
     // @return url("data:image/svg+xml;charset=utf8,#{$svgIcon}");
     //background-image: svgIconForm(check-circle);
-    // background-image:svgIconForm(no-img, fff);
+}
+
+// fontawesome ICO
+@mixin fontICO ($direction, $cont) {
+
+    @if($direction == before){
+        @include el-content("before"){
+            @include display(inline-block);
+            @include align(vertical, middle);
+            content:$cont;
+            @include webfont('iconFont', 900);
+            @content;
+        }
+
+    } @else if($direction == after){
+        @include el-content("after"){
+            @include display(inline-block);
+            @include align(vertical, middle);
+            content:$cont;
+            @include webfont('iconFont', 900);
+            margin-left:.5rem;
+            @content;
+        }
+    }
+
+    
+    // f059
 }
 
 // gradient
@@ -316,6 +438,19 @@
         @content;
     }
     
+}
+
+//icoSet
+@mixin icoSet($width, $height, $mgLeft, $bgL, $bgT) {
+    content:""; 
+    display: inline-block; 
+    width: $width; 
+    height: $height; 
+    margin-left: $mgLeft; 
+    background-image:url(/votenet/resources/m/com/img/icoSet.png);
+    background-repeat: no-repeat;
+    background-position: $bgL $bgT;
+    vertical-align: middle; 
 }
 
 //text ellipsis
@@ -342,4 +477,29 @@
 
 @mixin split($col, $space) {
     width:calc(100%/$col - ($space * ($col - 1)));
+}
+
+/* function */
+//font size 2배수
+@function size($size) {
+    @return $size / 2 / $font-size#{rem};
+}
+
+// px to rem
+@function rem($pixels){
+    @return $pixels / $font_size + rem;
+}
+
+//iOS - for notch
+@function cons($directon) {
+    @return constant(safe-area-inset-#{$directon});
+}
+@function safe($directon) {
+    @return env(safe-area-inset-#{$directon});
+}
+@function consm($directon) {
+    @return constant(safe-area-inset-#{$directon}) - 0.625rem;
+}
+@function safem($directon) {
+    @return env(safe-area-inset-#{$directon}) - 0.625rem;
 }

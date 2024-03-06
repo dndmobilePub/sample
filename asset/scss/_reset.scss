@@ -31,7 +31,7 @@ address,caption,cite,code,dfn,em,var,i,b {font-style:normal; font-weight:400;}
 blockquote:before, blockquote:after,q:before, q:after {content:'';content:none;}
 input,select,textarea,button {vertical-align:middle;font-size:100%;}
 button {border:0 none;background-color:transparent;cursor:pointer;} /* 포커스 라인 비활성처리*/
-table {background-color:transparent;border-spacing:0;}
+table {background-color:transparent;border-spacing:0;border-collapse:collapse;}
 
 input,
 textarea,
