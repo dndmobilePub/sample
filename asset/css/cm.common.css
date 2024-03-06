@@ -145,10 +145,6 @@ body, th, td, input, select, textarea, button {
   letter-spacing: -0.5px;
 }
 
-input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
-  background: #f6f6f6;
-}
-
 input[type=text]:read-only, input[type=password]:read-only,
 input[type=text]:disabled, input[type=password]:disabled {
   background: #f6f6f6;
@@ -1276,7 +1272,6 @@ legend, caption {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
 }
@@ -1853,22 +1848,7 @@ legend, caption {
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
-.field input[type=password]::-webkit-input-placeholder {
-  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
-  -webkit-text-security: none;
-  font-size: 2rem;
-}
 .field input[type=password]::-moz-placeholder {
-  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
-  -webkit-text-security: none;
-  font-size: 2rem;
-}
-.field input[type=password]:-ms-input-placeholder {
-  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
-  -webkit-text-security: none;
-  font-size: 2rem;
-}
-.field input[type=password]::-ms-input-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
@@ -1877,9 +1857,6 @@ legend, caption {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
-}
-.field input[type=password]:-moz-read-only {
-  color: #999;
 }
 .field input[type=password]:read-only {
   color: #999;
@@ -1954,16 +1931,7 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
 }
-.field-input input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder {
-  color: #ccc;
-}
 .field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
-  color: #ccc;
-}
-.field-input input:not([type=checkbox]):not([type=radio]):-ms-input-placeholder {
-  color: #ccc;
-}
-.field-input input:not([type=checkbox]):not([type=radio])::-ms-input-placeholder {
   color: #ccc;
 }
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
@@ -1980,19 +1948,7 @@ legend, caption {
   max-width: 1.1rem;
   padding-right: 0;
 }
-.field-input.mid_num input::-webkit-input-placeholder {
-  font-family: "pass";
-  font-size: 0.4rem;
-}
 .field-input.mid_num input::-moz-placeholder {
-  font-family: "pass";
-  font-size: 0.4rem;
-}
-.field-input.mid_num input:-ms-input-placeholder {
-  font-family: "pass";
-  font-size: 0.4rem;
-}
-.field-input.mid_num input::-ms-input-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
 }
@@ -2189,16 +2145,7 @@ legend, caption {
   -ms-touch-action: none;
       touch-action: none;
 }
-._input input._password::-webkit-input-placeholder {
-  font-weight: 700;
-}
 ._input input._password::-moz-placeholder {
-  font-weight: 700;
-}
-._input input._password:-ms-input-placeholder {
-  font-weight: 700;
-}
-._input input._password::-ms-input-placeholder {
   font-weight: 700;
 }
 ._input input._password::placeholder {
@@ -2214,16 +2161,7 @@ legend, caption {
   z-index: 2;
   color: transparent;
 }
-._input ._secureTxt > input[type=password]::-webkit-input-placeholder {
-  color: transparent;
-}
 ._input ._secureTxt > input[type=password]::-moz-placeholder {
-  color: transparent;
-}
-._input ._secureTxt > input[type=password]:-ms-input-placeholder {
-  color: transparent;
-}
-._input ._secureTxt > input[type=password]::-ms-input-placeholder {
   color: transparent;
 }
 ._input ._secureTxt > input[type=password]::placeholder {
@@ -2339,8 +2277,6 @@ label input {
   /* 모듈 */
 }
 .container .moduleWrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: calc(100% - 10rem);
   padding-bottom: 10rem;
@@ -2593,6 +2529,42 @@ label input {
 .container .module-edit .md .txtEdit .fontBold {
   font-weight: 700;
 }
+.container .module-edit .md .imgWrap .txtEdit {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.container .module-edit .md .imgWrap .txtEdit.center {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.container .module-edit .md .imgWrap .txtEdit.leftBottom {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-align: left;
+}
+.container .module-edit .md .imgWrap .txtEditBg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to top, #ccc, transparent);
+}
 .container .module-edit .md [contenteditable=true] {
   position: relative;
   cursor: text;
@@ -2741,6 +2713,9 @@ label input {
 }
 
 /* 이미지 */
+.imgWrap {
+  position: relative;
+}
 .imgWrap img {
   display: block;
   width: 100%;
