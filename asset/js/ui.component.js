@@ -1701,7 +1701,7 @@ var COMPONENT_UI = (function (cp, $) {
                 if (!$this.has('.textEditerWrap').length) {
                     $('.textEditerWrap').remove();
                     $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $this.prev('.textEditerWrap').load('text-edit.html', function(){
+                    $this.prev('.textEditerWrap').load('./module/text-edit.html', function(){
                         var targetData = $('.edit-box').data('edit');
                     
                         $this.attr('edit-target', targetData);
