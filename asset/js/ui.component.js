@@ -1257,8 +1257,8 @@ var COMPONENT_UI = (function (cp, $) {
             cp.moduleBox.mdBoxAddCont(function(content) {
                 var newContentHTML;
                     
-                $('.option-box a').click(function(e) {
-                    e.preventDefault();
+                $('.option-box a[goods-option]').click(function(e) {
+                    // e.preventDefault();
                     var optionDataType = $(this).parents('.option-wrap').data('type');
                     var optionGoodsOption = $(this).attr('goods-option');
                     var optionDataSwiper = $(this).data('swiper');
@@ -1267,31 +1267,61 @@ var COMPONENT_UI = (function (cp, $) {
                     var dataModule = $('.md[data-module="' + optionDataType + '"]').data('module');
                     $('.md[data-module="' + optionDataType + '"]').attr('data-swiper', optionDataSwiper);
     
-                   console.log(dataModule);
+                   console.log(optionDataType);
+                   //console.log(dataModule);
     
                     $('.md[data-module="' + optionDataType + '"]').attr('data-case', optionGoodsOption);
     
-                   if (dataModule === optionDataType){
-                    if(dataType === 'txt') {
-                        switch (dataCase) {
-                            case 'bigTxt':
-                                newContentHTML = content.txtArea.type01HTML;
-                            break;
-                            case 'smallTxt':
-                                newContentHTML = content.txtArea.type02HTML;
-                            break;
-                            case 'bodyTxt':
-                                newContentHTML = content.txtArea.type03HTML;
-                            break;
-                            default:
-                                newContentHTML = content.txtArea.type01HTML;
-                        }
+                    if (dataModule === optionDataType){
+                        if(dataType === 'txt') {
+                            switch (dataCase) {
+                                    case 'bigTxt':
+                                        newContentHTML = content.txtArea.type01HTML;
+                                    break;
+                                    case 'smallTxt':
+                                        newContentHTML = content.txtArea.type02HTML;
+                                    break;
+                                    case 'bodyTxt':
+                                        newContentHTML = content.txtArea.type03HTML;
+                                    break;
+                                    default:
+                                        newContentHTML = content.txtArea.type01HTML;
+                                }
+                            }else if(dataType === 'img') {
+                                switch (dataCase) {
+                                    case 'detailImg':
+                                        newContentHTML = content.imgArea.type01HTML;
+                                    break;
+                                    case 'onlyImg':
+                                        newContentHTML = content.imgArea.type02HTML;
+                                    break;
+                                    case 'titleImg':
+                                        newContentHTML = content.imgArea.type03HTML;
+                                    break;
+                                    default:
+                                        newContentHTML = content.imgArea.type01HTML;
+                                }
+                            }else if(dataType === 'goods') {
+                                switch (dataCase) {
+                                    case 'goodsSwiper':
+                                        newContentHTML = content.goodsArea.type01HTML;
+                                        //cp.moduleBox.init();
+                                    break;
+                                    case 'goodsTab':
+                                        newContentHTML = content.goodsArea.type02HTML;
+                                        //cp.tab.init();
+                                    break;
+                                    default:
+                                        newContentHTML = content.goodsArea.type01HTML;
+                                    }
+                                }
+                        $('.md[data-module="' + optionDataType + '"]').empty().append(newContentHTML);
+                        
                     }
-                    $('.md[data-module="' + optionDataType + '"]').empty().append(newContentHTML);
-                    
-                }
                    
                 });
+
+                
             });
                 
         },
