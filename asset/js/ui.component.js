@@ -1031,6 +1031,7 @@ var COMPONENT_UI = (function (cp, $) {
             this.mdGoodPopSel();
             this.initializeSwiper();
             this.resetSwipers();
+            this.mdBoxOption();
         },
         
         dragFn: function () {
@@ -1183,7 +1184,8 @@ var COMPONENT_UI = (function (cp, $) {
                     $('.container .section').append(newMd);
                     //COMPONENT_UI.init();
                     cp.init();
-                                       
+                    
+                    //cp.moduleBox.mdBoxOption();
                     
                     $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
 
@@ -1249,28 +1251,49 @@ var COMPONENT_UI = (function (cp, $) {
                     
             });
 
+            
+        },
+        mdBoxOption: function() {
             cp.moduleBox.mdBoxAddCont(function(content) {
                 var newContentHTML;
-
+                    
                 $('.option-box a').click(function(e) {
                     e.preventDefault();
                     var optionDataType = $(this).parents('.option-wrap').data('type');
                     var optionGoodsOption = $(this).attr('goods-option');
                     var optionDataSwiper = $(this).data('swiper');
                     var dataType = $('.md[data-module="' + optionDataType + '"]').data('type');
+                    var dataCase = $('.md[data-module="' + optionDataType + '"]').data('case');
                     var dataModule = $('.md[data-module="' + optionDataType + '"]').data('module');
                     $('.md[data-module="' + optionDataType + '"]').attr('data-swiper', optionDataSwiper);
+    
                    console.log(dataModule);
-                   console.log(optionDataType);
-
+    
+                    $('.md[data-module="' + optionDataType + '"]').attr('data-case', optionGoodsOption);
+    
                    if (dataModule === optionDataType){
-
-
-                   }
-                        
+                    if(dataType === 'txt') {
+                        switch (dataCase) {
+                            case 'bigTxt':
+                                newContentHTML = content.txtArea.type01HTML;
+                            break;
+                            case 'smallTxt':
+                                newContentHTML = content.txtArea.type02HTML;
+                            break;
+                            case 'bodyTxt':
+                                newContentHTML = content.txtArea.type03HTML;
+                            break;
+                            default:
+                                newContentHTML = content.txtArea.type01HTML;
+                        }
+                    }
+                    $('.md[data-module="' + optionDataType + '"]').empty().append(newContentHTML);
+                    
+                }
+                   
                 });
-
             });
+                
         },
 
         mdGoodsPopClose: function() {
@@ -1353,6 +1376,7 @@ var COMPONENT_UI = (function (cp, $) {
                         prevEl: '.swiper-button-prev',
                     },
                 });
+                console.log('dd');
             });
 
         }, 
