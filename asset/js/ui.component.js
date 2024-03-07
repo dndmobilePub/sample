@@ -1135,7 +1135,7 @@ var COMPONENT_UI = (function (cp, $) {
                                 }
                             }
                         $('.md[data-module="' + optiondataType + '"]').empty().append(newContentHTML);
-                        
+                        cp.moduleBox.initializeSwiper($('.md[data-module="' + optiondataType + '"]').find('.swiper'));
                     });
 
                 });
