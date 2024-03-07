@@ -111,7 +111,16 @@ label {
     z-index:101;
     @include pos-offset-b(0,0,fixed);
     width:100%; height:7rem;
+    min-width:80rem;
     background:#ddd;
+    & > .btnWrap {
+      @include display(flex);
+      justify-content: flex-end;
+      & > .btn {
+        &:first-child{margin-right:calc(100% - 46rem);}
+        min-width:15rem; @include align(text, center);
+      }
+    }
   }
 
   /* 상세설정 */
@@ -119,7 +128,7 @@ label {
     &-wrap {
       overflow-y: auto;
       @include pos(fixed) {left: -31%;top: 0;}
-      width: 30%;
+      width: 30%; min-width:30rem;
       // height: 100vh;
       @include height(calc(100vh - 7rem));
       padding: 2rem;
@@ -447,7 +456,7 @@ label {
               cursor: auto;
               pointer-events: none;
             }
-            &-lock{
+            &-disabled{
               @include display(none);
             }
           }

@@ -1,4 +1,109 @@
 var COMPONENT_UI = (function (cp, $) {
+
+    cp.tblCaption = {
+        constEl: {},
+          
+          init: function() {
+              this.tblSetting();
+              this.tblCellsUpdate();
+          },
+          tblSetting:function() {
+              $('table').each(function() {
+                  $(this).removeAttr('summary');
+  
+                  var hasHeader = $(this).find('th').length > 0;
+                  if (!hasHeader) {
+                      $(this).find('caption').remove();
+                  } else {
+                      cp.tblCaption.tblCaption.call(this);
+                  }
+              });
+          },
+          tblCellsUpdate: function () {
+              var theadCells = $('thead th');
+              var tbodyCells = $('tbody th, tfoot th');
+              var tdCells = $('tbody td, tfoot td');
+      
+              function updateCells(cells, scopeType) {
+                  cells.each(function () {
+      
+                      $(this).removeAttr('scope');
+      
+                      if ($(this).is('th:not([scope])')) {
+                          $(this).attr('scope', scopeType);
+                      }
+                      var colSpanGroup = $(this).attr('colspan');
+                      if (colSpanGroup !== undefined && colSpanGroup > 1) {
+                          $(this).attr('scope', 'colgroup');
+                      }
+                      var rowSpanGroup = $(this).attr('rowspan');
+                      if (rowSpanGroup !== undefined && rowSpanGroup > 1) {
+                          $(this).attr('scope', 'rowgroup');
+                      }
+                  });
+              }
+              // 셀에 대해 스코프 갱신
+              updateCells(theadCells, 'col');
+              updateCells(tbodyCells, 'row');
+              updateCells(tdCells, '');
+          },
+      
+          tblCaption: function() {
+              var captionType = $(this).data('caption');
+              var tblCaption = $(this).find('caption');
+  
+              if (tblCaption.hasClass("caption") && captionType !== "innerTbl") {
+                  return;
+              }
+      
+              if (captionType === 'basic') {
+                  // basic 타입인 경우
+                  tblCaption.remove();
+      
+                  $(this).find('th').each(function() {
+                      var thHTML = $(this).html();
+                      $(this).replaceWith('<td>' + thHTML + '</td>');
+                  });
+              } else if (captionType === 'keep') {
+                  // keep 타입인 경우 기존 caption 정보를 유지함
+              } else {
+                  cp.tblCaption.tblReset.call(this);
+              }
+          },
+      
+          tblReset: function() {
+              var tblCaption = $(this).find('caption');
+              var currentCaptionTit = $(this).data('tbl') || tblCaption.text().trim();
+              var tblColgroup = $(this).find('colgroup');
+              var captionText = $(this).find('> thead > tr > th, > tbody > tr > th').map(function() {
+                  return $(this).text();
+              }).get().join(', ');
+  
+              tblCaption.remove();
+      
+              if (tblColgroup.length > 0) {
+                  var captionHtml = cp.tblCaption.getCaptionHtml(currentCaptionTit, captionText);
+                  tblColgroup.before(captionHtml);
+              } else {
+                  cp.tblCaption.insertCaption.call(this, tblCaption, cp.tblCaption.getCaptionHtml(currentCaptionTit, captionText));
+              }
+          },
+      
+          insertCaption: function(tblCaption, captionHtml) {
+              var tableThead = $(this).find('thead');
+              var tableTbody = $(this).find('tbody');
+      
+              if (tableThead.length > 0) {
+                  tableThead.before(captionHtml);
+              } else {
+                  tableTbody.before(captionHtml);
+              }
+          },
+      
+          getCaptionHtml: function(title, text) {
+              return '<caption class="caption"><strong>' + title + '</strong><p>' + text + ' 로 구성된 표' + '</p></caption>';
+          },
+      },
     
     cp.form = {
         constEl: {
@@ -1135,7 +1240,7 @@ var COMPONENT_UI = (function (cp, $) {
                                 }
                             }
                         $('.md[data-module="' + optiondataType + '"]').empty().append(newContentHTML);
-                        
+                        cp.moduleBox.initializeSwiper($('.md[data-module="' + optiondataType + '"]').find('.swiper'));
                     });
 
                 });
@@ -2000,9 +2105,10 @@ var COMPONENT_UI = (function (cp, $) {
     };
 
     cp.init = function () {
-        cp.form.init();
-        cp.imgCrop.init();
-        cp.videoModule.init();
+        cp.tblCaption.init(); // table caption
+        cp.form.init(); // form
+        cp.imgCrop.init(); // img crop
+        cp.videoModule.init(); // video insert
         cp.moduleBox.init();
         cp.modalPop.init();
         cp.tab.init();

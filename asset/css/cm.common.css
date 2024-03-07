@@ -2050,7 +2050,23 @@ label input {
   left: 0;
   width: 100%;
   height: 7rem;
+  min-width: 80rem;
   background: #ddd;
+}
+.container .footer-btnWrap > .btnWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.container .footer-btnWrap > .btnWrap > .btn {
+  min-width: 15rem;
+  text-align: center !important;
+}
+.container .footer-btnWrap > .btnWrap > .btn:first-child {
+  margin-right: calc(100% - 46rem);
 }
 .container .option-wrap {
   overflow-y: auto;
@@ -2058,6 +2074,7 @@ label input {
   left: -31%;
   top: 0;
   width: 30%;
+  min-width: 30rem;
   height: calc(100vh - 7rem);
   padding: 2rem;
   border: 1px solid #999;
@@ -2403,7 +2420,7 @@ label input {
   cursor: auto;
   pointer-events: none;
 }
-.container .module-edit .md .swiper-button-prev.swiper-button-lock, .container .module-edit .md .swiper-button-next.swiper-button-lock {
+.container .module-edit .md .swiper-button-prev.swiper-button-disabled, .container .module-edit .md .swiper-button-next.swiper-button-disabled {
   display: none;
 }
 .container .module-edit .md .swiper-button-prev:after, .container .module-edit .md .swiper-button-next:after {
