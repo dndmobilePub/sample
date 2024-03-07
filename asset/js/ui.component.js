@@ -1225,7 +1225,6 @@ var COMPONENT_UI = (function (cp, $) {
                         prevEl: '.swiper-button-prev',
                     },
                 });
-                console.log('dd');
             });
 
         }, 
@@ -1804,6 +1803,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
         spectrumGrColor: function(initialColor) {
             $(document).ready(function(){
+                $(".txtBgColor").spectrum("destroy");
                 $(".txtBgColor").spectrum({
                     flat: false,
                     showInput: true,
@@ -1813,19 +1813,26 @@ var COMPONENT_UI = (function (cp, $) {
                     showSelectionPalette: true,
                     maxPaletteSize: 10,
                     color: initialColor,
+                    showAlpha: true,
+                    showAlphaPalette: true,
                     change: function(color) {
-                        var selectedColor = color.toHexString();
+                        var selectedColor = color.toRgbString();
                         cp.colorEdit.txtBgColor(selectedColor);
                     }
                 });
             });
         },
         txtBgColor:function(selectedColor) {
-            $('.txtBgColor').on('change', function() {
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
-
-                $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
+            $('.txtBgColor').off('change').each(function() {
+                $(this).on('change', function() {
+                    var dataType = $(this).closest('.option-wrap').data('type');
+                    console.log('dataType:', dataType);
+                    var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+                    
+                    if ($txtEditBg.length > 0) {
+                        $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
+                    }
+                });
             });
         }
     };
@@ -1915,7 +1922,6 @@ var COMPONENT_UI = (function (cp, $) {
             this.gapHeight();
             this.inpTxtLocation();
             this.txtBgHeight();
-            //this.txtBgColor();
         },
         currentModuleData: null,
         optionOpen: function() {
