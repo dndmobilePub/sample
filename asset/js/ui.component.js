@@ -1187,66 +1187,89 @@ var COMPONENT_UI = (function (cp, $) {
                     
                     $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
 
-                    $('.option-box a').click(function(e) {
-                        e.preventDefault();
+                    // $('.option-box a').click(function(e) {
+                    //     e.preventDefault();
                         
-                        var optionCase = $(this).attr('goods-option');
-                        var optionSwiper = $(this).attr('data-swiper');
-                        var optiondataType = $('.option-wrap').attr('data-type');
+                    //     var optionCase = $(this).attr('goods-option');
+                    //     var optionSwiper = $(this).attr('data-swiper');
+                    //     var optiondataType = $('.option-wrap').attr('data-type');
                         
-                        $('.md[data-module="' + optiondataType + '"]').attr('data-case', optionCase);
-                        $('.md[data-module="' + optiondataType + '"]').attr('data-swiper', optionSwiper);
+                    //     $('.md[data-module="' + optiondataType + '"]').attr('data-case', optionCase);
+                    //     $('.md[data-module="' + optiondataType + '"]').attr('data-swiper', optionSwiper);
                             
-                        if(dataType === 'txt') {
-                            switch (optionCase) {
-                                case 'bigTxt':
-                                    newContentHTML = content.txtArea.type01HTML;
-                                break;
-                                case 'smallTxt':
-                                    newContentHTML = content.txtArea.type02HTML;
-                                break;
-                                case 'bodyTxt':
-                                    newContentHTML = content.txtArea.type03HTML;
-                                break;
-                                default:
-                                    newContentHTML = content.txtArea.type01HTML;
-                            }
-                        }else if(dataType === 'img') {
-                            switch (optionCase) {
-                                case 'detailImg':
-                                    newContentHTML = content.imgArea.type01HTML;
-                                break;
-                                case 'onlyImg':
-                                    newContentHTML = content.imgArea.type02HTML;
-                                break;
-                                case 'titleImg':
-                                    newContentHTML = content.imgArea.type03HTML;
-                                break;
-                                default:
-                                    newContentHTML = content.imgArea.type01HTML;
-                            }
-                        }else if(dataType === 'goods') {
-                            switch (optionCase) {
-                                case 'goodsSwiper':
-                                    newContentHTML = content.goodsArea.type01HTML;
-                                    //cp.moduleBox.init();
-                                break;
-                                case 'goodsTab':
-                                    newContentHTML = content.goodsArea.type02HTML;
-                                    //cp.tab.init();
-                                break;
-                                default:
-                                    newContentHTML = content.goodsArea.type01HTML;
-                                }
-                            }
-                        $('.md[data-module="' + optiondataType + '"]').empty().append(newContentHTML);
-                        cp.moduleBox.initializeSwiper($('.md[data-module="' + optiondataType + '"]').find('.swiper'));
-                    });
+                    //     if(dataType === 'txt') {
+                    //         switch (optionCase) {
+                    //             case 'bigTxt':
+                    //                 newContentHTML = content.txtArea.type01HTML;
+                    //             break;
+                    //             case 'smallTxt':
+                    //                 newContentHTML = content.txtArea.type02HTML;
+                    //             break;
+                    //             case 'bodyTxt':
+                    //                 newContentHTML = content.txtArea.type03HTML;
+                    //             break;
+                    //             default:
+                    //                 newContentHTML = content.txtArea.type01HTML;
+                    //         }
+                    //     }else if(dataType === 'img') {
+                    //         switch (optionCase) {
+                    //             case 'detailImg':
+                    //                 newContentHTML = content.imgArea.type01HTML;
+                    //             break;
+                    //             case 'onlyImg':
+                    //                 newContentHTML = content.imgArea.type02HTML;
+                    //             break;
+                    //             case 'titleImg':
+                    //                 newContentHTML = content.imgArea.type03HTML;
+                    //             break;
+                    //             default:
+                    //                 newContentHTML = content.imgArea.type01HTML;
+                    //         }
+                    //     }else if(dataType === 'goods') {
+                    //         switch (optionCase) {
+                    //             case 'goodsSwiper':
+                    //                 newContentHTML = content.goodsArea.type01HTML;
+                    //                 //cp.moduleBox.init();
+                    //             break;
+                    //             case 'goodsTab':
+                    //                 newContentHTML = content.goodsArea.type02HTML;
+                    //                 //cp.tab.init();
+                    //             break;
+                    //             default:
+                    //                 newContentHTML = content.goodsArea.type01HTML;
+                    //             }
+                    //         }
+                    //     $('.md[data-module="' + optiondataType + '"]').empty().append(newContentHTML);
+                    //     cp.moduleBox.initializeSwiper($('.md[data-module="' + optiondataType + '"]').find('.swiper'));
+                    // });
 
                 });
 
                 cp.optionEdit.closeOptionWrap();
                     
+            });
+
+            cp.moduleBox.mdBoxAddCont(function(content) {
+                var newContentHTML;
+
+                $('.option-box a').click(function(e) {
+                    e.preventDefault();
+                    var optionDataType = $(this).parents('.option-wrap').data('type');
+                    var optionGoodsOption = $(this).attr('goods-option');
+                    var optionDataSwiper = $(this).data('swiper');
+                    var dataType = $('.md[data-module="' + optionDataType + '"]').data('type');
+                    var dataModule = $('.md[data-module="' + optionDataType + '"]').data('module');
+                    $('.md[data-module="' + optionDataType + '"]').attr('data-swiper', optionDataSwiper);
+                   console.log(dataModule);
+                   console.log(optionDataType);
+
+                   if (dataModule === optionDataType){
+
+
+                   }
+                        
+                });
+
             });
         },
 
