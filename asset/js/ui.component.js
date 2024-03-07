@@ -307,7 +307,7 @@ var COMPONENT_UI = (function (cp, $) {
                     if ($inputTxt.val()) {
                         $clearBtn.addClass("_active");
                         if (!$inputTxt.parent().find(clearSelector + "._active").length) {
-                            $inputTxt.css({width:"calc(373% - 2.5rem)"}).parent().append(clearBtnEl);
+                            $inputTxt.css({width:"calc(100% - 2.5rem)"}).parent().append(clearBtnEl);
                         }
                     } else {
                         $clearBtn.removeClass("_active");
@@ -1353,7 +1353,6 @@ var COMPONENT_UI = (function (cp, $) {
                         prevEl: '.swiper-button-prev',
                     },
                 });
-                console.log('dd');
             });
 
         }, 
@@ -1932,6 +1931,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
         spectrumGrColor: function(initialColor) {
             $(document).ready(function(){
+                $(".txtBgColor").spectrum("destroy");
                 $(".txtBgColor").spectrum({
                     flat: false,
                     showInput: true,
@@ -1941,19 +1941,26 @@ var COMPONENT_UI = (function (cp, $) {
                     showSelectionPalette: true,
                     maxPaletteSize: 10,
                     color: initialColor,
+                    showAlpha: true,
+                    showAlphaPalette: true,
                     change: function(color) {
-                        var selectedColor = color.toHexString();
+                        var selectedColor = color.toRgbString();
                         cp.colorEdit.txtBgColor(selectedColor);
                     }
                 });
             });
         },
         txtBgColor:function(selectedColor) {
-            $('.txtBgColor').on('change', function() {
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
-
-                $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
+            $('.txtBgColor').off('change').each(function() {
+                $(this).on('change', function() {
+                    var dataType = $(this).closest('.option-wrap').data('type');
+                    console.log('dataType:', dataType);
+                    var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+                    
+                    if ($txtEditBg.length > 0) {
+                        $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
+                    }
+                });
             });
         }
     };
@@ -2043,7 +2050,6 @@ var COMPONENT_UI = (function (cp, $) {
             this.gapHeight();
             this.inpTxtLocation();
             this.txtBgHeight();
-            //this.txtBgColor();
         },
         currentModuleData: null,
         optionOpen: function() {
@@ -2053,6 +2059,8 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const dataType = $thisMd.data('type');
                 const bgColor = $thisMd.css('background-color');
+                const mdHeight = parseInt($thisMd.css('height'), 10);
+                const grHeight = parseInt($thisMd.find('.txtEditBg').css('height'), 10);
     
                 $('.md').removeClass('_is-active');
                 $thisMd.addClass('_is-active');
@@ -2061,6 +2069,9 @@ var COMPONENT_UI = (function (cp, $) {
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
                 $('.moduel-wrap').addClass('_right');
+                $('.gap-height').val(mdHeight);
+                $('.txtBgHeight').val(grHeight);
+                
                 cp.colorEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
                 cp.colorEdit.imgColor();
@@ -2088,16 +2099,19 @@ var COMPONENT_UI = (function (cp, $) {
                 minHeight: 10,
                 stop: function(event, ui) {
                     var newHeight = ui.size.height;
-                    $('.gap-height').val(newHeight);
-                    //const dataType = $(this).data('module');
-                    //$('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
+                    const dataType = $(this).data('module');
+                    $('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
                 }
             });
         },
         gapHeight: function() {
             $('.gap-height').on('input', function() {
-                var newHeight = $(this).val() + 'px';
-                $('.md-gap').css('height', newHeight);
+                var newHeight = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $mdGap = $('.md-gap[data-module="' + dataType + '"]');
+                if ($mdGap.length > 0) {
+                    $mdGap.css('height', newHeight);
+                }
             });
         },
         inpTxtLocation:function() {
