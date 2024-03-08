@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="../../asset/css/cm.membrt.css">
+    <link rel="stylesheet" type="text/css" href="../../asset/css/cm.member.css">
     <script type="text/javascript" src="../../asset/js/plugin/lib.jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="../../asset/js/plugin/pg.spectrum.js"></script>
 </head>
@@ -13,57 +13,59 @@
         <header class="header mb"></header>
         <div class="container mb">
             <!--[s] 작업영억 -->
-            <div class="field _label">
-                <label class="field-label">아이디(이메일)</label>
+            <div class="md-wrap">
+              <div class="field">
+                  <label class="field-label">아이디(이메일)</label>
+                  <div class="field-outline">
+                    <div class="field-input grow _input">
+                      <input type="text" placeholder="" id="label1" title="" data-target="label1">
+                    </div>
+                  </div>
+                  <!-- <p class="field-msg">
+                    <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+                  </p> -->
+              </div>
+
+              <div class="field">
+                <label class="field-label">비밀번호</label>
                 <div class="field-outline">
                   <div class="field-input grow _input">
-                    <input type="text" placeholder="기본동작 INPUT" id="label1" title="" data-target="label1">
+                    <input type="password" class="_format _password" placeholder="비밀번호 입력" maxlength="4">
                   </div>
                 </div>
-                <!-- <p class="field-msg">
+                <p class="field-msg">
                   <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
-                </p> -->
-            </div>
+                </p>
+              </div>
 
-            <div class="field">
-              <label class="field-label">기본형 : password</label>
-              <div class="field-outline">
-                <div class="field-input grow _input">
-                  <input type="password" class="_format _password" placeholder="●●●●" maxlength="4">
+              <div class="field square">
+                <div class="field-group">
+                  <label class="field-checkbox square">
+                    <input type="checkbox">
+                    <i class="field-icon"></i>
+                    <span class="field-label"> 아이디 저장</span>
+                  </label>
                 </div>
               </div>
-              <p class="field-msg">
-                <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
-              </p>
-            </div>
 
-            <div class="field square">
-              <div class="field-group">
-                <label class="field-checkbox square">
-                  <input type="checkbox">
-                  <i class="field-icon"></i>
-                  <span class="field-label"> 아이디 저장</span>
-                </label>
+              <ul class="list01">
+                <li>개인정보 보호를 위해 비밀번호 5회 이상 오류 시 비밀번호 재설정으로 전환됩니다.</li>
+                <li>비밀번호는 주기적(3개월)으로 변경하시고 서비스 이용 후 반드시 로그아웃 하시기 바랍니다.</li>
+              </ul>
+
+              <div class="btnWrap">
+                <a href="#" class="btn btn-size md bg" aria-role="button">로그인</a>
               </div>
-            </div>
 
-            <ul class="list01">
-              <li>개인정보 보호를 위해 비밀번호 5회 이상 오류 시 비밀번호 재설정으로 전환됩니다.</li>
-              <li>비밀번호는 주기적(3개월)으로 변경하시고 서비스 이용 후 반드시 로그아웃 하시기 바랍니다.</li>
-            </ul>
+              <div class="btnWrap">
+                <a href="#" class="btn btn-size md txt" aria-role="button">아이디 찾기</a>
+                <a href="#" class="btn btn-size md txt" aria-role="button">비밀번호 찾기</a>
+                <a href="#" class="btn btn-size md txt" aria-role="button">회원가입</a>
+              </div>
 
-            <div class="btnWrap">
-              <a href="#" class="btn btn-size md bg" aria-role="button">로그인</a>
-            </div>
-
-            <div class="btnWrap">
-              <a href="#" class="btn btn-size md txt" aria-role="button">아이디 찾기</a>
-              <a href="#" class="btn btn-size md txt" aria-role="button">비밀번호 찾기</a>
-              <a href="#" class="btn btn-size md txt" aria-role="button">회원가입</a>
-            </div>
-
-            <div class="btnWrap">
-              <a href="#" class="btn btn-size md ico uline arrow" aria-role="button">관리자 문의</a>
+              <div class="btnWrap">
+                <a href="#" class="btn btn-size md ico uline arrow" aria-role="button">관리자 문의</a>
+              </div>
             </div>
 
             <!--[e] 작업영억 -->
