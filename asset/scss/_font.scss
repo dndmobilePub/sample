@@ -1,64 +1,65 @@
+$fontUrl:'/asset/font/';
 /* WEB FONT */
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-thin-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-thin-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-thin-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-thin-webfont.woff') format('woff');
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-extralight-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-extralight-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-extralight-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-extralight-webfont.woff') format('woff');
   font-weight: 200;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-light-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-light-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-light-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-light-webfont.woff') format('woff');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-regular-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-regular-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-regular-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-regular-webfont.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-medium-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-medium-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-medium-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-medium-webfont.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-semibold-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-semibold-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-semibold-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-semibold-webfont.woff') format('woff');
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-bold-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-bold-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-bold-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-bold-webfont.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-extrabold-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-extrabold-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-extrabold-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-extrabold-webfont.woff') format('woff');
   font-weight: 800;
   font-style: normal;
 }
 @font-face {
   font-family: 'gothic_a1';
-  src: url('/asset/font/gothica1-black-webfont.woff2') format('woff2'),
-       url('/asset/font/gothica1-black-webfont.woff') format('woff');
+  src: url($fontUrl + '/webfonts/gothica1-black-webfont.woff2') format('woff2'),
+       url($fontUrl + '/webfonts/gothica1-black-webfont.woff') format('woff');
   font-weight: 900;
   font-style: normal;
 }
@@ -69,25 +70,25 @@
   font-family:'YouandModern';
   font-style:normal;
   font-weight:400;
-  src:url('/asset/font/hdcard/Youandi_Modern_TextRegular.eot');
-  src:url('/asset/font/hdcard/Youandi_Modern_TextRegular.eot?#iefix') format('embedded-opentype');
-  src:url('/asset/font/hdcard/Youandi_Modern_TextRegular.woff') format('woff');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_TextRegular.eot');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_TextRegular.eot?#iefix') format('embedded-opentype');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_TextRegular.woff') format('woff');
 }
 @font-face {
   font-family:'YouandModern';
   font-style:normal;
   font-weight:700;
-  src:url('/asset/font/hdcard/Youandi_Modern_TextBold.eot');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_TextBold.eot');
   src:url('/asset/Youandi_Modern_TextBold.eot?#iefix') format('embedded-opentype');
-  src:url('/asset/font/hdcard/Youandi_Modern_TextBold.woff') format('woff');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_TextBold.woff') format('woff');
 }
 @font-face {
   font-family:'YouandModern';
   font-style:normal;
   font-weight:800;
-  src:url('/asset/font/hdcard/Youandi_Modern_HeadExtraBold.eot');
-  src:url('/asset/font/hdcard/Youandi_Modern_HeadExtraBold.eot?#iefix') format('embedded-opentype');
-  src:url('/asset/font/hdcard/Youandi_Modern_HeadExtraBold.woff') format('woff');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_HeadExtraBold.eot');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_HeadExtraBold.eot?#iefix') format('embedded-opentype');
+  src:url($fontUrl + '/hdcard/Youandi_Modern_HeadExtraBold.woff') format('woff');
 }
 
 /* YouAndiNewKr */
@@ -95,39 +96,39 @@
   font-family:'YouandiNewKr';
   font-style:normal;
   font-weight:300;
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-Light.eot'); /* IE9 Compat Modes */
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-Light.eot?#iefix') format('embedded-opentype'), /* IE6 ~ IE8 */
-  url('/asset/font/hdcard/YouandiNewKrTitle-Light.woff2') format('woff2'), /* Supper Modern Browsers */
-  url('/asset/font/hdcard/YouandiNewKrTitle-Light.woff') format('woff'), /* Modern Browsers */
-  url('/asset/font/hdcard/YouandiNewKrTitle-Light.svg') format('svg');
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-Light.eot'); /* IE9 Compat Modes */
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-Light.eot?#iefix') format('embedded-opentype'), /* IE6 ~ IE8 */
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Light.woff2') format('woff2'), /* Supper Modern Browsers */
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Light.woff') format('woff'), /* Modern Browsers */
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Light.svg') format('svg');
 }
 @font-face {
   font-family:'YouandiNewKr';
   font-style:normal;
   font-weight:400;
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-Regular.eot');
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-Regular.eot#iefix') format('embedded-opentype'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-Regular.woff2') format('woff2'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-Regular.woff') format('woff'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-Regular.svg') format('svg');
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-Regular.eot');
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-Regular.eot#iefix') format('embedded-opentype'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Regular.woff2') format('woff2'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Regular.woff') format('woff'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Regular.svg') format('svg');
 }
 @font-face {
   font-family:'YouandiNewKr';
   font-style:normal;
   font-weight:700;
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-Bold.eot');
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-Bold.eot#iefix') format('embedded-opentype'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-Bold.woff2') format('woff2'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-Bold.woff') format('woff'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-Bold.svg') format('svg');
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-Bold.eot');
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-Bold.eot#iefix') format('embedded-opentype'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Bold.woff2') format('woff2'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Bold.woff') format('woff'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-Bold.svg') format('svg');
 }
 @font-face {
   font-family:'YouandiNewKr';
   font-style:normal;
   font-weight:800;
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-ExtraBold.eot');
-  src:url('/asset/font/hdcard/YouandiNewKrTitle-ExtraBold.eot#iefix') format('embedded-opentype'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-ExtraBold.woff2') format('woff2'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-ExtraBold.woff') format('woff'),
-  url('/asset/font/hdcard/YouandiNewKrTitle-ExtraBold.svg') format('svg');
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-ExtraBold.eot');
+  src:url($fontUrl + '/hdcard/YouandiNewKrTitle-ExtraBold.eot#iefix') format('embedded-opentype'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-ExtraBold.woff2') format('woff2'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-ExtraBold.woff') format('woff'),
+  url($fontUrl + '/hdcard/YouandiNewKrTitle-ExtraBold.svg') format('svg');
 }
