@@ -168,7 +168,7 @@ var guide = {
     $tab.eq(0).addClass('active');
   },
   UI: function () {
-    var $document = $('body, html'),
+    var $document = $(document),
       $currentName = $('nav a[href^="' + location.pathname.split("/")[5] + '"]'),
       $currentTile = $currentName.text();
     $currentName.closest('li').addClass('active').parents('li').addClass('active'); // 현재 메뉴 활성화
