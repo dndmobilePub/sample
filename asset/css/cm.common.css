@@ -2980,10 +2980,10 @@ legend, caption {
   padding: 1rem;
 }
 .tab-list .tab:hover a {
-  color: #043b72;
+  color: #4b90df;
 }
 .tab-list .tab._is-active a {
-  color: #043b72;
+  color: #4b90df;
 }
 .tab-list .tab._is-active a::before {
   content: "";
@@ -2992,9 +2992,42 @@ legend, caption {
   bottom: 0;
   width: 0;
   height: 0.2rem;
-  background-color: #043b72;
+  background-color: #4b90df;
   -webkit-animation: widthAct 0.3s linear forwards;
           animation: widthAct 0.3s linear forwards;
+}
+.tab-list > li._addTab > a {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  background: #4b90df;
+  border-radius: 100%;
+}
+.tab-list > li._addTab > a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(50% - 0.1rem);
+  left: calc(50% - 0.5rem);
+  width: 1rem;
+  height: 0.2rem;
+  background: #fff;
+}
+.tab-list > li._addTab > a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(50% - 0.1rem);
+  left: calc(50% - 0.5rem);
+  width: 1rem;
+  height: 0.2rem;
+  background: #fff;
+}
+.tab-list > li._addTab > a::after {
+  content: "";
+  display: block;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 .tab-wrap {
   position: relative;
@@ -3074,7 +3107,7 @@ legend, caption {
   bottom: 0;
   width: 6.4rem;
   height: 0.2rem;
-  background-color: #043b72;
+  background-color: #4b90df;
   -webkit-transition: 0.2s all cubic-bezier(0, 0, 0.58, 1);
   transition: 0.2s all cubic-bezier(0, 0, 0.58, 1);
 }
@@ -3095,10 +3128,11 @@ legend, caption {
   display: block;
 }
 .tab-contents-wrap {
-  border: 0.1rem solid #0048ff;
+  border: 0.1rem solid #4b90df;
 }
 .tab-contents {
-  padding: 3rem 5rem 5rem;
+  padding: 0 2rem 2rem;
+  min-height: 20rem;
 }
 .tab-contents:nth-child(even) {
   background: #eee;
@@ -3112,10 +3146,6 @@ legend, caption {
 .tab-sticky .tab-contents-wrap {
   border: none;
 }
-.tab-sticky .tab-contents {
-  padding: 8rem 5rem;
-}
-
 @-webkit-keyframes widthAct {
   0% {
     width: 0;
@@ -3126,7 +3156,6 @@ legend, caption {
     left: 0;
   }
 }
-
 @keyframes widthAct {
   0% {
     width: 0;
