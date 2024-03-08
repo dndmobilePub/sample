@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /****************************************/
-/*	Name: KBDS PMS
+/*	Name: hyundaicard M-mall
 /*	Version: 1.0
 /*	Author: [써냐]BLUEWEBD™
 /****************************************/
@@ -138,7 +138,7 @@ select::-ms-expand {
 /* select {border-radius:0; ; -webkit-border-radius:0 ; -moz-border-radius:0 ; -ms-border-radius:0 ; -o-border-radius:0 ; border-color: #ccc; text-indent: 10px; } */
 body, th, td, input, select, textarea, button {
   font-size: 1.4rem;
-  font-family: "KBFG Display", "NotoSansKR", "Malgun Gothic", "Dotum", Arial, sans-serif;
+  font-family: "gothic_a1", "Malgun Gothic", "맑은 고딕", "Dotum", Arial, sans-serif;
   font-weight: 400;
   color: #333;
   letter-spacing: -0.5px;
@@ -303,7 +303,7 @@ legend, caption {
 }
 
 .bold {
-  font-family: "KBFG Display", "NotoSansKR", "Malgun Gothic", "Dotum", Arial, sans-serif;
+  font-family: "gothic_a1", "Malgun Gothic", "맑은 고딕", "Dotum", Arial, sans-serif;
   font-weight: 600;
 }
 
@@ -386,83 +386,113 @@ legend, caption {
 
 /* WEB FONT */
 @font-face {
-  font-family: "pass";
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-thin-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-thin-webfont.woff") format("woff");
+  font-weight: 100;
   font-style: normal;
-  font-weight: 400;
-  src: url(data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAAATsAA8AAAAAB2QAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABWAAAABwAAAAcg9+z70dERUYAAAF0AAAAHAAAAB4AJwANT1MvMgAAAZAAAAA/AAAAYH7AkBhjbWFwAAAB0AAAAFkAAAFqZowMx2N2dCAAAAIsAAAABAAAAAQAIgKIZ2FzcAAAAjAAAAAIAAAACAAAABBnbHlmAAACOAAAALkAAAE0MwNYJ2hlYWQAAAL0AAAAMAAAADYPA2KgaGhlYQAAAyQAAAAeAAAAJAU+ATJobXR4AAADRAAAABwAAAAcCPoA6mxvY2EAAANgAAAAEAAAABAA5gFMbWF4cAAAA3AAAAAaAAAAIAAKAE9uYW1lAAADjAAAARYAAAIgB4hZ03Bvc3QAAASkAAAAPgAAAE5Ojr8ld2ViZgAABOQAAAAGAAAABuK7WtIAAAABAAAAANXulPUAAAAA1viLwQAAAADW+JM4eNpjYGRgYOABYjEgZmJgBEI2IGYB8xgAA+AANXjaY2BifMg4gYGVgYVBAwOeYEAFjMgcp8yiFAYHBl7VP8wx/94wpDDHMIoo2DP8B8kx2TLHACkFBkYA8/IL3QB42mNgYGBmgGAZBkYGEEgB8hjBfBYGDyDNx8DBwMTABmTxMigoKKmeV/3z/z9YJTKf8f/X/4/vP7pldosLag4SYATqhgkyMgEJJnQFECcMOGChndEAfOwRuAAAAAAiAogAAQAB//8AD3jaY2BiUGJgYDRiWsXAzMDOoLeRkUHfZhM7C8Nbo41srHdsNjEzAZkMG5lBwqwg4U3sbIx/bDYxgsSNBRUF1Y0FlZUYBd6dOcO06m+YElMa0DiGJIZUxjuM9xjkGRhU2djZlJXU1UDQ1MTcDASNjcTFQFBUBGjYEkkVMJCU4gcCKRTeHCk+fn4+KSllsJiUJEhMUgrMUQbZk8bgz/iA8SRR9qzAY087FjEYD2QPDDAzMFgyAwC39TCRAAAAeNpjYGRgYADid/fqneL5bb4yyLMwgMC1H90HIfRkCxDN+IBpFZDiYGAC8QBbSwuceNpjYGRgYI7594aBgcmOAQgYHzAwMqACdgBbWQN0AAABdgAiAAAAAAAAAAABFAAAAj4AYgI+AGYB9AAAAAAAKgAqACoAKgBeAJIAmnjaY2BkYGBgZ1BgYGIAAUYGBNADEQAFQQBaAAB42o2PwUrDQBCGvzVV9GAQDx485exBY1CU3PQgVgIFI9prlVqDwcZNC/oSPoKP4HNUfQLfxYN/NytCe5GwO9/88+/MBAh5I8C0VoAtnYYNa8oaXpAn9RxIP/XcIqLreZENnjwvyfPieVVdXj2H7DHxPJH/2/M7sVn3/MGyOfb8SWjOGv4K2DRdctpkmtqhos+D6ISh4kiUUXDj1Fr3Bc/Oc0vPqec6A8aUyu1cdTaPZvyXyqz6Fm5axC7bxHOv/r/dnbSRXCk7+mpVrOqVtFqdp3NKxaHUgeod9cm40rtrzfrt2OyQa8fppCO9tk7d1x0rpiQcuDuRkjjtkHt16ctbuf/radZY52/PnEcphXpZOcofiEZNcQAAeNpjYGIAg///GBgZsAF2BgZGJkZmBmaGdkYWRla29JzKggxD9tK8TAMDAxc2D0MLU2NjENfI1M0ZACUXCrsAAAABWtLiugAA) format("woff");
 }
 @font-face {
-  font-family: "iconFont";
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-extralight-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-extralight-webfont.woff") format("woff");
+  font-weight: 200;
   font-style: normal;
-  font-weight: 900;
-  font-display: auto;
-  src: url("../font/iconfont/fontawesome/fa-solid-900.eot");
-  src: url("../font/iconfont/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../font/iconfont/fontawesome/fa-solid-900.woff2") format("woff2"), url("../font/iconfont/fontawesome/fa-solid-900.woff") format("woff"), url("../font/iconfont/fontawesome/fa-solid-900.ttf") format("truetype"), url("../font/iconfont/fontawesome/fa-solid-900.svg#fontawesome") format("svg");
-}
-.fa,
-.fas {
-  font-family: "iconFont";
-  font-weight: 900;
-}
-
-@font-face {
-  font-family: "iconFont";
-  font-display: block;
-  src: url("../font/iconfont/fontawesome/fa-solid-900.woff2") format("woff2"), url("../font/iconfont/fontawesome/fa-solid-900.ttf") format("truetype");
 }
 @font-face {
-  font-family: "roboto";
-  src: url("../font/webfonts/Roboto-Light.woff") format("woff");
-  src: url("../font/webfonts/Roboto-Light.woff2");
-  src: url("../font/webfonts/Roboto-Light.otf");
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-light-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-light-webfont.woff") format("woff");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: "roboto";
-  src: url("../font/webfonts/Roboto-Regular.woff") format("woff");
-  src: url("../font/webfonts/Roboto-Regular.woff2");
-  src: url("../font/webfonts/Roboto-Regular.otf");
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-regular-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-regular-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "roboto";
-  src: url("../font/webfonts/Roboto-Medium.woff") format("woff");
-  src: url("../font/webfonts/Roboto-Medium.woff2");
-  src: url("../font/webfonts/Roboto-Medium.otf");
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-medium-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-medium-webfont.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: "roboto";
-  src: url("../font/webfonts/Roboto-Bold.woff") format("woff");
-  src: url("../font/webfonts/Roboto-Bold.woff2");
-  src: url("../font/webfonts/Roboto-Bold.otf");
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-semibold-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-semibold-webfont.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
-  font-family: "NotoSansKR";
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-bold-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-bold-webfont.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
-  font-weight: 300;
-  src: url("../font/webfonts/NotoSansKR-Light.woff");
-  src: url("../font/webfonts/NotoSansKR-Light.otf");
 }
 @font-face {
-  font-family: "NotoSansKR";
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-extrabold-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-extrabold-webfont.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "gothic_a1";
+  src: url("/asset/font//webfonts/gothica1-black-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-black-webfont.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+/* 전용폰트 */
+/* YouAndModern */
+@font-face {
+  font-family: "YouandModern";
   font-style: normal;
   font-weight: 400;
-  src: url("../font/webfonts/NotoSansKR-Regular.eot");
-  src: url("../font/webfonts/NotoSansKR-Regular.woff");
-  src: url("../font/webfonts/NotoSansKR-Regular.otf");
+  src: url("/asset/font//hdcard/Youandi_Modern_TextRegular.eot");
+  src: url("/asset/font//hdcard/Youandi_Modern_TextRegular.eot?#iefix") format("embedded-opentype");
+  src: url("/asset/font//hdcard/Youandi_Modern_TextRegular.woff") format("woff");
 }
 @font-face {
-  font-family: "NotoSansKR";
+  font-family: "YouandModern";
   font-style: normal;
-  font-weight: 600;
-  src: url("../font/webfonts/NotoSansKR-Bold.woff");
-  src: url("../font/webfonts/NotoSansKR-Bold.otf");
+  font-weight: 700;
+  src: url("/asset/font//hdcard/Youandi_Modern_TextBold.eot");
+  src: url("/asset/Youandi_Modern_TextBold.eot?#iefix") format("embedded-opentype");
+  src: url("/asset/font//hdcard/Youandi_Modern_TextBold.woff") format("woff");
+}
+@font-face {
+  font-family: "YouandModern";
+  font-style: normal;
+  font-weight: 800;
+  src: url("/asset/font//hdcard/Youandi_Modern_HeadExtraBold.eot");
+  src: url("/asset/font//hdcard/Youandi_Modern_HeadExtraBold.eot?#iefix") format("embedded-opentype");
+  src: url("/asset/font//hdcard/Youandi_Modern_HeadExtraBold.woff") format("woff");
+}
+/* YouAndiNewKr */
+@font-face {
+  font-family: "YouandiNewKr";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-Light.eot"); /* IE9 Compat Modes */
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-Light.eot?#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-Light.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-Light.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-Light.svg") format("svg");
+}
+@font-face {
+  font-family: "YouandiNewKr";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-Regular.eot");
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-Regular.eot#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-Regular.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-Regular.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-Regular.svg") format("svg");
+}
+@font-face {
+  font-family: "YouandiNewKr";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-Bold.eot");
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-Bold.eot#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-Bold.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-Bold.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-Bold.svg") format("svg");
+}
+@font-face {
+  font-family: "YouandiNewKr";
+  font-style: normal;
+  font-weight: 800;
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.eot");
+  src: url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.eot#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.svg") format("svg");
 }
 /* jquery UI CSS - resizalabe */
 .ui-sortable-handle {

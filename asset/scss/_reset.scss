@@ -48,7 +48,7 @@ select::-ms-expand {display:none;} /* IE9 이상 select 화살표 삭제 */
 
 body,th,td,input,select,textarea,button {
     @include fontSize($size:"base");
-    @include webfont($fontKO, 400);
+    @include webfont($fontDefault, 400);
     color:$color-default;
     letter-spacing:-0.5px;
 }
@@ -102,7 +102,7 @@ legend, caption{@include ir("hide");}
         text-decoration:underline;
     }
 }
-.bold {@include webfont($fontKO, 600);}
+.bold {@include webfont($fontDefault, 600);}
 .fs-md {@include fontSize(1.6rem !important);}
 .fs-s {@include fontSize(1.3rem !important);}
 .fs-xs {@include fontSize(1.2rem !important);}
