@@ -1,4 +1,11 @@
 #{$lst} {
+  &-dot{
+    & > li{
+      position:relative;
+      padding:0.5rem 0 0.5rem 1.2rem
+    }
+  }
+
   &-goods {
     @include display(flex);
     flex-wrap:wrap;
