@@ -262,6 +262,7 @@
                 // @include display(inline-block);
                 background:$color-green2;
                 width:1.5rem; height:.3rem;
+                margin-bottom:1rem;
             }
         }
         &.dep03{
@@ -337,9 +338,13 @@
             background:$color-light-gray2;
         }
         
-        tr {
-            &:first-child {
-                & > th, & > td {border-top:0;}
+        thead {
+            & + tbody {
+                tr {
+                    &:first-child {
+                        & > th, & > td {border-top:0;}
+                    }
+                }
             }
         }
     }

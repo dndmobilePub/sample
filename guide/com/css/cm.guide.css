@@ -469,6 +469,7 @@
   background: #00c542;
   width: 1.5rem;
   height: 0.3rem;
+  margin-bottom: 1rem;
 }
 .cp-tit.dep03 {
   margin-bottom: 1rem;
@@ -551,7 +552,7 @@
 .tblWrap .tbl td {
   background: #f5f5f5;
 }
-.tblWrap .tbl tr:first-child > th, .tblWrap .tbl tr:first-child > td {
+.tblWrap .tbl thead + tbody tr:first-child > th, .tblWrap .tbl thead + tbody tr:first-child > td {
   border-top: 0;
 }
 

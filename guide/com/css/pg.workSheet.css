@@ -6747,26 +6747,6 @@ html.m .frame_device {
   margin-top: 2rem;
 }
 
-.tblWrap {
-  margin: 1.5rem 0 0.5rem;
-}
-.tblWrap .tbl {
-  width: 100%;
-}
-.tblWrap .tbl th, .tblWrap .tbl td {
-  padding: 1rem;
-  border-top: 1px #242424 solid;
-}
-.tblWrap .tbl th {
-  background: #e6e6e6;
-}
-.tblWrap .tbl td {
-  background: #f5f5f5;
-}
-.tblWrap .tbl tr:first-child > th, .tblWrap .tbl tr:first-child > td {
-  border-top: 0;
-}
-
 .hr.divice {
   display: block;
   visibility: visible;
