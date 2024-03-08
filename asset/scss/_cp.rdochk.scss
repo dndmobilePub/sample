@@ -20,7 +20,7 @@
     &-checkbox {
         @include display(flex);
         #{$field} {
-            &-label {@include display(inline-block); margin-bottom:0; vertical-align:middle;}
+            &-label {@include display(inline-block); margin-bottom:0; align-self:center; color:$color-black;}
             &-icon {
                 @include display(inline-block);
                 @include el-size(2rem, 2rem); min-width:2rem;
@@ -109,7 +109,7 @@
         input[type=checkbox] {
             &:checked {
                 & ~ .field-icon {
-                    background: svgIconForm(chk-square-fill, 0048ff);
+                    background: svgIconForm(chk-square-fill, 000000);
                 }
                 &[readonly] ~ .field-icon, .readonly ~ .field-icon,
                 &[disabled] ~ .field-icon, .disabled ~ .field-icon {background: svgIconForm(chk-square-fill, aaa);}

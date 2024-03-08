@@ -48,7 +48,7 @@ select::-ms-expand {display:none;} /* IE9 이상 select 화살표 삭제 */
 
 body,th,td,input,select,textarea,button {
     @include fontSize($size:"base");
-    @include webfont($fontDefault, 400);
+    @include webfont($fontDefault, 500);
     color:$color-default;
     letter-spacing:-0.5px;
 }
