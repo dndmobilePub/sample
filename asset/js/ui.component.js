@@ -556,7 +556,7 @@ var COMPONENT_UI = (function (cp, $) {
         openPop: function () {
             const self = this,
                 btnModal = this.constEl.btnModal;
-            $(document).on('click', btnModal, function() {
+            $('body, html').on('click', btnModal, function() {
                 $(this).addClass('_rtFocus');
                 self.showModal($(this));
                 self.layerFocusControl($(this));
@@ -690,35 +690,9 @@ var COMPONENT_UI = (function (cp, $) {
             $('body').addClass('no-scroll').append(dimmedEl);            
         },
         
-        // 접근성 포커스 반영
-        layerFocusControl: function ($btn) {
-            const target = $btn.attr('data-modal') || $btn.attr('data-select');
-            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
-            var $modalWrap = $modal.find("> .modalWrap");
-            
-            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
-            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
-            
-            $modalWrap.on("keydown", function (e) {
-                if (e.keyCode == 9) {
-                if (e.shiftKey) { // shift + tab
-                    if ($(e.target).is($firstEl)) {
-                        $lastEl.focus();
-                        e.preventDefault();
-                        }
-                    } else { // tab
-                        if ($(e.target).is($lastEl)) {
-                        $firstEl.focus();
-                        e.preventDefault();
-                        }
-                    }
-                }
-            });
-        },
-        
         closePop: function() {
             const self = this;
-            $(document).on('click', '.modalPop .btn-close-pop', function() {
+            $('.modalPop').on('click', '.btn-close-pop', function() {
                 var $modal = $(this).closest('.modalPop');
                 var $modalWrap = $modal.find("> .modalWrap");
                 var modalWrapClass = $modal.attr('class');
@@ -786,6 +760,32 @@ var COMPONENT_UI = (function (cp, $) {
                 $('body').removeClass('no-scroll');
                 $(this).closest('.modalPop').prev().focus();
                 $('.dimmed').remove();
+            });
+        },
+        
+        // 접근성 포커스 반영
+        layerFocusControl: function ($btn) {
+            const target = $btn.attr('data-modal') || $btn.attr('data-select');
+            const $modal = $('.modalPop[modal-target="' + target + '"], .modalPop[select-target="' + target + '"]');
+            var $modalWrap = $modal.find("> .modalWrap");
+            
+            var $firstEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').first();
+            var $lastEl = $modalWrap.find('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])').last();
+            
+            $modalWrap.on("keydown", function (e) {
+                if (e.keyCode == 9) {
+                if (e.shiftKey) { // shift + tab
+                    if ($(e.target).is($firstEl)) {
+                        $lastEl.focus();
+                        e.preventDefault();
+                        }
+                    } else { // tab
+                        if ($(e.target).is($lastEl)) {
+                        $firstEl.focus();
+                        e.preventDefault();
+                        }
+                    }
+                }
             });
         },
 
@@ -875,6 +875,227 @@ var COMPONENT_UI = (function (cp, $) {
         }
         
     };
+    /* ToolTip */
+    cp.toolTip = {
+        constEl: {
+            tooltip: '.tooltip',
+            content: '.tooltip-content',
+            message: '.tooltip-message',
+            close: '.tooltip-close',
+            icoTip: '.ico-tooltip',
+            top: '_top',
+            default: '_default',
+            bottom: '_bottom',
+            left: '_left',
+            active: '_is-active',
+            duration: '250ms',
+            easing: 'cubic-bezier(.86, 0, .07, 1)',
+            space: 10,
+            padding: 32
+        },
+        init() {
+            this.openTip();
+            this.closeTip();
+            this.toolIndex();
+            $('[data-tooltip]').hover(this.showTip.bind(this), this.openTip.bind(this), this.closeTip.bind(this));
+        },
+        toolIndex() {
+            $('[data-toggle="tooltip"]').each(function(index) {
+                const num = index + 1;
+                const tooltipId = "toolTip_" + num;
+            
+                // aria-describedby 속성 설정
+                $(this).attr("aria-describedby", tooltipId);
+            });
+        },
+        openTip: function() {
+            const self = this;
+            const $tooltipToggle = $('[data-toggle="tooltip"]');
+            $tooltipToggle.click(function() {
+                const $this = $(this);
+                if (!$this.hasClass('_is-active')) {
+                    $(".ico-tooltip._is-active").removeClass(cp.toolTip.constEl.active).focus();
+                    self.showTip(event);
+                    $this.addClass('_is-active');
+                }
+            });
+        },
+        closeTip() {
+            const $tooltip = $(this.constEl.tooltip);
+            if ($tooltip.length) {
+                $(".ico-tooltip._is-active").removeClass(cp.toolTip.constEl.active).focus();
+                $tooltip.removeClass('_is-active').remove();
+            }
+            return this;
+        },
+        
+        focusControl: function () {
+            const $tooltip = $(this.constEl.tooltip);
+            
+            const $firstEl = $tooltip.find('a, button, [tabindex]:not([tabindex="-1"])').first();
+            const $lastEl = $tooltip.find('a, button, [tabindex]:not([tabindex="-1"])').last();
+            
+            $tooltip.on("keydown", function (e) {
+                if (e.keyCode == 9) {
+                if (e.shiftKey) { // shift + tab
+                    if ($(e.target).is($firstEl)) {
+                        $lastEl.focus();
+                        e.preventDefault();
+                        }
+                    } else { // tab
+                        if ($(e.target).is($lastEl)) {
+                        $firstEl.focus();
+                        e.preventDefault();
+                        }
+                    }
+                }
+            });
+            
+        },
+        toolTipHtml(options) {
+            const directionClass = this.constEl[options.direction];
+            const messageHtml = options.message;
+        
+            //const tooltipId = $(this.constEl.tooltip).attr('aria-describedby');
+            const tooltipId = options.ariaDescribedBy;
+        
+            return `
+                <div id="${tooltipId}" class="tooltip ${directionClass}" tabindex="0" role="tooltip">
+                    <div class="tooltip-content">
+                        <p class="tooltip-message">${messageHtml}</p>
+                        <a href="javascript:void(0);" onclick="COMPONENT_UI.toolTip.closeTip()" class="ico-tooltip-close"><span class="hide">툴팁닫기</span></a>
+                    </div>
+                </div>
+            `;
+        },
+        
+        showTip(event) {
+            const self = this;
+            const $this = $(event.currentTarget);
+            const options = {
+                body:"body, html",
+                selector: $this,
+                container: $this.parent(),
+                direction: $this.data('direction'),
+                message: $this.data('message'),
+                ariaDescribedBy: $this.attr('aria-describedby')
+            };
+            
+            const directionClass = this.constEl[options.direction];
+            const tooltipWrap = this.constEl[options.container];
+            $this.addClass(`${cp.toolTip.constEl.active} ${directionClass}`);            
+            
+            const $newTooltip = $(this.toolTipHtml(options));
+            if ($(options.body).find('.tooltip').length) {
+                this.closeTip();
+            }
+            $('body, html').append($newTooltip);
+            self.focusControl($(this));
+            setTimeout(function() {
+                const winW = $(window).width();
+                const winH = $(window).outerHeight();
+                const tooltipWidth = $(options.body).find('.tooltip').outerWidth();
+                const tooltipHeight = $(options.body).find('.tooltip').outerHeight();
+                const elWidth = $this.outerWidth();
+                const elHeight = $this.outerHeight();
+                const elOffsetT = $this.offset().top;
+                const elOffsetL = $this.offset().left;
+                let thisTooltip = $(options.body).find('.tooltip');
+  
+                
+                /* 230523 edit [s] */
+                $this.parent().removeClass('reverse');
+                if (options.direction === 'default') {//오른쪽에 노출
+                    if( (elOffsetL + 20) >= (winW/3) ){
+                        cp.toolTip.calcRight(tooltipWidth,tooltipHeight,winW,elOffsetT,elOffsetL,thisTooltip);
+                    }else{
+                        $newTooltip.css({
+                            top: elOffsetT - ((tooltipHeight/2) - 10),
+                            left: elOffsetL + 30
+                        }); 
+                    }
+                } else if (options.direction === 'left') {//왼쪽에 노출,
+                    if( (elOffsetL + 20) >= (winW/3)*2 ){
+                        $newTooltip.css({
+                            top: elOffsetT - ((tooltipHeight/2) - 10),
+                            left: elOffsetL - (tooltipWidth + 10)
+                        }); 
+                    }else{
+                        cp.toolTip.calcLeft(tooltipWidth,tooltipHeight,elOffsetL,elOffsetT,thisTooltip);
+                    }
+                } else if (options.direction === 'top') {//위에 노출
+                    let thisH = thisTooltip.outerHeight();
+                    let bottomPosT = elOffsetT - (thisH + 10);
+                    let thisW = thisTooltip.outerWidth();
+                    cp.toolTip.calcHorizontal(thisW,elWidth,winW,elOffsetL,thisTooltip,bottomPosT);
+                    
+                } else if (options.direction === 'bottom') {//아래 노출
+                    let bottomPosT = elOffsetT + 30;
+                    cp.toolTip.calcHorizontal(tooltipWidth,elWidth,winW,elOffsetL,thisTooltip,bottomPosT);
+                    
+                }
+                // $newTooltip.css({
+                //     top,left,right
+                // });                
+                $newTooltip.addClass(cp.toolTip.constEl.active).focus();
+        
+                //console.log(winW, elOffsetL, (winW - elOffsetL));
+            }, 0);
+            
+        },
+        calcRight(tooltipWidth,tooltipHeight,winW,elOffsetT,elOffsetL,newTooltip) {
+            let $thisTooltip = newTooltip;
+            if( (tooltipWidth+15) >= (winW-(elOffsetL+20)) ){
+                $thisTooltip.css({
+                    top: elOffsetT - ((tooltipHeight/2) - 10),
+                    left: elOffsetL - (tooltipWidth + 10)
+                }); 
+                $(".ico-tooltip._is-active").addClass('reverse')
+            }else{
+                $thisTooltip.css({
+                    top: elOffsetT - ((tooltipHeight/2) - 10),
+                    left: elOffsetL + 30
+                }); 
+            }
+        },
+        calcLeft(tooltipWidth,tooltipHeight,elOffsetL,elOffsetT,thisTooltip) {
+            let $thisTooltip = thisTooltip;
+            if( (tooltipWidth+15) >= elOffsetL ){
+                $thisTooltip.css({
+                    top: elOffsetT - ((tooltipHeight/2) - 10),
+                    left: elOffsetL + 30
+                }); 
+                $(".ico-tooltip._is-active").addClass('reverse')
+            }else{
+                $thisTooltip.css({
+                    top: elOffsetT - ((tooltipHeight/2) - 10),
+                    left: elOffsetL - (tooltipWidth + 10)
+                }); 
+            }
+        },
+        calcHorizontal(tooltipWidth,elWidth,winW,elOffsetL,thisTooltip,bottomPosT) {
+            let $thisTooltip = thisTooltip,
+                $tops = bottomPosT;
+            if( (elOffsetL + 20) >= (winW/3)*2 ){
+                console.log('right',winW,tooltipWidth)
+                $thisTooltip.css({
+                    top: $tops,
+                    left: winW - tooltipWidth - 10
+                });
+            }else if( (elOffsetL + 20) <= (winW/3) ){
+                console.log('left')
+                $thisTooltip.css({
+                    top: $tops,
+                left: 10
+                });
+            }else{
+                $thisTooltip.css({
+                    top: $tops,
+                    left: elOffsetL - (tooltipWidth / 2) + (elWidth/2)
+                });
+            }
+        }
+    };
     /* bottom select pop */
     cp.selectPop = {
         constEl: {
@@ -889,7 +1110,7 @@ var COMPONENT_UI = (function (cp, $) {
         openSelect: function () {
             const self = this,
                 btnSelect = this.constEl.btnSelect;                
-            $(document).on('click', btnSelect, function() {
+            $('body, html').on('click', btnSelect, function() {
                 const $btn = $(this);
                 const target = $btn.attr('data-select');
                 const $select = $('.modalPop[select-target="' + target + '"]');
@@ -966,11 +1187,11 @@ var COMPONENT_UI = (function (cp, $) {
     
         optSelect: function () {
             const self = this;
-            $(document).on('click', '.select-lst > li > a.sel-opt', function () {
+            $('.modalPop').on('click', '.select-lst > li > a.sel-opt', function () {
                 $(this).parent('li').addClass('_is-active').siblings().removeClass('_is-active');
             });
             
-            $(document).on('click', '.btn-selChoice', function () {
+            $('.modalPop').on('click', '.btn-selChoice', function () {
                 $('.modalPop .btn-close-pop').trigger('click');
                 const selectedOption = $('.select-lst > li._is-active > a.sel-opt');
                 const selectedText = selectedOption.text();
@@ -1008,7 +1229,7 @@ var COMPONENT_UI = (function (cp, $) {
             $('.tab-list').attr('roll', 'tablist');
             $('.tab-contents').attr('roll', 'tabpanel');
     
-            $(document).ready(function() {
+            $('body, html').ready(function() {
                 $('.tab-wrap').each(function () {
                     var $tabWrap = $(this);
     
@@ -1232,7 +1453,7 @@ var COMPONENT_UI = (function (cp, $) {
              */
             const self = this;
     
-            $(document).on('click', this.constEl.tab, function(e) {
+            $('.tab-wrap').on('click', this.constEl.tab, function(e) {
                 e.preventDefault();
     
                 const $this = $(this).parent('.tab');
@@ -1402,7 +1623,7 @@ var COMPONENT_UI = (function (cp, $) {
              */
             const self = this;
     
-            $(document).on('click', this.constEl.btnToggle, function(e) {
+            $('.accordion-wrap').on('click', this.constEl.btnToggle, function(e) {
                 e.preventDefault();
     
                 const $this = $(this);
@@ -1424,7 +1645,7 @@ var COMPONENT_UI = (function (cp, $) {
              */
             const self = this;
     
-            $(document).on('click', this.constEl.btnChk, function(e) {
+            $('.accordion-wrap').on('click', this.constEl.btnChk, function(e) {
                 e.stopPropagation();
     
                 const $thisLabel = $(this);
@@ -1466,7 +1687,7 @@ var COMPONENT_UI = (function (cp, $) {
              */
             
             // 전체 체크하는 input 클릭시
-            $(document).on('click', '#' + chkAllId, function() {
+            $('.accordion-wrap').on('click', '#' + chkAllId, function() {
                 if ($(this).is(':checked')){
                     $('input[name^="' + chkName + '"]').prop('checked', true);
                 } else {
@@ -1475,7 +1696,7 @@ var COMPONENT_UI = (function (cp, $) {
             });
     
             // 개별 input 클릭시
-            $(document).on('click', 'input[name^="' + chkName + '"]', function() {
+            $('.accordion-wrap').on('click', 'input[name^="' + chkName + '"]', function() {
                 const total = $('input[name^="' + chkName + '"]').length;
                 const checked = $('input[name^="' + chkName + '"]:checked').length;
                 const $thisContents = $(this).closest('.accordion-contents');
@@ -2568,6 +2789,7 @@ var COMPONENT_UI = (function (cp, $) {
         cp.tblCaption.init(); // table caption
         cp.form.init(); // form
         cp.modalPop.init();
+        cp.toolTip.init();
         cp.selectPop.init(); // 바텀시트 select
         cp.tab.init();
         cp.accordion.init();
