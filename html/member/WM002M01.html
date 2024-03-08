@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>로그인 : 현대카드 M몰</title>
     <link rel="stylesheet" type="text/css" href="../../asset/css/cm.member.css">
     <script type="text/javascript" src="../../asset/js/plugin/lib.jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="../../asset/js/plugin/pg.spectrum.js"></script>
 </head>
-<body style="margin:2rem;">
+<body>
     <div class="wrap member">
         <header class="header mb"></header>
         <div class="container mb">
             <!--[s] 작업영억 -->
             <div class="loginWrap">
-              <div class="field">
+
+              <div class="logo">
+                <img src="../../asset/image/hyundailogo.png" alt="현대로고">
+              </div>
+
+              <div class="field invalid">
                   <label class="field-label tit">아이디(이메일)</label>
                   <div class="field-outline">
                     <div class="field-input grow _input">
                       <input type="text" placeholder="" id="label1" title="" data-target="label1">
                     </div>
                   </div>
-                  <!-- <p class="field-msg">
+                  <p class="field-msg">
                     <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
-                  </p> -->
+                  </p>
               </div>
 
               <div class="field">
@@ -48,23 +53,23 @@
                 </div>
               </div>
 
-              <ul class="list01">
+              <ul class="list-dot cir">
                 <li>개인정보 보호를 위해 비밀번호 5회 이상 오류 시 비밀번호 재설정으로 전환됩니다.</li>
                 <li>비밀번호는 주기적(3개월)으로 변경하시고 서비스 이용 후 반드시 로그아웃 하시기 바랍니다.</li>
               </ul>
 
               <div class="btnWrap">
-                <a href="#" class="btn btn-size md bg" aria-role="button">로그인</a>
+                <button href="#" class="btn btn-size md bg" aria-role="button">로그인</button>
               </div>
 
-              <div class="btnWrap">
+              <div class="btnWrap flex">
                 <a href="#" class="btn btn-size md txt" aria-role="button">아이디 찾기</a>
                 <a href="#" class="btn btn-size md txt" aria-role="button">비밀번호 찾기</a>
                 <a href="#" class="btn btn-size md txt" aria-role="button">회원가입</a>
               </div>
 
-              <div class="btnWrap">
-                <a href="#" class="btn btn-size md ico uline arrow" aria-role="button">관리자 문의</a>
+              <div class="btnWrap center">
+                <a href="#" class="btn btn-size md ico arrow" aria-role="button">관리자 문의</a>
               </div>
             </div>
 

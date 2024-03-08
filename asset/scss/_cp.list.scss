@@ -1,17 +1,32 @@
 #{$lst} {
-  &-dot > li{
-    position:relative;
-    padding:0.5rem 0 0.5rem 1.2rem;
-    color: #333;
-    font-size: 1.3rem;
+  &-goods {
+    @include display(flex);
+    flex-wrap:wrap;
+    gap:2rem;
+    & > li {
+      @include width(calc(100%/2 - 1rem));
+    }  
+  }
+}
 
-    & .cir {
+.list{
+  &-dot{
+    padding: 0.3rem 0;
+    margin-left: 1rem;
+    margin-top: 2rem;
+
+    &.cir {
       & > li{
+        position:relative;
+        padding:0.5rem 0 0.5rem 1.2rem;
+        color: #333;
+        font-size: 1.3rem;
+
         &::before{
           content: "";
           display: block;
           position: absolute;
-          top: 1.4rem;
+          top: 1rem;
           left: 0;
           width: 0.3rem;
           height: 0.3rem;
@@ -21,13 +36,18 @@
       }
     }
 
-    & .squ {
+    &.squ {
       & > li{
+        position:relative;
+        padding:0.5rem 0 0.5rem 1.2rem;
+        color: #333;
+        font-size: 1.3rem;
+
         &::before{
           content: "";
           display: block;
           position: absolute;
-          top: 1.4rem;
+          top: 1rem;
           left: 0;
           width: 0.3rem;
           height: 0.3rem;
@@ -35,32 +55,60 @@
         }
       }
     }
+}
 
-    &-hyphen{
-      & li{
-        &::before{
-          content: "";
-          display: block;
-          position: absolute;
-          top: 1.4rem;
-          left: 0;
-          width: 0.5rem;
-          height: 0.1rem;
-          background: #888;
-        }
+  &-hyphen{
+    & > li{
+      position:relative;
+      padding:0.5rem 0 0.5rem 1.2rem;
+      color: #333;
+      font-size: 1.3rem;
+
+      &::before{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 1rem;
+        left: 0;
+        width: 0.5rem;
+        height: 0.1rem;
+        background: #888;
       }
     }
   }
-  
-  
 
-  &-goods {
-    @include display(flex);
-    flex-wrap:wrap;
-    gap:2rem;
-    & > li {
-      @include width(calc(100%/2 - 1rem));
-    }  
+  &-caution{
+    & > li{
+      position:relative;
+      padding:0.5rem 0 0.5rem 1.2rem;
+      color: #333;
+      font-size: 1.3rem;
+
+      &::before{
+        content: "※";
+        display: block;
+        position: absolute;
+        top: 0.2rem;
+        left: 0;
+      }
+    }
+  }
+
+  &-star{
+      & > li{
+        position:relative;
+        padding:0.5rem 0 0.5rem 1.2rem;
+        color: #333;
+        font-size: 1.3rem;
+
+        &::before{
+          content: "*";
+          display: block;
+          position: absolute;
+          top: 0.5rem;
+          left: 0;
+      } 
+      }
   }
 }
 
