@@ -1849,10 +1849,10 @@ var COMPONENT_UI = (function (cp, $) {
 
         mdBoxAddCont: function(callback) {
             Promise.all([
-                fetch('./module/module_txt.html').then(response => response.text()),
-                fetch('./module/module_img.html').then(response => response.text()),
-                fetch('./module/module_video.html').then(response => response.text()),
-                fetch('./module/module_goods.html').then(response => response.text())
+                fetch('/../../asset/_module/module_txt.html').then(response => response.text()),
+                fetch('/../../asset/_module/module_img.html').then(response => response.text()),
+                fetch('/../../asset/_module/module_video.html').then(response => response.text()),
+                fetch('/../../asset/_module/module_goods.html').then(response => response.text())
             ]).then(([txtArea, imgArea, videoArea, goodsArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
@@ -2227,7 +2227,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
         openCropImg: function () {
             function loadCropModal($imgWrap) {
-                $('.cropModalWrap').load('./module/modal.html', function () {
+                $('.cropModalWrap').load('/../../asset/_module/modal.html', function () {
                     var cropModalWrap = $(this);
                     var uniqueId = generateUniqueId();
         
@@ -2756,7 +2756,7 @@ var COMPONENT_UI = (function (cp, $) {
                 if (!$this.has('.textEditerWrap').length) {
                     $('.textEditerWrap').remove();
                     $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $this.prev('.textEditerWrap').load('./module/text-edit.html', function(){
+                    $this.prev('.textEditerWrap').load('/../../asset/_module/text-edit.html', function(){
                         var targetData = $('.edit-box').data('edit');
                     
                         $this.attr('edit-target', targetData);
