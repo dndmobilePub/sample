@@ -12,12 +12,19 @@
 @import 'variables';
 @import 'mixin';
 @import 'reset';
+@import 'font';
 @import 'plugin';
-@import '_cp.button';
-@import '_cp.tab';
-@import '_cp.list';
-@import '_cp.popup';
-@import '_cp.input';
+@import 'cp.text';
+@import 'cp.button';
+@import 'cp.ico';
+@import 'cp.input';
+@import 'cp.select';
+@import 'cp.rdochk';
+@import 'cp.accodion';
+@import 'cp.tab';
+@import 'cp.list';
+@import 'cp.table';
+@import 'cp.popup';
 
 /* 버튼 */
 .btn {

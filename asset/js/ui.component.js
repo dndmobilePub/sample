@@ -1,5 +1,94 @@
 var COMPONENT_UI = (function (cp, $) {
 
+    /* 브라우저 & 디바이스버전 체크 */
+    cp.uaCheck = {
+        init: function() {
+            this.addChkClass();
+        },
+        browserCheck: function() {
+            var user = window.navigator.userAgent.toLowerCase();
+            var isIE = user.indexOf("trident") > -1 || user.indexOf("msie") > -1;
+            
+            if (isIE) {
+                var ieVersion = this.getIEVersion();
+                var browser = "ie";
+                
+                if (ieVersion > 0 && ieVersion <= 8) {
+                    browser += " ie" + ieVersion;
+                }
+            } else {
+                var browser = user.indexOf("edge") > -1 ? "edge"
+                              : user.indexOf("edg/") > -1 ? "edge(chromium based)"
+                              : user.indexOf("opr") > -1 ? "opera"
+                              : user.indexOf("chrome") > -1 ? "chrome"
+                              : user.indexOf("firefox") > -1 ? "firefox"
+                              : user.indexOf("safari") > -1 ? "safari"
+                              : user.indexOf("whale") > -1 ? "whale"
+                              : "other_browser";
+            }
+  
+            return browser;
+        },
+        getIEVersion: function() {
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+            if (msie > 0) {
+                // IE 10 or older
+                return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+            }
+  
+            var trident = ua.indexOf("Trident/");
+            if (trident > 0) {
+                // IE 11
+                var rv = ua.indexOf("rv:");
+                return parseInt(ua.substring(rv + 3, ua.indexOf(".", rv)), 10);
+            }
+  
+            var edge = ua.indexOf("Edge/");
+            if (edge > 0) {
+                // Edge (Chromium-based)
+                return parseInt(ua.substring(edge + 5, ua.indexOf(".", edge)), 10);
+            }
+  
+            // Not IE or IE version >= 11
+            return -1;
+        },
+        mobileCheck: function() {
+            var user = navigator.userAgent;
+            var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (mobile) {
+                mobile = user.match(/lg/i) != null ? "lg"
+                        : user.match(/iphone|ipad|ipod/i) != null ? "ios"
+                        : user.match(/android/i) != null ? "aos"
+                        : "other_mobile";
+  
+                // aos인 경우 버전 체크
+                if (mobile === "aos") {
+                    var version = this.getAOSVersion();
+                    if (version > 0 && version <= 7) {
+                        mobile += "_old"; // aos_old 클래스 추가
+                    }
+                }
+            } else {
+                mobile = this.browserCheck();
+            }
+  
+            return mobile;
+        },
+        getAOSVersion: function() {
+            var ua = navigator.userAgent;
+            var match = ua.match(/Android\s([0-9]+)/);
+            return match ? parseInt(match[1], 10) : -1;
+        },
+        addChkClass: function() {
+            var browser = this.browserCheck();
+            var device = this.mobileCheck();
+            
+            $('html').addClass(browser).addClass(device);
+        },
+    },
+    /* table caption */
     cp.tblCaption = {
         constEl: {},
           
@@ -103,8 +192,8 @@ var COMPONENT_UI = (function (cp, $) {
           getCaptionHtml: function(title, text) {
               return '<caption class="caption"><strong>' + title + '</strong><p>' + text + ' 로 구성된 표' + '</p></caption>';
           },
-      },
-    
+    },
+    /* form UI */
     cp.form = {
         constEl: {
             inputDiv: $("._input"),
@@ -451,241 +540,7 @@ var COMPONENT_UI = (function (cp, $) {
 
         }
     };
-    function generateUniqueId() {
-        return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
-    }
-    cp.generateUniqueId = generateUniqueId;
-
-    cp.imgCrop = {
-        init: function () {
-            this.openCropImg();
-        },
-        openCropImg: function () {
-            function loadCropModal($imgWrap) {
-                $('.cropModalWrap').load('./module/modal.html', function () {
-                    var cropModalWrap = $(this);
-                    var uniqueId = generateUniqueId();
-        
-                    var avatarId = 'avatar_' + uniqueId;
-                    var inputId = 'input_' + uniqueId;
-                    var modalId = 'modal_' + uniqueId;
-                    var imgId = 'img_' + uniqueId;
-                    var cropId = 'crop_' + uniqueId;
-                    
-                    $imgWrap.children('img').attr('id', avatarId);
-                    cropModalWrap.find('.cropInput').attr('id', inputId);
-                    cropModalWrap.children('.modalPop').attr('id', modalId);
-                    cropModalWrap.find('.img-container img').attr('id', imgId);
-                    cropModalWrap.find('.btnCrop').attr('id', cropId);
-        
-                    cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap);
-                });
-            }
-        
-            $('.imgWrap').on('click', function(){
-                var $imgWrap = $(this);
-
-                if (!$imgWrap.is('.img-background')) {
-                    loadCropModal($imgWrap);
-                }
-            });
-        
-            $('.imgAdd').on('click', function(){
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $imgWrap = $('.md[data-module="' + dataType + '"]').find('.imgWrap');
-
-                loadCropModal($imgWrap);
-            });
-        },
-        iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap) {
-            var avatar = $('#' + avatarId)[0];
-            var $image = $('#' + imgId)[0];
-            var $input = $('#' + inputId)[0];
-            var $modal = $('#' + modalId);
-            var cropper;
-
-            $modal.show();
-
-            if ($(avatar).attr('src') != '') {
-                $image.src = $(avatar).attr('src');
-                $image.onload = function () {
-                    initializeCropper();
-                };
-            } else {
-                cropModalWrap.find('.img-container').addClass("no-img");
-            }
-            
-            function initializeCropper() {
-                if (cropper) {
-                    cropper.destroy();
-                    cropper = null;
-                }
-                cropper = new Cropper($image);
-            }
-            
-            $(document).off('change', $input).on('change', $input, function (e) {
-                var files = e.target.files;
-                var done = function (url) {
-                    $image.src = url;
-                    initializeCropper();
-                };
-                var reader;
-                var file;
-                var url;
-
-                cropModalWrap.find('.img-container').removeClass("no-img");
-
-                if (files && files.length > 0) {
-                    file = files[0];
-
-                    if (URL) {
-                        done(URL.createObjectURL(file));
-                    } else if (FileReader) {
-                        reader = new FileReader();
-                        reader.onload = function (e) {
-                            done(reader.result);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                }
-            });
-            
-            $modal.on('show', function () {
-                cropper = new Cropper($image);
-            }).on('hide', function () {
-                cropRemove();
-            });
-
-            // cropper 실행 후(crop 버튼 클릭 후)
-            $('#' + cropId).on('click', function () {
-                var initialAvatarURL;
-                var canvas;
-                
-                $imgWrap.removeClass("no-img");
-
-                if (cropper) {
-                    var cropWidth = $('#cropWidth').val();
-                    var cropHeight = $('#cropHeight').val();
-                    canvas = cropper.getCroppedCanvas({
-                        width: cropWidth,
-                        height: cropHeight
-                    });
-                    initialAvatarURL = avatar.src;
-                    avatar.src = canvas.toDataURL();
-                    /*
-                    $alert.removeClass('alert-success alert-warning');
-                    
-                    서버전송관련
-                    canvas.toBlob(function (blob) {
-                        var formData = new FormData();
-                        formData.append('avatar', blob, 'avatar.jpg');
-                        
-                        $.ajax('https://jsonplaceholder.typicode.com/posts', {
-                            method: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-
-                            success: function () {
-                                $alert.show().addClass('alert-success').text('업데이트 성공');
-                                setTimeout(function () {
-                                    $('.alert').hide();
-                                }, 2000);
-                                $imgWrap.removeClass('no-img');
-                            },
-
-                            error: function () {
-                                avatar.src = initialAvatarURL;
-                                $alert.show().addClass('alert-warning').text('업데이트 실패');
-                                setTimeout(function () {
-                                    $('.alert').hide();
-                                }, 2000);
-                            },
-                        });
-                        cropper = new Cropper($image);
-                    });
-                    */
-                }
-
-                $modal.hide();
-                cropRemove();
-            });
-            
-            $('.btn-close-pop').on('click', function () {
-                $modal.hide();
-                cropRemove();
-            });
-            
-            function cropRemove() {
-                if (cropper) {
-                    cropper.destroy();
-                    cropper = null;
-                }
-                $('#' + imgId).attr('src', '');
-                $('.cropModalWrap').children('.modalPop').remove();
-            }
-        }
-    };
-
-    cp.videoModule = {
-        constEl: {
-            btnVideoFile: ".addVideo-file",
-            btnYoutube: ".addVideo-utube"
-        },
-        init: function () {
-            this.addVideo();
-            this.addYoutube();
-        },
-        addVideo: function () {
-            const btnVideo = $(this.constEl.btnVideoFile);
-
-            btnVideo.off('click').on('click', function () {
-                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-
-                var input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'video/*';
-                input.style.display = 'none';
-                input.onchange = function(event) {
-                    var file = event.target.files[0];
-                    var videoURL = URL.createObjectURL(file);
-                    var videoElement = $('<video controls></video>');
-                    videoElement.attr('src', videoURL);
-                    $videoWrap.html(videoElement);
-                    $videoWrap.removeClass('no-video');
-                };
-                
-                $('input[type="file"]').remove(); 
-    
-                document.body.appendChild(input);
-                input.click();
-            });
-        },
-        addYoutube: function () {
-            const btnYoutube = $(this.constEl.btnYoutube);
-
-            btnYoutube.off('click').on('click', function () {
-                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-
-                var inputURL = prompt("Please enter YouTube video URL:");
-                if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
-                    var videoId;
-                    if (inputURL.includes("youtube.com")) {
-                        videoId = inputURL.split('v=')[1];
-                    } else if (inputURL.includes("youtu.be")) {
-                        videoId = inputURL.split('/').pop();
-                    }
-                    var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
-                    iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
-                    $videoWrap.html(iframe);
-                    $videoWrap.removeClass('no-video');
-                } else {
-                    alert("Invalid YouTube video URL.");
-                }
-            });
-        }
-    };
-        
+    /* modalPop UI */
     cp.modalPop = {
         constEl: {
             btnModal: "._modalBtn",
@@ -1020,7 +875,721 @@ var COMPONENT_UI = (function (cp, $) {
         }
         
     };
+    /* bottom select pop */
+    cp.selectPop = {
+        constEl: {
+            btnSelect: "._selectBtn",
+            dimmedEl: $('<div class="dimmed" aria-hidden="true"></div>')
+        },
+        init: function() {       
+            this.openSelect();
+            this.optSelect();
+        },
     
+        openSelect: function () {
+            const self = this,
+                btnSelect = this.constEl.btnSelect;                
+            $(document).on('click', btnSelect, function() {
+                const $btn = $(this);
+                const target = $btn.attr('data-select');
+                const $select = $('.modalPop[select-target="' + target + '"]');
+                const $selectWrap = $select.find("> .modalWrap");
+                
+                const $activeOption = $select.find('.select-lst > li._is-active');
+                if ($activeOption.length === 0) {
+                    const btnText = $btn.text();
+                    $select.find('.select-lst > li:eq(0)').before('<li class="_is-active"><a href="javascript:;" class="sel-opt _defaultTxt">' + btnText + '</a></li>');
+                } else {
+                    const btnText = $btn.text();
+                    if ($activeOption.find('a').text() !== btnText) {
+                        $activeOption.removeClass('_is-active');
+                        const $newActiveOption = $select.find('.select-lst > li > a').filter(function() {
+                            return $(this).text() === btnText;
+                        }).parent();
+                        $newActiveOption.addClass('_is-active');
+                    } else {
+                        $activeOption.addClass('_is-active');
+                    }
+                }
+                
+                
+                $btn.addClass('_selectTxt _rtFocus');
+                cp.modalPop.layerFocusControl($(this));
+                self.showSelect($(this));
+            });
+        },
+    
+        showSelect: function ($btn) {
+            const self = this,
+                dimmedEl = this.constEl.dimmedEl;
+            var target = $btn.attr('data-select');
+            var $select = $('.modalPop[select-target="' + target + '"]');
+            var $selectWrap = $select.find("> .modalWrap");
+            var selectWidth = '';
+            var selectHeight = '';
+    
+            $select.addClass('_is-active').show();
+    
+            selectWidth = $select.outerWidth();
+            selectHeight = $selectWrap.outerHeight();                
+            winHeight = $(window).height();
+    
+            selectTitHeight = $selectWrap.find(" > .modal-header").outerHeight();
+            selectConHeight = $selectWrap.find(" > .modal-container").outerHeight();
+            selectBtnHeight = $selectWrap.find(" > .modal-footer").outerHeight();
+  
+            if (selectHeight > winHeight) {
+                $select
+                .addClass('_scroll').css({
+                    'max-height':winHeight - 100 + 'px',
+                    'height':''
+                })
+                .animate({bottom: '0'}, 300).show();
+                $selectWrap
+                .css({'max-height':winHeight - 100 + 'px'})
+                .find(" > .modal-container").css({'max-height':winHeight - (selectTitHeight + selectBtnHeight) - 160 + 'px'}).attr("tabindex","0");
+            } else {
+                $select
+                .css({'height': selectHeight + 'px'})
+                .animate({bottom: '0'}, 300).show();
+            }
+  
+            $select.attr({'aria-hidden': 'false', 'tabindex':'0'}).focus();
+            $selectWrap.attr({'role': 'dialog', 'aria-modal': 'true'})
+                    .find('h1, h2, h3, h4, h5, h6').first().attr('tabindex', '0');
+  
+            dimmedEl.remove(); 
+            $('body').addClass('no-scroll').append(dimmedEl);
+  
+            $btn.addClass('_selectTxt');
+        },
+    
+        optSelect: function () {
+            const self = this;
+            $(document).on('click', '.select-lst > li > a.sel-opt', function () {
+                $(this).parent('li').addClass('_is-active').siblings().removeClass('_is-active');
+            });
+            
+            $(document).on('click', '.btn-selChoice', function () {
+                $('.modalPop .btn-close-pop').trigger('click');
+                const selectedOption = $('.select-lst > li._is-active > a.sel-opt');
+                const selectedText = selectedOption.text();
+                const selectTxtElement = $('._selectTxt');
+                selectTxtElement.text(selectedText).removeClass('_selectTxt');
+                selectedOption.addClass('sel-opt');
+            });
+        }
+    },
+    /* tab UI */
+    cp.tab = {
+        constEl: {
+            tab: '.tab > a'
+        },
+        init() {
+            this.tabSetting();
+            this.tabClick();
+            this.scrollEventHandler();
+            this.addTab();
+        },
+        tabSetting: function() {
+            /**
+             * 탭 초기 설정
+             * @contentsIdx 클릭한 탭의 index와 같은 index의 content
+             */
+            const self = this;
+            
+            $('.tab-moving .tab-list-wrap').append($('<span class="highlight"></span>'));
+            $('.tab-scroll .tab-contents').scrollTop();
+    
+            // 접근성
+            $('.tab').children('a').attr('aria-selected', 'false');
+            $('.tab._is-active').children('a').attr('aria-selected', 'true');
+            $('.tab').attr('roll', 'tab');
+            $('.tab-list').attr('roll', 'tablist');
+            $('.tab-contents').attr('roll', 'tabpanel');
+    
+            $(document).ready(function() {
+                $('.tab-wrap').each(function () {
+                    var $tabWrap = $(this);
+    
+                    // id 부여
+                    $tabWrap.find('.tab').each(function (index) {
+                        var tabId = $tabWrap.attr('id') + '_' + 'tab' + (index + 1);
+                        $(this).attr('aria-controls', tabId);
+                    });
+    
+                    $tabWrap.find('.tab-contents').each(function (index) {
+                        var panelId = $tabWrap.attr('id') + '_' + 'tab' + (index + 1);
+                        $(this).attr('id', panelId);
+                    });
+    
+                    // highlight 너비(높이) 부여
+                    $tabWrap.find('.highlight').each(function () {
+                        self.moveHighLight($tabWrap);
+                    });
+                })
+            })
+    
+            // resize 체크
+            let resizeTimeout;
+            $(window).on('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    $('.tab-wrap').each(function () {
+                        var $tabWrap = $(this);
+                        
+                        // highlight 너비(높이) 부여
+                        $tabWrap.find('.highlight').each(function () {
+                            self.moveHighLight($tabWrap);
+                        });
+                    });
+                }, 200);
+            });
+    
+            let isTabClick; // 중복 호출 방지를 위한 플래그 변수
+    
+            // tabpanel 스크롤 이벤트 처리
+            $('.tab-scroll .tab-contents-wrap').on('scroll', self.scrollEventHandler);
+    
+            self.tabSticky(isTabClick);
+        },
+        tabSel: function($this, $tabWrap) {
+            /**
+             * 가로/세로 탭 선택 함수
+             * @this 클릭한 탭 버튼
+             * @tabWrap 클릭한 탭의 wrapper
+             * @next 가로/세로 형식으로 바뀌는 컨텐츠 wrapper
+             * sel-h-v 클래스 있는 tab 메뉴에서 data-type에 따라 $next highlight 초기화
+             */
+    
+            if ($tabWrap.hasClass('sel-h-v')) {
+                const $next = $tabWrap.next('.tab-wrap'); //실제 tabWrap
+                const $activeTab = $next.find('._is-active');
+                const newHeight = $next.find('.tab').outerHeight();
+                const newWidth = $next.find('.tab').outerWidth();
+                const nextHighlight = $next.find('.highlight');
+                const newTop = $activeTab.position().top;
+    
+                if ($this.attr('data-type') === 'vertical') { 
+                    //탭메뉴 세로 버전일때
+                    $next.addClass('tab-vertical').find('.tab-list').attr('aria-orientation', 'vertical');
+                    
+                    nextHighlight.css({ 
+                        left: '', 
+                        width: '', 
+                        top: newTop + 'px', 
+                        height: newHeight + 'px' 
+                    });
+                } else { 
+                    //탭메뉴 가로 버전일때
+                    $next.removeClass('tab-vertical').find('.tab-list').removeAttr('aria-orientation');
+    
+                    nextHighlight.css({ 
+                        top: '', 
+                        height: '', 
+                        width: newWidth + 'px' 
+                    });
+                }
+                
+                /* 탭활성화 초기화 */
+                $next.find('.tab, .tab-contents').removeClass('_is-active').eq(0).addClass('_is-active');
+            } 
+        },
+        moveHighLight: function($tabWrap, $this, callback) {
+            /**
+             * 선택된 탭 highlight action 함수
+             * @this 클릭한 탭 버튼
+             * @tabWrap 클릭한 탭의 wrapper
+             * tab-moving 클래스 있는 tab 메뉴에서 tab-vertical 클래스에 따라 highlight 스타일 변화
+             */
+    
+            if ($tabWrap.hasClass('tab-moving') && $tabWrap.hasClass('tab-vertical')) { 
+                // 세로 버전일때
+                $this = $tabWrap.find('._is-active, .active');
+                const $tabLstWrap = $tabWrap.find('.tab-list-wrap');
+                const num = $tabLstWrap.offset().top; 
+                const elemTop = Math.ceil($this.offset().top);
+                const scrollTop = $tabLstWrap.scrollTop();
+                const thisElem = Math.ceil($this.outerHeight());
+                const centerScroll = elemTop + scrollTop - num - $tabLstWrap.height() / 2 + thisElem / 2;
+    
+                const $highLight = $tabWrap.find('.highlight');
+                const newHeight = $this.outerHeight();
+                
+                $highLight.css('left', '');
+                $highLight.css('width', '');
+    
+                $highLight.stop().animate({ // 활성화 된 탭의 높이와 위치로 변경
+                    height: newHeight,
+                    top: elemTop - num + scrollTop
+                });
+                $tabLstWrap.stop().animate({ // 활성화 된 탭 가운데 스크롤 이동
+                    scrollTop: centerScroll
+                }, 500);
+            } else if ($tabWrap.hasClass('tab-moving') && !$tabWrap.hasClass('tab-vertical')) { 
+                // 가로 버전일때
+                const $tabLstWrap = $tabWrap.find('.tab-list-wrap');
+                const $this = $tabLstWrap.find('._is-active, .active');
+                const num = $tabLstWrap.offset().left; 
+                const elemLeft = Math.ceil($this.offset().left);
+                const scrollLeft = $tabLstWrap.scrollLeft();
+                const thisElem = Math.ceil($this.outerWidth());
+                const centerScroll = elemLeft + scrollLeft - num - $tabLstWrap.width() / 2 + thisElem / 2;
+    
+                const $highLight = $tabWrap.find('.highlight');
+                const newWidth = Math.floor($this.outerWidth());
+                
+                // 활성화 된 탭의 너비와 위치로 변경
+                $highLight.css({ 
+                    top: '', 
+                    height: '' 
+                }).stop().animate({ 
+                    width: newWidth, 
+                    left: elemLeft - num + scrollLeft 
+                });
+    
+                $tabLstWrap.stop().animate({ // 활성화 된 탭 가운데로 스크롤 이동
+                    scrollLeft: centerScroll
+                }, 500);
+            }
+            if (callback && typeof callback === 'function') {
+                callback($tabWrap, $this); // 콜백 호출
+            }
+        },
+        tabSticky: function(isTabClick) {
+            /**
+             * tab sticky 이벤트
+             * @this 클릭한 탭 버튼
+             * @tabWrap 클릭한 탭의 wrapper
+             * window 스크롤시 해당 content와 tab 활성화
+             */
+            const self = this;
+            const $tabWrap = $('.tab-sticky');
+            
+            $(window).on('scroll', function(){
+                if (!isTabClick) {
+                    isTabClick = true;
+    
+                    $(".tab-contents").each(function () {
+                        const contentTop = $(this).offset().top;
+                        const contentBottom = contentTop + $(this).outerHeight();
+                        const tabHeight = $('.tab').outerHeight() + 2;
+    
+                        if (!$('html, body').is(':animated')) {
+                            if (window.scrollY >= contentTop - tabHeight && window.scrollY <= contentBottom) {
+                                const targetId = $(this).attr("id");
+                                const targetTab = $('.tab[aria-controls="' + targetId + '"]');
+    
+                                targetTab.closest('li').addClass("_is-active").siblings().removeClass("_is-active");
+                                targetTab.siblings().find('.tab').children('a').attr('aria-selected', 'false');
+                                targetTab.children('a').attr('aria-selected', 'true');
+                                $(this).addClass("_is-active").siblings().removeClass("_is-active");
+    
+                                self.moveHighLight($tabWrap, targetTab);
+                            }
+                        }
+    
+                        setTimeout(function () {
+                            isTabClick = false;
+                        }, 10);
+                    });
+                }
+            });
+        },
+        scrollEventHandler: function() {
+            /**
+             * tab scroll 이벤트
+             * @thisWrap 스크롤 중인 컨텐츠 상위 wrapper
+             * 스크롤시 해당 content와 tab 활성화
+             */
+            const $thisWrap = $(this);
+    
+            $thisWrap.children('.tab-contents').each(function() {
+                const panelTop = $(this).position().top;
+                const $tabWrap = $(this).closest('.tab-scroll');
+    
+                if (panelTop <= -20 && panelTop > -$thisWrap.height() / 2) {
+                    const tabId = $(this).attr('id');
+    
+                    $tabWrap.find('.tab').removeClass('_is-active');
+                    $tabWrap.find('.tab').children('a').attr('aria-selected', 'false');
+                    $tabWrap.find('.tab[aria-controls="' + tabId + '"]').addClass('_is-active');
+                    $tabWrap.find('.tab[aria-controls="' + tabId + '"]').children('a').attr('aria-selected', 'true');
+                    $(this).siblings().removeClass('_is-active');
+                    $(this).addClass('_is-active');
+    
+                    const $this = $tabWrap.find('.tab[aria-controls="' + tabId + '"]');
+                    cp.tab.moveHighLight($tabWrap, $this);
+                }
+            });
+        },
+        tabClick: function() {
+            /**
+             * 선택된 탭 _is-active 함수
+             * @this 클릭한 탭 버튼
+             * @tabWrap 클릭한 탭의 wrapper
+             * @contentsIdx 클릭한 탭의 index와 같은 index의 content
+             */
+            const self = this;
+    
+            $(document).on('click', this.constEl.tab, function(e) {
+                e.preventDefault();
+    
+                const $this = $(this).parent('.tab');
+                const $index = $this.index();
+                const $tabWrap = $this.closest('.tab-wrap');
+                const $contentsWrap = $tabWrap.children('.tab-contents-wrap');
+                const $contents = $contentsWrap.children('.tab-contents');
+                const $contentsIdx = $contentsWrap.children('.tab-contents').eq($index);
+    
+                const tabAttr = function () { 
+                    // 탭 클릭시 활성화
+                    $this.siblings('.tab').removeClass('_is-active');
+                    $this.siblings('.tab').children('a').attr('aria-selected', 'false');
+                    $this.addClass('_is-active');
+                    $this.children('a').attr('aria-selected', 'true');
+                    $contents.removeClass('_is-active');
+                    $contentsIdx.addClass('_is-active');
+                    $contents.removeAttr('tabindex');
+                    $contentsIdx.attr('tabindex','0');
+                }
+    
+                if ($tabWrap.attr('data-roll') === 'tab' && $tabWrap.hasClass('tab-scroll')){ 
+                    // tab-scroll 일 경우
+                    tabAttr();
+                    self.moveHighLight($tabWrap);
+    
+                    // tabpanel 영역 안 스크롤 이동
+                    $('.tab-scroll .tab-contents-wrap').off('scroll', self.scrollEventHandler); // 스크롤 이벤트 핸들러 제거
+    
+                    const $targetHref = $('#' + $this.attr('aria-controls'));
+                    const $targetWrap = $targetHref.parent('.tab-contents-wrap');
+                    const location = $targetHref.position().top;
+    
+                    $targetWrap.stop().animate({
+                        scrollTop: $targetWrap.scrollTop() + location
+                    }, 300);
+    
+                    setTimeout(function() {
+                        $('.tab-scroll .tab-contents-wrap').on('scroll', self.scrollEventHandler);
+                    }, 400);
+                } else if ($tabWrap.attr('data-roll') === 'tab' && $tabWrap.hasClass('tab-sticky')) { 
+                    // tab-sticky 일 경우
+                    isTabClick = false;
+                    if (!isTabClick) {
+                        isTabClick = true;          
+                        
+                        tabAttr();       
+                        self.moveHighLight($tabWrap, $this, function() {
+                            const target = $this.attr('aria-controls');
+                            const $target = $('#' + target);
+                            const tabHeight = $this.outerHeight();
+                            const targetTop = $target.offset().top - tabHeight;
+    
+                            $('html,body').stop().animate({
+                                'scrollTop': targetTop
+                            }, 600, 'swing', function() {
+                                isTabClick = false; // 스크롤이동 끝난 후 false 부여
+                            });   
+                        });
+                    }
+                } else if ($tabWrap.attr('data-roll') === 'tab' && !$tabWrap.hasClass('tab-sticky')) {
+                    tabAttr();
+                    $contentsIdx.removeAttr('hidden');
+                    self.moveHighLight($tabWrap);
+                }
+                
+                let newTop = 0;
+                self.tabSel($this, $tabWrap);
+            });
+        },
+        
+        addTab: function() {
+            const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
+            const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
+                      _tabCont = $('<div class="tab-contents" contenteditable="true">탭컨텐츠 추가</div>');
+
+            $(_addTab).one('click', function() {
+                
+                $(this).closest('li').before(_tabLi);
+                $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
+                cp.tab.init();
+            });
+        },
+    };
+    /* accordion */
+    cp.accordion = {
+        constEl: {
+            btnToggle: '.btn-toggle',
+            btnChk: '.field-checkbox'
+        },
+        init() {
+            this.toggleAccordion();
+            this.toggleChk();
+            this.allChk('chkAll', 'exChk');
+        },
+        toggleDown: function($this, $thisContents, $thisWrap) {
+            /**
+             * 아코디언 slideDown 함수
+             * @this 클릭한 토글 버튼
+             * @thisContents 클릭한 버튼에 해당하는 content 박스
+             * @thisWrap 해당 아코디언의 wrapper
+             */
+            if ($thisWrap.attr('data-scroll') === 'top') { // data-scroll="top" 여부
+                var offsetTop = $this.parent().offset().top;
+    
+                if (!$thisWrap.attr('data-type')) {
+                    $thisContents.slideDown();
+                    $this.addClass('_is-active').attr('aria-expanded', true).attr('aria-label', '닫기');
+                    
+                    setTimeout(function() {
+                        $('html, body').animate({ 
+                            scrollTop: offsetTop
+                        }, 300);
+                    }, 200);
+                } else {
+                    $('html, body').animate({ 
+                        scrollTop: offsetTop
+                    }, 300, function (){
+                        $thisContents.slideDown(300);
+                        $this.addClass('_is-active').attr('aria-expanded', true).attr('aria-label', '닫기');
+                    });
+                }
+            } else {
+                $thisContents.slideDown();
+                $this.addClass('_is-active').attr('aria-expanded', true).attr('aria-label', '닫기');
+            }
+        },
+        handleAccordion: function($this, $thisContents, $thisWrap) {
+            /**
+             * data-type 조건에 따라 아코디언 동작 함수
+             * @dataType 해당 아코디언의 data-type
+             * @this 클릭한 토글 버튼
+             * @thisContents 클릭한 버튼에 해당하는 content 박스
+             * @thisWrap 해당 아코디언의 wrapper
+             * @btnAll 아코디언 전체 토글 버튼
+             */
+            const self = this;
+            const dataType = $thisWrap.closest('.accordion-wrap').attr('data-type')
+    
+            if ($thisContents.is(':hidden')) {
+                if (dataType && dataType.indexOf('oneToggle') !== -1) { //토글 하나씩만 오픈
+                    const $btnAll = $thisWrap.find('.btn-toggle');
+    
+                    $btnAll.removeClass('_is-active').attr('aria-expanded', false).attr('aria-label', '열기');
+                    $btnAll.parent('.accordion-header').next('.accordion-contents').slideUp();
+                    setTimeout(function() {
+                        self.toggleDown($this, $thisContents, $thisWrap);
+                    }, 300);
+                } else {
+                    self.toggleDown($this, $thisContents, $thisWrap);
+                }
+            } else {
+                if (dataType && dataType.indexOf('double') !== -1) { //토글 안에 토글
+                    $thisContents.find('.accordion-contents').slideUp();
+                    $thisContents.find('._is-active').removeClass('_is-active').attr('aria-expanded', false).attr('aria-label', '열기');
+                }
+                $this.removeClass('_is-active').attr('aria-expanded', false).attr('aria-label', '열기');
+                $thisContents.slideUp();
+            }
+        },
+        toggleAccordion: function() {
+            /**
+             * 아코디언 함수 실행
+             * @this 클릭한 토글 버튼
+             * @thisContents 클릭한 버튼에 해당하는 content 박스
+             * @thisWrap 해당 아코디언의 wrapper
+             */
+            const self = this;
+    
+            $(document).on('click', this.constEl.btnToggle, function(e) {
+                e.preventDefault();
+    
+                const $this = $(this);
+                const $thisContents = $this.parent('.accordion-header').next('.accordion-contents');
+                const $thisWrap = $this.closest('.accordion-wrap');
+    
+                self.handleAccordion($this, $thisContents, $thisWrap);
+            });
+        },
+        toggleChk: function() {
+            /**
+             * 체크박스 상태에 따라 아코디언 동작하는 함수
+             * @thisLabel 클릭한 label
+             * @thisContents 클릭한 레이블에 해당하는 content 박스
+             * @thisWrap 해당 아코디언의 wrapper
+             * @thisBtn 클릭한 레이블의 형제 토글 버튼
+             * @nextAccordion 클릭한 레이블의 다음 contents
+             * @dataType 해당 아코디언의 data-type
+             */
+            const self = this;
+    
+            $(document).on('click', this.constEl.btnChk, function(e) {
+                e.stopPropagation();
+    
+                const $thisLabel = $(this);
+                const $thisContents = $thisLabel.closest('.accordion-header').next('.accordion-contents');
+                const $thisWrap = $thisLabel.closest('.accordion-wrap');
+                const $thisBtn = $thisLabel.siblings('.btn-toggle');
+                const $nextAccordion = $thisContents.parent('.accordion').next('.accordion');
+                const dataType = $thisWrap.attr('data-type');
+    
+                if (dataType && dataType.indexOf('toggleChk') !== -1) {
+                    setTimeout(function() {
+                        if ($thisContents.is(':visible')) {
+                            if ($thisLabel.find('input').prop('checked')) { // 체크하면 해당 contents 닫힘
+                                $thisBtn.removeClass('_is-active').attr('aria-expanded', false).attr('aria-label', '열기');
+                                $thisContents.slideUp();
+    
+                                if (!$nextAccordion.children('.accordion-header').find('input').prop('checked')) { // 다음 input이 미체크시 다음 contents 열림
+                                    $nextAccordion.children('.accordion-contents').slideDown();
+                                    $nextAccordion.children('.accordion-header').find('.btn-toggle').addClass('_is-active').attr('aria-expanded', true).attr('aria-label', '닫기');
+                                }
+                            }
+                        } else {
+                            if (!$thisLabel.find('input').prop('checked')) { //체크 풀면 해당 contents 열림
+                                self.toggleDown($thisLabel, $thisContents, $thisWrap);
+                            }
+                        }
+                    });
+                }
+            });
+        },
+        allChk: function(chkAllId, chkName) { // (전체 체크할 input ID, 해당하는 input name명)
+            /**
+             * @total 개별 input의 전체 갯수
+             * @checked 개별 input의 check된 상태
+             * @thisContents 클릭한 레이블의 아코디언 contents
+             * @thisWrap 해당 아코디언의 wrapper
+             * @thisBtn 클릭한 레이블의 형제 토글 버튼
+             * @dataType 해당 아코디언의 data-type
+             */
+            
+            // 전체 체크하는 input 클릭시
+            $(document).on('click', '#' + chkAllId, function() {
+                if ($(this).is(':checked')){
+                    $('input[name^="' + chkName + '"]').prop('checked', true);
+                } else {
+                    $('input[name^="' + chkName + '"]').prop('checked', false);
+                }
+            });
+    
+            // 개별 input 클릭시
+            $(document).on('click', 'input[name^="' + chkName + '"]', function() {
+                const total = $('input[name^="' + chkName + '"]').length;
+                const checked = $('input[name^="' + chkName + '"]:checked').length;
+                const $thisContents = $(this).closest('.accordion-contents');
+                const $thisWrap = $(this).closest('.accordion-wrap');
+                const $thisBtn =  $(this).closest('.accordion').find('.btn-toggle');
+                const dataType = $thisWrap.attr('data-type');
+        
+                if (total !== checked) {
+                    $('#' + chkAllId).prop('checked', false);
+                } else {
+                    $('#' + chkAllId).prop('checked', true); 
+                    if (dataType && dataType.indexOf('toggleChk') !== -1) {
+                        $thisContents.slideUp();
+                        $thisBtn.removeClass('_is-active').attr('aria-expanded', false).attr('aria-label', '열기');
+                    }
+                }
+            });
+        }
+    };
+    
+    /* module option control */
+    cp.optionEdit = {
+        init: function() {
+            this.optionOpen();
+            this.optionClose();
+            this.resizeable();
+            this.gapHeight();
+            this.inpTxtLocation();
+            this.txtBgHeight();
+        },
+        currentModuleData: null,
+        optionOpen: function() {
+            cp.optionEdit.currentModuleData = null;
+            $('html, body').on('click', '.optionBtn', function() {
+                const $thisMd = $(this).closest('.md');
+                cp.optionEdit.currentModuleData = $thisMd.data('module');
+                const dataType = $thisMd.data('type');
+                const bgColor = $thisMd.css('background-color');
+                const mdHeight = parseInt($thisMd.css('height'), 10);
+                const grHeight = parseInt($thisMd.find('.txtEditBg').css('height'), 10);
+    
+                $('.md').removeClass('_is-active');
+                $thisMd.addClass('_is-active');
+                $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
+                $('.option-box').hide();
+                $('.option-box:not([data-type])').show();
+                $('.option-box[data-type="'+dataType+'"]').show();
+                $('.moduel-wrap').addClass('_right');
+                $('.gap-height').val(mdHeight);
+                $('.txtBgHeight').val(grHeight);
+                
+                cp.colorEdit.resetImgColor();
+                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
+                cp.colorEdit.imgColor();
+                cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
+                cp.fontEditer.init();
+            });
+        },
+        optionClose: function() {
+            this.closeOptionWrap = function() {
+                const $optionWrap = $('.option-wrap');
+                cp.optionEdit.currentModuleData = null;
+                $optionWrap.attr('data-type','').removeClass('show');
+                $('.moduel-wrap').removeClass('_right');
+                cp.colorEdit.resetImgColor();
+                $('.md').removeClass('_is-active');
+            };
+        
+            $('html, body').on('click', '.optionClsBtn', this.closeOptionWrap);
+        },
+        resizeable: function() {
+            $(".md-gap").resizable({
+                handles: 's',
+                minWidth: 373,
+                maxWidth: 373,
+                minHeight: 10,
+                stop: function(event, ui) {
+                    var newHeight = ui.size.height;
+                    const dataType = $(this).data('module');
+                    $('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
+                }
+            });
+        },
+        gapHeight: function() {
+            $('.gap-height').on('input', function() {
+                var newHeight = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $mdGap = $('.md-gap[data-module="' + dataType + '"]');
+                if ($mdGap.length > 0) {
+                    $mdGap.css('height', newHeight);
+                }
+            });
+        },
+        inpTxtLocation:function() {
+            $('input[name="location"]').on('change', function() {
+                var locationValue = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+
+                $txtEdit.removeClass();
+                $txtEdit.addClass('txtEdit ' + locationValue);
+            });
+        },
+        txtBgHeight:function() {
+            $('.txtBgHeight').on('change', function() {
+                var heightValue = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+
+                $txtEditBg.css('height', heightValue);
+            });
+        }
+    };
+    /* module option */
     cp.moduleBox = {
         init: function() {
             this.dragFn();
@@ -1425,344 +1994,242 @@ var COMPONENT_UI = (function (cp, $) {
         
         
     };
+    /* imgCrop plugin */
+    function generateUniqueId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+    }
+    cp.generateUniqueId = generateUniqueId;
 
-    cp.tab = {
-        constEl: {
-            tab: '.tab > a'
+    cp.imgCrop = {
+        init: function () {
+            this.openCropImg();
         },
-        init() {
-            this.tabSetting();
-            this.tabClick();
-            this.scrollEventHandler();
-            this.addTab();
-        },
-        tabSetting: function() {
-            /**
-             * 탭 초기 설정
-             * @contentsIdx 클릭한 탭의 index와 같은 index의 content
-             */
-            const self = this;
-            
-            $('.tab-moving .tab-list-wrap').append($('<span class="highlight"></span>'));
-            $('.tab-scroll .tab-contents').scrollTop();
-    
-            // 접근성
-            $('.tab').children('a').attr('aria-selected', 'false');
-            $('.tab._is-active').children('a').attr('aria-selected', 'true');
-            $('.tab').attr('roll', 'tab');
-            $('.tab-list').attr('roll', 'tablist');
-            $('.tab-contents').attr('roll', 'tabpanel');
-    
-            $(document).ready(function() {
-                $('.tab-wrap').each(function () {
-                    var $tabWrap = $(this);
-    
-                    // id 부여
-                    $tabWrap.find('.tab').each(function (index) {
-                        var tabId = $tabWrap.attr('id') + '_' + 'tab' + (index + 1);
-                        $(this).attr('aria-controls', tabId);
-                    });
-    
-                    $tabWrap.find('.tab-contents').each(function (index) {
-                        var panelId = $tabWrap.attr('id') + '_' + 'tab' + (index + 1);
-                        $(this).attr('id', panelId);
-                    });
-    
-                    // highlight 너비(높이) 부여
-                    $tabWrap.find('.highlight').each(function () {
-                        self.moveHighLight($tabWrap);
-                    });
-                })
-            })
-    
-            // resize 체크
-            let resizeTimeout;
-            $(window).on('resize', function() {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function() {
-                    $('.tab-wrap').each(function () {
-                        var $tabWrap = $(this);
-                        
-                        // highlight 너비(높이) 부여
-                        $tabWrap.find('.highlight').each(function () {
-                            self.moveHighLight($tabWrap);
-                        });
-                    });
-                }, 200);
-            });
-    
-            let isTabClick; // 중복 호출 방지를 위한 플래그 변수
-    
-            // tabpanel 스크롤 이벤트 처리
-            $('.tab-scroll .tab-contents-wrap').on('scroll', self.scrollEventHandler);
-    
-            self.tabSticky(isTabClick);
-        },
-        tabSel: function($this, $tabWrap) {
-            /**
-             * 가로/세로 탭 선택 함수
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * @next 가로/세로 형식으로 바뀌는 컨텐츠 wrapper
-             * sel-h-v 클래스 있는 tab 메뉴에서 data-type에 따라 $next highlight 초기화
-             */
-    
-            if ($tabWrap.hasClass('sel-h-v')) {
-                const $next = $tabWrap.next('.tab-wrap'); //실제 tabWrap
-                const $activeTab = $next.find('._is-active');
-                const newHeight = $next.find('.tab').outerHeight();
-                const newWidth = $next.find('.tab').outerWidth();
-                const nextHighlight = $next.find('.highlight');
-                const newTop = $activeTab.position().top;
-    
-                if ($this.attr('data-type') === 'vertical') { 
-                    //탭메뉴 세로 버전일때
-                    $next.addClass('tab-vertical').find('.tab-list').attr('aria-orientation', 'vertical');
-                    
-                    nextHighlight.css({ 
-                        left: '', 
-                        width: '', 
-                        top: newTop + 'px', 
-                        height: newHeight + 'px' 
-                    });
-                } else { 
-                    //탭메뉴 가로 버전일때
-                    $next.removeClass('tab-vertical').find('.tab-list').removeAttr('aria-orientation');
-    
-                    nextHighlight.css({ 
-                        top: '', 
-                        height: '', 
-                        width: newWidth + 'px' 
-                    });
-                }
-                
-                /* 탭활성화 초기화 */
-                $next.find('.tab, .tab-contents').removeClass('_is-active').eq(0).addClass('_is-active');
-            } 
-        },
-        moveHighLight: function($tabWrap, $this, callback) {
-            /**
-             * 선택된 탭 highlight action 함수
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * tab-moving 클래스 있는 tab 메뉴에서 tab-vertical 클래스에 따라 highlight 스타일 변화
-             */
-    
-            if ($tabWrap.hasClass('tab-moving') && $tabWrap.hasClass('tab-vertical')) { 
-                // 세로 버전일때
-                $this = $tabWrap.find('._is-active, .active');
-                const $tabLstWrap = $tabWrap.find('.tab-list-wrap');
-                const num = $tabLstWrap.offset().top; 
-                const elemTop = Math.ceil($this.offset().top);
-                const scrollTop = $tabLstWrap.scrollTop();
-                const thisElem = Math.ceil($this.outerHeight());
-                const centerScroll = elemTop + scrollTop - num - $tabLstWrap.height() / 2 + thisElem / 2;
-    
-                const $highLight = $tabWrap.find('.highlight');
-                const newHeight = $this.outerHeight();
-                
-                $highLight.css('left', '');
-                $highLight.css('width', '');
-    
-                $highLight.stop().animate({ // 활성화 된 탭의 높이와 위치로 변경
-                    height: newHeight,
-                    top: elemTop - num + scrollTop
-                });
-                $tabLstWrap.stop().animate({ // 활성화 된 탭 가운데 스크롤 이동
-                    scrollTop: centerScroll
-                }, 500);
-            } else if ($tabWrap.hasClass('tab-moving') && !$tabWrap.hasClass('tab-vertical')) { 
-                // 가로 버전일때
-                const $tabLstWrap = $tabWrap.find('.tab-list-wrap');
-                const $this = $tabLstWrap.find('._is-active, .active');
-                const num = $tabLstWrap.offset().left; 
-                const elemLeft = Math.ceil($this.offset().left);
-                const scrollLeft = $tabLstWrap.scrollLeft();
-                const thisElem = Math.ceil($this.outerWidth());
-                const centerScroll = elemLeft + scrollLeft - num - $tabLstWrap.width() / 2 + thisElem / 2;
-    
-                const $highLight = $tabWrap.find('.highlight');
-                const newWidth = Math.floor($this.outerWidth());
-                
-                // 활성화 된 탭의 너비와 위치로 변경
-                $highLight.css({ 
-                    top: '', 
-                    height: '' 
-                }).stop().animate({ 
-                    width: newWidth, 
-                    left: elemLeft - num + scrollLeft 
-                });
-    
-                $tabLstWrap.stop().animate({ // 활성화 된 탭 가운데로 스크롤 이동
-                    scrollLeft: centerScroll
-                }, 500);
-            }
-            if (callback && typeof callback === 'function') {
-                callback($tabWrap, $this); // 콜백 호출
-            }
-        },
-        tabSticky: function(isTabClick) {
-            /**
-             * tab sticky 이벤트
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * window 스크롤시 해당 content와 tab 활성화
-             */
-            const self = this;
-            const $tabWrap = $('.tab-sticky');
-            
-            $(window).on('scroll', function(){
-                if (!isTabClick) {
-                    isTabClick = true;
-    
-                    $(".tab-contents").each(function () {
-                        const contentTop = $(this).offset().top;
-                        const contentBottom = contentTop + $(this).outerHeight();
-                        const tabHeight = $('.tab').outerHeight() + 2;
-    
-                        if (!$('html, body').is(':animated')) {
-                            if (window.scrollY >= contentTop - tabHeight && window.scrollY <= contentBottom) {
-                                const targetId = $(this).attr("id");
-                                const targetTab = $('.tab[aria-controls="' + targetId + '"]');
-    
-                                targetTab.closest('li').addClass("_is-active").siblings().removeClass("_is-active");
-                                targetTab.siblings().find('.tab').children('a').attr('aria-selected', 'false');
-                                targetTab.children('a').attr('aria-selected', 'true');
-                                $(this).addClass("_is-active").siblings().removeClass("_is-active");
-    
-                                self.moveHighLight($tabWrap, targetTab);
-                            }
-                        }
-    
-                        setTimeout(function () {
-                            isTabClick = false;
-                        }, 10);
-                    });
-                }
-            });
-        },
-        scrollEventHandler: function() {
-            /**
-             * tab scroll 이벤트
-             * @thisWrap 스크롤 중인 컨텐츠 상위 wrapper
-             * 스크롤시 해당 content와 tab 활성화
-             */
-            const $thisWrap = $(this);
-    
-            $thisWrap.children('.tab-contents').each(function() {
-                const panelTop = $(this).position().top;
-                const $tabWrap = $(this).closest('.tab-scroll');
-    
-                if (panelTop <= -20 && panelTop > -$thisWrap.height() / 2) {
-                    const tabId = $(this).attr('id');
-    
-                    $tabWrap.find('.tab').removeClass('_is-active');
-                    $tabWrap.find('.tab').children('a').attr('aria-selected', 'false');
-                    $tabWrap.find('.tab[aria-controls="' + tabId + '"]').addClass('_is-active');
-                    $tabWrap.find('.tab[aria-controls="' + tabId + '"]').children('a').attr('aria-selected', 'true');
-                    $(this).siblings().removeClass('_is-active');
-                    $(this).addClass('_is-active');
-    
-                    const $this = $tabWrap.find('.tab[aria-controls="' + tabId + '"]');
-                    cp.tab.moveHighLight($tabWrap, $this);
-                }
-            });
-        },
-        tabClick: function() {
-            /**
-             * 선택된 탭 _is-active 함수
-             * @this 클릭한 탭 버튼
-             * @tabWrap 클릭한 탭의 wrapper
-             * @contentsIdx 클릭한 탭의 index와 같은 index의 content
-             */
-            const self = this;
-    
-            $(document).on('click', this.constEl.tab, function(e) {
-                e.preventDefault();
-    
-                const $this = $(this).parent('.tab');
-                const $index = $this.index();
-                const $tabWrap = $this.closest('.tab-wrap');
-                const $contentsWrap = $tabWrap.children('.tab-contents-wrap');
-                const $contents = $contentsWrap.children('.tab-contents');
-                const $contentsIdx = $contentsWrap.children('.tab-contents').eq($index);
-    
-                const tabAttr = function () { 
-                    // 탭 클릭시 활성화
-                    $this.siblings('.tab').removeClass('_is-active');
-                    $this.siblings('.tab').children('a').attr('aria-selected', 'false');
-                    $this.addClass('_is-active');
-                    $this.children('a').attr('aria-selected', 'true');
-                    $contents.removeClass('_is-active');
-                    $contentsIdx.addClass('_is-active');
-                    $contents.removeAttr('tabindex');
-                    $contentsIdx.attr('tabindex','0');
-                }
-    
-                if ($tabWrap.attr('data-roll') === 'tab' && $tabWrap.hasClass('tab-scroll')){ 
-                    // tab-scroll 일 경우
-                    tabAttr();
-                    self.moveHighLight($tabWrap);
-    
-                    // tabpanel 영역 안 스크롤 이동
-                    $('.tab-scroll .tab-contents-wrap').off('scroll', self.scrollEventHandler); // 스크롤 이벤트 핸들러 제거
-    
-                    const $targetHref = $('#' + $this.attr('aria-controls'));
-                    const $targetWrap = $targetHref.parent('.tab-contents-wrap');
-                    const location = $targetHref.position().top;
-    
-                    $targetWrap.stop().animate({
-                        scrollTop: $targetWrap.scrollTop() + location
-                    }, 300);
-    
-                    setTimeout(function() {
-                        $('.tab-scroll .tab-contents-wrap').on('scroll', self.scrollEventHandler);
-                    }, 400);
-                } else if ($tabWrap.attr('data-roll') === 'tab' && $tabWrap.hasClass('tab-sticky')) { 
-                    // tab-sticky 일 경우
-                    isTabClick = false;
-                    if (!isTabClick) {
-                        isTabClick = true;          
-                        
-                        tabAttr();       
-                        self.moveHighLight($tabWrap, $this, function() {
-                            const target = $this.attr('aria-controls');
-                            const $target = $('#' + target);
-                            const tabHeight = $this.outerHeight();
-                            const targetTop = $target.offset().top - tabHeight;
-    
-                            $('html,body').stop().animate({
-                                'scrollTop': targetTop
-                            }, 600, 'swing', function() {
-                                isTabClick = false; // 스크롤이동 끝난 후 false 부여
-                            });   
-                        });
-                    }
-                } else if ($tabWrap.attr('data-roll') === 'tab' && !$tabWrap.hasClass('tab-sticky')) {
-                    tabAttr();
-                    $contentsIdx.removeAttr('hidden');
-                    self.moveHighLight($tabWrap);
-                }
-                
-                let newTop = 0;
-                self.tabSel($this, $tabWrap);
-            });
-        },
+        openCropImg: function () {
+            function loadCropModal($imgWrap) {
+                $('.cropModalWrap').load('./module/modal.html', function () {
+                    var cropModalWrap = $(this);
+                    var uniqueId = generateUniqueId();
         
-        addTab: function() {
-            const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
-            const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
-                      _tabCont = $('<div class="tab-contents" contenteditable="true">탭컨텐츠 추가</div>');
+                    var avatarId = 'avatar_' + uniqueId;
+                    var inputId = 'input_' + uniqueId;
+                    var modalId = 'modal_' + uniqueId;
+                    var imgId = 'img_' + uniqueId;
+                    var cropId = 'crop_' + uniqueId;
+                    
+                    $imgWrap.children('img').attr('id', avatarId);
+                    cropModalWrap.find('.cropInput').attr('id', inputId);
+                    cropModalWrap.children('.modalPop').attr('id', modalId);
+                    cropModalWrap.find('.img-container img').attr('id', imgId);
+                    cropModalWrap.find('.btnCrop').attr('id', cropId);
+        
+                    cp.imgCrop.iterateMdImg(avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap);
+                });
+            }
+        
+            $('.imgWrap').on('click', function(){
+                var $imgWrap = $(this);
 
-            $(_addTab).one('click', function() {
-                
-                $(this).closest('li').before(_tabLi);
-                $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
-                cp.tab.init();
+                if (!$imgWrap.is('.img-background')) {
+                    loadCropModal($imgWrap);
+                }
+            });
+        
+            $('.imgAdd').on('click', function(){
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $imgWrap = $('.md[data-module="' + dataType + '"]').find('.imgWrap');
+
+                loadCropModal($imgWrap);
             });
         },
-    };
+        iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap) {
+            var avatar = $('#' + avatarId)[0];
+            var $image = $('#' + imgId)[0];
+            var $input = $('#' + inputId)[0];
+            var $modal = $('#' + modalId);
+            var cropper;
 
+            $modal.show();
+
+            if ($(avatar).attr('src') != '') {
+                $image.src = $(avatar).attr('src');
+                $image.onload = function () {
+                    initializeCropper();
+                };
+            } else {
+                cropModalWrap.find('.img-container').addClass("no-img");
+            }
+            
+            function initializeCropper() {
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+                cropper = new Cropper($image);
+            }
+            
+            $(document).off('change', $input).on('change', $input, function (e) {
+                var files = e.target.files;
+                var done = function (url) {
+                    $image.src = url;
+                    initializeCropper();
+                };
+                var reader;
+                var file;
+                var url;
+
+                cropModalWrap.find('.img-container').removeClass("no-img");
+
+                if (files && files.length > 0) {
+                    file = files[0];
+
+                    if (URL) {
+                        done(URL.createObjectURL(file));
+                    } else if (FileReader) {
+                        reader = new FileReader();
+                        reader.onload = function (e) {
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
+            
+            $modal.on('show', function () {
+                cropper = new Cropper($image);
+            }).on('hide', function () {
+                cropRemove();
+            });
+
+            // cropper 실행 후(crop 버튼 클릭 후)
+            $('#' + cropId).on('click', function () {
+                var initialAvatarURL;
+                var canvas;
+                
+                $imgWrap.removeClass("no-img");
+
+                if (cropper) {
+                    var cropWidth = $('#cropWidth').val();
+                    var cropHeight = $('#cropHeight').val();
+                    canvas = cropper.getCroppedCanvas({
+                        width: cropWidth,
+                        height: cropHeight
+                    });
+                    initialAvatarURL = avatar.src;
+                    avatar.src = canvas.toDataURL();
+                    /*
+                    $alert.removeClass('alert-success alert-warning');
+                    
+                    서버전송관련
+                    canvas.toBlob(function (blob) {
+                        var formData = new FormData();
+                        formData.append('avatar', blob, 'avatar.jpg');
+                        
+                        $.ajax('https://jsonplaceholder.typicode.com/posts', {
+                            method: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+
+                            success: function () {
+                                $alert.show().addClass('alert-success').text('업데이트 성공');
+                                setTimeout(function () {
+                                    $('.alert').hide();
+                                }, 2000);
+                                $imgWrap.removeClass('no-img');
+                            },
+
+                            error: function () {
+                                avatar.src = initialAvatarURL;
+                                $alert.show().addClass('alert-warning').text('업데이트 실패');
+                                setTimeout(function () {
+                                    $('.alert').hide();
+                                }, 2000);
+                            },
+                        });
+                        cropper = new Cropper($image);
+                    });
+                    */
+                }
+
+                $modal.hide();
+                cropRemove();
+            });
+            
+            $('.btn-close-pop').on('click', function () {
+                $modal.hide();
+                cropRemove();
+            });
+            
+            function cropRemove() {
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+                $('#' + imgId).attr('src', '');
+                $('.cropModalWrap').children('.modalPop').remove();
+            }
+        }
+    };
+    /* module : video */
+    cp.videoModule = {
+        constEl: {
+            btnVideoFile: ".addVideo-file",
+            btnYoutube: ".addVideo-utube"
+        },
+        init: function () {
+            this.addVideo();
+            this.addYoutube();
+        },
+        addVideo: function () {
+            const btnVideo = $(this.constEl.btnVideoFile);
+
+            btnVideo.off('click').on('click', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'video/*';
+                input.style.display = 'none';
+                input.onchange = function(event) {
+                    var file = event.target.files[0];
+                    var videoURL = URL.createObjectURL(file);
+                    var videoElement = $('<video controls></video>');
+                    videoElement.attr('src', videoURL);
+                    $videoWrap.html(videoElement);
+                    $videoWrap.removeClass('no-video');
+                };
+                
+                $('input[type="file"]').remove(); 
+    
+                document.body.appendChild(input);
+                input.click();
+            });
+        },
+        addYoutube: function () {
+            const btnYoutube = $(this.constEl.btnYoutube);
+
+            btnYoutube.off('click').on('click', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+
+                var inputURL = prompt("Please enter YouTube video URL:");
+                if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
+                    var videoId;
+                    if (inputURL.includes("youtube.com")) {
+                        videoId = inputURL.split('v=')[1];
+                    } else if (inputURL.includes("youtu.be")) {
+                        videoId = inputURL.split('/').pop();
+                    }
+                    var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
+                    iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+                    $videoWrap.html(iframe);
+                    $videoWrap.removeClass('no-video');
+                } else {
+                    alert("Invalid YouTube video URL.");
+                }
+            });
+        }
+    };
+    /* FONT UI : color picker */
     cp.colorEdit = {
         init: function() {
             this.spectrumColor();
@@ -2018,7 +2485,7 @@ var COMPONENT_UI = (function (cp, $) {
             });
         }
     };
-
+    /* FONT UI : Text */
     cp.fontEditer = {
         init: function() {
             this.fontBold();
@@ -2096,110 +2563,20 @@ var COMPONENT_UI = (function (cp, $) {
         }
     };
 
-    cp.optionEdit = {
-        init: function() {
-            this.optionOpen();
-            this.optionClose();
-            this.resizeable();
-            this.gapHeight();
-            this.inpTxtLocation();
-            this.txtBgHeight();
-        },
-        currentModuleData: null,
-        optionOpen: function() {
-            cp.optionEdit.currentModuleData = null;
-            $('html, body').on('click', '.optionBtn', function() {
-                const $thisMd = $(this).closest('.md');
-                cp.optionEdit.currentModuleData = $thisMd.data('module');
-                const dataType = $thisMd.data('type');
-                const bgColor = $thisMd.css('background-color');
-                const mdHeight = parseInt($thisMd.css('height'), 10);
-                const grHeight = parseInt($thisMd.find('.txtEditBg').css('height'), 10);
-    
-                $('.md').removeClass('_is-active');
-                $thisMd.addClass('_is-active');
-                $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
-                $('.option-box').hide();
-                $('.option-box:not([data-type])').show();
-                $('.option-box[data-type="'+dataType+'"]').show();
-                $('.moduel-wrap').addClass('_right');
-                $('.gap-height').val(mdHeight);
-                $('.txtBgHeight').val(grHeight);
-                
-                cp.colorEdit.resetImgColor();
-                cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
-                cp.colorEdit.imgColor();
-                cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
-                cp.fontEditer.init();
-            });
-        },
-        optionClose: function() {
-            this.closeOptionWrap = function() {
-                const $optionWrap = $('.option-wrap');
-                cp.optionEdit.currentModuleData = null;
-                $optionWrap.attr('data-type','').removeClass('show');
-                $('.moduel-wrap').removeClass('_right');
-                cp.colorEdit.resetImgColor();
-                $('.md').removeClass('_is-active');
-            };
-        
-            $('html, body').on('click', '.optionClsBtn', this.closeOptionWrap);
-        },
-        resizeable: function() {
-            $(".md-gap").resizable({
-                handles: 's',
-                minWidth: 373,
-                maxWidth: 373,
-                minHeight: 10,
-                stop: function(event, ui) {
-                    var newHeight = ui.size.height;
-                    const dataType = $(this).data('module');
-                    $('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
-                }
-            });
-        },
-        gapHeight: function() {
-            $('.gap-height').on('input', function() {
-                var newHeight = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $mdGap = $('.md-gap[data-module="' + dataType + '"]');
-                if ($mdGap.length > 0) {
-                    $mdGap.css('height', newHeight);
-                }
-            });
-        },
-        inpTxtLocation:function() {
-            $('input[name="location"]').on('change', function() {
-                var locationValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
-
-                $txtEdit.removeClass();
-                $txtEdit.addClass('txtEdit ' + locationValue);
-            });
-        },
-        txtBgHeight:function() {
-            $('.txtBgHeight').on('change', function() {
-                var heightValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
-
-                $txtEditBg.css('height', heightValue);
-            });
-        }
-    };
-
     cp.init = function () {
+        cp.uaCheck.init(); // ver check
         cp.tblCaption.init(); // table caption
         cp.form.init(); // form
-        cp.imgCrop.init(); // img crop
-        cp.videoModule.init(); // video insert
-        cp.moduleBox.init();
         cp.modalPop.init();
+        cp.selectPop.init(); // 바텀시트 select
         cp.tab.init();
+        cp.accordion.init();
+        cp.optionEdit.init();
+        cp.moduleBox.init();
+        cp.imgCrop.init(); // img crop
+        cp.videoModule.init(); // video insert    
         cp.colorEdit.init();
         cp.fontEditer.init();
-        cp.optionEdit.init();
     };
 
     cp.init();
