@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../guide/com/css/cm.member.css">
+    <script type="text/javascript" src="com/js/lib/lib.jquery-3.6.3.min.js"></script>
+    <script type="text/javascript" src="com/js/lib/lib.jquery-ui-1.13.2.js"></script>
+</head>
+<body>
+    <div class="wrap member">
+        <header class="header mb"></header>
+        <div class="container mb">
+            <!--[s] 작업영억 -->
+            <h2 class="tit dep02">회원가입</h2>
+
+            <h2 class="tit dep03">회원가입</h2>
+            <div class="field _label">
+              <label class="field-label">기본INPUT</label>
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="text" placeholder="기본동작 INPUT" id="label1" title="" data-target="label1">
+                </div>
+              </div>
+              <!-- <p class="field-msg">
+                <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+              </p> -->
+            </div>
+
+            <div class="field">
+              <label class="field-label">주민등록번호</label>
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="text" class="_format _number" placeholder="생년월일 6자리" maxlength="6">
+                </div>
+                <span class="field-txt">-</span>
+                <div class="field-input grow _input">
+                  <label class="_secureTxt _num" data-length="7" data-secureLine="1">
+                    <input type="password" class="_format _password" placeholder="" maxlength="1">
+                  </label>
+                </div>
+              </div>
+              <p class="field-msg">
+                <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+              </p>
+            </div>
+
+            <div class="field">
+              <h3 class="field-label">BOX</h3>
+              <div class="field-group opt-box">
+                <label class="field-radio">
+                  <input type="radio" name="optBox">
+                  <span class="field-label">SKT</span>
+                </label>
+                <label class="field-radio">
+                  <input type="radio" name="optBox">
+                  <span class="field-label">KT</span>
+                </label>
+                <label class="field-radio">
+                  <input type="radio" name="optBox">
+                  <span class="field-label">LG U+</span>
+                </label>
+                <label class="field-radio">
+                  <input type="radio" name="optBox">
+                  <span class="field-label">SKT 알뜰폰</span>
+                </label>
+                <label class="field-radio">
+                  <input type="radio" name="optBox">
+                  <span class="field-label">KT 알뜰폰</span>
+                </label>
+                <label class="field-radio">
+                  <input type="radio" name="optBox">
+                  <span class="field-label">LG U+ 알뜰폰</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="btnWrap">
+              <button class="btn btn-size xl bg" disabled>기본BTN</button>
+            </div>
+
+
+            <!--[e] 작업영억 -->
+        </div>    
+        <footer class="footer mb"></footer>
+    </div>
+    <script type="text/javascript" src="com/js/ui.component.js"></script>
+</body>
+</html>

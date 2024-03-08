@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../guide/com/css/cm.member.css">
+    <script type="text/javascript" src="com/js/lib/lib.jquery-3.6.3.min.js"></script>
+    <script type="text/javascript" src="com/js/lib/lib.jquery-ui-1.13.2.js"></script>
+</head>
+<body>
+    <div class="wrap member">
+        <header class="header mb"></header>
+        <div class="container mb">
+            <!--[s] 작업영억 -->
+
+            <div class="tab-wrap" data-roll="tab" id="tab-1">
+              <div class="tab-list-wrap tab-expand">
+                <ul class="tab-list">
+                  <li class="tab"><a href="#새창" target="">개인정보동의</a></li>
+                  <li class="tab _is-active"><a href="#새창" target="">회원정보입력</a></li>
+                  <li class="tab"><a href="#새창" target="">가입신청완료</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <h2 class="tit dep02">회원정보입력</h2>
+
+            <div class="hgroup split">
+              <h2 class="tit dep03">2depth + 기준텍스트</h2>
+              <div class="col">
+                  <span class="cmt">(단위 : 천원)</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field-label">이름</label>
+              <div class="field-outline disabled">
+                <div class="field-input grow _input">
+                  <input type="text" placeholder="disabled" disabled="disabled">
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field-label">이메일</label>
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="tel" class="_format _number" placeholder="메일아이디" maxlength="3">
+                </div>
+                <span class="field-txt">@</span>
+                <div class="field-select grow">
+                  <select class="select-sys" title="메일도메인">
+                    <option>선택해주세요</option>
+                    <option>naver.com</option>
+                    <option>daum.net</option>
+                    <option>gmail.com</option>
+                  </select>
+                </div>
+              </div>
+              <p class="field-msg">
+                <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+              </p>
+            </div>
+
+            <div class="field-select grow">
+              <select class="select-sys" title="메일도메인">
+                <option>선택해주세요</option>
+                <option>naver.com</option>
+                <option>daum.net</option>
+                <option>gmail.com</option>
+              </select>
+            </div>
+            <div class="btnWrap">
+              <button class="btn btn-size md bg" disabled>기본BTN</button>
+            </div>
+
+            <div class="field">
+              <label class="field-label">휴대폰번호</label>
+              <div class="field-outline disabled">
+                <div class="field-input grow _input">
+                  <input type="text" placeholder="disabled" disabled="disabled">
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field-label">비밀번호</label>
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="password" class="_format _password" placeholder="●●●●" maxlength="4">
+                </div>
+              </div>
+              <p class="field-msg">
+                <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+              </p>
+            </div>
+
+            <div class="field">
+              <label class="field-label">비밀번호 확인</label>
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="password" class="_format _password" placeholder="●●●●" maxlength="4">
+                </div>
+              </div>
+              <p class="field-msg">
+                <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+              </p>
+            </div>
+
+            <h2 class="tit dep03">브랜드 정보</h2>
+
+            <div class="field-select grow">
+              <select class="select-sys" title="메일도메인">
+                <option>선택해주세요</option>
+                <option>naver.com</option>
+                <option>daum.net</option>
+                <option>gmail.com</option>
+              </select>
+            </div>
+
+            <div class="field-select grow">
+              <select class="select-sys" title="메일도메인">
+                <option>선택해주세요</option>
+                <option>naver.com</option>
+                <option>daum.net</option>
+                <option>gmail.com</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field-label">회사명</label>
+              <div class="field-outline disabled">
+                <div class="field-input grow _input">
+                  <input type="text" placeholder="disabled" disabled="disabled">
+                </div>
+              </div>
+            </div>
+
+            <h2 class="tit dep03">브랜드 선택</h2>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+
+            <div class="btnWrap">
+              <button class="btn btn-size xl bg" disabled>다음</button>
+            </div>
+
+
+            <!--[e] 작업영억 -->
+        </div>    
+        <footer class="footer mb"></footer>
+    </div>
+    <script type="text/javascript" src="com/js/ui.component.js"></script>
+</body>
+</html>
