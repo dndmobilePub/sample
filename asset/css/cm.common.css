@@ -3582,43 +3582,6 @@ legend, caption {
   position: relative;
 }
 
-.lst-dot > li {
-  position: relative;
-  padding: 0.5rem 0 0.5rem 1.2rem;
-  color: #333;
-  font-size: 1.3rem;
-}
-.lst-dot > li .cir > li::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 1.4rem;
-  left: 0;
-  width: 0.3rem;
-  height: 0.3rem;
-  background: #1c5a96;
-  border-radius: 50%;
-}
-.lst-dot > li .squ > li::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 1.4rem;
-  left: 0;
-  width: 0.3rem;
-  height: 0.3rem;
-  background: #1c5a96;
-}
-.lst-dot > li-hyphen li::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 1.4rem;
-  left: 0;
-  width: 0.5rem;
-  height: 0.1rem;
-  background: #888;
-}
 .lst-goods {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3629,6 +3592,87 @@ legend, caption {
 }
 .lst-goods > li {
   width: calc(50% - 1rem);
+}
+
+.list-dot {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+.list-dot.cir > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.2rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+.list-dot.cir > li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 0.3rem;
+  height: 0.3rem;
+  background: #1c5a96;
+  border-radius: 50%;
+}
+.list-dot.squ > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.2rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+.list-dot.squ > li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 0.3rem;
+  height: 0.3rem;
+  background: #1c5a96;
+}
+.list-hyphen > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.2rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+.list-hyphen > li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 0.5rem;
+  height: 0.1rem;
+  background: #888;
+}
+.list-caution > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.2rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+.list-caution > li::before {
+  content: "※";
+  display: block;
+  position: absolute;
+  top: 0.2rem;
+  left: 0;
+}
+.list-star > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.2rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+.list-star > li::before {
+  content: "*";
+  display: block;
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
 }
 
 .goodsWrap .item {
