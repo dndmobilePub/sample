@@ -29,9 +29,6 @@
         <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type02">상품 - swiper02</a>
         <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type03">상품 - swiper03</a>
         <a href="javascript:void(0);" data-type="gap">공백</a>
-
-        <!-- 임시저장 시 토스트팝업 생성 -->
-        <a href="javascript:void(0);" class="btn btn-size md bg _toastBtn" data-toast="임시 저장 되었습니다.">토스트팝업</a>
       </div>
     </div>
 
@@ -56,7 +53,7 @@
               <a href="javascript:void(0);">2열 리스트</a>
             </div>
           </div> -->
-          <div class="option-box" data-type="goodsTab">
+          <div class="option-box" data-type="goods">
             <h3 class="option-tit">색상 선택</h3>
             <div class="option-cont">
               <div class="color-selbox">
@@ -81,14 +78,6 @@
           <!-- [E] 상세설정 텍스트 -->
           <!-- [S] 상세설정 이미지 -->
           <div class="option-box" data-type="img">
-            <h3 class="option-tit">이미지타입</h3>
-            <div class="option-cont type-select-wrap">
-              <a href="#;" class="type-select" goods-option="detailImg">이미지<br>대제목<br>소제목</a>
-              <a href="#;" class="type-select" goods-option="titleImg">대제목<br>이미지</a>
-              <a href="#;" class="type-select" goods-option="onlyImg">이미지만</a>
-            </div>
-          </div>
-          <div class="option-box" data-type="img">
           <h3 class="option-tit">이미지 추가</h3>
           <div class="option-cont">
             <a href="#" class="btn imgAdd">이미지 추가</a>
@@ -104,12 +93,12 @@
               </div>
             </div>
           </div>
-          <div class="option-box">
+          <div class="option-box" data-type="img">
           <h3 class="option-tit">텍스트 위치</h3>
           <div class="option-cont">
             <div class="input-box">
-              <label for="leftBottom"><input type="radio" name="location" id="leftBottom" value="leftBottom" checked>좌측 하단</label>
-              <label for="center"><input type="radio" name="location" id="center" value="center">센터</label>
+              <label for="leftBottom"><input type="radio" name="location" id="leftBottom" value="leftBottom">좌측 하단</label>
+              <label for="center"><input type="radio" name="location" id="center" value="center" checked>센터</label>
             </div>
           </div>
         </div>
@@ -175,7 +164,7 @@
               </article>
             </div>
           </div>
-          <div class="option-box">
+          <div class="option-box" data-type="title">
             <h3 class="option-tit">전시기간 노출여부</h3>
             <div class="option-cont">
               <div class="input-box">
@@ -212,12 +201,26 @@
               </div>
             </div>
     
+            <!-- [S] 타이틀 컨텐츠 -->
+            <div class="md md-img" data-type="img" data-module="default">
+              <div class="imgWrap no-img"><img src=""></div>
+              <div class="txtEdit">
+                <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
+                <h3 contenteditable="true" data-text="subTitle">소제목</h3>
+                <p contenteditable="true" data-text="date">2024.01.25 - 02.25</p>
+              </div>
+              <div class="module-option">
+                <button class="btn btn-size xs shadow optionBtn">설정</button>
+              </div>
+            </div>
+            <!--// [E] 타이틀 컨텐츠 -->
+            
             <!-- [S] 이미지 위에 텍스트 -->
             <div class="md md-img" data-type="img" data-module="test">
               <div class="imgWrap no-img img-background">
                 <img src="">
-                <div class="txtEdit leftBottom">
-                  <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
+                <div class="txtEdit center">
+                  <h1 contenteditable="true" data-text="mainTitle">이미지 위에 <br/>이미지 추가 작업예정</h1>
                   <h3 contenteditable="true" data-text="subTitle">소제목</h3>
                   <div class="txtEditBg"></div>
                 </div>
