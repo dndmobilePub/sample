@@ -70,6 +70,13 @@
 
 #{$swiper}{
   $sw:'.swiper-wrapper';
+  
+  @include pos(relative);
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  list-style: none;
+  z-index: 1;
 
   &-container{
     &-vertical{
@@ -106,6 +113,22 @@
     flex-shrink: 0;
     @include el-size(100%, 100%);
     @include pos(relative);
+    
+    &-invisible-blank {
+        visibility: hidden;
+    }
+    .txtEdit {
+      padding: 1.2rem .8rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .swiper-box{
+      text-align: center;
+      img{
+        max-width: 30rem;
+        @include width(100%);
+      }
+    }
   }
 
   &-pagination{
@@ -113,17 +136,19 @@
     @include align(text, center);
     @extend %transition3s;
     transform: translate3d(0,0,0);
+    @include width(100%);
+    @include pos-offset-b(10px, 0);
 
     &-bullet{
       @include el-size(1rem, 1rem !important) ;
       opacity: 1 !important;
-      background: $color-white !important;
+      background: $color-gray6 !important;
       @include line(border, 0.2rem solid $color-blue4 !important);
       @include display(inline-block);
       border-radius: 100%;
 
       &-active{
-        background: $color-blue4 !important;
+        background: $color-blue !important;
         @include width(2rem !important);
         border-radius: 1.5rem !important;
         opacity: 1;
@@ -137,6 +162,9 @@
         &:not(:focus-visible){
           outline: none !important;
         }
+      }
+      & + .swiper-pagination-bullet{
+        margin-left: .6rem;
       }
     }
   }

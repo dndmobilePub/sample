@@ -1821,7 +1821,7 @@ var COMPONENT_UI = (function (cp, $) {
             this.mdGoodPopSel();
             this.initializeSwiper();
             this.resetSwipers();
-            this.mdBoxOption();
+            //this.mdBoxOption();
         },
         
         dragFn: function () {
@@ -1868,16 +1868,6 @@ var COMPONENT_UI = (function (cp, $) {
                     return matches.join('');
                 }
 
-                function ImgAreaByCase(caseValue) {
-                    var pattern = new RegExp('<!-- 이미지 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 이미지 컨텐츠 ' + caseValue + ' -->', 'g');
-                    var matches = [];
-                    var match;
-                    while ((match = pattern.exec(imgArea)) !== null) {
-                        matches.push(match[0]);
-                    }
-                    return matches.join('');
-                }
-
                 function goodsAreaByCase(caseValue) {
                     var pattern = new RegExp('<!-- 상품 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 상품 컨텐츠 ' + caseValue + ' -->', 'g');
                     var matches = [];
@@ -1893,11 +1883,7 @@ var COMPONENT_UI = (function (cp, $) {
                         type02HTML: TxtAreaByCase('smallTxt'),
                         type03HTML: TxtAreaByCase('bodyTxt')
                     },
-                    imgArea: {
-                        type01HTML: ImgAreaByCase('detailImg'),
-                        type02HTML: ImgAreaByCase('onlyImg'),
-                        type03HTML: ImgAreaByCase('titleImg')
-                    },
+                    imgArea: imgArea,
                     videoArea: videoArea,
                     goodsArea: {
                         type01HTML: goodsAreaByCase('goodsSwiper'),
@@ -1914,31 +1900,20 @@ var COMPONENT_UI = (function (cp, $) {
                 
                 var dataType = $(this).data('type');
                 var caseValue = $(this).data('case');
+                var swiperCase = $(this).attr('swiper-case')
+                var tabCase = $(this).attr('tab-case')
                 var newMd = $('<div class="md"></div>');
                 newMd.addClass('md-' + dataType);
                 newMd.attr('data-type', dataType);
                 newMd.attr('data-case', caseValue);
+                newMd.attr('swiper-case', swiperCase);
+                newMd.attr('tab-case', tabCase);
                 newMd.attr('data-module', moduleId);
-                if (dataType === 'goods') {
-                    newMd.attr('data-case', 'goodsSwiper');
-                }
 
                 cp.moduleBox.mdBoxAddCont(function(content) {
                     var newContentHTML;
                     if (dataType === 'img') {
-                        switch (caseValue) {
-                            case 'detailImg':
-                                newContentHTML = content.imgArea.type01HTML;
-                                break;
-                            case 'onlyImg':
-                                newContentHTML = content.imgArea.type02HTML;
-                                break;
-                            case 'titleImg':
-                                newContentHTML = content.imgArea.type03HTML;
-                                break;
-                            default:
-                                newContentHTML = content.imgArea.type01HTML;
-                        }
+                        newContentHTML = content.imgArea;
                     } 
                      else if(dataType === 'txt') {
                         switch (caseValue) {
@@ -1955,16 +1930,16 @@ var COMPONENT_UI = (function (cp, $) {
                                 newContentHTML = content.txtArea.type01HTML;
                         }
                     }else if(dataType === 'goods') {
-                         switch (caseValue) {
-                             case 'goodsSwiper':
-                                 newContentHTML = content.goodsArea.type01HTML;
-                                 break;
-                             case 'goodsTab':
-                                 newContentHTML = content.goodsArea.type02HTML;
-                                 break;
-                             default:
-                                 newContentHTML = content.goodsArea.type01HTML;
-                         }
+                        switch (caseValue) {
+                            case 'goodsSwiper':
+                                newContentHTML = content.goodsArea.type01HTML;
+                                break;
+                            case 'goodsTab':
+                                newContentHTML = content.goodsArea.type02HTML;
+                                break;
+                            default:
+                                newContentHTML = content.goodsArea.type01HTML;
+                        }
                      } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
@@ -1979,62 +1954,6 @@ var COMPONENT_UI = (function (cp, $) {
                     
                     $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
 
-                    // $('.option-box a').click(function(e) {
-                    //     e.preventDefault();
-                        
-                    //     var optionCase = $(this).attr('goods-option');
-                    //     var optionSwiper = $(this).attr('data-swiper');
-                    //     var optiondataType = $('.option-wrap').attr('data-type');
-                        
-                    //     $('.md[data-module="' + optiondataType + '"]').attr('data-case', optionCase);
-                    //     $('.md[data-module="' + optiondataType + '"]').attr('data-swiper', optionSwiper);
-                            
-                    //     if(dataType === 'txt') {
-                    //         switch (optionCase) {
-                    //             case 'bigTxt':
-                    //                 newContentHTML = content.txtArea.type01HTML;
-                    //             break;
-                    //             case 'smallTxt':
-                    //                 newContentHTML = content.txtArea.type02HTML;
-                    //             break;
-                    //             case 'bodyTxt':
-                    //                 newContentHTML = content.txtArea.type03HTML;
-                    //             break;
-                    //             default:
-                    //                 newContentHTML = content.txtArea.type01HTML;
-                    //         }
-                    //     }else if(dataType === 'img') {
-                    //         switch (optionCase) {
-                    //             case 'detailImg':
-                    //                 newContentHTML = content.imgArea.type01HTML;
-                    //             break;
-                    //             case 'onlyImg':
-                    //                 newContentHTML = content.imgArea.type02HTML;
-                    //             break;
-                    //             case 'titleImg':
-                    //                 newContentHTML = content.imgArea.type03HTML;
-                    //             break;
-                    //             default:
-                    //                 newContentHTML = content.imgArea.type01HTML;
-                    //         }
-                    //     }else if(dataType === 'goods') {
-                    //         switch (optionCase) {
-                    //             case 'goodsSwiper':
-                    //                 newContentHTML = content.goodsArea.type01HTML;
-                    //                 //cp.moduleBox.init();
-                    //             break;
-                    //             case 'goodsTab':
-                    //                 newContentHTML = content.goodsArea.type02HTML;
-                    //                 //cp.tab.init();
-                    //             break;
-                    //             default:
-                    //                 newContentHTML = content.goodsArea.type01HTML;
-                    //             }
-                    //         }
-                    //     $('.md[data-module="' + optiondataType + '"]').empty().append(newContentHTML);
-                    //     cp.moduleBox.initializeSwiper($('.md[data-module="' + optiondataType + '"]').find('.swiper'));
-                    // });
-
                 });
 
                 cp.optionEdit.closeOptionWrap();
@@ -2043,78 +1962,25 @@ var COMPONENT_UI = (function (cp, $) {
 
             
         },
-        mdBoxOption: function() {
-            cp.moduleBox.mdBoxAddCont(function(content) {
-                var newContentHTML;
-                    
-                $('.option-box a[goods-option]').click(function(e) {
-                    // e.preventDefault();
-                    var optionDataType = $(this).parents('.option-wrap').data('type');
-                    var optionGoodsOption = $(this).attr('goods-option');
-                    var optionDataSwiper = $(this).data('swiper');
-                    var dataType = $('.md[data-module="' + optionDataType + '"]').data('type');
-                    var dataCase = $('.md[data-module="' + optionDataType + '"]').data('case');
-                    var dataModule = $('.md[data-module="' + optionDataType + '"]').data('module');
-                    $('.md[data-module="' + optionDataType + '"]').attr('data-swiper', optionDataSwiper);
-    
-                   console.log(optionDataType);
-                   //console.log(dataModule);
-    
-                    $('.md[data-module="' + optionDataType + '"]').attr('data-case', optionGoodsOption);
-    
-                    if (dataModule === optionDataType){
-                        if(dataType === 'txt') {
-                            switch (dataCase) {
-                                    case 'bigTxt':
-                                        newContentHTML = content.txtArea.type01HTML;
-                                    break;
-                                    case 'smallTxt':
-                                        newContentHTML = content.txtArea.type02HTML;
-                                    break;
-                                    case 'bodyTxt':
-                                        newContentHTML = content.txtArea.type03HTML;
-                                    break;
-                                    default:
-                                        newContentHTML = content.txtArea.type01HTML;
-                                }
-                            }else if(dataType === 'img') {
-                                switch (dataCase) {
-                                    case 'detailImg':
-                                        newContentHTML = content.imgArea.type01HTML;
-                                    break;
-                                    case 'onlyImg':
-                                        newContentHTML = content.imgArea.type02HTML;
-                                    break;
-                                    case 'titleImg':
-                                        newContentHTML = content.imgArea.type03HTML;
-                                    break;
-                                    default:
-                                        newContentHTML = content.imgArea.type01HTML;
-                                }
-                            }else if(dataType === 'goods') {
-                                switch (dataCase) {
-                                    case 'goodsSwiper':
-                                        newContentHTML = content.goodsArea.type01HTML;
-                                        //cp.moduleBox.init();
-                                    break;
-                                    case 'goodsTab':
-                                        newContentHTML = content.goodsArea.type02HTML;
-                                        //cp.tab.init();
-                                    break;
-                                    default:
-                                        newContentHTML = content.goodsArea.type01HTML;
-                                    }
-                                }
-                        $('.md[data-module="' + optionDataType + '"]').empty().append(newContentHTML);
-                        
-                    }
-                   
-                });
 
+        // mdBoxOption: function() {
+        //     $('.option-box a[goods-option="txt"]').click(function(e) {
+
+        //     });
+            
+        //     $('.option-box a[data-option]').click(function(e) {
+        //         // e.preventDefault();
+        //         var optionDataType = $(this).parents('.option-wrap').attr('data-type');
+        //         var optionGoodsOption = $(this).attr('data-option');
+        //         var optionDataSwiper = $(this).attr('data-swiper')
+        //         var dataCase = $('.md[data-module="' + optionDataType + '"]').attr('data-case');
+        //         var dataModule = $('.md[data-module="' + optionDataType + '"]').attr('data-module');
+        //         $('.md[data-module="' + optionDataType + '"]').attr('data-swiper', optionDataSwiper);
+
+               
+        //     });
                 
-            });
-                
-        },
+        // },
 
         mdGoodsPopClose: function() {
             const productCheckboxes = $('.product-list input[type="checkbox"]');
@@ -2135,7 +2001,6 @@ var COMPONENT_UI = (function (cp, $) {
             $('.btn-registration-pop').on('click', function() {
                 var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
                 var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
-                console.log(dataElem);
                 
                 var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
                 if (existingSwiper && existingSwiper.swiper) {
@@ -2169,20 +2034,16 @@ var COMPONENT_UI = (function (cp, $) {
                 var slidesPerView = slidesCount > 1 ? 2 : 1; 
                 var loopEnabled = slidesPerView > 1 && slidesCount >= 3;
                 var loopOption = loopEnabled ? true : false;
-                var swiperType = $(this).parents(".md").data('swiper');
-
-                if (slidesCount === 1) {
-                    slidesPerView = 1;
-                } else {
-                    if (swiperType === 'type01') {
-                        slidesPerView = 2;
-                    } else if (swiperType === 'type02') {
-                        slidesPerView = 1.5;
-                    } else if (swiperType === 'type03') {
-                        slidesPerView = 1;
-                    }
-                }
+                var swiperCase = $(this).parents('.md').attr('swiper-case');
             
+                if (swiperCase === 'type01') {
+                    slidesPerView = 2;
+                } else if (swiperCase === 'type02') {
+                    slidesPerView = 1.5;
+                } else if (swiperCase === 'type03') {
+                    slidesPerView = 1;
+                }
+
                 new Swiper(this, {
                     loop: loopOption,
                     slidesPerView: slidesPerView,  
@@ -2198,6 +2059,7 @@ var COMPONENT_UI = (function (cp, $) {
                 });
                 console.log('dd');
             });
+            
 
         }, 
 

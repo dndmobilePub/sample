@@ -19,6 +19,7 @@
 @import 'cp.ico';
 @import 'cp.input';
 @import 'cp.select';
+@import 'cp.swiper';
 @import 'cp.rdochk';
 @import 'cp.accodion';
 @import 'cp.tab';
@@ -221,42 +222,12 @@ label {
     margin:2rem auto;
     background: $color-gray6;
 
-    [data-type="goods"] {
-      & > .btnWrap {margin:0; padding:1.5rem 1rem;}
-      .swiper{
-        @include display(flex);
-        padding: 0 2rem 2rem;
-        min-height: 20rem;
-        img{
-          max-width: 30rem;
-          width: 100%;
-        }
-      }
-      &[data-swiper="type03"]{
-        .goodsWrap{
-          &:after{
-            content:'';
-            @include display(block);
-            clear: both;
-          }
-         .goods-img{
-           width: 50%;
-           float: left;
-           margin-right: 1.6rem;
-           margin-bottom: 0;
-          }
-          .item{
-            width: calc(50% - 1.6rem);
-            float:left;
-          }
-        }
-      }
-    }
+    
     .md {
       position: relative;
       @include line(outline, .3rem dashed transparent);
       background:$color-white;
-      min-height:10rem;
+      // min-height:10rem;
       cursor: pointer;
       // & ~ .md {margin-top: 1.5rem;}
 
@@ -360,122 +331,6 @@ label {
       .box-pd {
         padding: 0 2.4rem 2.4rem;
       }
-
-      .swiper{
-        @include pos(relative);
-        margin-left: auto;
-        margin-right: auto;
-        overflow: hidden;
-        list-style: none;
-        z-index: 1;
-
-        &-wrapper{
-          @include pos(relative){z-index: 1;};
-          @include display(flex);
-          @include el-size(100%, 100%);
-          transition-property: transform;
-          box-sizing: content-box;
-        }
-        &-slide{
-          @include pos(relative);
-          @include el-size(100%, 100%);
-          flex-shrink: 0;
-          transition-property: transform;
-          
-          &-invisible-blank {
-              visibility: hidden;
-          }
-          .txtEdit {
-            padding: 1.2rem .8rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-          }
-          .swiper-box{
-            text-align: center;
-            img{
-              max-width: 30rem;
-              @include width(100%);
-            }
-          }
-        }
-        &-pagination {
-          @include pos(absolute){z-index: 10;};
-          text-align: center;
-          transition: 300ms opacity;
-          transform: translate3d(0, 0, 0);
-
-          &-bullet{
-            @include display(inline-block);
-            @include el-size(1rem, 1rem);
-            background: $color-gray6;
-            border-radius: 50%;
-            &-active{
-              background: $color-blue;
-            }
-            & + .swiper-pagination-bullet{
-              margin-left: .6rem;
-            }
-          }
-          &-fraction,
-          &-custom,
-          &-bullets,
-          &-horizontal{
-            @include width(100%);
-            @include pos-offset-b(10px, 0);
-          }
-          &.swiper-pagination-hidden {
-            opacity: 0;
-          }
-          &-disabled,
-          &-lock{
-            @include display(none);
-            & > .swiper-pagination{
-              @include display(none);
-            }
-          }
-        }
-        &-button-prev{
-          left: 10px;
-          right: auto;
-          &:after{
-            content: '<';
-          }
-        }
-        &-button-next{
-          right: 10px;
-          left: auto;
-          &:after{
-            content: '>';
-          }
-        }
-        &-button-prev,
-        &-button-next {
-          @include pos-offset-l(50%, auto, $pos:absolute){z-index: 10;}
-          @include display(flex);
-          @include flex( $j-content:center, $al-items:center);
-          cursor: pointer;
-          color: $color-blue;
-
-          &.swiper-button{
-            &-disabled,
-            &-hidden{
-              opacity: 0.35;
-              cursor: auto;
-              pointer-events: none;
-            }
-            &-disabled{
-              @include display(none);
-            }
-          }
-          &:after{
-            font-size: 5rem;
-            text-transform: none !important;
-            letter-spacing: 0;
-            font-variant: initial;
-            line-height: 1;
-          }
-        }
-      }
 /*       .alert {
         display: none;
         padding: 0.75rem 1.25rem;
@@ -484,6 +339,63 @@ label {
         font-size: 1rem;
         color: #856404;
       } */
+    }
+  }
+}
+
+[data-type="goods"] {
+  & > .btnWrap {margin:0; padding:1.5rem 1rem;}
+  .swiper{
+    @include display(flex);
+    padding: 0 2rem 2rem;
+    min-height: 20rem;
+    img{
+      max-width: 30rem;
+      width: 100%;
+    }
+  }
+  &[swiper-case="type03"]{
+    .goodsWrap{
+      &:after{
+        content:'';
+        @include display(block);
+        clear: both;
+      }
+      .goods-img{
+        width: 50%;
+        float: left;
+        margin-right: 1.6rem;
+        margin-bottom: 0;
+      }
+      .item{
+        width: calc(50% - 1.6rem);
+        float:left;
+      }
+    }
+  }
+  &[tab-case="type02"]{
+    .lst-goods {
+      & > li {
+        @include width(100%);
+      }
+    }
+  
+    .goodsWrap{
+      &:after{
+        content:'';
+        @include display(block);
+        clear: both;
+      }
+      .goods-img{
+        width: 50%;
+        float: left;
+        margin-right: 1.6rem;
+        margin-bottom: 0;
+      }
+      .item{
+        width: calc(50% - 1.6rem);
+        float:left;
+      }
     }
   }
 }
