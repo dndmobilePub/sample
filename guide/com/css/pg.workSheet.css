@@ -1766,6 +1766,9 @@ legend, caption {
   /* FIELD - DISABLED */
   /* FIELD - READONLY */
 }
+.field + .field {
+  margin: 2rem 0;
+}
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
