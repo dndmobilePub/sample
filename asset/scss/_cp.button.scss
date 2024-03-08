@@ -56,16 +56,16 @@
             color:$color-white;
             &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):hover {
                 color:$color-white;
-                background:$color-violet; border-color:$color-violet;
+                background:$color-violet2; border-color:$color-violet2;
             }
             &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):focus, &.is-active {
                 color:$color-white;
-                background:$color-violet; border-color:$color-violet;
+                background:$color-violet2; border-color:$color-violet2;
             }
             &[aria-disabled="disabled"], &.disabled {
                 color:$color-white;
                 &:hover, &:focus {
-                    background:$color-violet; color:$color-white;  border-color:$color-violet;
+                    background:$color-violet2; color:$color-white;  border-color:$color-violet2;
                 }
             }
         }
@@ -78,12 +78,12 @@
             }
             &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):focus, &.is-active {
                 color:$color-white;
-                background:$color-blue3; border-color:$color-blue3;
+                background:$color-blue2; border-color:$color-blue2;
             }
             &[aria-disabled="disabled"], &.disabled {
                 color:$color-white;
                 &:hover, &:focus {
-                    background:$color-blue; color:$color-white;  border-color:$color-blue;
+                    background:$color-blue2; color:$color-white;  border-color:$color-blue2;
                 }
             }
         }
@@ -119,7 +119,7 @@
         @include el-content(after){
             @include pos(absolute);
             bottom:-.2rem;
-            background:$color-yellow;
+            background:$color-yellow2;
             width:0;
         }
 
@@ -128,7 +128,7 @@
                 @include transition(0.3s, all, ease);
                 height:.7rem;
                 width:100%;
-                background:$color-green;
+                background:$color-green2;
                 opacity:.7;
                 z-index:-1;
             };
@@ -161,6 +161,7 @@
                     @include transition(0.3s, all, ease);
                     background:$color-violet;
                     width:100%; height:.2rem;
+                    z-index:1;
                 }
             }
             /*
@@ -191,7 +192,7 @@
             &:hover, &:focus {
                 @include el-content(before){
                     @include transition(0.3s, all, ease);
-                    border-color:$color-pk;
+                    border-color:$color-orange;
                 // border-width:2px;  margin-top:calc(-.6rem/2);
                 }                
             }
@@ -208,7 +209,7 @@
         &:hover, &:focus {
             @include line-effect($color-gray1, after, center) {
                 @include transition(0.5s, all, ease);
-                background:$color-pk;
+                background:$color-orange;
                 width:100%; height:.1rem;
             }
         }

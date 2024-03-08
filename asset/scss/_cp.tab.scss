@@ -3,8 +3,7 @@
 		@include overflow (x, auto);
 		@include pos(relative);
 		@include width(100%);
-		// margin: 1.5rem auto;
-		margin: 0 auto 1.5rem;
+		margin: 1.5rem auto;
 		border: 0.1rem solid $color-light-gray1;
 		border-width: 0 0 0.1rem 0;
 		white-space: nowrap;
@@ -73,37 +72,19 @@
 			}
 
 			&:hover a {
-				color: $color-blue;
+				color: $color-blue3;
 			}
 
 			&#{$isActive} a {
-				color: $color-blue;
+				color: $color-blue3;
 
 				@include el-content(before) {
 					@include pos(absolute);
 					bottom: 0;
 					@include width(0);
 					@include height(0.2rem);
-					background-color: $color-blue;
+					background-color: $color-blue3;
 					animation: widthAct .3s linear forwards;
-				}
-			}
-		}
-		& > li {
-			&._addTab {
-				& > a {
-					@include pos(relative);
-					@include el-size(2rem, 2rem);
-					background:$color-blue;
-					border-radius:100%;
-					@include el-content(both) {
-						@include pos-offset-l(calc(50% - .2rem/2), calc(50% - 1rem/2));
-						@include el-size(1rem, .2rem);
-						background:$color-white;
-					}
-					@include el-content(after) {
-						transform: rotate(90deg)
-					}
 				}
 			}
 		}
@@ -180,7 +161,7 @@
 						left: 0; bottom: 0;
 						@include width(6.4rem);
 						@include height(0.2rem);
-						background-color: $color-blue;
+						background-color: $color-blue3;
 						@include transition(.2s, all, cubic-bezier(0.0, 0.0, 0.58, 1.0));
 					}
 					#{$isActive} > a::before {
@@ -212,12 +193,11 @@
 	}
 
 	&-contents-wrap {
-		border: 0.1rem solid $color-blue;
+		border: 0.1rem solid $color-valid;
 	}
 
 	&-contents {
-		padding: 0 2rem 2rem;
-		min-height: 20rem;
+		padding: 3rem 5rem 5rem;
 
 		&:nth-child(even) {
 			background: $color-gray7;
@@ -236,7 +216,7 @@
 				border: none;
 			}
 			&-contents {
-				// padding: 8rem 5rem;
+				padding: 8rem 5rem;
 			}
 		}
 	}
