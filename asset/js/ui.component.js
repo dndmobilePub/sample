@@ -1757,7 +1757,7 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.fontEditer.init();
 
                 if (dataCase) {
-                    $('.option-box[data-type="'+dataType+'"]').hide();
+                    $('.option-box[data-case]').hide();
                     $('.option-box[data-type="' + dataType + '"][data-case="' + dataCase + '"]').show();
                 }
             });
