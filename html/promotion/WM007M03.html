@@ -28,10 +28,10 @@
         <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type01">상품 - swiper01</a>
         <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type02">상품 - swiper02</a>
         <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type03">상품 - swiper03</a>
-<!--         <a href="javascript:void(0);" data-type="group" data-case="">그룹 - tab01</a>
-        <a href="javascript:void(0);" data-type="group" data-case="">그룹 - tab02</a>
-        <a href="javascript:void(0);" data-type="group" data-case="">그룹 - swiper01</a>
-        <a href="javascript:void(0);" data-type="group" data-case="">그룹 - swiper02</a> -->
+<!--         <a href="javascript:void(0);" data-type="group" data-case="groupList">그룹 - List01</a>
+        <a href="javascript:void(0);" data-type="group" data-case="groupList">그룹 - List02</a>
+        <a href="javascript:void(0);" data-type="group" data-case="groupSwiper">그룹 - swiper01</a>
+        <a href="javascript:void(0);" data-type="group" data-case="groupSwiper">그룹 - swiper02</a> -->
         <a href="javascript:void(0);" data-type="gap">공백</a>
       </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="option-wrap" data-type="">
           <h2>상세설정</h2>
           <!-- [S] 상세설정 상품 -->
-          <!-- <div class="option-box goods-box" data-type="goodsSwiper">
+          <!-- <div class="option-box" data-type="goods" data-case="goodSwiper">
             <h3>상품타입</h3>
             <div class="goods-box-inner">
               <a href="javascript:void(0);" data-option="type01">정사각형 스와이프<br/>(최대 10개)</a>
@@ -50,14 +50,23 @@
               <a href="javascript:void(0);" data-option="type03">가로형 스와이프<br/>(최대 5개)</a>
             </div>
           </div>
-          <div class="option-box goods-box" data-type="goodsTab">
+          <div class="option-box" data-type="goods" data-case="goodsTab">
             <h3>상품타입</h3>
             <div class="goods-box-inner">
               <a href="javascript:void(0);">1열 리스트</a>
               <a href="javascript:void(0);">2열 리스트</a>
             </div>
           </div> -->
-          <div class="option-box" data-type="goods">
+          <div class="option-box" data-type="goods" data-case="goodsTab">
+            <h3>앵커 탭 사용</h3>
+            <div class="option-cont">
+              <div class="input-box">
+                <label for="anchorTabUse"><input type="radio" name="anchorTab" id="anchorTabUse" value="use" checked>사용</label>
+                <label for="anchorTabDisuse"><input type="radio" name="anchorTab" id="anchorTabDisuse" value="disuse">미사용</label>
+              </div>
+            </div>
+          </div>
+          <div class="option-box" data-type="goods" data-case="goodsTab">
             <h3 class="option-tit">색상 선택</h3>
             <div class="option-cont">
               <div class="color-selbox">
@@ -81,10 +90,10 @@
           </div> -->
           <!-- [E] 상세설정 텍스트 -->
           <!-- [S] 상세설정 이미지 -->
-          <div class="option-box" data-type="img">
+          <div class="option-box" data-type="img" data-case="imgFloat">
           <h3 class="option-tit">이미지 추가</h3>
           <div class="option-cont">
-            <a href="#" class="btn imgAdd">이미지 추가</a>
+            <a href="#" class="btn shadow imgAdd">이미지 추가</a>
           </div>
         </div>
         <div class="option-box" data-type="img">
@@ -97,7 +106,7 @@
               </div>
             </div>
           </div>
-          <div class="option-box" data-type="img">
+          <div class="option-box" data-type="img" data-case="imgFloat">
           <h3 class="option-tit">텍스트 위치</h3>
           <div class="option-cont">
             <div class="input-box">
@@ -106,7 +115,7 @@
             </div>
           </div>
         </div>
-        <div class="option-box" data-type="img">
+        <div class="option-box" data-type="img" data-case="imgFloat">
           <h3 class="option-tit">그라데이션 높이</h3>
           <div class="option-cont field">
             <div class="field-outline">
@@ -116,23 +125,23 @@
             </div>
           </div>
         </div>
-        <div class="option-box" data-type="img">
+        <div class="option-box" data-type="img" data-case="imgFloat">
           <h3 class="option-tit">그라데이션 색상</h3>
           <div class="option-cont">
             <input type="color" class="txtBgColor">
           </div>
         </div>
         <div class="option-box" data-type="img">
-            <h3 class="option-tit">링크 URL</h3>
-            <div class="option-cont field">
-              <div class="field-outline">
-                <div class="field-input grow _input">
-                  <input type="text" placeholder="링크 URL 입력" title="">
-                </div>
+          <h3 class="option-tit">링크 URL</h3>
+          <div class="option-cont field">
+            <div class="field-outline">
+              <div class="field-input grow _input">
+                <input type="text" placeholder="링크 URL 입력" title="">
               </div>
             </div>
           </div>
-          <!-- [E] 상세설정 이미지 -->
+        </div>
+        <!-- [E] 상세설정 이미지 -->
           
         <!-- [S] 상세설정 공백 -->
         <div class="option-box" data-type="gap">
@@ -181,7 +190,7 @@
           <a href="javascript:void(0);" class="ico ico-pop-close optionClsBtn" role="button"><span class="hide">창닫기</span></a>
         </div>
         <!--// [E] 상세설정 -->
-        <div class="moduel-wrap">
+        <div class="module-wrap">
           <!-- [S] notice/guide -->
           <div class="guide-box">
             <p>각각의 모듈과 모듈에 해당하는 상세설정창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-module)</strong> : <strong>상세설정(data-type)</strong> 매칭</p>
@@ -236,7 +245,7 @@
             </div>
             <!--// [E] 이미지 위에 텍스트 -->
             <!-- [S] 이미지 컨텐츠 -->
-            <div class="md md-img" data-type="img" data-module="onlyImg">
+            <div class="md md-img" data-type="img" data-case="onlyImg" data-module="onlyImg">
               <div class="imgWrap no-img"><img src=""></div>
               <div class="module-option">
                 <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
@@ -246,7 +255,7 @@
             <!--// [E] 이미지 컨텐츠 -->    
     
             <!-- [S] 상품 컨텐츠 TYPE2 -->
-            <div class="md md-goods" data-type="goods" data-module="anchorTab" tab-case="type01">
+            <div class="md md-goods" data-type="goods" data-case="goodsTab" data-module="anchorTab" tab-case="type01">
               <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
                 <div class="tab-list-wrap">
                   <ul class="tab-list">
@@ -313,7 +322,7 @@
             <!--// [E] 상품 컨텐츠 TYPE2-->
             
             <!-- [S] 상품 컨텐츠 TYPE1 -->
-            <div class="md md-goods" data-type="goods" data-module="swiper" swiper-case="type01">
+            <div class="md md-goods" data-type="goods" data-case="goodsSwiper" data-module="goodsSwiper" swiper-case="type01">
               <div class="txtEdit">
                 <h1 contenteditable="true" class="fontBold">대제목</h1>
               </div>
