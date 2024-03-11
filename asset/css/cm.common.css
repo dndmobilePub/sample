@@ -4604,7 +4604,7 @@ label input {
 }
 
 .img-container {
-  text-align: center;
+  text-align: center !important;
 }
 .img-container img {
   width: 100%;
@@ -4628,7 +4628,7 @@ label input {
           align-items: center;
   height: 16.3rem;
   background: #f3f4f6;
-  text-align: center;
+  text-align: center !important;
 }
 .no-img::before {
   content: "";
