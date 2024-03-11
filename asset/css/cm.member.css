@@ -3233,8 +3233,6 @@ legend, caption {
   display: block;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
-<<<<<<< HEAD
-=======
 }
 .tab-list.use {
   display: -webkit-box;
@@ -3243,7 +3241,6 @@ legend, caption {
 }
 .tab-list.disuse {
   display: none;
->>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
 }
 .tab-wrap {
   position: relative;

@@ -1161,17 +1161,29 @@ legend, caption {
 
 /* text : text 그룹 후 flex*/
 .split {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .split.hgroup > .tit {
   vertical-align: middle;
 }
 .split.hgroup > .col {
-  flex: 1 0 30%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 30%;
+          flex: 1 0 30%;
   text-align: right !important;
   vertical-align: middle;
 }
@@ -3514,12 +3526,8 @@ legend, caption {
   width: 0;
   height: 0.2rem;
   background-color: #000;
-<<<<<<< HEAD
   -webkit-animation: widthAct 0.3s linear forwards;
           animation: widthAct 0.3s linear forwards;
-=======
-  animation: widthAct 0.3s linear forwards;
->>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
 }
 .tab-list > li._addTab > a {
   position: relative;
@@ -3555,6 +3563,8 @@ legend, caption {
           transform: rotate(90deg);
 }
 .tab-list.use {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 .tab-list.disuse {
@@ -4228,6 +4238,7 @@ label input {
 /* 모듈 추가 박스 */
 .module-wrap {
   width: 100%;
+  -webkit-transition: all 0.15s ease;
   transition: all 0.15s ease;
 }
 .module-wrap._right {
@@ -4267,164 +4278,7 @@ label input {
 .module-option .btn {
   min-width: initial;
 }
-<<<<<<< HEAD
-.container .moduleWrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: calc(100% - 10rem);
-  padding-bottom: 10rem;
-}
-.container .footer-btnWrap {
-  z-index: 101;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 7rem;
-  min-width: 80rem;
-  background: #ddd;
-}
-.container .footer-btnWrap > .btnWrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-}
-.container .footer-btnWrap > .btnWrap > .btn {
-  min-width: 15rem;
-  text-align: center !important;
-}
-.container .footer-btnWrap > .btnWrap > .btn:first-child {
-  margin-right: calc(100% - 46rem);
-}
-.container .option-wrap {
-  overflow-y: auto;
-  position: fixed;
-  left: -31%;
-  top: 0;
-  width: 30%;
-  min-width: 30rem;
-  height: calc(100vh - 7rem);
-  padding: 2rem;
-  border: 1px solid #999;
-  border-bottom: 0;
-  background-color: #fff;
-  -webkit-transition: left 0.15s ease;
-  transition: left 0.15s ease;
-}
-.container .option-wrap .ico-pop-close {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-}
-.container .option-wrap.show {
-  left: 0;
-}
-.container .option-box {
-  display: block;
-  margin-top: 4rem;
-}
-.container .option-box.goods-box .goods-box-inner {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 1.6rem;
-}
-.container .option-box.goods-box .goods-box-inner a {
-  display: block;
-  padding: 1.65rem;
-  width: calc((100% - 3.2rem) / 3);
-  border: 1px solid #000;
-  border-radius: 1.4rem;
-  font-size: 1.2rem;
-  text-align: center;
-}
-.container .option-tit {
-  display: block;
-  min-width: 7rem;
-  margin-right: 1.5rem;
-  vertical-align: top;
-}
-.container .option-cont {
-  margin-top: 1rem;
-}
-.container .option-cont.type-select-wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  gap: 1rem;
-}
-.container .option-cont .type-select {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  padding: 1rem;
-  border: 1px solid #999;
-  border-radius: 1rem;
-  text-align: center;
-}
-.container .option-cont .input-box, .container .option-cont .color-selbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 1rem;
-}
-.container .moduel-wrap {
-  width: 100%;
-  -webkit-transition: all 0.15s ease;
-  transition: all 0.15s ease;
-}
-.container .moduel-wrap._right {
-  width: 70%;
-  margin-left: 30%;
-}
-.container .module-edit {
-=======
 .module-edit {
->>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
   border: 1px solid #ccc;
   max-width: var(--section);
   width: 100%;
@@ -4512,13 +4366,9 @@ label input {
 .module-edit .md .txtEdit .fontBold {
   font-weight: 700;
 }
-<<<<<<< HEAD
-.container .module-edit .md .imgWrap .txtEdit {
+.module-edit .md .imgWrap .txtEdit {
   display: -webkit-box;
   display: -ms-flexbox;
-=======
-.module-edit .md .imgWrap .txtEdit {
->>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -4539,8 +4389,7 @@ label input {
   width: 100%;
   height: 100%;
 }
-<<<<<<< HEAD
-.container .module-edit .md .imgWrap .txtEdit.center {
+.module-edit .md .imgWrap .txtEdit.center {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -4553,9 +4402,9 @@ label input {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  text-align: center;
+  text-align: center !important;
 }
-.container .module-edit .md .imgWrap .txtEdit.leftBottom {
+.module-edit .md .imgWrap .txtEdit.leftBottom {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -4568,22 +4417,7 @@ label input {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  text-align: left;
-=======
-.module-edit .md .imgWrap .txtEdit.center {
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  text-align: center !important;
-}
-.module-edit .md .imgWrap .txtEdit.leftBottom {
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: flex-start;
   text-align: left !important;
->>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
 }
 .module-edit .md .imgWrap .txtEditBg {
   position: absolute;
@@ -4612,6 +4446,8 @@ label input {
   padding: 0 2.4rem 2.4rem;
 }
 .moduleWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: calc(100% - 10rem);
   padding-bottom: 10rem;
@@ -4629,8 +4465,12 @@ label input {
 .moduleWrap + .footer-btnWrap > .btnWrap {
   margin-top: 0;
   padding: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 .moduleWrap + .footer-btnWrap > .btnWrap > .btn {
   min-width: 15rem;
@@ -4652,6 +4492,7 @@ label input {
   border: 1px solid #999;
   border-bottom: 0;
   background-color: #fff;
+  -webkit-transition: left 0.15s ease;
   transition: left 0.15s ease;
 }
 .option-wrap .ico-pop-close {
@@ -4667,8 +4508,11 @@ label input {
   margin-top: 4rem;
 }
 .option-box.goods-box .goods-box-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   gap: 1.6rem;
 }
 .option-box.goods-box .goods-box-inner a {
@@ -4690,31 +4534,62 @@ label input {
   margin-top: 1rem;
 }
 .option-cont.type-select-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   gap: 1rem;
 }
 .option-cont .type-select {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   padding: 1rem;
   border: 1px solid #999;
   border-radius: 1rem;
   text-align: center !important;
 }
 .option-cont .input-box, .option-cont .color-selbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 1rem;
 }
 
