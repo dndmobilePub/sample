@@ -1726,6 +1726,7 @@ var COMPONENT_UI = (function (cp, $) {
             this.gapHeight();
             this.inpTxtLocation();
             this.txtBgHeight();
+            this.anchorTab();
         },
         currentModuleData: null,
         optionOpen: function() {
@@ -1734,6 +1735,7 @@ var COMPONENT_UI = (function (cp, $) {
                 const $thisMd = $(this).closest('.md');
                 cp.optionEdit.currentModuleData = $thisMd.data('module');
                 const dataType = $thisMd.data('type');
+                const dataCase = $thisMd.data('case');
                 const bgColor = $thisMd.css('background-color');
                 const mdHeight = parseInt($thisMd.css('height'), 10);
                 const grHeight = parseInt($thisMd.find('.txtEditBg').css('height'), 10);
@@ -1744,7 +1746,7 @@ var COMPONENT_UI = (function (cp, $) {
                 $('.option-box').hide();
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
-                $('.moduel-wrap').addClass('_right');
+                $('.module-wrap').addClass('_right');
                 $('.gap-height').val(mdHeight);
                 $('.txtBgHeight').val(grHeight);
                 
@@ -1753,6 +1755,11 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.colorEdit.imgColor();
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
+
+                if (dataCase) {
+                    $('.option-box[data-case]').hide();
+                    $('.option-box[data-type="' + dataType + '"][data-case="' + dataCase + '"]').show();
+                }
             });
         },
         optionClose: function() {
@@ -1760,7 +1767,7 @@ var COMPONENT_UI = (function (cp, $) {
                 const $optionWrap = $('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
                 $optionWrap.attr('data-type','').removeClass('show');
-                $('.moduel-wrap').removeClass('_right');
+                $('.module-wrap').removeClass('_right');
                 cp.colorEdit.resetImgColor();
                 $('.md').removeClass('_is-active');
             };
@@ -1808,6 +1815,16 @@ var COMPONENT_UI = (function (cp, $) {
 
                 $txtEditBg.css('height', heightValue);
             });
+        },
+        anchorTab:function() {
+            $('input[name="anchorTab"]').on('change', function() {
+                var anchorTabValue = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $anchorTab = $('.md[data-module="' + dataType + '"]').find('.tab-list');
+
+                $anchorTab.removeClass();
+                $anchorTab.addClass('tab-list ' + anchorTabValue);
+            });
         }
     };
     /* module option */
@@ -1840,7 +1857,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
 
         mdGoodsAdd:function() {
-            $('body').on('click', '.goodsAddBtn', function() {
+            $('body, html').on('click', '.goodsAddBtn', function() {
                 var targetModal = $(this).data('modal');
                 $('.modalPop.goodsPop').attr('modal-target', targetModal);
                 cp.modalPop.showModal($(this));
@@ -1849,11 +1866,12 @@ var COMPONENT_UI = (function (cp, $) {
 
         mdBoxAddCont: function(callback) {
             Promise.all([
-                fetch('/../../asset/_module/module_txt.html').then(response => response.text()),
-                fetch('/../../asset/_module/module_img.html').then(response => response.text()),
-                fetch('/../../asset/_module/module_video.html').then(response => response.text()),
-                fetch('/../../asset/_module/module_goods.html').then(response => response.text())
-            ]).then(([txtArea, imgArea, videoArea, goodsArea]) => {
+                fetch('../../asset/_module/module_txt.html').then(response => response.text()),
+                fetch('../../asset/_module/module_img.html').then(response => response.text()),
+                fetch('../../asset/_module/module_video.html').then(response => response.text()),
+                fetch('../../asset/_module/module_goods.html').then(response => response.text()),
+                fetch('../../asset/_module/module_group.html').then(response => response.text())
+            ]).then(([txtArea, imgArea, videoArea, goodsArea, groupArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
                 goodsArea = goodsArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
@@ -1877,6 +1895,17 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                     return matches.join('');
                 }
+
+                function groupAreaByCase(caseValue) {
+                    var pattern = new RegExp('<!-- 그룹 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 그룹 컨텐츠 ' + caseValue + ' -->', 'g');
+                    var matches = [];
+                    var match;
+                    while ((match = pattern.exec(groupArea)) !== null) {
+                        matches.push(match[0]);
+                    }
+                    return matches.join('');
+                }
+
                 callback({
                     txtArea: {
                         type01HTML: TxtAreaByCase('bigTxt'),
@@ -1888,6 +1917,10 @@ var COMPONENT_UI = (function (cp, $) {
                     goodsArea: {
                         type01HTML: goodsAreaByCase('goodsSwiper'),
                         type02HTML: goodsAreaByCase('goodsTab')
+                    },
+                    groupArea: {
+                        type01HTML: groupAreaByCase('groupList'),
+                        type02HTML: groupAreaByCase('groupSwiper')
                     },
                 });
             });
@@ -1940,7 +1973,18 @@ var COMPONENT_UI = (function (cp, $) {
                             default:
                                 newContentHTML = content.goodsArea.type01HTML;
                         }
-                     } else if(dataType === 'video') {
+                    }else if(dataType === 'group') {
+                        switch (caseValue) {
+                            case 'groupList':
+                                newContentHTML = content.groupArea.type01HTML;
+                                break;
+                            case 'groupSwiper':
+                                newContentHTML = content.groupArea.type02HTML;
+                                break;
+                            default:
+                                newContentHTML = content.groupArea.type01HTML;
+                        }
+                    } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
                         newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
@@ -2008,7 +2052,9 @@ var COMPONENT_UI = (function (cp, $) {
                 }
                 
                 dataElem.closest('.md').find('.swiper-notification').remove();
-                dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                if ($('.product-list input[type="checkbox"]:checked').length > 0) {
+                    dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                }
         
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');
@@ -2017,7 +2063,7 @@ var COMPONENT_UI = (function (cp, $) {
                 });
                 
                 cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
-                cp.modalPop.closePop($(this));
+                // cp.modalPop.closePop($(this));
         
                 $('.product-list input[type="checkbox"]').prop('checked', false);
         
@@ -2089,7 +2135,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
         openCropImg: function () {
             function loadCropModal($imgWrap) {
-                $('.cropModalWrap').load('/../../asset/_module/modal.html', function () {
+                $('.cropModalWrap').load('../../asset/_module/modal.html', function () {
                     var cropModalWrap = $(this);
                     var uniqueId = generateUniqueId();
         
@@ -2618,7 +2664,7 @@ var COMPONENT_UI = (function (cp, $) {
                 if (!$this.has('.textEditerWrap').length) {
                     $('.textEditerWrap').remove();
                     $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $this.prev('.textEditerWrap').load('/../../asset/_module/text-edit.html', function(){
+                    $this.prev('.textEditerWrap').load('../../asset/_module/text-edit.html', function(){
                         var targetData = $('.edit-box').data('edit');
                     
                         $this.attr('edit-target', targetData);
