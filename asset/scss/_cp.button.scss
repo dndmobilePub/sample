@@ -34,6 +34,14 @@
         }
     }
 
+    &.type{
+        &-one{
+            & button{
+                min-width:24rem;
+            }
+        }
+    }
+
 }
 #{$btn} { 
     padding:.5rem 1rem;
