@@ -1755,7 +1755,7 @@ var COMPONENT_UI = (function (cp, $) {
                 cp.colorEdit.imgColor();
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
-                cp.optionEdit.gapHeight.init();
+                cp.optionEdit.gapHeight(cp.optionEdit.currentModuleData);
 
                 if (dataCase) {
                     $('.option-box[data-case]').hide();
@@ -1788,17 +1788,10 @@ var COMPONENT_UI = (function (cp, $) {
                 }
             });
         },
-        gapHeight: function() {
-            $('.gap-height').on('input', function() {
-                //console.log(dataType)
+        gapHeight: function(dataType) {
+            $('.gap-height').off('change').on('change', function() {
                 var newHeight = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                $('.md-gap').each(function() {
-                    if ($(this).data('module') === dataType) {
-                        $(this).css('height', newHeight);
-                        console.log(dataType)
-                    }
-                });
+                $('.md-gap[data-module="' + dataType + '"]').css('height', newHeight);
             });
         },
         inpTxtLocation:function() {
