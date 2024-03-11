@@ -319,6 +319,14 @@ label {
             width: 100%; height: 30%;
             background: linear-gradient(to top, #ccc, transparent);
           }
+
+          .imgWrap {
+            overflow: hidden;
+            max-width: 12.6rem; max-height: 8rem;
+            &.no-img {
+              border: 1px solid red;
+            }
+          }
         }
       }
       
