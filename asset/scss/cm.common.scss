@@ -87,6 +87,56 @@ $moduel:'.module';
       width: calc(100% - 40rem);
       margin-left: 40rem;
     }
+    .md {
+      .txtEdit {
+        @include pos(relative);
+        padding: 2.4rem;
+        font-size: 1.4rem;
+        color: $color-black;
+
+        h1 {
+          font-size: 2.8rem;
+          font-weight: 700;
+        }
+        >*:not(:first-child) {
+          margin-top: 1rem;
+          font-weight: normal;
+        }
+
+        .fontBold {
+          font-weight: 700;
+        }
+      }
+      .imgWrap {
+        .txtEdit {
+          @include display(flex);
+          @include flex($direction:column,  $j-content:flex-end);
+          @include pos-offset-l(0,0) {z-index: 1;};
+          @include el-size(100%, 100%);
+
+          &.center {
+            @include flex($direction:column, $j-content:center);
+            @include align(text, center);
+          }
+
+          &.leftBottom {
+            @include flex($direction:column, $j-content:flex-end, $al-items:flex-start);
+            @include align(text, left);
+          }
+
+          &Bg {
+            @include pos(absolute) {bottom: 0; left: 0; z-index: -1;};
+            @include el-size(100%, 30%);
+            background: linear-gradient(to top, $color-gray8, transparent);
+          }
+
+          .md-logo {
+            @include overflow(both, hidden);
+            max-width: 12.6rem; max-height: 8rem;
+          }
+        }
+      }
+    }
   }
 
   &-add-box {
@@ -179,55 +229,9 @@ $moduel:'.module';
         z-index:5;
       }
 
-      .txtEdit {
-        @include pos(relative);
-        padding: 2.4rem;
-        font-size: 1.4rem;
-        color: $color-black;
-
-        h1 {
-          font-size: 2.8rem;
-          font-weight: normal;
-        }
-        >*:not(:first-child) {
-          margin-top: 1rem;
-          font-weight: normal;
-        }
-
-        .fontBold {
-          font-weight: 700;
-        }
-      }
-      .imgWrap {
-        .txtEdit {
-          @include display(flex);
-          @include flex($direction:column,  $j-content:flex-end);
-          @include pos-offset-l(0,0) {z-index: 1;};
-          @include el-size(100%, 100%);
-
-          &.center {
-            @include flex($direction:column, $j-content:center);
-            @include align(text, center);
-          }
-
-          &.leftBottom {
-            @include flex($direction:column, $j-content:flex-end, $al-items:flex-start);
-            @include align(text, left);
-          }
-
-          &Bg {
-            @include pos(absolute) {bottom: 0; left: 0; z-index: -1;};
-            @include el-size(100%, 30%);
-            background: linear-gradient(to top, $color-gray8, transparent);
-          }
-
-          .imgWrap {
-            @include overflow(both, hidden);
-            max-width: 12.6rem; max-height: 8rem;
-            &.no-img {
-              @include line(border, 1px solid $color-pk);
-            }
-          }
+      .md-logo {
+        &.no-img {
+          @include line(border, 1px solid $color-pk);
         }
       }
       
