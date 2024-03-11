@@ -2571,11 +2571,11 @@ var COMPONENT_UI = (function (cp, $) {
     /* FONT UI : Text */
     cp.fontEditer = {
         init: function() {
-            this.fontBold();
-            this.fontSize();
+            //this.fontBold();
+            //this.fontSize();
             this.editOpen();
         },
-        fontBold: function() {
+/*         fontBold: function() {
             $(document).off('click').on('click', '.editBold', function(){
                 var targetData = $('.edit-box').data('edit');
                 var thisWrap = $(this).closest('.textEditerWrap');
@@ -2589,8 +2589,8 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                 }
             })
-        },
-        fontSize: function() {
+        }, */
+/*         fontSize: function() {
             $(document).on('change', '.editSize', function(){
                 var newSize = parseInt($(this).val().trim());
                 var targetData = $('.edit-box').data('edit');
@@ -2604,7 +2604,7 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                 })
             })
-        },
+        }, */
         editOpen: function() {
             $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
