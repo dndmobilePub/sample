@@ -360,7 +360,7 @@ $moduel:'.module';
       width: 100%;
     }
   }
-  &[swiper-case="type03"]{
+  &[swiper-case="PerView1"]{
     .goodsWrap{
       &:after{
         content:'';
@@ -379,7 +379,7 @@ $moduel:'.module';
       }
     }
   }
-  &[tab-case="type02"]{
+  &[tab-case="list1"]{
     .lst-goods {
       & > li {
         @include width(100%);
@@ -530,15 +530,6 @@ $moduel:'.module';
     }
   }
 }
-
-/* 모달팝업 */
-/*
-.modalPop {
-  &._center {
-    width: auto;
-  }
-}
-*/
 
 /* cropper 모달팝업 */
 .cropModalWrap {
