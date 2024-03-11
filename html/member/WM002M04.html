@@ -31,7 +31,7 @@
             <div class="hgroup split">
               <h4 class="tit dep03">기본정보</h4>
               <div class="col">
-                  <span class="cmt">필수항목</span>
+                  <span class="cmt"><span class="ir req-b"></span>필수항목</span>
               </div>
             </div>
 
@@ -48,16 +48,11 @@
               <label class="field-label tit">이메일</label>
               <div class="field-outline">
                 <div class="field-input grow _input">
-                  <input type="tel" class="_format _number" placeholder="메일아이디" maxlength="3">
+                  <input type="tel" class="_format _number" placeholder="메일아이디">
                 </div>
                 <span class="field-txt">@</span>
-                <div class="field-select grow">
-                  <select class="select-sys" title="메일도메인">
-                    <option>선택해주세요</option>
-                    <option>naver.com</option>
-                    <option>daum.net</option>
-                    <option>gmail.com</option>
-                  </select>
+                <div class="field-input grow _input">
+                  <input type="tel" class="_format _number" placeholder="메일아이디">
                 </div>
               </div>
               <p class="field-msg">
@@ -65,17 +60,21 @@
               </p>
             </div>
 
-            <div class="field-select grow">
-              <select class="select-sys" title="메일도메인">
-                <option>선택해주세요</option>
-                <option>naver.com</option>
-                <option>daum.net</option>
-                <option>gmail.com</option>
-              </select>
+            <div class="field">
+              <div class="field-label tit">메일선택</div>
+              <div class="field-select">
+                <span>선택</span>
+                <ul class="field-select-list" title="메일도메인">
+                  <li>선택</li>
+                  <li>naver.com</li>
+                  <li>daum.com</li>
+                </ul>
+              </div>
+              <div class="btnWrap">
+                <button class="btn btn-size md bg">중복확인</button>
+              </div>
             </div>
-            <div class="btnWrap">
-              <button class="btn btn-size md bg" disabled>기본BTN</button>
-            </div>
+            
 
             <div class="field">
               <label class="field-label">휴대폰번호</label>
@@ -87,7 +86,7 @@
             </div>
 
             <div class="field">
-              <label class="field-label">비밀번호</label>
+              <label class="field-label req-a">비밀번호</label>
               <div class="field-outline">
                 <div class="field-input grow _input">
                   <input type="password" class="_format _password" placeholder="●●●●" maxlength="4">

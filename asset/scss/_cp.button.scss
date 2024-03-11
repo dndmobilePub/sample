@@ -34,6 +34,14 @@
         }
     }
 
+    &.type{
+        &-one{
+            & button{
+                min-width:24rem;
+            }
+        }
+    }
+
 }
 #{$btn} { 
     padding:.5rem 1rem;
@@ -42,7 +50,6 @@
     & ~ .btn {margin-left:.5rem;}
     // SIZE
     &-size {
-        min-width:24rem;
         &.xs {@include btnSize(xs, .3, .7);}
         &.s {@include btnSize(s, .5, 1);}
         &.md {@include btnSize(md, 1, 1);}

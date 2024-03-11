@@ -96,6 +96,23 @@
     }
 }
 
+.req{
+    &-b{
+        &::before{
+            content: "*";
+            color: $color-red2;
+            padding-right: 0.5rem;
+        }
+    }
+    &-a{
+        &::after{
+            content: "*";
+            color: $color-red2;
+            padding-left: 0.5rem;
+        }
+    }
+}
+
 /* text : text 그룹 후 flex*/ 
 .split {
     @include display(flex);
