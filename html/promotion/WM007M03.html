@@ -23,12 +23,12 @@
         <a href="javascript:void(0);" data-type="txt" data-case="bigTxt">텍스트 - 대제목</a>
         <a href="javascript:void(0);" data-type="txt" data-case="smallTxt">텍스트 - 소제목</a>
         <a href="javascript:void(0);" data-type="txt" data-case="bodyTxt">텍스트 - 본문</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="type01">상품 - tab01</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="type02">상품 - tab02</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type01">상품 - swiper01</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type02">상품 - swiper02</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="type03">상품 - swiper03</a>
-<!--         <a href="javascript:void(0);" data-type="group" data-case="groupList">그룹 - List01</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list2">상품 - tab01</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list1">상품 - tab02</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView2">상품 - swiper01</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1.5">상품 - swiper02</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1">상품 - swiper03</a>
+    <!--<a href="javascript:void(0);" data-type="group" data-case="groupList">그룹 - List01</a>
         <a href="javascript:void(0);" data-type="group" data-case="groupList">그룹 - List02</a>
         <a href="javascript:void(0);" data-type="group" data-case="groupSwiper">그룹 - swiper01</a>
         <a href="javascript:void(0);" data-type="group" data-case="groupSwiper">그룹 - swiper02</a> -->
@@ -42,21 +42,6 @@
         <div class="option-wrap" data-type="">
           <h2>상세설정</h2>
           <!-- [S] 상세설정 상품 -->
-          <!-- <div class="option-box" data-type="goods" data-case="goodSwiper">
-            <h3>상품타입</h3>
-            <div class="goods-box-inner">
-              <a href="javascript:void(0);" data-option="type01">정사각형 스와이프<br/>(최대 10개)</a>
-              <a href="javascript:void(0);" data-option="type02">세로형 스와이프<br/>(최대 10개)</a>
-              <a href="javascript:void(0);" data-option="type03">가로형 스와이프<br/>(최대 5개)</a>
-            </div>
-          </div>
-          <div class="option-box" data-type="goods" data-case="goodsTab">
-            <h3>상품타입</h3>
-            <div class="goods-box-inner">
-              <a href="javascript:void(0);">1열 리스트</a>
-              <a href="javascript:void(0);">2열 리스트</a>
-            </div>
-          </div> -->
           <div class="option-box" data-type="goods" data-case="goodsTab">
             <h3>앵커 탭 사용</h3>
             <div class="option-cont">
@@ -75,28 +60,24 @@
               </div>
             </div>
           </div>
-          <!-- [E] 상세설정 상품 -->
-          <!-- [S] 상세설정 텍스트 -->
-          <!-- <div class="option-box txt-box" data-type="txt">
-            <h3>상품타입</h3>
+          <div class="option-box" data-type="goods" data-case="goodsSwiper">
+            <h3 class="option-tit">버튼 사용</h3>
             <div class="option-cont">
               <div class="input-box">
-                <label for="bigTxt"><input type="radio" name="text" id="bigTxt" checked>대제목</label>
-                <label for="smallTxt"><input type="radio" name="text" id="smallTxt">소제목</label>
-                <label for="bodyTxt"><input type="radio" name="text" id="bodyTxt">본문</label>
-                <label for="infoTxt"><input type="radio" name="text" id="infoTxt">유의사항</label>
+                <label for="moreBtnUse"><input type="radio" name="moreBtn" id="moreBtnUse" value="use" checked>사용</label>
+                <label for="moreBtnDisuse"><input type="radio" name="moreBtn" id="moreBtnDisuse" value="disuse">미사용</label>
               </div>
             </div>
-          </div> -->
-          <!-- [E] 상세설정 텍스트 -->
+          </div>
+          <!-- [E] 상세설정 상품 -->
           <!-- [S] 상세설정 이미지 -->
           <div class="option-box" data-type="img" data-case="imgFloat">
-          <h3 class="option-tit">이미지 추가</h3>
-          <div class="option-cont">
-            <a href="#" class="btn shadow imgAdd">이미지 추가</a>
+            <h3 class="option-tit">이미지 추가</h3>
+            <div class="option-cont">
+              <a href="#" class="btn shadow imgAdd">이미지 추가</a>
+            </div>
           </div>
-        </div>
-        <div class="option-box" data-type="img">
+          <div class="option-box" data-type="img">
             <h3 class="option-tit">이미지 대체 텍스트</h3>
             <div class="option-cont field">
               <div class="field-outline">
@@ -107,55 +88,56 @@
             </div>
           </div>
           <div class="option-box" data-type="img" data-case="imgFloat">
-          <h3 class="option-tit">텍스트 위치</h3>
-          <div class="option-cont">
-            <div class="input-box">
-              <label for="leftBottom"><input type="radio" name="location" id="leftBottom" value="leftBottom" checked>좌측 하단</label>
-              <label for="center"><input type="radio" name="location" id="center" value="center">센터</label>
-            </div>
-          </div>
-        </div>
-        <div class="option-box" data-type="img" data-case="imgFloat">
-          <h3 class="option-tit">그라데이션 높이</h3>
-          <div class="option-cont field">
-            <div class="field-outline">
-              <div class="field-input grow _input">
-                <input type="text" placeholder="그라데이션 높이 입력" title="" class="txtBgHeight">
+            <h3 class="option-tit">텍스트 위치</h3>
+            <div class="option-cont">
+              <div class="input-box">
+                <label for="leftBottom"><input type="radio" name="location" id="leftBottom" value="leftBottom" checked>좌측 하단</label>
+                <label for="center"><input type="radio" name="location" id="center" value="center">센터</label>
               </div>
             </div>
           </div>
-        </div>
-        <div class="option-box" data-type="img" data-case="imgFloat">
-          <h3 class="option-tit">그라데이션 색상</h3>
-          <div class="option-cont">
-            <input type="color" class="txtBgColor">
-          </div>
-        </div>
-        <div class="option-box" data-type="img">
-          <h3 class="option-tit">링크 URL</h3>
-          <div class="option-cont field">
-            <div class="field-outline">
-              <div class="field-input grow _input">
-                <input type="text" placeholder="링크 URL 입력" title="">
+          <div class="option-box" data-type="img" data-case="imgFloat">
+            <h3 class="option-tit">그라데이션 높이</h3>
+            <div class="option-cont field">
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="text" placeholder="그라데이션 높이 입력" title="" class="txtBgHeight">
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- [E] 상세설정 이미지 -->
+          <div class="option-box" data-type="img" data-case="imgFloat">
+            <h3 class="option-tit">그라데이션 색상</h3>
+            <div class="option-cont">
+              <input type="color" class="txtBgColor">
+            </div>
+          </div>
+          <div class="option-box" data-type="img">
+            <h3 class="option-tit">링크 URL</h3>
+            <div class="option-cont field">
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="text" placeholder="링크 URL 입력" title="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [E] 상세설정 이미지 -->
           
-        <!-- [S] 상세설정 공백 -->
-        <div class="option-box" data-type="gap">
-          <h3 class="option-tit">공백 높이</h3>
-          <div class="option-cont field">
-            <div class="field-outline">
-              <div class="field-input grow _input">
-                <input type="text" placeholder="공백 높이 입력" title="" class="gap-height" value=""><button type="button" class="field-btn _input-clear _active"><span class="hide">입력값삭제</span></button>
+          <!-- [S] 상세설정 공백 -->
+          <div class="option-box" data-type="gap">
+            <h3 class="option-tit">공백 높이</h3>
+            <div class="option-cont field">
+              <div class="field-outline">
+                <div class="field-input grow _input">
+                  <input type="text" placeholder="공백 높이 입력" title="" class="gap-height" value=""><button type="button" class="field-btn _input-clear _active"><span class="hide">입력값삭제</span></button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- [E] 상세설정 공백 -->
-        <!-- [S] 상세설정 공통 -->
+          <!-- [E] 상세설정 공백 -->
+          
+          <!-- [S] 상세설정 공통 -->
           <div class="option-box">
             <h3 class="option-tit">배경색상</h3>
             <div class="option-cont">
@@ -255,7 +237,7 @@
             <!--// [E] 이미지 컨텐츠 -->    
     
             <!-- [S] 상품 컨텐츠 TYPE2 -->
-            <div class="md md-goods" data-type="goods" data-case="goodsTab" data-module="anchorTab" tab-case="type01">
+            <div class="md md-goods" data-type="goods" data-case="goodsTab" data-module="anchorTab" tab-case="list1">
               <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
                 <div class="tab-list-wrap">
                   <ul class="tab-list">
@@ -322,7 +304,7 @@
             <!--// [E] 상품 컨텐츠 TYPE2-->
             
             <!-- [S] 상품 컨텐츠 TYPE1 -->
-            <div class="md md-goods" data-type="goods" data-case="goodsSwiper" data-module="goodsSwiper" swiper-case="type01">
+            <div class="md md-goods" data-type="goods" data-case="goodsSwiper" data-module="goodsSwiper" swiper-case="PerView2">
               <div class="txtEdit">
                 <h1 contenteditable="true" class="fontBold">대제목</h1>
               </div>
@@ -354,6 +336,7 @@
                       </dd>
                     </dl>
                   </div>
+                  <div class="moreBtn">더보기</div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>

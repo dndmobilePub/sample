@@ -2078,20 +2078,20 @@ var COMPONENT_UI = (function (cp, $) {
             $(swiperContainer).each(function() {
                 var slidesCount = $(this).find('.swiper-slide').length;
                 var slidesPerView = slidesCount > 1 ? 2 : 1; 
-                var loopEnabled = slidesPerView > 1 && slidesCount >= 3;
-                var loopOption = loopEnabled ? true : false;
+                // var loopEnabled = slidesPerView > 1 && slidesCount >= 3;
+                // var loopOption = loopEnabled ? true : false;
                 var swiperCase = $(this).parents('.md').attr('swiper-case');
             
-                if (swiperCase === 'type01') {
+                if (swiperCase === 'PerView2') {
                     slidesPerView = 2;
-                } else if (swiperCase === 'type02') {
+                } else if (swiperCase === 'PerView1.5') {
                     slidesPerView = 1.5;
-                } else if (swiperCase === 'type03') {
+                } else if (swiperCase === 'PerView1') {
                     slidesPerView = 1;
                 }
 
                 new Swiper(this, {
-                    loop: loopOption,
+                    loop: false,
                     slidesPerView: slidesPerView,  
                     spaceBetween: 10, 
                     autoplay: true,
@@ -2103,10 +2103,8 @@ var COMPONENT_UI = (function (cp, $) {
                         prevEl: '.swiper-button-prev',
                     },
                 });
-                console.log('dd');
             });
             
-
         }, 
 
         resetSwipers: function() {

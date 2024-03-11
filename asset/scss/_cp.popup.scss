@@ -41,7 +41,7 @@
     &._center {
         @include pos-offset-l(50%, 50%, fixed);
         // transform: translate(-50%, -50%);
-        width:80%;
+        width:auto;
 
         &._scroll {
             .modal-container {@include overflow(y, auto); max-height:80%;}
