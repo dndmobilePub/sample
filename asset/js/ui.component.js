@@ -1746,7 +1746,7 @@ var COMPONENT_UI = (function (cp, $) {
                 $('.option-box').hide();
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
-                $('.moduel-wrap').addClass('_right');
+                $('.module-wrap').addClass('_right');
                 $('.gap-height').val(mdHeight);
                 $('.txtBgHeight').val(grHeight);
                 
@@ -1767,7 +1767,7 @@ var COMPONENT_UI = (function (cp, $) {
                 const $optionWrap = $('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
                 $optionWrap.attr('data-type','').removeClass('show');
-                $('.moduel-wrap').removeClass('_right');
+                $('.module-wrap').removeClass('_right');
                 cp.colorEdit.resetImgColor();
                 $('.md').removeClass('_is-active');
             };

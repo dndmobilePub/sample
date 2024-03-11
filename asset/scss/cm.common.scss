@@ -84,8 +84,8 @@ $moduel:'.module';
     transition: all .15s ease;
 
     &._right {
-      @include width(70%);
-      margin-left: 30%;
+      width: calc(100% - 40rem);
+      margin-left: 40rem;
     }
   }
 
@@ -280,8 +280,8 @@ $moduel:'.module';
 .option {
   &-wrap {
     overflow-y: auto;
-    @include pos(fixed) {left: -31%;top: 0;}
-    width: 30%; min-width:30rem;
+    @include pos(fixed) {left: -40rem;top: 0;}
+    width: 40rem;
     @include height(calc(100vh - 7rem));
     padding: 2rem;
     @include line(border, 1px solid $color-gray4) {border-bottom:0;}
