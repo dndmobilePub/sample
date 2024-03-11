@@ -33,6 +33,7 @@
             &:focus {z-index:-1;} // shadow 효과가 있을때만 적용
         }
     }
+
 }
 #{$btn} { 
     padding:.5rem 1rem;
@@ -41,6 +42,7 @@
     & ~ .btn {margin-left:.5rem;}
     // SIZE
     &-size {
+        min-width:24rem;
         &.xs {@include btnSize(xs, .3, .7);}
         &.s {@include btnSize(s, .5, 1);}
         &.md {@include btnSize(md, 1, 1);}

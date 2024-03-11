@@ -6,7 +6,9 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../../asset/css/cm.member.css">
     <script type="text/javascript" src="../../asset/js/plugin/lib.jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="./../../asset/js/plugin/lib.jquery-ui.min.js"></script>
     <script type="text/javascript" src="../../asset/js/plugin/pg.spectrum.js"></script>
+    <script type="text/javascript" src="./../asset/js/ui.component.js"></script>
 </head>
 <body>
     <div class="wrap member">
@@ -24,17 +26,17 @@
               </div>
             </div>
 
-            <h2 class="tit dep02">회원정보입력</h2>
+            <h3 class="tit dep01 center">회원정보입력</h3>
 
             <div class="hgroup split">
-              <h2 class="tit dep03">2depth + 기준텍스트</h2>
+              <h4 class="tit dep03">기본정보</h4>
               <div class="col">
-                  <span class="cmt">(단위 : 천원)</span>
+                  <span class="cmt">필수항목</span>
               </div>
             </div>
 
             <div class="field">
-              <label class="field-label">이름</label>
+              <label class="field-label tit">이름</label>
               <div class="field-outline disabled">
                 <div class="field-input grow _input">
                   <input type="text" placeholder="disabled" disabled="disabled">
@@ -43,7 +45,7 @@
             </div>
 
             <div class="field">
-              <label class="field-label">이메일</label>
+              <label class="field-label tit">이메일</label>
               <div class="field-outline">
                 <div class="field-input grow _input">
                   <input type="tel" class="_format _number" placeholder="메일아이디" maxlength="3">
@@ -149,6 +151,5 @@
         </div>    
         <footer class="footer mb"></footer>
     </div>
-    <script type="text/javascript" src="./../asset/js/ui.component.js"></script>
 </body>
 </html>

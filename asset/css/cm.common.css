@@ -47,6 +47,7 @@ body {
   -webkit-text-size-adjust: none;
   font-size: var(--space-ms);
   word-break: keep-all;
+  line-height: 1.4;
 }
 
 @media screen and (max-width: 1260px) {
@@ -835,21 +836,24 @@ legend, caption {
   padding: 0.5rem 0;
 }
 .tit.dep01 {
-  font-size: 2.2rem;
+  font-size: 3.2rem;
 }
 .tit.dep02 {
-  font-size: 1.8rem;
-}
-.tit.dep02.type2 {
-  color: #0048ff;
+  font-size: 2rem;
 }
 .tit.dep03 {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+}
+.tit.dep03.type2 {
+  color: #0048ff;
 }
 .tit.dep04 {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
 }
 .tit.dep05 {
+  font-size: 1.3rem;
+}
+.tit.dep06 {
   font-size: 1.2rem;
 }
 .tit.sub {
@@ -863,6 +867,9 @@ legend, caption {
   font-size: 1.4rem;
   font-family: "NotoSansKR";
   font-weight: 400;
+}
+.tit.center {
+  text-align: center !important;
 }
 
 .txt {
@@ -1122,6 +1129,41 @@ legend, caption {
   background-color: #000;
 }
 
+/* text : text 그룹 후 flex*/
+.split {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.split.hgroup > .tit {
+  vertical-align: middle;
+}
+.split.hgroup > .col {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 30%;
+          flex: 1 0 30%;
+  text-align: right !important;
+  vertical-align: middle;
+}
+.split.col2 > * {
+  width: 50%;
+}
+.split.col2 > .cp-tit + .btnWrap {
+  min-width: 70%;
+}
+
 .btnWrap.split.col2 {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -1189,6 +1231,9 @@ legend, caption {
 .btn ~ .btn {
   margin-left: 0.5rem;
 }
+.btn-size {
+  min-width: 24rem;
+}
 .btn-size.xs {
   padding: 0.3rem 0.7rem;
   font-size: 0.9rem;
@@ -1211,8 +1256,8 @@ legend, caption {
 }
 .btn.bg {
   border-radius: 0.3rem;
-  border: 1px #5C5C5C solid;
-  background: #5C5C5C;
+  border: 1px #000 solid;
+  background: #000;
   color: #fff;
 }
 .btn.bg:not(.disabled):not([disabled]):not([aria-disabled=disabled]):focus {
@@ -1332,8 +1377,8 @@ legend, caption {
 }
 .btn.round {
   border-radius: 0.3rem;
-  border: 1px #5C5C5C solid;
-  background: #5C5C5C;
+  border: 1px #000 solid;
+  background: #000;
   color: #fff;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -1380,8 +1425,8 @@ legend, caption {
 }
 .btn.shadow {
   border-radius: 0.3rem;
-  border: 1px #5C5C5C solid;
-  background: #5C5C5C;
+  border: 1px #000 solid;
+  background: #000;
   color: #fff;
   -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.05);
           box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.05);
@@ -1844,7 +1889,7 @@ legend, caption {
   position: absolute;
   top: -0.5rem;
   left: 1rem;
-  z-index: 0;
+  z-index: 1;
   color: #5C5C5C;
   font-size: var(--space-md);
   margin: 0;
@@ -3308,6 +3353,9 @@ legend, caption {
   border-width: 0 0 0.1rem 0;
   white-space: nowrap;
 }
+.tab-list-wrap.tab-expand {
+  margin-bottom: 6.4rem;
+}
 .tab-list-wrap.tab-expand .tab-list {
   width: 100%;
 }
@@ -3393,12 +3441,14 @@ legend, caption {
 .tab-list .tab a {
   display: block;
   padding: 1rem;
+  font-size: 1.6rem;
+  color: #7a7a7a;
 }
 .tab-list .tab:hover a {
-  color: #4b90df;
+  color: #000;
 }
 .tab-list .tab._is-active a {
-  color: #4b90df;
+  color: #000;
 }
 .tab-list .tab._is-active a::before {
   content: "";
@@ -3407,7 +3457,7 @@ legend, caption {
   bottom: 0;
   width: 0;
   height: 0.2rem;
-  background-color: #4b90df;
+  background-color: #000;
   -webkit-animation: widthAct 0.3s linear forwards;
           animation: widthAct 0.3s linear forwards;
 }
@@ -3718,16 +3768,24 @@ legend, caption {
 }
 .tblWrap table {
   width: 100%;
+  margin-top: 1.7rem;
 }
 .tblWrap table + table {
   margin-top: 2rem;
 }
+.tblWrap table tr {
+  border-top: 0.1rem #EBEBEB solid;
+}
+.tblWrap table tr:last-child {
+  border-bottom: 0.1rem #EBEBEB solid;
+}
 .tblWrap table th, .tblWrap table td {
-  padding: 1rem;
-  border: 0.1rem #aaa solid;
+  padding: 2.4rem 2.4rem 2.2rem 2.4rem;
+  text-align: left !important;
 }
 .tblWrap table th {
-  border-color: #666;
+  border-color: #EBEBEB;
+  font-size: 1.6rem;
 }
 .tblWrap table thead th {
   background: #d9e4fa;
@@ -3736,7 +3794,14 @@ legend, caption {
   border-top: none;
 }
 .tblWrap table tbody th {
-  background: #fff4ce;
+  background: #FAFAFA;
+}
+.tblWrap table tbody td {
+  font-size: 1.5rem;
+  color: #000;
+}
+.tblWrap + .tblWrap {
+  margin-top: 5.6rem;
 }
 
 .modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap, .swiper-pagination, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after {
@@ -3933,7 +3998,8 @@ legend, caption {
 }
 
 .btnWrap {
-  margin: 1rem;
+  margin-top: 6rem;
+  text-align: center !important;
 }
 .btn-modal {
   background: #333;

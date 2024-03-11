@@ -1,16 +1,21 @@
 #{$tit} { 
     padding:.5rem 0;
-    &.dep01 {@include fontSize("xxl");}
-    &.dep02 {
+    &.dep01 {@include fontSize(3.2rem);}
+    &.dep02 {@include fontSize("xl");}
+    &.dep03 {
         @include fontSize("lg");
         &.type2 {color:$color-blue2;}
     }
-    &.dep03 {@include fontSize("md");}
-    &.dep04 {@include fontSize("s");}
-    &.dep05 {@include fontSize("xs");}
+    &.dep04 {@include fontSize("md");}
+    &.dep05 {@include fontSize("s");}
+    &.dep06 {@include fontSize("xs");}
 
     &.sub {padding:0; @include fontSize("s"); @include webfont('NotoSansKR', 400);}
     & > .headcopy {margin-top:1.5rem; @include fontSize("base"); @include webfont('NotoSansKR', 400);}
+
+    &.center{
+        @include align(text, center);
+    }
     
 }
 
@@ -88,5 +93,21 @@
     margin-top: 10px; margin-left: 5px; font-weight: 100; font-size: 13px;
     > li {position: relative; margin: 2px 0 0 0; padding: 0 0 4px 13px; color: #000;
         &::before {content: ""; position: absolute; top: 9px; left: 5px; width: 3px; height: 3px; border-radius: 50%; background-color: #000;}
+    }
+}
+
+/* text : text 그룹 후 flex*/ 
+.split {
+    @include display(flex);
+    @include flex(row, nowrap, space-between, center);
+    
+    &.hgroup {
+        & > .tit {vertical-align: middle;}
+        & > .col {@include flexbox(1, 0, 30%); @include align("text", right); vertical-align: middle;}
+    }
+    
+    &.col2 {
+        & > * {width:50%;}
+        & > .cp-tit + .btnWrap {min-width:70%;}
     }
 }

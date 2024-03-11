@@ -10,6 +10,7 @@
 
 		&#{$tab} {
 			&-expand {
+				margin-bottom: 6.4rem;
 				.tab-list {
 					@include width(100%);
 			
@@ -69,21 +70,23 @@
 			a {
 				@include display(block);
 				padding: 1rem;
+				@include fontSize(md);
+				color: $color-gray10;
 			}
 
 			&:hover a {
-				color: $color-blue;
+				color: $color-black;
 			}
 
 			&#{$isActive} a {
-				color: $color-blue;
+				color: $color-black;
 
 				@include el-content(before) {
 					@include pos(absolute);
 					bottom: 0;
 					@include width(0);
 					@include height(0.2rem);
-					background-color: $color-blue;
+					background-color: $color-black;
 					animation: widthAct .3s linear forwards;
 				}
 			}

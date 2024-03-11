@@ -2,25 +2,43 @@
 #{$tbl} {
   &Wrap {
     & > p:first-child {margin-top:0;}
-    p {margin:4rem 0 1rem;}
-    table {
+    & p {margin:4rem 0 1rem;}
+    & table {
         @include width;
-        & + table {margin-top:2rem;}
+        margin-top:1.7rem;
+        & + table {margin-top:2rem;} 
 
-        th, td {padding:1rem; @include line(border, .1rem $color-gray5 solid);}
-        th {border-color:$color-gray3;}
+        & tr{
+          @include line(border, .1rem $color-gray11 solid, top);
+          &:last-child{
+            @include line(border, .1rem $color-gray11 solid, bottom);
+          }
+        }
 
-        thead {
-          th {background:$color-light-blue2;}
+        & th,& td {
+          padding:2.4rem 2.4rem 2.2rem 2.4rem;
+          @include align(text,left);
+        }
+        
+        & th {border-color:$color-gray11; @include fontSize('md');}
+
+        & thead {
+          & th {background:$color-light-blue2;}
           & + tbody {
               & > tr:first-child th, & > tr:first-child td {@include line(border, none, top)}
           }
         }
-        tbody {
-            th {background:$color-light-yellow1;}
+
+        & tbody {
+            & th {background:$color-gray12;}
+            & td {@include fontSize(1.5rem); color: $color-black;}
         }    
     }
-  
+    & + #{$tbl}{
+      &Wrap{
+        margin-top:5.6rem;
+      }
+    }
   }
 }
 

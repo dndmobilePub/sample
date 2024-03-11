@@ -11,6 +11,7 @@ body{
     -webkit-text-size-adjust:none;
     font-size:var(--space-ms);
     word-break:keep-all;
+    line-height: 1.4;
 }
 
 @media screen and (max-width: 1260px) {

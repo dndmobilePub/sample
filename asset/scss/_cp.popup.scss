@@ -135,7 +135,7 @@
 }
 
 .btn {
-    &Wrap {margin:1rem;}
+    &Wrap {margin-top:6rem; @include align(text, center);}
     &-modal {
         background:#333;
         padding:.5rem 1rem;

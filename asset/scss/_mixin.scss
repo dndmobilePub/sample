@@ -287,8 +287,8 @@
         }
         @content;
     } @else if ($type == "bg"){ 
-        border:1px $color-gray2 solid;       
-        background:$color-gray2;
+        border:1px $color-black solid;       
+        background:$color-black;
         color:$color-white;
         &:not(.disabled):not([disabled]):not([aria-disabled="disabled"]):hover {            
             background:$color-gray4; 
@@ -357,6 +357,9 @@
             border-bottom: $argument;
         } @else if($direction == "right"){
             border-right: $argument;
+        } @else if($direction == "both"){
+            border-left: $argument;
+            border-right: $argument;
         }
     } @else if($attribute == "outline"){
         @if($direction == "all"){
@@ -368,6 +371,9 @@
         } @else if($direction == "bottom"){
             outline-bottom: $argument;
         } @else if($direction == "right"){
+            outline-right: $argument;
+        } @else if($direction == "both"){
+            outline-left: $argument;
             outline-right: $argument;
         }
     }

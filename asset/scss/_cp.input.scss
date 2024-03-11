@@ -33,7 +33,7 @@
     &-label {
         @include display(block); margin-bottom: 1rem;
         &.tit {
-            @include pos-offset-l(-.5rem, 1rem) {z-index:0}
+            @include pos-offset-l(-.5rem, 1rem) {z-index:1;}
             color:$color-gray2; font-size:var(--space-md);
             margin:0; padding:0 .5rem;
             @include el-content(before) {
