@@ -132,3 +132,22 @@ $fontUrl:'/asset/font/';
   url($fontUrl + '/hdcard/YouandiNewKrTitle-ExtraBold.woff') format('woff'),
   url($fontUrl + '/hdcard/YouandiNewKrTitle-ExtraBold.svg') format('svg');
 }
+@font-face {
+  font-family: 'iconFont';
+  font-style: normal;
+  font-weight: 900;
+  font-display: auto;
+  src: url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.eot");
+  src: url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.woff2") format("woff2"), url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.woff") format("woff"), url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.ttf") format("truetype"), url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.svg#fontawesome") format("svg"); 
+}
+
+.fa,
+.fas {
+  font-family: 'iconFont';
+  font-weight: 900; }
+
+@font-face {
+  font-family: 'iconFont';
+  font-display: block;
+  src: url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.woff2") format("woff2"), url("../../guide/com/font/iconfont/fontawesome/fa-solid-900.ttf") format("truetype"); 
+}
