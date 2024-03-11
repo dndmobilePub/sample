@@ -76,160 +76,61 @@ label {
   }
 }
 
-
-
 /* 모듈 추가 박스 */
-.module-add-box {
-  @include pos-offset-b(10%, auto, fixed){right:2%; z-index: 1000;}
-  min-width:15rem;
-  background:$color-gray2;
-
-  .btnWrap {
-    padding:.5rem;
-    & > a {
-      @include display(block);
-      padding:.5rem 1rem;
-      color:$color-gray6; text-decoration:none;
-      background:$color-gray3;
-      @include line(border, 1px solid $color-gray4);
-      font-size:var(--space-ms);
-      border-radius: .3rem;
-  
-      & ~ a {margin-top:.5rem;}
-      &:hover {
-        color:$color-gray1;
-        font-weight:bold;
-        background:$color-white;
-      }
-    }
-  }
-}
-
-.container {
-  // @include display(flex);
-  // flex-direction: column;  
-
-  .moduleWrap {
-    @include display(flex);
-    @include height(calc(100% - 10rem));
-    padding-bottom: 10rem;
-  }
-
-  .footer-btnWrap {
-    z-index:101;
-    @include pos-offset-b(0,0,fixed);
-    width:100%; height:7rem;
-    min-width:80rem;
-    background:#ddd;
-    & > .btnWrap {
-      @include display(flex);
-      justify-content: flex-end;
-      & > .btn {
-        &:first-child{margin-right:calc(100% - 46rem);}
-        min-width:15rem; @include align(text, center);
-      }
-    }
-  }
-
-  /* 상세설정 */
-  .option {
-    &-wrap {
-      overflow-y: auto;
-      @include pos(fixed) {left: -31%;top: 0;}
-      width: 30%; min-width:30rem;
-      // height: 100vh;
-      @include height(calc(100vh - 7rem));
-      padding: 2rem;
-      @include line(border, 1px solid $color-gray4) {border-bottom:0;}
-      background-color: $color-white;
-      transition: left .15s ease;
-
-      .ico-pop-close {
-        @include pos-offset-r(2rem, 2rem);
-      }
-
-      &.show {
-        left: 0;
-      }
-    }
-    &-box {
-      @include display(block);
-      margin-top: 4rem;
-
-      &.goods-box{
-        .goods-box-inner{
-          @include display(flex);
-          flex-wrap: wrap;
-          gap:1.6rem;
-
-          a{
-            @include display(block);
-            padding: 1.65rem;
-            width: calc((100% - 3.2rem)/3);
-            @include line(border, 1px solid $color-black);
-            border-radius: 1.4rem;
-            font-size: 1.2rem;
-            text-align: center;
-          }
-        }
-      }
-    }
-    &-tit {
-      @include display(block);
-      min-width: 7rem;
-      margin-right: 1.5rem;
-      vertical-align: top;
-    }
-    &-cont {
-      margin-top: 1rem;
-      
-      &.type-select-wrap {
-        @include display(flex);
-        @include flex($al-items:stretch) {gap: 1rem};
-      }
-
-      .type-select {
-        @include display(flex);
-        @include flex($j-content:center);
-        flex-grow: 1;
-        padding: 1rem;
-        @include line(border, 1px solid $color-gray4);
-        border-radius: 1rem;
-        text-align: center;
-      }
-
-      .input-box, .color-selbox {
-        @include display(flex);
-        @include flex($j-content:space-around) {gap: 1rem};
-      }
-    }
-  }
-
-  /* 모듈 */
-  .moduel-wrap {
-    width: 100%;
+$moduel:'.module';
+#{$moduel} {
+  &-wrap {
+    @include width;
     transition: all .15s ease;
 
     &._right {
-      width: 70%;
-      margin-left: 30%;
+      width: calc(100% - 40rem);
+      margin-left: 40rem;
     }
   }
-  .module-edit {
+
+  &-add-box {
+    @include pos-offset-b(10%, auto, fixed){right:2%; z-index: 1000;}
+    min-width:15rem;
+    background:$color-gray2;
+
+    .btnWrap {
+      padding:.5rem;
+      & > a {
+        @include display(block);
+        padding:.5rem 1rem;
+        color:$color-gray6; text-decoration:none;
+        background:$color-gray3;
+        @include line(border, 1px solid $color-gray4);
+        font-size:var(--space-ms);
+        border-radius: .3rem;
+    
+        & ~ a {margin-top:.5rem;}
+        &:hover {
+          color:$color-gray1;
+          font-weight:bold;
+          background:$color-white;
+        }
+      }
+    }
+  }
+
+  &-option {
+    .btn {min-width:initial;}
+  }
+  
+  &-edit {
     @include line(border, 1px solid $color-gray8);
     max-width:var(--section); 
     width: 100%;
     margin:2rem auto;
     background: $color-gray6;
-
     
     .md {
       position: relative;
       @include line(outline, .3rem dashed transparent);
       background:$color-white;
-      // min-height:10rem;
       cursor: pointer;
-      // & ~ .md {margin-top: 1.5rem;}
 
       &.md-gap {
         min-height: 0;
@@ -302,29 +203,29 @@ label {
           @include display(flex);
           @include flex($direction:column,  $j-content:flex-end);
           @include pos-offset-l(0,0) {z-index: 1;};
-          width: 100%;
-          height: 100%;
+          @include el-size(100%, 100%);
 
           &.center {
-            @include flex($direction:column,  $j-content:center);
-            text-align: center;
+            @include flex($direction:column, $j-content:center);
+            @include align(text, center);
           }
+
           &.leftBottom {
-            @include flex($direction:column,  $j-content:flex-end, $al-items:flex-start);
-            text-align: left;
+            @include flex($direction:column, $j-content:flex-end, $al-items:flex-start);
+            @include align(text, left);
           }
 
           &Bg {
             @include pos(absolute) {bottom: 0; left: 0; z-index: -1;};
-            width: 100%; height: 30%;
-            background: linear-gradient(to top, #ccc, transparent);
+            @include el-size(100%, 30%);
+            background: linear-gradient(to top, $color-gray8, transparent);
           }
 
           .imgWrap {
-            overflow: hidden;
+            @include overflow(both, hidden);
             max-width: 12.6rem; max-height: 8rem;
             &.no-img {
-              border: 1px solid red;
+              @include line(border, 1px solid $color-pk);
             }
           }
         }
@@ -333,7 +234,7 @@ label {
       [contenteditable=true] {
         @include pos(relative);
         cursor: text;
-        outline: 0;
+        @include line(outline, 0);
       }
 
       .box-pd {
@@ -348,8 +249,105 @@ label {
         color: #856404;
       } */
     }
+  }  
+
+  &Wrap {
+    @include display(flex);
+    @include height(calc(100% - 10rem));
+    padding-bottom: 10rem;
+
+    & + .footer-btnWrap {
+      z-index:101;
+      @include pos-offset-b(0,0,fixed);
+      @include el-size(100%, auto);
+      min-width:80rem;
+      background:$color-gray6;
+      & > .btnWrap {
+        margin-top:0; padding:1.5rem;
+        @include display(flex);
+        justify-content: flex-end;
+        & > .btn {
+          &:first-child{margin-right:calc(100% - 46rem);}
+          min-width:15rem; @include align(text, center);
+        }
+      }
+    }
   }
 }
+
+
+/* 상세설정 */
+.option {
+  &-wrap {
+    overflow-y: auto;
+    @include pos(fixed) {left: -40rem;top: 0;}
+    width: 40rem;
+    @include height(calc(100vh - 7rem));
+    padding: 2rem;
+    @include line(border, 1px solid $color-gray4) {border-bottom:0;}
+    background-color: $color-white;
+    transition: left .15s ease;
+
+    .ico-pop-close {
+      @include pos-offset-r(2rem, 2rem);
+    }
+
+    &.show {
+      left: 0;
+    }
+  }
+  &-box {
+    @include display(block);
+    margin-top: 4rem;
+
+    &.goods-box{
+      .goods-box-inner{
+        @include display(flex);
+        flex-wrap: wrap;
+        gap:1.6rem;
+
+        a{
+          @include display(block);
+          padding: 1.65rem;
+          width: calc((100% - 3.2rem)/3);
+          @include line(border, 1px solid $color-black);
+          border-radius: 1.4rem;
+          font-size: 1.2rem;
+          @include align(text, center);
+        }
+      }
+    }
+  }
+  &-tit {
+    @include display(block);
+    min-width: 7rem;
+    margin-right: 1.5rem;
+    @include align(valign, top);
+  }
+  &-cont {
+    margin-top: 1rem;
+    
+    &.type-select-wrap {
+      @include display(flex);
+      @include flex($al-items:stretch) {gap: 1rem};
+    }
+
+    .type-select {
+      @include display(flex);
+      @include flex($j-content:center) {flex-grow: 1;}
+      padding: 1rem;
+      @include line(border, 1px solid $color-gray4);
+      border-radius: 1rem;
+      @include align(text, center);
+    }
+
+    .input-box, .color-selbox {
+      @include display(flex);
+      @include flex($j-content:space-around) {gap: 1rem};
+    }
+  }
+}
+  
 
 [data-type="goods"] {
   & > .btnWrap {margin:0; padding:1.5rem 1rem;}
@@ -417,9 +415,9 @@ label {
   }
 }
 .img-container{
-  text-align: center;
+  @include align(text, center);
   img {
-    width: 100%;
+    @include width;
   }
 }
 .no-img {
@@ -427,7 +425,7 @@ label {
   @include flex($direction:column, $j-content:center);
   height: 16.3rem;
   background: $color-light-gray5;
-  text-align:center;
+  @include align(text, center);
 
   @include el-content(before){
     /* background:svgIconForm(no-img, 666); */
@@ -534,11 +532,13 @@ label {
 }
 
 /* 모달팝업 */
+/*
 .modalPop {
   &._center {
     width: auto;
   }
 }
+*/
 
 /* cropper 모달팝업 */
 .cropModalWrap {

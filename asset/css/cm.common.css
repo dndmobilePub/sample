@@ -405,63 +405,63 @@ legend, caption {
 /* WEB FONT */
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-thin-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-thin-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-thin-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-thin-webfont.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-extralight-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-extralight-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-extralight-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-extralight-webfont.woff") format("woff");
   font-weight: 200;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-light-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-light-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-light-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-light-webfont.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-regular-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-regular-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-regular-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-regular-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-medium-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-medium-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-medium-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-medium-webfont.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-semibold-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-semibold-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-semibold-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-semibold-webfont.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-bold-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-bold-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-bold-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-bold-webfont.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-extrabold-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-extrabold-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-extrabold-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-extrabold-webfont.woff") format("woff");
   font-weight: 800;
   font-style: normal;
   font-stretch: expanded;
 }
 @font-face {
   font-family: "gothic_a1";
-  src: url("/asset/font//webfonts/gothica1-black-webfont.woff2") format("woff2"), url("/asset/font//webfonts/gothica1-black-webfont.woff") format("woff");
+  src: url("../font/webfonts/gothica1-black-webfont.woff2") format("woff2"), url("../font/webfonts/gothica1-black-webfont.woff") format("woff");
   font-weight: 900;
   font-style: normal;
   font-stretch: expanded;
@@ -472,54 +472,54 @@ legend, caption {
   font-family: "YouandModern";
   font-style: normal;
   font-weight: 400;
-  src: url("/asset/font//hdcard/Youandi_Modern_TextRegular.eot");
-  src: url("/asset/font//hdcard/Youandi_Modern_TextRegular.eot?#iefix") format("embedded-opentype");
-  src: url("/asset/font//hdcard/Youandi_Modern_TextRegular.woff") format("woff");
+  src: url("../font/hdcard/Youandi_Modern_TextRegular.eot");
+  src: url("../font/hdcard/Youandi_Modern_TextRegular.eot?#iefix") format("embedded-opentype");
+  src: url("../font/hdcard/Youandi_Modern_TextRegular.woff") format("woff");
 }
 @font-face {
   font-family: "YouandModern";
   font-style: normal;
   font-weight: 700;
-  src: url("/asset/font//hdcard/Youandi_Modern_TextBold.eot");
+  src: url("../font/hdcard/Youandi_Modern_TextBold.eot");
   src: url("/asset/Youandi_Modern_TextBold.eot?#iefix") format("embedded-opentype");
-  src: url("/asset/font//hdcard/Youandi_Modern_TextBold.woff") format("woff");
+  src: url("../font/hdcard/Youandi_Modern_TextBold.woff") format("woff");
 }
 @font-face {
   font-family: "YouandModern";
   font-style: normal;
   font-weight: 800;
-  src: url("/asset/font//hdcard/Youandi_Modern_HeadExtraBold.eot");
-  src: url("/asset/font//hdcard/Youandi_Modern_HeadExtraBold.eot?#iefix") format("embedded-opentype");
-  src: url("/asset/font//hdcard/Youandi_Modern_HeadExtraBold.woff") format("woff");
+  src: url("../font/hdcard/Youandi_Modern_HeadExtraBold.eot");
+  src: url("../font/hdcard/Youandi_Modern_HeadExtraBold.eot?#iefix") format("embedded-opentype");
+  src: url("../font/hdcard/Youandi_Modern_HeadExtraBold.woff") format("woff");
 }
 /* YouAndiNewKr */
 @font-face {
   font-family: "YouandiNewKr";
   font-style: normal;
   font-weight: 300;
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-Light.eot"); /* IE9 Compat Modes */
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-Light.eot?#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-Light.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-Light.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-Light.svg") format("svg");
+  src: url("../font/hdcard/YouandiNewKrTitle-Light.eot"); /* IE9 Compat Modes */
+  src: url("../font/hdcard/YouandiNewKrTitle-Light.eot?#iefix") format("embedded-opentype"), url("../font/hdcard/YouandiNewKrTitle-Light.woff2") format("woff2"), url("../font/hdcard/YouandiNewKrTitle-Light.woff") format("woff"), url("../font/hdcard/YouandiNewKrTitle-Light.svg") format("svg");
 }
 @font-face {
   font-family: "YouandiNewKr";
   font-style: normal;
   font-weight: 400;
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-Regular.eot");
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-Regular.eot#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-Regular.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-Regular.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-Regular.svg") format("svg");
+  src: url("../font/hdcard/YouandiNewKrTitle-Regular.eot");
+  src: url("../font/hdcard/YouandiNewKrTitle-Regular.eot#iefix") format("embedded-opentype"), url("../font/hdcard/YouandiNewKrTitle-Regular.woff2") format("woff2"), url("../font/hdcard/YouandiNewKrTitle-Regular.woff") format("woff"), url("../font/hdcard/YouandiNewKrTitle-Regular.svg") format("svg");
 }
 @font-face {
   font-family: "YouandiNewKr";
   font-style: normal;
   font-weight: 700;
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-Bold.eot");
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-Bold.eot#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-Bold.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-Bold.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-Bold.svg") format("svg");
+  src: url("../font/hdcard/YouandiNewKrTitle-Bold.eot");
+  src: url("../font/hdcard/YouandiNewKrTitle-Bold.eot#iefix") format("embedded-opentype"), url("../font/hdcard/YouandiNewKrTitle-Bold.woff2") format("woff2"), url("../font/hdcard/YouandiNewKrTitle-Bold.woff") format("woff"), url("../font/hdcard/YouandiNewKrTitle-Bold.svg") format("svg");
 }
 @font-face {
   font-family: "YouandiNewKr";
   font-style: normal;
   font-weight: 800;
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.eot");
-  src: url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.eot#iefix") format("embedded-opentype"), url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.woff2") format("woff2"), url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.woff") format("woff"), url("/asset/font//hdcard/YouandiNewKrTitle-ExtraBold.svg") format("svg");
+  src: url("../font/hdcard/YouandiNewKrTitle-ExtraBold.eot");
+  src: url("../font/hdcard/YouandiNewKrTitle-ExtraBold.eot#iefix") format("embedded-opentype"), url("../font/hdcard/YouandiNewKrTitle-ExtraBold.woff2") format("woff2"), url("../font/hdcard/YouandiNewKrTitle-ExtraBold.woff") format("woff"), url("../font/hdcard/YouandiNewKrTitle-ExtraBold.svg") format("svg");
 }
 @font-face {
   font-family: "iconFont";
@@ -1161,29 +1161,17 @@ legend, caption {
 
 /* text : text 그룹 후 flex*/
 .split {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 .split.hgroup > .tit {
   vertical-align: middle;
 }
 .split.hgroup > .col {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 30%;
-          flex: 1 0 30%;
+  flex: 1 0 30%;
   text-align: right !important;
   vertical-align: middle;
 }
@@ -3526,8 +3514,12 @@ legend, caption {
   width: 0;
   height: 0.2rem;
   background-color: #000;
+<<<<<<< HEAD
   -webkit-animation: widthAct 0.3s linear forwards;
           animation: widthAct 0.3s linear forwards;
+=======
+  animation: widthAct 0.3s linear forwards;
+>>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
 }
 .tab-list > li._addTab > a {
   position: relative;
@@ -3561,6 +3553,12 @@ legend, caption {
   display: block;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
+}
+.tab-list.use {
+  display: flex;
+}
+.tab-list.disuse {
+  display: none;
 }
 .tab-wrap {
   position: relative;
@@ -4228,6 +4226,14 @@ label input {
 }
 
 /* 모듈 추가 박스 */
+.module-wrap {
+  width: 100%;
+  transition: all 0.15s ease;
+}
+.module-wrap._right {
+  width: calc(100% - 40rem);
+  margin-left: 40rem;
+}
 .module-add-box {
   position: fixed;
   bottom: 10%;
@@ -4258,11 +4264,10 @@ label input {
   font-weight: bold;
   background: #fff;
 }
-
-.container {
-  /* 상세설정 */
-  /* 모듈 */
+.module-option .btn {
+  min-width: initial;
 }
+<<<<<<< HEAD
 .container .moduleWrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4417,13 +4422,16 @@ label input {
   margin-left: 30%;
 }
 .container .module-edit {
+=======
+.module-edit {
+>>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
   border: 1px solid #ccc;
   max-width: var(--section);
   width: 100%;
   margin: 2rem auto;
   background: #ddd;
 }
-.container .module-edit .md {
+.module-edit .md {
   position: relative;
   outline: 0.3rem dashed transparent;
   background: #fff;
@@ -4437,18 +4445,18 @@ label input {
           color: #856404;
         } */
 }
-.container .module-edit .md.md-gap {
+.module-edit .md.md-gap {
   min-height: 0;
   height: 10rem;
   position: relative;
   outline: 0.1rem dashed #e6e6e6;
   z-index: 2;
 }
-.container .module-edit .md.md-gap:hover, .container .module-edit .md.md-gap._is-active {
+.module-edit .md.md-gap:hover, .module-edit .md.md-gap._is-active {
   background: #e6e6e6;
   outline-width: 0.3rem;
 }
-.container .module-edit .md.md-gap:hover::before, .container .module-edit .md.md-gap._is-active::before {
+.module-edit .md.md-gap:hover::before, .module-edit .md.md-gap._is-active::before {
   content: "";
   display: block;
   width: 100%;
@@ -4460,13 +4468,13 @@ label input {
   text-align: center !important;
   background: #e6e6e6;
 }
-.container .module-edit .md.md-gap + .md-gap {
+.module-edit .md.md-gap + .md-gap {
   z-index: 1;
 }
-.container .module-edit .md.md-gap + .md-gap:hover, .container .module-edit .md.md-gap + .md-gap._is-active {
+.module-edit .md.md-gap + .md-gap:hover, .module-edit .md.md-gap + .md-gap._is-active {
   z-index: 2;
 }
-.container .module-edit .md:hover .module-option, .container .module-edit .md._is-active .module-option {
+.module-edit .md:hover .module-option, .module-edit .md._is-active .module-option {
   display: block;
   position: absolute;
   top: 0;
@@ -4476,37 +4484,41 @@ label input {
   background: #fff;
   border: 0.1rem dashed #000;
 }
-.container .module-edit .md:hover .deleteBtn, .container .module-edit .md:hover .dragBtn, .container .module-edit .md:hover .optionBtn, .container .module-edit .md._is-active .deleteBtn, .container .module-edit .md._is-active .dragBtn, .container .module-edit .md._is-active .optionBtn {
+.module-edit .md:hover .deleteBtn, .module-edit .md:hover .dragBtn, .module-edit .md:hover .optionBtn, .module-edit .md._is-active .deleteBtn, .module-edit .md._is-active .dragBtn, .module-edit .md._is-active .optionBtn {
   display: block;
 }
-.container .module-edit .md:hover {
+.module-edit .md:hover {
   outline-color: #0048ff;
   z-index: 5;
 }
-.container .module-edit .md._is-active {
+.module-edit .md._is-active {
   outline-color: #e93c79;
   z-index: 5;
 }
-.container .module-edit .md .txtEdit {
+.module-edit .md .txtEdit {
   position: relative;
   padding: 2.4rem;
   font-size: 1.4rem;
   color: #000;
 }
-.container .module-edit .md .txtEdit h1 {
+.module-edit .md .txtEdit h1 {
   font-size: 2.8rem;
   font-weight: normal;
 }
-.container .module-edit .md .txtEdit > *:not(:first-child) {
+.module-edit .md .txtEdit > *:not(:first-child) {
   margin-top: 1rem;
   font-weight: normal;
 }
-.container .module-edit .md .txtEdit .fontBold {
+.module-edit .md .txtEdit .fontBold {
   font-weight: 700;
 }
+<<<<<<< HEAD
 .container .module-edit .md .imgWrap .txtEdit {
   display: -webkit-box;
   display: -ms-flexbox;
+=======
+.module-edit .md .imgWrap .txtEdit {
+>>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -4527,6 +4539,7 @@ label input {
   width: 100%;
   height: 100%;
 }
+<<<<<<< HEAD
 .container .module-edit .md .imgWrap .txtEdit.center {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -4556,8 +4569,23 @@ label input {
       -ms-flex-align: start;
           align-items: flex-start;
   text-align: left;
+=======
+.module-edit .md .imgWrap .txtEdit.center {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center !important;
 }
-.container .module-edit .md .imgWrap .txtEditBg {
+.module-edit .md .imgWrap .txtEdit.leftBottom {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-align: left !important;
+>>>>>>> 4afa7cdf23034fe2baf8893d3971bc297ac5402e
+}
+.module-edit .md .imgWrap .txtEditBg {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -4567,21 +4595,127 @@ label input {
   background: -webkit-gradient(linear, left bottom, left top, from(#ccc), to(transparent));
   background: linear-gradient(to top, #ccc, transparent);
 }
-.container .module-edit .md .imgWrap .txtEdit .imgWrap {
+.module-edit .md .imgWrap .txtEdit .imgWrap {
   overflow: hidden;
   max-width: 12.6rem;
   max-height: 8rem;
 }
-.container .module-edit .md .imgWrap .txtEdit .imgWrap.no-img {
-  border: 1px solid red;
+.module-edit .md .imgWrap .txtEdit .imgWrap.no-img {
+  border: 1px solid #e93c79;
 }
-.container .module-edit .md [contenteditable=true] {
+.module-edit .md [contenteditable=true] {
   position: relative;
   cursor: text;
   outline: 0;
 }
-.container .module-edit .md .box-pd {
+.module-edit .md .box-pd {
   padding: 0 2.4rem 2.4rem;
+}
+.moduleWrap {
+  display: flex;
+  height: calc(100% - 10rem);
+  padding-bottom: 10rem;
+}
+.moduleWrap + .footer-btnWrap {
+  z-index: 101;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  min-width: 80rem;
+  background: #ddd;
+}
+.moduleWrap + .footer-btnWrap > .btnWrap {
+  margin-top: 0;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+.moduleWrap + .footer-btnWrap > .btnWrap > .btn {
+  min-width: 15rem;
+  text-align: center !important;
+}
+.moduleWrap + .footer-btnWrap > .btnWrap > .btn:first-child {
+  margin-right: calc(100% - 46rem);
+}
+
+/* 상세설정 */
+.option-wrap {
+  overflow-y: auto;
+  position: fixed;
+  left: -40rem;
+  top: 0;
+  width: 40rem;
+  height: calc(100vh - 7rem);
+  padding: 2rem;
+  border: 1px solid #999;
+  border-bottom: 0;
+  background-color: #fff;
+  transition: left 0.15s ease;
+}
+.option-wrap .ico-pop-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+.option-wrap.show {
+  left: 0;
+}
+.option-box {
+  display: block;
+  margin-top: 4rem;
+}
+.option-box.goods-box .goods-box-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+.option-box.goods-box .goods-box-inner a {
+  display: block;
+  padding: 1.65rem;
+  width: calc((100% - 3.2rem) / 3);
+  border: 1px solid #000;
+  border-radius: 1.4rem;
+  font-size: 1.2rem;
+  text-align: center !important;
+}
+.option-tit {
+  display: block;
+  min-width: 7rem;
+  margin-right: 1.5rem;
+  vertical-align: top !important;
+}
+.option-cont {
+  margin-top: 1rem;
+}
+.option-cont.type-select-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+}
+.option-cont .type-select {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 1rem;
+  border: 1px solid #999;
+  border-radius: 1rem;
+  text-align: center !important;
+}
+.option-cont .input-box, .option-cont .color-selbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
 }
 
 [data-type=goods] > .btnWrap {
@@ -4643,7 +4777,7 @@ label input {
 }
 
 .img-container {
-  text-align: center;
+  text-align: center !important;
 }
 .img-container img {
   width: 100%;
@@ -4667,7 +4801,7 @@ label input {
           align-items: center;
   height: 16.3rem;
   background: #f3f4f6;
-  text-align: center;
+  text-align: center !important;
 }
 .no-img::before {
   content: "";
@@ -4794,10 +4928,13 @@ label input {
 }
 
 /* 모달팝업 */
-.modalPop._center {
-  width: auto;
+/*
+.modalPop {
+  &._center {
+    width: auto;
+  }
 }
-
+*/
 /* cropper 모달팝업 */
 .cropModalWrap .modalPop {
   width: 100%;
