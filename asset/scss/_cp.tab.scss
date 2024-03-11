@@ -109,6 +109,14 @@
 				}
 			}
 		}
+
+		&.use{
+			@include display(flex);
+		}
+		&.disuse{
+			@include display(none);
+		}
+		
 	}
 
 	&-wrap {
