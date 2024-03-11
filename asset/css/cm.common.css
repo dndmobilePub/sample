@@ -3513,6 +3513,14 @@ legend, caption {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
+.tab-list.use {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.tab-list.disuse {
+  display: none;
+}
 .tab-wrap {
   position: relative;
 }
