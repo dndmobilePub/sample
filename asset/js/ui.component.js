@@ -1840,7 +1840,7 @@ var COMPONENT_UI = (function (cp, $) {
         },
 
         mdGoodsAdd:function() {
-            $('body').on('click', '.goodsAddBtn', function() {
+            $('body, html').on('click', '.goodsAddBtn', function() {
                 var targetModal = $(this).data('modal');
                 $('.modalPop.goodsPop').attr('modal-target', targetModal);
                 cp.modalPop.showModal($(this));
@@ -1852,7 +1852,8 @@ var COMPONENT_UI = (function (cp, $) {
                 fetch('/../../asset/_module/module_txt.html').then(response => response.text()),
                 fetch('/../../asset/_module/module_img.html').then(response => response.text()),
                 fetch('/../../asset/_module/module_video.html').then(response => response.text()),
-                fetch('/../../asset/_module/module_goods.html').then(response => response.text())
+                fetch('/../../asset/_module/module_goods.html').then(response => response.text()),
+                fetch('/../../asset/_module/module_group.html').then(response => response.text())
             ]).then(([txtArea, imgArea, videoArea, goodsArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
@@ -1877,6 +1878,17 @@ var COMPONENT_UI = (function (cp, $) {
                     }
                     return matches.join('');
                 }
+
+                function groupAreaByCase(caseValue) {
+                    var pattern = new RegExp('<!-- 그룹 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 그룹 컨텐츠 ' + caseValue + ' -->', 'g');
+                    var matches = [];
+                    var match;
+                    while ((match = pattern.exec(Area)) !== null) {
+                        matches.push(match[0]);
+                    }
+                    return matches.join('');
+                }
+
                 callback({
                     txtArea: {
                         type01HTML: TxtAreaByCase('bigTxt'),
@@ -2008,7 +2020,9 @@ var COMPONENT_UI = (function (cp, $) {
                 }
                 
                 dataElem.closest('.md').find('.swiper-notification').remove();
-                dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                if ($('.product-list input[type="checkbox"]:checked').length > 0) {
+                    dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                }
         
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');
@@ -2017,7 +2031,7 @@ var COMPONENT_UI = (function (cp, $) {
                 });
                 
                 cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
-                cp.modalPop.closePop($(this));
+                // cp.modalPop.closePop($(this));
         
                 $('.product-list input[type="checkbox"]').prop('checked', false);
         
