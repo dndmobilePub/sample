@@ -403,22 +403,6 @@ var COMPONENT_MD = (function (cp, $) {
                     });
                     $('.product-list input[type="checkbox"]').prop('checked', false);
                 }
-                
-<<<<<<< HEAD
-=======
-                dataElem.closest('.md').find('.swiper-notification').remove();
-                if ($('.product-list input[type="checkbox"]:checked').length > 0) {
-                    dataElem.parent('.btnWrap').siblings('.swiper-inner').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
-                }
-        
-                $('.product-list input[type="checkbox"]:checked').each(function() {
-                    var parentLi = $(this).closest('li');
-                    var clonedSlide = parentLi.find('.swiper-slide').clone();
-                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
-                    dataElem.closest('.md').children('.swiper-inner').removeClass('swiperIsEnd');
-                });
->>>>>>> 9516d85ba3a869ab8d2a392e0d4d37727f3cc50e
-                
             });
         },
 
