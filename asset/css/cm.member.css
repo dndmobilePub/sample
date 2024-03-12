@@ -2343,7 +2343,7 @@ legend, caption {
   display: block;
   background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232380ff' viewBox='0 0 16 16'%3E%3Cpath d='M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z'/%3E%3Cpath d='m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z'/%3E%3C/svg%3E") no-repeat;
 }
-.field-select {
+.field-select.type-one {
   position: relative;
   min-height: 4rem;
   border-radius: 0.5rem;
@@ -2357,8 +2357,10 @@ legend, caption {
   padding: 1.7rem 1rem 1.3rem 1rem;
   color: #000;
   font-weight: 700;
+  width: 100%;
+  text-align: left;
 }
-.field-select:focus-within {
+.field-select.type-one:focus-within {
   -webkit-box-shadow: inset 0 0 0 0.2rem #ccc;
           box-shadow: inset 0 0 0 0.2rem #ccc;
 }
@@ -2373,6 +2375,9 @@ legend, caption {
   padding: 1.6rem 0;
   z-index: 10;
   display: none;
+}
+.field-select-list._is-active {
+  display: block;
 }
 .field-select-list li {
   padding: 0.8rem 1.6rem;
@@ -3617,7 +3622,7 @@ legend, caption {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 80%;
+  width: auto;
 }
 .modalPop._center._scroll .modal-container {
   overflow-y: auto;
