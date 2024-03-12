@@ -1114,8 +1114,6 @@ var COMPONENT_MD = (function (cp, $) {
         }
     };
     
-    
-
     cp.init = function () {
         cp.optionEdit.init();
         cp.moduleBox.init();

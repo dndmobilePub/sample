@@ -245,6 +245,15 @@
               </div>
             </div>
           </div>
+          <div class="option-box" data-type="countdown">
+            <h3 class="option-tit">제목 사용여부</h3>
+            <div class="option-cont">
+              <div class="input-box inpUse">
+                <label for="countdownTitleUse"><input type="radio" name="countdownTitle" id="countdownTitleUse" value="use" checked>사용</label>
+                <label for="countdownTitleDisuse"><input type="radio" name="countdownTitle" id="countdownTitleDisuse" value="disuse">미사용</label>
+              </div>
+            </div>
+          </div>
           <!-- [E] 상세설정 카운트다운 -->
           
           <!-- [S] 상세설정 공통 -->
@@ -315,7 +324,7 @@
             <!-- [S] 카운트다운 컨텐츠 -->
             <div class="md md-img" data-type="countdown" data-module="countdownid" style="height: 100px">
               <div class="txtEdit">
-                <p contenteditable="true">카운트다운 제목입니다.</p>
+                <p contenteditable="true" data-text="countdownTitle">카운트다운 제목입니다.</p>
               </div>
               <div id="countdown">
                 <span class="cdDate">00</span>:<span class="cdTime">00</span>:<span class="cdMinute">00</span>
