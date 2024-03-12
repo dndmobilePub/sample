@@ -384,7 +384,6 @@ var COMPONENT_MD = (function (cp, $) {
                         var clonedSlide = parentLi.find('.swiper-slide').clone();
                         dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
                         dataElem.closest('.md').children('.swiper-inner').removeClass('swiperIsEnd');
-                        dataElem.closest('.md').find('.moreBtn').hide();
                     });
                     
                     cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
