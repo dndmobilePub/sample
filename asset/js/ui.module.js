@@ -166,6 +166,13 @@ var COMPONENT_MD = (function (cp, $) {
             $('body, html').on('click', '.goodsAddBtn', function() {
                 var targetModal = $(this).data('modal');
                 $('.modalPop.goodsPop').attr('modal-target', targetModal);
+
+                // 240312 수정하기 추가하기 분기
+                var isSingle = $(this).attr('item-single');
+                var slideIdx = $(this).closest('.swiper-slide').index();
+                $('.modalPop.goodsPop').attr('item-single', isSingle);
+                $('.modalPop.goodsPop').attr('item-idx', slideIdx);
+
                 COMPONENT_UI.modalPop.showModal($(this));
             });
         },
@@ -347,37 +354,52 @@ var COMPONENT_MD = (function (cp, $) {
             });
         },
 
+
+        // append 영역
         mdGoodPopSel: function() {
             $('.btn-registration-pop').on('click', function() {
                 var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
+                var itemSingle = $(this).closest('.modalPop.goodsPop').attr('item-single');
+                var slideIdx = $(this).closest('.modalPop.goodsPop').attr('item-idx');
                 var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
                 
-                var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
-                if (existingSwiper && existingSwiper.swiper) {
-                    existingSwiper.swiper.destroy();
+                if(itemSingle == "false") { // 추가하기 일 때
+                    var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
+                    if (existingSwiper && existingSwiper.swiper) {
+                        existingSwiper.swiper.destroy();
+                    }
+                    
+                    dataElem.closest('.md').find('.swiper-notification').remove();
+                    if ($('.product-list input[type="checkbox"]:checked').length > 0) {
+                        dataElem.parent('.btnWrap').siblings('.swiper-inner').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                    }
+            
+                    $('.product-list input[type="checkbox"]:checked').each(function() {
+                        var parentLi = $(this).closest('li');
+                        var clonedSlide = parentLi.find('.swiper-slide').clone();
+                        dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
+                        dataElem.closest('.md').children('.swiper-inner').removeClass('swiperIsEnd');
+                        dataElem.closest('.md').find('.moreBtn').hide();
+                    });
+                    
+                    cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
+                    // cp.modalPop.closePop($(this));
+            
+                    $('.product-list input[type="checkbox"]').prop('checked', false);
+            
+                    setTimeout(function() {
+                        $('.btn-registration-pop').removeClass('btn-close-pop');
+                    }, 100);
+                } else if (itemSingle == "true") { // 수정하기 일 때
+                    $('.product-list input[type="checkbox"]:checked').each(function() {
+                        var parentLi = $(this).closest('li');
+                        var clonedSlide = parentLi.find('.swiper-slide').html();
+                        dataElem.closest('.md').find('.swiper-wrapper').children('.swiper-slide').eq(slideIdx).html(clonedSlide);
+                    });
+                    $('.product-list input[type="checkbox"]').prop('checked', false);
                 }
                 
-                dataElem.closest('.md').find('.swiper-notification').remove();
-                if ($('.product-list input[type="checkbox"]:checked').length > 0) {
-                    dataElem.parent('.btnWrap').siblings('.swiper-inner').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
-                }
-        
-                $('.product-list input[type="checkbox"]:checked').each(function() {
-                    var parentLi = $(this).closest('li');
-                    var clonedSlide = parentLi.find('.swiper-slide').clone();
-                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
-                    dataElem.closest('.md').children('.swiper-inner').removeClass('swiperIsEnd');
-                    dataElem.closest('.md').find('.moreBtn').hide();
-                });
                 
-                cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
-                // cp.modalPop.closePop($(this));
-        
-                $('.product-list input[type="checkbox"]').prop('checked', false);
-        
-                setTimeout(function() {
-                    $('.btn-registration-pop').removeClass('btn-close-pop');
-                }, 100);
             });
         },
 
