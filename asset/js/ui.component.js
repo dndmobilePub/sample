@@ -1201,6 +1201,23 @@ var COMPONENT_UI = (function (cp, $) {
             });
         }
     },
+    /* select box */
+    cp.selectBox = {
+        init: function() {       
+            this.selectBoxshow();
+        },
+
+        selectBoxshow: function(){
+            $('.field-select.type-one').click(function() {
+                $(this).next('.field-select-list').toggleClass('_is-active');
+            });
+            $('.field-select-list li').click(function() {
+                var selectedText = $(this).text();
+                $('.field-select.type-one').text(selectedText);
+                $(this).parent('.field-select-list').removeClass('_is-active');
+            });
+        },
+    },
     /* tab UI */
     cp.tab = {
         constEl: {
@@ -1724,6 +1741,7 @@ var COMPONENT_UI = (function (cp, $) {
         cp.modalPop.init();
         cp.toolTip.init();
         cp.selectPop.init(); // 바텀시트 select
+        cp.selectBox.init();
         cp.tab.init();
         cp.accordion.init();
     };
