@@ -1039,6 +1039,61 @@ var COMPONENT_MD = (function (cp, $) {
             });
         }
     };
+    /* module : countdown */
+    cp.countdownEdit = {
+        init: function() {
+            this.bindEvents();
+        },
+        bindEvents: function() {
+            $('#countdownDate').change(this.startCountdown);
+            $('#countdownTime').change(this.startCountdown);
+        },
+        startCountdown: function() {
+            var inputDate = $('#countdownDate').val();
+            var inputTime = $('#countdownTime').val();
+            
+            if (inputDate) {
+                var targetDate = new Date(inputDate);
+                var targetTime = targetDate.setHours(0, 0, 0, 0); // 날짜만 설정된 경우 0시로 설정
+    
+                if (inputTime) {
+                    var timeParts = inputTime.split(":");
+                    targetTime += parseInt(timeParts[0]) * 60 * 60 * 1000;
+                    targetTime += parseInt(timeParts[1]) * 60 * 1000;
+                }
+                
+                cp.countdownEdit.updateCountdown(targetTime);
+            } else {
+                alert("날짜를 입력하세요.");
+            }
+        },
+        updateCountdown: function(targetTime) {
+            clearInterval(cp.countdownInterval); // 기존의 카운트다운 인터벌 제거
+            cp.countdownInterval = setInterval(function() {
+                var currentTime = new Date().getTime();
+                var distance = targetTime - currentTime;
+    
+                if (distance <= 0) {
+                    clearInterval(cp.countdownInterval);
+                    $('#countdown').text("카운트다운 종료");
+                } else {
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    //var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    var daysStr = days.toString().padStart(2, '0');
+                    var hoursStr = hours.toString().padStart(2, '0');
+                    var minutesStr = minutes.toString().padStart(2, '0');
+                    //var secondsStr = seconds.toString().padStart(2, '0');
+                    $('#countdown .cdDate').html(daysStr);
+                    $('#countdown .cdTime').html(hoursStr);
+                    $('#countdown .cdMinute').html(minutesStr);
+                }
+            }, 1000); // 1초마다 갱신
+        }
+    };
+    
+    
 
     cp.init = function () {
         cp.optionEdit.init();
@@ -1047,6 +1102,7 @@ var COMPONENT_MD = (function (cp, $) {
         cp.videoModule.init(); // video insert    
         cp.colorEdit.init();
         cp.fontEditer.init();
+        cp.countdownEdit.init();
     };
 
     cp.init();
