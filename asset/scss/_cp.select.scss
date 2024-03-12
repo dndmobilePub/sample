@@ -38,7 +38,13 @@
         }
     }
     &-select{
-        &.type-one{
+        position: relative;
+        
+        & > button{
+            @include fontSize('lg');
+        }
+
+        & .border{
             position: relative;
             min-height: 4.0rem;
             border-radius: .5rem;
@@ -51,6 +57,19 @@
             width: 100%;
             text-align: left;
             &:focus-within {box-shadow: inset 0 0 0 .2rem $color-gray8;}
+        }
+
+        & .border-none{
+            position: relative;
+            min-height: 4.0rem;
+            border-radius: .5rem;
+            background:transparent;
+            transition: box-shadow 250ms cubic-bezier(.65,.05,.36,1);
+            padding: 1.7rem 1rem 1.3rem 1rem;
+            color: $color-black;
+            font-weight: 700;
+            width: 100%;
+            text-align: left;
         }
 
         &-list{
@@ -73,6 +92,7 @@
             & li{
                 padding: 0.8rem 1.6rem;
                 color: $color-gray2;
+                text-align: left;
 
                 &:hover{
                     background-color: $color-light-gray2;

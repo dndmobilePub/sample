@@ -2152,6 +2152,18 @@ legend, caption {
   margin-top: 0;
   margin-left: 1rem;
 }
+.field-group .btnWrap {
+  margin-top: 0;
+}
+.field-group div {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.field-group .field + .field {
+  margin: 0;
+  margin-left: 0.8rem;
+}
 .field + .field-group {
   margin-top: 1rem;
 }
@@ -2343,7 +2355,13 @@ legend, caption {
   display: block;
   background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232380ff' viewBox='0 0 16 16'%3E%3Cpath d='M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z'/%3E%3Cpath d='m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z'/%3E%3C/svg%3E") no-repeat;
 }
-.field-select.type-one {
+.field-select {
+  position: relative;
+}
+.field-select > button {
+  font-size: 1.8rem;
+}
+.field-select .border {
   position: relative;
   min-height: 4rem;
   border-radius: 0.5rem;
@@ -2360,9 +2378,24 @@ legend, caption {
   width: 100%;
   text-align: left;
 }
-.field-select.type-one:focus-within {
+.field-select .border:focus-within {
   -webkit-box-shadow: inset 0 0 0 0.2rem #ccc;
           box-shadow: inset 0 0 0 0.2rem #ccc;
+}
+.field-select .border-none {
+  position: relative;
+  min-height: 4rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  -webkit-transition: -webkit-box-shadow 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
+  transition: -webkit-box-shadow 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
+  transition: box-shadow 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
+  transition: box-shadow 250ms cubic-bezier(0.65, 0.05, 0.36, 1), -webkit-box-shadow 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
+  padding: 1.7rem 1rem 1.3rem 1rem;
+  color: #000;
+  font-weight: 700;
+  width: 100%;
+  text-align: left;
 }
 .field-select-list {
   position: absolute;
@@ -2382,6 +2415,7 @@ legend, caption {
 .field-select-list li {
   padding: 0.8rem 1.6rem;
   color: #5C5C5C;
+  text-align: left;
 }
 .field-select-list li:hover {
   background-color: #f5f5f5;

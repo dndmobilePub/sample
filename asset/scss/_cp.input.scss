@@ -140,13 +140,28 @@
     /* FIELD - GROUP */
     &-group {
         @include display(flex);
-
         & + & {margin-top:1rem;}
         & + #{$field} {margin-top:1rem;}
         
         #{$field} {
             & + & {margin-top:0; margin-left:1rem;}
         }
+
+        & .btnWrap{
+            margin-top: 0;
+        }
+
+        & div{
+            flex-grow: 1;
+        }
+
+        & #{$field}{
+            & + #{$field}{
+                margin: 0;
+                margin-left: 0.8rem;
+            }
+        }
+        
     }
     & + &-group {margin-top:1rem;}
 
