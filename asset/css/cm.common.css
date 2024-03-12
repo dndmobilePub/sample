@@ -145,6 +145,10 @@ body, th, td, input, select, textarea, button {
   letter-spacing: -0.5px;
 }
 
+input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
+  background: #f6f6f6;
+}
+
 input[type=text]:read-only, input[type=password]:read-only,
 input[type=text]:disabled, input[type=password]:disabled {
   background: #f6f6f6;
@@ -525,11 +529,9 @@ legend, caption {
 }
 /* jquery UI CSS - resizalabe */
 .ui-sortable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable .ui-dialog-titlebar {
@@ -542,7 +544,6 @@ legend, caption {
   position: absolute;
   font-size: 0.1px;
   display: block;
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
@@ -611,11 +612,9 @@ legend, caption {
   font-size: 0;
   line-height: 0;
   position: relative;
-  -ms-touch-action: none;
   touch-action: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .cropper-container img {
@@ -1761,10 +1760,18 @@ legend, caption {
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
+.field input[type=password]::-moz-placeholder {
+  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
+  -webkit-text-security: none;
+  font-size: 2rem;
+}
 .field input[type=password]::placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
+}
+.field input[type=password]:-moz-read-only {
+  color: #999;
 }
 .field input[type=password]:read-only {
   color: #999;
@@ -1840,12 +1847,19 @@ legend, caption {
   border: 0;
   background-color: transparent;
 }
+.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
+  font-weight: normal;
+  color: #949494;
+}
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   font-weight: normal;
   color: #949494;
 }
 .field-input input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
+}
+.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
+  color: #ccc;
 }
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   color: #ccc;
@@ -1860,6 +1874,10 @@ legend, caption {
   position: relative;
   max-width: 1.1rem;
   padding-right: 0;
+}
+.field-input.mid_num input::-moz-placeholder {
+  font-family: "pass";
+  font-size: 0.4rem;
 }
 .field-input.mid_num input::placeholder {
   font-family: "pass";
@@ -2025,6 +2043,9 @@ legend, caption {
   opacity: 1;
   touch-action: none;
 }
+._input input._password::-moz-placeholder {
+  font-weight: 700;
+}
 ._input input._password::placeholder {
   font-weight: 700;
 }
@@ -2036,6 +2057,9 @@ legend, caption {
 ._input ._secureTxt > input[type=password] {
   position: relative;
   z-index: 2;
+  color: transparent;
+}
+._input ._secureTxt > input[type=password]::-moz-placeholder {
   color: transparent;
 }
 ._input ._secureTxt > input[type=password]::placeholder {
@@ -2111,7 +2135,7 @@ legend, caption {
   display: block;
   background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232380ff' viewBox='0 0 16 16'%3E%3Cpath d='M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z'/%3E%3Cpath d='m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z'/%3E%3C/svg%3E") no-repeat;
 }
-.field-select {
+.field-select.type-one {
   position: relative;
   min-height: 4rem;
   border-radius: 0.5rem;
@@ -2121,8 +2145,10 @@ legend, caption {
   padding: 1.7rem 1rem 1.3rem 1rem;
   color: #000;
   font-weight: 700;
+  width: 100%;
+  text-align: left;
 }
-.field-select:focus-within {
+.field-select.type-one:focus-within {
   box-shadow: inset 0 0 0 0.2rem #ccc;
 }
 .field-select-list {
@@ -2136,6 +2162,9 @@ legend, caption {
   padding: 1.6rem 0;
   z-index: 10;
   display: none;
+}
+.field-select-list._is-active {
+  display: block;
 }
 .field-select-list li {
   padding: 0.8rem 1.6rem;
@@ -2271,6 +2300,7 @@ legend, caption {
   width: 100%;
   height: 100%;
   box-sizing: content-box;
+  padding-right: 50px;
 }
 .swiper-slide {
   flex-shrink: 0;
@@ -2300,7 +2330,7 @@ legend, caption {
   transform: translate3d(0, 0, 0);
   width: 100%;
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   left: 0;
 }
 .swiper-pagination-bullet {
@@ -2460,6 +2490,92 @@ legend, caption {
   height: 0.1rem;
   margin: -0.1rem;
   overflow: hidden;
+}
+
+[data-type=goods] > .btnWrap {
+  margin: 0;
+  padding: 1.5rem 1rem;
+}
+[data-type=goods] .swiper {
+  display: flex;
+  min-height: 20rem;
+}
+[data-type=goods] .swiper img {
+  max-width: 30rem;
+  width: 100%;
+}
+[data-type=goods] .swiper-inner {
+  display: flex;
+  position: relative;
+  margin: 0 2rem;
+  padding-bottom: 2rem;
+  overflow: hidden;
+}
+[data-type=goods] .swiper-inner.use .moreBtn {
+  display: block;
+}
+[data-type=goods] .swiper-inner.disuse .moreBtn {
+  display: none !important;
+}
+[data-type=goods] .swiper-inner.swiperIsEnd.use .swiper {
+  transform: translateX(-50px);
+}
+[data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper {
+  transform: translateX(0);
+}
+[data-type=goods] .swiper-inner .moreBtn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin: auto 0;
+}
+[data-type=goods] .swiper-inner .moreBtn:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
+[data-type=goods] .swiper-inner .moreBtn::after {
+  position: absolute;
+  top: -3rem;
+  right: 1rem;
+  border: 0.1rem #000 solid;
+  padding: 10px;
+  border-radius: 100%;
+}
+[data-type=goods][swiper-case=PerView1] .goodsWrap:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+[data-type=goods][swiper-case=PerView1] .goodsWrap .goods-img {
+  width: 50%;
+  float: left;
+  margin-right: 1.6rem;
+  margin-bottom: 0;
+}
+[data-type=goods][swiper-case=PerView1] .goodsWrap .item {
+  width: calc(50% - 1.6rem);
+  float: left;
+}
+[data-type=goods][tab-case=list1] .lst-goods > li {
+  width: 100%;
+}
+[data-type=goods][tab-case=list1] .goodsWrap:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
+  width: 50%;
+  float: left;
+  margin-right: 1.6rem;
+  margin-bottom: 0;
+}
+[data-type=goods][tab-case=list1] .goodsWrap .item {
+  width: calc(50% - 1.6rem);
+  float: left;
 }
 
 /* function */
@@ -3140,6 +3256,7 @@ legend, caption {
   justify-content: flex-start;
   align-items: center;
   position: relative;
+  min-width: -moz-fit-content;
   min-width: fit-content;
 }
 .tab-list .tab {
@@ -3323,6 +3440,25 @@ legend, caption {
   position: relative;
 }
 
+[data-type=goods][tab-case=list1] .lst-goods > li {
+  width: 100%;
+}
+[data-type=goods][tab-case=list1] .goodsWrap:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
+  width: 50%;
+  float: left;
+  margin-right: 1.6rem;
+  margin-bottom: 0;
+}
+[data-type=goods][tab-case=list1] .goodsWrap .item {
+  width: calc(50% - 1.6rem);
+  float: left;
+}
+
 .lst-goods {
   display: flex;
   flex-wrap: wrap;
@@ -3489,7 +3625,7 @@ legend, caption {
   margin-top: 5.6rem;
 }
 
-.modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap, .swiper-pagination, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after {
+.modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap, .swiper-pagination, [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper, [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after {
   transition: 0.3s all ease-in-out;
 }
 
@@ -4097,53 +4233,6 @@ label input {
   justify-content: space-around;
   align-items: center;
   gap: 1rem;
-}
-
-[data-type=goods] > .btnWrap {
-  margin: 0;
-  padding: 1.5rem 1rem;
-}
-[data-type=goods] .swiper {
-  display: flex;
-  padding: 0 2rem 2rem;
-  min-height: 20rem;
-}
-[data-type=goods] .swiper img {
-  max-width: 30rem;
-  width: 100%;
-}
-[data-type=goods][swiper-case=PerView1] .goodsWrap:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-[data-type=goods][swiper-case=PerView1] .goodsWrap .goods-img {
-  width: 50%;
-  float: left;
-  margin-right: 1.6rem;
-  margin-bottom: 0;
-}
-[data-type=goods][swiper-case=PerView1] .goodsWrap .item {
-  width: calc(50% - 1.6rem);
-  float: left;
-}
-[data-type=goods][tab-case=list1] .lst-goods > li {
-  width: 100%;
-}
-[data-type=goods][tab-case=list1] .goodsWrap:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
-  width: 50%;
-  float: left;
-  margin-right: 1.6rem;
-  margin-bottom: 0;
-}
-[data-type=goods][tab-case=list1] .goodsWrap .item {
-  width: calc(50% - 1.6rem);
-  float: left;
 }
 
 /* 이미지 */

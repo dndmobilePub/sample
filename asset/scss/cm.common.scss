@@ -354,64 +354,6 @@ $moduel:'.module';
   }
 }
   
-
-[data-type="goods"] {
-  & > .btnWrap {margin:0; padding:1.5rem 1rem;}
-  .swiper{
-    @include display(flex);
-    padding: 0 2rem 2rem;
-    min-height: 20rem;
-    img{
-      max-width: 30rem;
-      width: 100%;
-    }
-  }
-  &[swiper-case="PerView1"]{
-    .goodsWrap{
-      &:after{
-        content:'';
-        @include display(block);
-        clear: both;
-      }
-      .goods-img{
-        width: 50%;
-        float: left;
-        margin-right: 1.6rem;
-        margin-bottom: 0;
-      }
-      .item{
-        width: calc(50% - 1.6rem);
-        float:left;
-      }
-    }
-  }
-  &[tab-case="list1"]{
-    .lst-goods {
-      & > li {
-        @include width(100%);
-      }
-    }
-  
-    .goodsWrap{
-      &:after{
-        content:'';
-        @include display(block);
-        clear: both;
-      }
-      .goods-img{
-        width: 50%;
-        float: left;
-        margin-right: 1.6rem;
-        margin-bottom: 0;
-      }
-      .item{
-        width: calc(50% - 1.6rem);
-        float:left;
-      }
-    }
-  }
-}
-
 /* 이미지 */
 .imgWrap {
   @include pos(relative);

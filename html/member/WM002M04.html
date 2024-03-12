@@ -6,9 +6,9 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../../asset/css/cm.member.css">
     <script type="text/javascript" src="../../asset/js/plugin/lib.jquery-3.7.1.min.js"></script>
-    <script type="text/javascript" src="./../../asset/js/plugin/lib.jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../asset/js/plugin/lib.jquery-ui.min.js"></script>
     <script type="text/javascript" src="../../asset/js/plugin/pg.spectrum.js"></script>
-    <script type="text/javascript" src="./../asset/js/ui.component.js"></script>
+    <script type="text/javascript" src="../../asset/js/ui.component.js"></script>
 </head>
 <body>
     <div class="wrap member">
@@ -61,15 +61,13 @@
             </div>
 
             <div class="field">
-              <div class="field-label tit">메일선택</div>
-              <div class="field-select">
-                <span>선택</span>
-                <ul class="field-select-list" title="메일도메인">
-                  <li>선택</li>
-                  <li>naver.com</li>
-                  <li>daum.com</li>
-                </ul>
-              </div>
+              <label class="field-label tit">메일선택</label>
+              <button class="field-select type-one">선택</button>
+              <ul class="field-select-list" title="메일도메인">
+                <li>선택</li>
+                <li>naver.com</li>
+                <li>daum.com</li>
+              </ul>
               <div class="btnWrap">
                 <button class="btn btn-size md bg">중복확인</button>
               </div>
@@ -145,10 +143,15 @@
               <button class="btn btn-size xl bg" disabled>다음</button>
             </div>
 
-
             <!--[e] 작업영억 -->
         </div>    
         <footer class="footer mb"></footer>
     </div>
+    
+    <script>
+      $(function() {
+        COMPONENT_UI.init();
+      });
+    </script>
 </body>
 </html>
