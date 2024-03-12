@@ -902,6 +902,7 @@ var COMPONENT_MD = (function (cp, $) {
             //this.fontBold();
             //this.fontSize();
             this.editOpen();
+            this.textHide();
         },
 /*         fontBold: function() {
             $(document).off('click').on('click', '.editBold', function(){
@@ -971,6 +972,9 @@ var COMPONENT_MD = (function (cp, $) {
                     $('.textEditerWrap').remove();
                 }
             });
+        },
+        textHide: function() {
+
         }
     };
 
