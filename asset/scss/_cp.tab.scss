@@ -228,10 +228,6 @@
 	&-contents {
 		padding: 0 2rem 2rem;
 		min-height: 20rem;
-
-		&:nth-child(even) {
-			background: $color-gray7;
-		}
 	}
 
 	&-sticky {
@@ -245,9 +241,9 @@
 			&-contents-wrap {
 				border: none;
 			}
-			&-contents {
-				// padding: 8rem 5rem;
-			}
+			// &-contents {
+			// 	// padding: 8rem 5rem;
+			// }
 		}
 	}
 }

@@ -311,7 +311,6 @@
 
 // 상품모듈 스와이퍼
 [data-type="goods"] {
-  & > .btnWrap {margin:0; padding:1.5rem 1rem;}
   #{$swiper}{
     @include display(flex);
     min-height: 20rem;
@@ -328,21 +327,15 @@
       padding-bottom: 2rem; 
       overflow: hidden;
   
-      &.use{
-        .moreBtn{
-          @include display(block);
-        }
-      }
-      &.disuse{
-        .moreBtn{
-          @include display(none !important);
-        }
-      }
       &.swiperIsEnd{
         &.use{
           .swiper{
             @extend %transition3s;
             transform: translateX(-50px);
+          }
+          .moreBtn{
+            right: 0;
+            width: auto;
           }
         }
         &.disuse{
@@ -350,12 +343,16 @@
             @extend %transition3s;
             transform: translateX(0);
           }
+          .moreBtn{
+            right: -4rem;
+            width: 0;
+           }
         }
       }
       
       .moreBtn{
-        @include display(none);
-        @include pos-offset-r(50%, 0);
+        @extend %transition3s;
+        @include pos-offset-r(calc(50% - 1rem), -4rem);
         margin: auto 0;
         
         @include clearfix;
