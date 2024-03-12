@@ -579,8 +579,6 @@ var COMPONENT_MD = (function (cp, $) {
             $('#' + cropId).on('click', function () {
                 var initialAvatarURL;
                 var canvas;
-                
-                $imgWrap.removeClass("no-img");
 
                 if (cropper) {
                     var cropWidth = $('#cropWidth').val();
@@ -589,6 +587,8 @@ var COMPONENT_MD = (function (cp, $) {
                         width: cropWidth,
                         height: cropHeight
                     });
+                
+                    $imgWrap.removeClass("no-img");
                     initialAvatarURL = avatar.src;
                     avatar.src = canvas.toDataURL();
                     /*
