@@ -1112,6 +1112,29 @@ var COMPONENT_MD = (function (cp, $) {
             }, 1000); // 1초마다 갱신
         }
     };
+    /* module : HTML Code */
+    cp.htmlCodeEdit = {
+        init: function(){
+            this.htmlCode();
+        },
+        htmlCode: function() {
+            $('.htmlCodeSubmit').on('click', function() {
+                var htmlContent = $('.textareaHtml textarea').val();
+                $('.htmlCodeView').html(htmlContent);
+        
+                // HTML 유효성 검사
+                try {
+                    var tempDiv = $('<div></div>');
+                    tempDiv.html(htmlContent);
+        
+                    $('.errorDisplay').hide();
+                    tempDiv.remove();
+                } catch (error) {
+                    $('.errorDisplay').text('입력한 HTML에 문제가 있습니다: ' + error.message).show();
+                }
+            });
+        }
+    }
     
     cp.init = function () {
         cp.optionEdit.init();
@@ -1121,6 +1144,7 @@ var COMPONENT_MD = (function (cp, $) {
         cp.colorEdit.init();
         cp.fontEditer.init();
         cp.countdownEdit.init();
+        cp.htmlCodeEdit.init();
     };
 
     cp.init();

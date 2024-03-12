@@ -4211,6 +4211,9 @@ label input {
   align-items: center;
   gap: 1rem;
 }
+.option-cont .textareaHtml textarea {
+  width: 100%;
+}
 
 /* 이미지 */
 .imgWrap {

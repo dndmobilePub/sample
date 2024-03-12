@@ -354,6 +354,12 @@ $moduel:'.module';
       @include display(flex);
       @include flex($j-content:space-around) {gap: 1rem};
     }
+
+    .textareaHtml {
+      textarea {
+        width: 100%;
+      }
+    }
   }
 }
   
