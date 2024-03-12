@@ -2495,10 +2495,6 @@ legend, caption {
   overflow: hidden;
 }
 
-[data-type=goods] > .btnWrap {
-  margin: 0;
-  padding: 1.5rem 1rem;
-}
 [data-type=goods] .swiper {
   display: flex;
   min-height: 20rem;
@@ -2514,23 +2510,24 @@ legend, caption {
   padding-bottom: 2rem;
   overflow: hidden;
 }
-[data-type=goods] .swiper-inner.use .moreBtn {
-  display: block;
-}
-[data-type=goods] .swiper-inner.disuse .moreBtn {
-  display: none !important;
-}
 [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper {
   transform: translateX(-50px);
+}
+[data-type=goods] .swiper-inner.swiperIsEnd.use .moreBtn {
+  right: 0;
+  width: auto;
 }
 [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper {
   transform: translateX(0);
 }
+[data-type=goods] .swiper-inner.swiperIsEnd.disuse .moreBtn {
+  right: -4rem;
+  width: 0;
+}
 [data-type=goods] .swiper-inner .moreBtn {
-  display: none;
   position: absolute;
-  top: 50%;
-  right: 0;
+  top: calc(50% - 1rem);
+  right: -4rem;
   margin: auto 0;
 }
 [data-type=goods] .swiper-inner .moreBtn:after {
@@ -3417,9 +3414,6 @@ legend, caption {
   padding: 0 2rem 2rem;
   min-height: 20rem;
 }
-.tab-contents:nth-child(even) {
-  background: #eee;
-}
 .tab-sticky .tab-list-wrap {
   position: sticky;
   top: 0;
@@ -3429,6 +3423,7 @@ legend, caption {
 .tab-sticky .tab-contents-wrap {
   border: none;
 }
+
 @keyframes widthAct {
   0% {
     width: 0;
@@ -3628,7 +3623,7 @@ legend, caption {
   margin-top: 5.6rem;
 }
 
-.frame_device, .pg_layout .pg_layout_content > div, .pg_layout div::before, .pg_layout div, .pg_board_scroll > div, .pg_status_box .bar, .pg_alert_btn_set button, .panel_head, .search_title, .pg_project_status .pg_project_ing .ing, .pg_project_status .pg_project_ing, .pg_project_status pgCount > strong, .pg_project_status pgCount > span, .pg_board_tab, .btn_light_mode > i::after, .btn_light_mode > i::before, .btn_light_mode::after, .btn_light_mode::before, .btn_guide_top, .btm_btn_set, .btm_guide_top, .pg_titles h2, .pg_titles .pg_project_status, .pg_titles, #pgWrap, .pg_nav > ul > li > a, .pg_project .current::after, #pgHeader .switch > ul > li > a, #pgHeader .pg_util .btn_responsive > i > i, #pgHeader .pg_util .btn_responsive > i::after, #pgHeader .pg_util .btn_responsive > i::before, #pgHeader .pg_util .btn_responsive > i, #pgHeader .pg_util .btn_responsive::after, #pgHeader .pg_util .btn_responsive::before, #pgHeader .pg_util .btn_responsive, #pgHeader .pg_util .btn_nav span::after, #pgHeader .pg_util .btn_nav span::before, #pgHeader .pg_util .btn_nav span, #pgHeader .pg_util .pg_search #btnPgSearch, .modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap, .swiper-pagination, [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper, [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after {
+.frame_device, .pg_layout .pg_layout_content > div, .pg_layout div::before, .pg_layout div, .pg_board_scroll > div, .pg_status_box .bar, .pg_alert_btn_set button, .panel_head, .search_title, .pg_project_status .pg_project_ing .ing, .pg_project_status .pg_project_ing, .pg_project_status pgCount > strong, .pg_project_status pgCount > span, .pg_board_tab, .btn_light_mode > i::after, .btn_light_mode > i::before, .btn_light_mode::after, .btn_light_mode::before, .btn_guide_top, .btm_btn_set, .btm_guide_top, .pg_titles h2, .pg_titles .pg_project_status, .pg_titles, #pgWrap, .pg_nav > ul > li > a, .pg_project .current::after, #pgHeader .switch > ul > li > a, #pgHeader .pg_util .btn_responsive > i > i, #pgHeader .pg_util .btn_responsive > i::after, #pgHeader .pg_util .btn_responsive > i::before, #pgHeader .pg_util .btn_responsive > i, #pgHeader .pg_util .btn_responsive::after, #pgHeader .pg_util .btn_responsive::before, #pgHeader .pg_util .btn_responsive, #pgHeader .pg_util .btn_nav span::after, #pgHeader .pg_util .btn_nav span::before, #pgHeader .pg_util .btn_nav span, #pgHeader .pg_util .pg_search #btnPgSearch, .modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap, .swiper-pagination, [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper, [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper, [data-type=goods] .swiper-inner .moreBtn, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after {
   transition: 0.3s all ease-in-out;
 }
 
@@ -3917,11 +3912,9 @@ legend, caption {
 .btn.optionBtn {
   display: none;
   width: 100%;
-  margin: 0.5rem 0 0;
 }
 .btn.dragBtn {
   display: none;
-  margin: 0.5rem 0 0;
   padding: 1rem 1.15rem;
   background: #7c4bdf;
   border-color: #7c4bdf;
@@ -4015,6 +4008,10 @@ label input {
   max-width: 12.6rem;
   max-height: 8rem;
 }
+.module-wrap .md > .btnWrap {
+  margin: 0;
+  padding: 1.5rem 1rem;
+}
 .module-add-box {
   position: fixed;
   bottom: 10%;
@@ -4047,6 +4044,9 @@ label input {
 }
 .module-option .btn {
   min-width: initial;
+}
+.module-option .btn ~ * {
+  margin: 0.5rem 0 0;
 }
 .module-edit {
   border: 1px solid #ccc;
@@ -4496,7 +4496,7 @@ label input {
 /****************************************/
 /*	PART: work sheet PAGE STYLE
 /****************************************/
-.frame_device, .pg_layout .pg_layout_content > div, .pg_layout div::before, .pg_layout div, .pg_board_scroll > div, .pg_status_box .bar, .pg_alert_btn_set button, .panel_head, .search_title, .pg_project_status .pg_project_ing .ing, .pg_project_status .pg_project_ing, .pg_project_status pgCount > strong, .pg_project_status pgCount > span, .pg_board_tab, .btn_light_mode > i::after, .btn_light_mode > i::before, .btn_light_mode::after, .btn_light_mode::before, .btn_guide_top, .btm_btn_set, .btm_guide_top, .pg_titles h2, .pg_titles .pg_project_status, .pg_titles, #pgWrap, .pg_nav > ul > li > a, .pg_project .current::after, #pgHeader .switch > ul > li > a, #pgHeader .pg_util .btn_responsive > i > i, #pgHeader .pg_util .btn_responsive > i::after, #pgHeader .pg_util .btn_responsive > i::before, #pgHeader .pg_util .btn_responsive > i, #pgHeader .pg_util .btn_responsive::after, #pgHeader .pg_util .btn_responsive::before, #pgHeader .pg_util .btn_responsive, #pgHeader .pg_util .btn_nav span::after, #pgHeader .pg_util .btn_nav span::before, #pgHeader .pg_util .btn_nav span, #pgHeader .pg_util .pg_search #btnPgSearch, .swiper-pagination, [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper, [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after, .modalPop._top > .modalWrap, .modalPop._left > .modalWrap, .modalPop._bottom > .modalWrap {
+.frame_device, .pg_layout .pg_layout_content > div, .pg_layout div::before, .pg_layout div, .pg_board_scroll > div, .pg_status_box .bar, .pg_alert_btn_set button, .panel_head, .search_title, .pg_project_status .pg_project_ing .ing, .pg_project_status .pg_project_ing, .pg_project_status pgCount > strong, .pg_project_status pgCount > span, .pg_board_tab, .btn_light_mode > i::after, .btn_light_mode > i::before, .btn_light_mode::after, .btn_light_mode::before, .btn_guide_top, .btm_btn_set, .btm_guide_top, .pg_titles h2, .pg_titles .pg_project_status, .pg_titles, #pgWrap, .pg_nav > ul > li > a, .pg_project .current::after, #pgHeader .switch > ul > li > a, #pgHeader .pg_util .btn_responsive > i > i, #pgHeader .pg_util .btn_responsive > i::after, #pgHeader .pg_util .btn_responsive > i::before, #pgHeader .pg_util .btn_responsive > i, #pgHeader .pg_util .btn_responsive::after, #pgHeader .pg_util .btn_responsive::before, #pgHeader .pg_util .btn_responsive, #pgHeader .pg_util .btn_nav span::after, #pgHeader .pg_util .btn_nav span::before, #pgHeader .pg_util .btn_nav span, #pgHeader .pg_util .pg_search #btnPgSearch, .swiper-pagination, [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper, [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper, [data-type=goods] .swiper-inner .moreBtn, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after, .modalPop._top > .modalWrap, .modalPop._left > .modalWrap, .modalPop._bottom > .modalWrap {
   transition: 0.3s all ease-in-out;
 }
 

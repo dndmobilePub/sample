@@ -176,8 +176,9 @@ var COMPONENT_MD = (function (cp, $) {
                 fetch('../../asset/_module/module_img.html').then(response => response.text()),
                 fetch('../../asset/_module/module_video.html').then(response => response.text()),
                 fetch('../../asset/_module/module_goods.html').then(response => response.text()),
-                fetch('../../asset/_module/module_group.html').then(response => response.text())
-            ]).then(([txtArea, imgArea, videoArea, goodsArea, groupArea]) => {
+                fetch('../../asset/_module/module_banner.html').then(response => response.text()),
+                fetch('../../asset/_module/module_button.html').then(response => response.text())
+            ]).then(([txtArea, imgArea, videoArea, goodsArea, bannerArea, buttonArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
                 goodsArea = goodsArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
@@ -202,11 +203,11 @@ var COMPONENT_MD = (function (cp, $) {
                     return matches.join('');
                 }
 
-                function groupAreaByCase(caseValue) {
-                    var pattern = new RegExp('<!-- 그룹 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 그룹 컨텐츠 ' + caseValue + ' -->', 'g');
+                function bannerAreaByCase(caseValue) {
+                    var pattern = new RegExp('<!-- 배너 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 배너 컨텐츠 ' + caseValue + ' -->', 'g');
                     var matches = [];
                     var match;
-                    while ((match = pattern.exec(groupArea)) !== null) {
+                    while ((match = pattern.exec(bannerArea)) !== null) {
                         matches.push(match[0]);
                     }
                     return matches.join('');
@@ -221,14 +222,16 @@ var COMPONENT_MD = (function (cp, $) {
                     imgArea: imgArea,
                     videoArea: videoArea,
                     goodsArea: {
-                        type01HTML: goodsAreaByCase('goodsSwiper'),
+                        type01HTML: goodsAreaByCase('goodsSwiper'), 
                         type02HTML: goodsAreaByCase('goodsTab')
                     },
-                    groupArea: {
-                        type01HTML: groupAreaByCase('groupList'),
-                        type02HTML: groupAreaByCase('groupSwiper')
+                    bannerArea: {
+                        type01HTML: bannerAreaByCase('bannerList'),
+                        type02HTML: bannerAreaByCase('bannerSwiper')
                     },
+                    buttonArea: buttonArea,
                 });
+                COMPONENT_UI.tab.init();
             });
         },
         
@@ -279,21 +282,23 @@ var COMPONENT_MD = (function (cp, $) {
                             default:
                                 newContentHTML = content.goodsArea.type01HTML;
                         }
-                    }else if(dataType === 'group') {
+                    }else if(dataType === 'banner') {
                         switch (caseValue) {
-                            case 'groupList':
-                                newContentHTML = content.groupArea.type01HTML;
+                            case 'bannerList':
+                                newContentHTML = content.bannerArea.type01HTML;
                                 break;
-                            case 'groupSwiper':
-                                newContentHTML = content.groupArea.type02HTML;
+                            case 'bannerSwiper':
+                                newContentHTML = content.bannerArea.type02HTML;
                                 break;
                             default:
-                                newContentHTML = content.groupArea.type01HTML;
+                                newContentHTML = content.bannerArea.type01HTML;
                         }
                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
                         newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
+                    } else if(dataType === 'button') {
+                        newContentHTML = content.buttonArea;
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -367,7 +372,6 @@ var COMPONENT_MD = (function (cp, $) {
                     var clonedSlide = parentLi.find('.swiper-slide').clone();
                     dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
                     dataElem.closest('.md').children('.swiper-inner').removeClass('swiperIsEnd');
-                    dataElem.closest('.md').find('.moreBtn').hide();
                 });
                 
                 cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
@@ -417,10 +421,8 @@ var COMPONENT_MD = (function (cp, $) {
 
                     if (swiperInstance.isEnd) {
                         swiperInner.addClass('swiperIsEnd');
-                        swiperInner.children('.moreBtn').show();
                     } else {
                         swiperInner.removeClass('swiperIsEnd');
-                        swiperInner.children('.moreBtn').hide();
                     }
                 });
             });
