@@ -107,6 +107,7 @@
     @include pos(relative){z-index:1;}
     @include el-size(100%, 100%);    
     box-sizing: content-box;
+    padding-right: 50px;
   }
 
   &-slide{
@@ -137,7 +138,7 @@
     @extend %transition3s;
     transform: translate3d(0,0,0);
     @include width(100%);
-    @include pos-offset-b(10px, 0);
+    @include pos-offset-b(0, 0);
 
     &-bullet{
       @include el-size(1rem, 1rem !important) ;
@@ -228,6 +229,8 @@
     }
   }
 
+
+
   &-container{
     &-3d{
       perspective: 120rem;
@@ -302,6 +305,109 @@
       @include el-size(0.1rem, 0.1rem);
       margin: -0.1rem;
       @include overflow(both, hidden);
+    }
+  }
+}
+
+// 상품모듈 스와이퍼
+[data-type="goods"] {
+  & > .btnWrap {margin:0; padding:1.5rem 1rem;}
+  #{$swiper}{
+    @include display(flex);
+    min-height: 20rem;
+    img{
+      max-width: 30rem;
+      width: 100%;
+    }
+
+    &-inner{
+      @include display(flex);
+      @include pos(relative);
+      
+      margin: 0 2rem;
+      padding-bottom: 2rem; 
+      overflow: hidden;
+  
+      &.swiperIsEnd{
+        &.use{
+          .swiper{
+            @extend %transition3s;
+            transform: translateX(-50px);
+          }
+          .moreBtn{
+            @include display(block);
+          }
+        }
+        &.disuse{
+          .swiper{
+            @extend %transition3s;
+            transform: translateX(0);
+          }
+          .moreBtn{
+            @include display(none !important);
+          }
+        }
+      }
+      
+      .moreBtn{
+        @include display(none);
+        @include pos-offset-r(50%, 0);
+        margin: auto 0;
+        
+        @include clearfix;
+        &::after{
+          @include pos-offset-r(-3rem, 1rem);
+          @include line(border, .1rem $color-black solid);
+          padding: 10px;
+          border-radius: 100%;
+        }
+       
+      }
+    }
+  }
+
+  &[swiper-case="PerView1"]{
+    .goodsWrap{
+      &:after{
+        content:'';
+        @include display(block);
+        clear: both;
+      }
+      .goods-img{
+        width: 50%;
+        float: left;
+        margin-right: 1.6rem;
+        margin-bottom: 0;
+      }
+      .item{
+        width: calc(50% - 1.6rem);
+        float:left;
+      }
+    }
+  }
+  &[tab-case="list1"]{
+    .lst-goods {
+      & > li {
+        @include width(100%);
+      }
+    }
+  
+    .goodsWrap{
+      &:after{
+        content:'';
+        @include display(block);
+        clear: both;
+      }
+      .goods-img{
+        width: 50%;
+        float: left;
+        margin-right: 1.6rem;
+        margin-bottom: 0;
+      }
+      .item{
+        width: calc(50% - 1.6rem);
+        float:left;
+      }
     }
   }
 }

@@ -10,6 +10,7 @@ var COMPONENT_MD = (function (cp, $) {
             this.inpTxtLocation();
             this.txtBgHeight();
             this.anchorTab();
+            this.moreBtn();
         },
         currentModuleData: null,
         optionOpen: function() {
@@ -105,6 +106,16 @@ var COMPONENT_MD = (function (cp, $) {
                 $anchorTab.removeClass();
                 $anchorTab.addClass('tab-list ' + anchorTabValue);
             });
+        },
+        moreBtn:function() {
+            $('input[name="moreBtn"]').on('change', function() {
+                var moreBtnValue = $(this).val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $moreBtnSwiper = $('.md[data-module="' + dataType + '"]').children('.swiper-inner');
+
+                $moreBtnSwiper.removeClass();
+                $moreBtnSwiper.addClass('swiper-inner swiperIsEnd ' + moreBtnValue);
+            });
         }
     };
     /* module option */
@@ -140,7 +151,7 @@ var COMPONENT_MD = (function (cp, $) {
             $('body, html').on('click', '.goodsAddBtn', function() {
                 var targetModal = $(this).data('modal');
                 $('.modalPop.goodsPop').attr('modal-target', targetModal);
-                cp.modalPop.showModal($(this));
+                COMPONENT_UI.modalPop.showModal($(this));
             });
         },
 
@@ -333,13 +344,15 @@ var COMPONENT_MD = (function (cp, $) {
                 
                 dataElem.closest('.md').find('.swiper-notification').remove();
                 if ($('.product-list input[type="checkbox"]:checked').length > 0) {
-                    dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                    dataElem.parent('.btnWrap').siblings('.swiper-inner').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
                 }
         
                 $('.product-list input[type="checkbox"]:checked').each(function() {
                     var parentLi = $(this).closest('li');
                     var clonedSlide = parentLi.find('.swiper-slide').clone();
                     dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
+                    dataElem.closest('.md').children('.swiper-inner').removeClass('swiperIsEnd');
+                    dataElem.closest('.md').find('.moreBtn').hide();
                 });
                 
                 cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
@@ -370,11 +383,11 @@ var COMPONENT_MD = (function (cp, $) {
                     slidesPerView = 1;
                 }
 
-                new Swiper(this, {
+                var swiperInstance = new Swiper(this, {
                     loop: false,
                     slidesPerView: slidesPerView,  
                     spaceBetween: 10, 
-                    autoplay: true,
+                    //autoplay: true,
                     pagination: {
                         el: '.swiper-pagination',
                     },
@@ -383,9 +396,23 @@ var COMPONENT_MD = (function (cp, $) {
                         prevEl: '.swiper-button-prev',
                     },
                 });
+
+                swiperInstance.on('slideChange', function () {
+                    var swiperInner = $(swiperInstance.el).parent('.swiper-inner');
+
+                    if (swiperInstance.isEnd) {
+                        swiperInner.addClass('swiperIsEnd');
+                        swiperInner.children('.moreBtn').show();
+                        console.log(swiperInstance.el);
+                    } else {
+                        swiperInner.removeClass('swiperIsEnd');
+                        swiperInner.children('.moreBtn').hide();
+                    }
+                });
             });
             
         }, 
+
 
         resetSwipers: function() {
             $(document).ready(function() {
