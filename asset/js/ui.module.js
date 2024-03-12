@@ -441,11 +441,15 @@ var COMPONENT_MD = (function (cp, $) {
                 }
             });
         
-            $('.imgAdd').on('click', function(){
+            $('.btnAddImg').on('click', function(){
                 var dataType = $(this).closest('.option-wrap').data('type');
-                var $imgWrap = $('.md[data-module="' + dataType + '"]').find('.imgWrap');
-
-                loadCropModal($imgWrap);
+                var $md = $('.md[data-module="' + dataType + '"]');
+                var $imgWraps = $md.children('.imgWrap');
+            
+                $imgWraps.each(function() {
+                    var $imgWrap = $(this);
+                    loadCropModal($imgWrap);
+                });
             });
         },
         iterateMdImg: function (avatarId, inputId, modalId, imgId, cropId, $imgWrap, cropModalWrap) {

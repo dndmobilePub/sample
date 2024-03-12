@@ -4253,6 +4253,91 @@ label input {
   width: calc(100% - 40rem);
   margin-left: 40rem;
 }
+.module-wrap .md .txtEdit {
+  position: relative;
+  padding: 2.4rem;
+  font-size: 1.4rem;
+  color: #000;
+}
+.module-wrap .md .txtEdit h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+.module-wrap .md .txtEdit > *:not(:first-child) {
+  margin-top: 1rem;
+  font-weight: normal;
+}
+.module-wrap .md .txtEdit .fontBold {
+  font-weight: 700;
+}
+.module-wrap .md .imgWrap .txtEdit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.module-wrap .md .imgWrap .txtEdit.center {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center !important;
+}
+.module-wrap .md .imgWrap .txtEdit.leftBottom {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  text-align: left !important;
+}
+.module-wrap .md .imgWrap .txtEditBg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 30%;
+  background: -webkit-gradient(linear, left bottom, left top, from(#ccc), to(transparent));
+  background: linear-gradient(to top, #ccc, transparent);
+}
+.module-wrap .md .imgWrap .txtEdit .md-logo {
+  overflow: hidden;
+  max-width: 12.6rem;
+  max-height: 8rem;
+}
 .module-add-box {
   position: fixed;
   bottom: 10%;
@@ -4357,92 +4442,7 @@ label input {
   outline-color: #e93c79;
   z-index: 5;
 }
-.module-edit .md .txtEdit {
-  position: relative;
-  padding: 2.4rem;
-  font-size: 1.4rem;
-  color: #000;
-}
-.module-edit .md .txtEdit h1 {
-  font-size: 2.8rem;
-  font-weight: normal;
-}
-.module-edit .md .txtEdit > *:not(:first-child) {
-  margin-top: 1rem;
-  font-weight: normal;
-}
-.module-edit .md .txtEdit .fontBold {
-  font-weight: 700;
-}
-.module-edit .md .imgWrap .txtEdit {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-.module-edit .md .imgWrap .txtEdit.center {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center !important;
-}
-.module-edit .md .imgWrap .txtEdit.leftBottom {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  text-align: left !important;
-}
-.module-edit .md .imgWrap .txtEditBg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 30%;
-  background: -webkit-gradient(linear, left bottom, left top, from(#ccc), to(transparent));
-  background: linear-gradient(to top, #ccc, transparent);
-}
-.module-edit .md .imgWrap .txtEdit .imgWrap {
-  overflow: hidden;
-  max-width: 12.6rem;
-  max-height: 8rem;
-}
-.module-edit .md .imgWrap .txtEdit .imgWrap.no-img {
+.module-edit .md .md-logo.no-img {
   border: 1px solid #e93c79;
 }
 .module-edit .md [contenteditable=true] {
