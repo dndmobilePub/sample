@@ -40,6 +40,8 @@ var COMPONENT_MD = (function (cp, $) {
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
                 cp.optionEdit.gapHeight(cp.optionEdit.currentModuleData);
+                cp.optionEdit.inpTxtLocation(cp.optionEdit.currentModuleData);
+                cp.imgCrop.openCropImg(cp.optionEdit.currentModuleData);
 
                 if (dataCase) {
                     $('.option-box[data-case]').hide();
@@ -78,11 +80,23 @@ var COMPONENT_MD = (function (cp, $) {
                 $('.md-gap[data-module="' + dataType + '"]').css('height', newHeight);
             });
         },
-        inpTxtLocation:function() {
-            $('input[name="location"]').on('change', function() {
+        inpTxtLocation: function(dataType) {
+            var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+
+            $txtEdit.each(function() {
+                var classes = $(this).attr('class').split(' '); 
+                for (var i = 0; i < classes.length; i++) {
+                    if (classes[i] !== 'txtEdit') {
+                        $('input[name="location"]').filter(function() {
+                            return $(this).val() === classes[i];
+                        }).prop('checked', true);
+                        break;
+                    }
+                }
+            });
+            $('input[name="location"]').off('change').on('change', function() {
                 var locationValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                //var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
 
                 $txtEdit.removeClass();
                 $txtEdit.addClass('txtEdit ' + locationValue);
@@ -438,7 +452,7 @@ var COMPONENT_MD = (function (cp, $) {
         init: function () {
             this.openCropImg();
         },
-        openCropImg: function () {
+        openCropImg: function (dataType) {
             function loadCropModal($imgWrap) {
                 $('.cropModalWrap').load('../../asset/_module/modal.html', function () {
                     var cropModalWrap = $(this);
@@ -468,10 +482,11 @@ var COMPONENT_MD = (function (cp, $) {
                 }
             });
         
-            $('.btnAddImg').on('click', function(){
-                var dataType = $(this).closest('.option-wrap').data('type');
+            $('.btnAddImg').off('click').on('click', function(){
+                //var dataType = $(this).closest('.option-wrap').data('type');
                 var $md = $('.md[data-module="' + dataType + '"]');
                 var $imgWraps = $md.children('.imgWrap');
+                console.log(dataType)
             
                 $imgWraps.each(function() {
                     var $imgWrap = $(this);
