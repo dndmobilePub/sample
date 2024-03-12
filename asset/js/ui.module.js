@@ -1016,7 +1016,19 @@ var COMPONENT_MD = (function (cp, $) {
             });
         },
         textHide: function() {
-
+            $('.inpUse input').change(function() {
+                var radioValue = $(this).val();
+                var radioName = $(this).attr('name');
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                
+                if (radioValue === "disuse") {
+                    $txtEdit.each(function(){
+                        console.log($(this).find('[data-text="' + radioName + '"]'))
+                        $(this).find('[data-text="' + radioName + '"]').hide();
+                    })
+                }
+            });
         }
     };
 
