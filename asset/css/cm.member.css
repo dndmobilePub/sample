@@ -3002,9 +3002,6 @@ legend, caption {
   padding: 0 2rem 2rem;
   min-height: 20rem;
 }
-.tab-contents:nth-child(even) {
-  background: #eee;
-}
 .tab-sticky .tab-list-wrap {
   position: sticky;
   top: 0;
@@ -3014,6 +3011,7 @@ legend, caption {
 .tab-sticky .tab-contents-wrap {
   border: none;
 }
+
 @keyframes widthAct {
   0% {
     width: 0;

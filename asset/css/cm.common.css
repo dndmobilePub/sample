@@ -2468,10 +2468,6 @@ legend, caption {
   overflow: hidden;
 }
 
-[data-type=goods] > .btnWrap {
-  margin: 0;
-  padding: 1.5rem 1rem;
-}
 [data-type=goods] .swiper {
   display: flex;
   min-height: 20rem;
@@ -2487,23 +2483,24 @@ legend, caption {
   padding-bottom: 2rem;
   overflow: hidden;
 }
-[data-type=goods] .swiper-inner.use .moreBtn {
-  display: block;
-}
-[data-type=goods] .swiper-inner.disuse .moreBtn {
-  display: none !important;
-}
 [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper {
   transform: translateX(-50px);
+}
+[data-type=goods] .swiper-inner.swiperIsEnd.use .moreBtn {
+  right: 0;
+  width: auto;
 }
 [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper {
   transform: translateX(0);
 }
+[data-type=goods] .swiper-inner.swiperIsEnd.disuse .moreBtn {
+  right: -4rem;
+  width: 0;
+}
 [data-type=goods] .swiper-inner .moreBtn {
-  display: none;
   position: absolute;
-  top: 50%;
-  right: 0;
+  top: calc(50% - 1rem);
+  right: -4rem;
   margin: auto 0;
 }
 [data-type=goods] .swiper-inner .moreBtn:after {
@@ -3389,9 +3386,6 @@ legend, caption {
   padding: 0 2rem 2rem;
   min-height: 20rem;
 }
-.tab-contents:nth-child(even) {
-  background: #eee;
-}
 .tab-sticky .tab-list-wrap {
   position: sticky;
   top: 0;
@@ -3401,6 +3395,7 @@ legend, caption {
 .tab-sticky .tab-contents-wrap {
   border: none;
 }
+
 @keyframes widthAct {
   0% {
     width: 0;
@@ -3600,7 +3595,7 @@ legend, caption {
   margin-top: 5.6rem;
 }
 
-.modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap, .swiper-pagination, [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper, [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after {
+.modalPop._bottom > .modalWrap, .modalPop._left > .modalWrap, .modalPop._top > .modalWrap, .swiper-pagination, [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper, [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper, [data-type=goods] .swiper-inner .moreBtn, .btn-toggle:not([class*=btn-style])::after, .btn-toggle.btn-style-02::before, .btn-toggle.btn-style-02::after {
   transition: 0.3s all ease-in-out;
 }
 
@@ -3987,6 +3982,10 @@ label input {
   overflow: hidden;
   max-width: 12.6rem;
   max-height: 8rem;
+}
+.module-wrap .md > .btnWrap {
+  margin: 0;
+  padding: 1.5rem 1rem;
 }
 .module-add-box {
   position: fixed;

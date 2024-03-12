@@ -24,19 +24,21 @@
     <div class="module-add-box">
       <div class="btnWrap">
         <a href="javascript:void(0);" data-type="img">이미지</a>
-        <a href="javascript:void(0);" data-type="txt" data-case="bigTxt">텍스트 - 대제목</a>
-        <a href="javascript:void(0);" data-type="txt" data-case="smallTxt">텍스트 - 소제목</a>
-        <a href="javascript:void(0);" data-type="txt" data-case="bodyTxt">텍스트 - 본문</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list2">상품 - tab01</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list1">상품 - tab02</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView2">상품 - swiper01</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1.5">상품 - swiper02</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1">상품 - swiper03</a>
-        <a href="javascript:void(0);" data-type="group" data-case="groupList">그룹 - List01</a>
-        <a href="javascript:void(0);" data-type="group" data-case="groupList">그룹 - List02</a>
-        <a href="javascript:void(0);" data-type="group" data-case="groupSwiper">그룹 - swiper01</a>
-        <a href="javascript:void(0);" data-type="group" data-case="groupSwiper">그룹 - swiper02</a>
+        <a href="javascript:void(0);" data-type="txt" data-case="bigTxt">대제목</a>
+        <a href="javascript:void(0);" data-type="txt" data-case="smallTxt">소제목</a>
+        <a href="javascript:void(0);" data-type="txt" data-case="bodyTxt">본문</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list2">상품 리스트01</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list1">상품 리스트02</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView2">상품 슬라이드01</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1.5">상품 슬라이드02</a>
+        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1">상품 슬라이드03</a>
+        <a href="javascript:void(0);" data-type="banner" data-case="banner">배너</a>
+        <a href="javascript:void(0);" data-type="banner" data-case="bannerlist" banner-case="list2">배너 리스트01</a>
+        <a href="javascript:void(0);" data-type="banner" data-case="bannerlist" banner-case="list3">배너 리스트02</a>
+        <a href="javascript:void(0);" data-type="banner" data-case="bannerSwiper">배너 슬라이드01</a>
+        <a href="javascript:void(0);" data-type="banner" data-case="bannerSwiper">배너 슬라이드02</a>
         <a href="javascript:void(0);" data-type="gap">공백</a>
+        <a href="javascript:void(0);" data-type="button">버튼</a>
       </div>
     </div>
 
@@ -144,7 +146,7 @@
           <div class="option-box" data-type="title">
             <h3 class="option-tit">대제목 사용여부</h3>
             <div class="option-cont">
-              <div class="input-box">
+              <div class="input-box inpUse">
                 <label for="mainTitleUse"><input type="radio" name="mainTitle" id="mainTitleUse" value="use" checked>사용</label>
                 <label for="mainTitleDisuse"><input type="radio" name="mainTitle" id="mainTitleDisuse" value="disuse">미사용</label>
               </div>
@@ -153,7 +155,7 @@
           <div class="option-box" data-type="title">
             <h3 class="option-tit">소제목 사용여부</h3>
             <div class="option-cont">
-              <div class="input-box">
+              <div class="input-box inpUse">
                 <label for="subTitleUse"><input type="radio" name="subTitle" id="subTitleUse" value="use" checked>사용</label>
                 <label for="subTitleDisuse"><input type="radio" name="subTitle" id="subTitleDisuse" value="disuse">미사용</label>
               </div>
@@ -162,7 +164,7 @@
           <div class="option-box" data-type="title">
             <h3 class="option-tit">기획전 설명 사용여부</h3>
             <div class="option-cont">
-              <div class="input-box">
+              <div class="input-box inpUse">
                 <label for="discUse"><input type="radio" name="titleDisc" id="discUse" value="use" checked>사용</label>
                 <label for="discDisuse"><input type="radio" name="titleDisc" id="discDisuse" value="disuse">미사용</label>
               </div>
@@ -171,13 +173,63 @@
           <div class="option-box" data-type="title">
             <h3 class="option-tit">전시기간 노출여부</h3>
             <div class="option-cont">
-              <div class="input-box">
+              <div class="input-box inpUse">
                 <label for="dateUse"><input type="radio" name="titleDate" id="dateUse" value="use" checked>노출</label>
                 <label for="dateDisuse"><input type="radio" name="titleDate" id="dateDisuse" value="disuse">미노출</label>
               </div>
             </div>
           </div>
           <!-- [E] 상세설정 타이틀 -->
+
+          <!-- [S] 상세설정 버튼 -->
+          <div class="option-box" data-type="button">
+            <h3 class="option-tit">버튼 BG Color</h3>
+            <div class="option-cont">
+              <input type="color" class="colorInput">
+            </div>
+          </div>
+          <div class="option-box" data-type="button">
+            <h3 class="option-tit">유형</h3>
+            <div class="option-cont">
+              <div class="input-box">
+                <label for="btnTypeList"><input type="radio" name="btnType" id="btnTypeList" checked>상품리스트</label>
+                <label for="btnTypeLink"><input type="radio" name="btnType" id="btnTypeLink">링크 연결</label>
+              </div>
+            </div>
+          </div>
+          <div class="option-box" data-type="button banner">
+            <h3 class="option-tit">구분</h3>
+            <div class="option-cont">
+              <div class="input-box">
+                <label for="btnProduct"><input type="radio" name="btnDivide" id="btnProduct" checked>상품</label>
+                <label for="btnBrand"><input type="radio" name="btnDivide" id="btnBrand">브랜드</label>
+                <label for="btnGroup"><input type="radio" name="btnDivide" id="btnGroup">상품 그룹</label>
+              </div>
+            </div>
+          </div>
+          <div class="option-box" data-type="button banner">
+            <h3 class="option-tit">카테고리</h3>
+            <div class="option-cont">
+              <div class="input-box">
+                <div class="field-select grow">
+                  <select class="select-sys" title="대 카테고리">
+                    <option>대 카테고리</option>
+                  </select>
+                </div>
+                <div class="field-select grow">
+                  <select class="select-sys" title="중 카테고리">
+                    <option>중 카테고리</option>
+                  </select>
+                </div>
+                <div class="field-select grow">
+                  <select class="select-sys" title="소 카테고리">
+                    <option>소 카테고리</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [E] 상세설정 버튼 -->
           
           <!-- [S] 상세설정 공통 -->
           <div class="option-box">
