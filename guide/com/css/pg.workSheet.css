@@ -2514,17 +2514,17 @@ legend, caption {
   padding-bottom: 2rem;
   overflow: hidden;
 }
+[data-type=goods] .swiper-inner.use .moreBtn {
+  display: block;
+}
+[data-type=goods] .swiper-inner.disuse .moreBtn {
+  display: none !important;
+}
 [data-type=goods] .swiper-inner.swiperIsEnd.use .swiper {
   transform: translateX(-50px);
 }
-[data-type=goods] .swiper-inner.swiperIsEnd.use .moreBtn {
-  display: block;
-}
 [data-type=goods] .swiper-inner.swiperIsEnd.disuse .swiper {
   transform: translateX(0);
-}
-[data-type=goods] .swiper-inner.swiperIsEnd.disuse .moreBtn {
-  display: none !important;
 }
 [data-type=goods] .swiper-inner .moreBtn {
   display: none;

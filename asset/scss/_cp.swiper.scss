@@ -328,23 +328,27 @@
       padding-bottom: 2rem; 
       overflow: hidden;
   
+      &.use{
+        .moreBtn{
+          @include display(block);
+        }
+      }
+      &.disuse{
+        .moreBtn{
+          @include display(none !important);
+        }
+      }
       &.swiperIsEnd{
         &.use{
           .swiper{
             @extend %transition3s;
             transform: translateX(-50px);
           }
-          .moreBtn{
-            @include display(block);
-          }
         }
         &.disuse{
           .swiper{
             @extend %transition3s;
             transform: translateX(0);
-          }
-          .moreBtn{
-            @include display(none !important);
           }
         }
       }

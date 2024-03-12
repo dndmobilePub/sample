@@ -110,11 +110,12 @@ var COMPONENT_MD = (function (cp, $) {
         moreBtn:function() {
             $('input[name="moreBtn"]').on('change', function() {
                 var moreBtnValue = $(this).val();
+                var moreBtnValue02 = $(this).parent('label').siblings().find('input[name="moreBtn"]').val();
                 var dataType = $(this).closest('.option-wrap').data('type');
                 var $moreBtnSwiper = $('.md[data-module="' + dataType + '"]').children('.swiper-inner');
 
-                $moreBtnSwiper.removeClass();
-                $moreBtnSwiper.addClass('swiper-inner swiperIsEnd ' + moreBtnValue);
+                $moreBtnSwiper.removeClass(moreBtnValue02);
+                $moreBtnSwiper.addClass('swiper-inner ' + moreBtnValue);
             });
         }
     };
@@ -403,7 +404,6 @@ var COMPONENT_MD = (function (cp, $) {
                     if (swiperInstance.isEnd) {
                         swiperInner.addClass('swiperIsEnd');
                         swiperInner.children('.moreBtn').show();
-                        console.log(swiperInstance.el);
                     } else {
                         swiperInner.removeClass('swiperIsEnd');
                         swiperInner.children('.moreBtn').hide();
