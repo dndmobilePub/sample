@@ -39,6 +39,25 @@
     }
     &-select{
         position: relative;
+
+        &-wrap{
+            @include display(flex);
+
+            & #{$field}{
+                &-select{
+                    margin-left: 0.8rem;
+                }
+            }
+            
+            & .btnWrap{
+                flex-grow:0;
+                margin-left: 0.8rem;
+                & button{
+                    min-height: 4rem;
+                    padding: 1.7rem 1rem 1.3rem 1rem;
+                }
+            }
+        }
         
         & > button{
             @include fontSize('lg');

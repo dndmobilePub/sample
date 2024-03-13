@@ -1949,9 +1949,6 @@ legend, caption {
   -ms-flex-negative: 0;
       flex-shrink: 0;
 }
-.field-msg {
-  margin-top: 0.5rem;
-}
 .field-info {
   margin-top: 0.5rem;
   color: #666;
@@ -2189,6 +2186,9 @@ legend, caption {
   -webkit-box-shadow: inset 0 0 0 0.2rem #e93c79;
           box-shadow: inset 0 0 0 0.2rem #e93c79;
 }
+.field.invalid .field-msg {
+  margin-top: 0.5rem;
+}
 .field.invalid + .field-msg, .field.invalid .field-msg {
   color: #e93c79;
 }
@@ -2360,6 +2360,24 @@ legend, caption {
 }
 .field-select {
   position: relative;
+}
+.field-select-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.field-select-wrap .field-select {
+  margin-left: 0.8rem;
+}
+.field-select-wrap .btnWrap {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  margin-left: 0.8rem;
+}
+.field-select-wrap .btnWrap button {
+  min-height: 4rem;
+  padding: 1.7rem 1rem 1.3rem 1rem;
 }
 .field-select > button {
   font-size: 1.8rem;
