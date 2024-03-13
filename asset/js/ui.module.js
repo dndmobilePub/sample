@@ -21,6 +21,7 @@ var COMPONENT_MD = (function (cp, $) {
                 const dataType = $thisMd.data('type');
                 const dataCase = $thisMd.data('case');
                 const bgColor = $thisMd.css('background-color');
+                const btnColor = $thisMd.find('.btnBn').css('background-color');
                 const mdHeight = parseInt($thisMd.css('height'), 10);
                 const grHeight = parseInt($thisMd.find('.txtEditBg').css('height'), 10);
     
@@ -36,6 +37,7 @@ var COMPONENT_MD = (function (cp, $) {
                 
                 cp.colorEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
+                cp.colorEdit.spectrumBtnColor(cp.optionEdit.currentModuleData, btnColor);
                 cp.colorEdit.imgColor();
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
@@ -193,8 +195,10 @@ var COMPONENT_MD = (function (cp, $) {
                 fetch('../../asset/_module/module_video.html').then(response => response.text()),
                 fetch('../../asset/_module/module_goods.html').then(response => response.text()),
                 fetch('../../asset/_module/module_banner.html').then(response => response.text()),
-                fetch('../../asset/_module/module_button.html').then(response => response.text())
-            ]).then(([txtArea, imgArea, videoArea, goodsArea, bannerArea, buttonArea]) => {
+                fetch('../../asset/_module/module_button.html').then(response => response.text()),
+                fetch('../../asset/_module/module_code.html').then(response => response.text()),
+                fetch('../../asset/_module/module_countdown.html').then(response => response.text())
+            ]).then(([txtArea, imgArea, videoArea, goodsArea, bannerArea, buttonArea, htmlCodeArea, countdownArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
                 goodsArea = goodsArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
@@ -246,6 +250,8 @@ var COMPONENT_MD = (function (cp, $) {
                         type02HTML: bannerAreaByCase('bannerSwiper')
                     },
                     buttonArea: buttonArea,
+                    htmlCodeArea: htmlCodeArea,
+                    countdownArea: countdownArea,
                 });
                 COMPONENT_UI.tab.init();
             });
@@ -312,9 +318,13 @@ var COMPONENT_MD = (function (cp, $) {
                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
-                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
+                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><div class="btn btn-size xs shadow dragBtn">드래그</div><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     } else if(dataType === 'button') {
                         newContentHTML = content.buttonArea;
+                    } else if(dataType === 'htmlCode') {
+                        newContentHTML = content.htmlCodeArea;
+                    } else if(dataType === 'countdown') {
+                        newContentHTML = content.countdownArea;
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -776,6 +786,30 @@ var COMPONENT_MD = (function (cp, $) {
             $('.section').find('.md').each(function() {
                 if ($(this).data('module') === moduleType) {
                     $(this).css('background-color', selectedBgColor);
+                }
+            });
+        },
+        spectrumBtnColor: function(moduleType, btnColor) {
+            var self = this;
+            $(".colorBtnInput").spectrum({
+                flat: false,
+                showInput: true,
+                preferredFormat: "hex",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxPaletteSize: 10,
+                color: btnColor,
+                change: function(color) {
+                    var selectedbtnColor = color.toHexString();
+                    self.btnColor(selectedbtnColor, moduleType);
+                }
+            });
+        },
+        btnColor: function(selectedbtnColor, moduleType) {
+            $('.section').find('.md').each(function() {
+                if ($(this).data('module') === moduleType) {
+                    $(this).find('.btnBn').css('background-color', selectedbtnColor);
                 }
             });
         },

@@ -83,7 +83,10 @@ $moduel:'.module';
       margin-left: 40rem;
     }
     .md {
-      .txtEdit {
+      &.md-htmlCode {
+        padding: 2.4rem;
+      }
+      .txt-edit {
         @include pos(relative);
         padding: 2.4rem;
         font-size: 1.4rem;
@@ -103,7 +106,7 @@ $moduel:'.module';
         }
       }
       .imgWrap {
-        .txtEdit {
+        .txt-edit {
           @include display(flex);
           @include flex($direction:column,  $j-content:flex-end);
           @include pos-offset-l(0,0) {z-index: 1;};

@@ -3957,24 +3957,27 @@ label input {
   width: calc(100% - 40rem);
   margin-left: 40rem;
 }
-.module-wrap .md .txtEdit {
+.module-wrap .md.md-htmlCode {
+  padding: 2.4rem;
+}
+.module-wrap .md .txt-edit {
   position: relative;
   padding: 2.4rem;
   font-size: 1.4rem;
   color: #000;
 }
-.module-wrap .md .txtEdit h1 {
+.module-wrap .md .txt-edit h1 {
   font-size: 2.8rem;
   font-weight: 700;
 }
-.module-wrap .md .txtEdit > *:not(:first-child) {
+.module-wrap .md .txt-edit > *:not(:first-child) {
   margin-top: 1rem;
   font-weight: normal;
 }
-.module-wrap .md .txtEdit .fontBold {
+.module-wrap .md .txt-edit .fontBold {
   font-weight: 700;
 }
-.module-wrap .md .imgWrap .txtEdit {
+.module-wrap .md .imgWrap .txt-edit {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -3987,21 +3990,21 @@ label input {
   width: 100%;
   height: 100%;
 }
-.module-wrap .md .imgWrap .txtEdit.center {
+.module-wrap .md .imgWrap .txt-edit.center {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   text-align: center !important;
 }
-.module-wrap .md .imgWrap .txtEdit.leftBottom {
+.module-wrap .md .imgWrap .txt-edit.leftBottom {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: flex-end;
   align-items: flex-start;
   text-align: left !important;
 }
-.module-wrap .md .imgWrap .txtEditBg {
+.module-wrap .md .imgWrap .txt-editBg {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -4010,7 +4013,7 @@ label input {
   height: 30%;
   background: linear-gradient(to top, #ccc, transparent);
 }
-.module-wrap .md .imgWrap .txtEdit .md-logo {
+.module-wrap .md .imgWrap .txt-edit .md-logo {
   overflow: hidden;
   max-width: 12.6rem;
   max-height: 8rem;
