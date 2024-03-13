@@ -22,23 +22,49 @@
 <body>
   <div class="wrap">
     <div class="module-add-box">
+      <div class="module-add-tit">모듈 추가</div>
       <div class="btnWrap">
-        <a href="javascript:void(0);" data-type="img">이미지</a>
-        <a href="javascript:void(0);" data-type="txt" data-case="bigTxt">대제목</a>
-        <a href="javascript:void(0);" data-type="txt" data-case="smallTxt">소제목</a>
-        <a href="javascript:void(0);" data-type="txt" data-case="bodyTxt">본문</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list2">상품 리스트01</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list1">상품 리스트02</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView2">상품 슬라이드01</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1.5">상품 슬라이드02</a>
-        <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1">상품 슬라이드03</a>
-        <a href="javascript:void(0);" data-type="banner" data-case="banner">배너</a>
-        <a href="javascript:void(0);" data-type="banner" data-case="bannerlist" banner-case="list2">배너 리스트01</a>
-        <a href="javascript:void(0);" data-type="banner" data-case="bannerlist" banner-case="list3">배너 리스트02</a>
-        <a href="javascript:void(0);" data-type="banner" data-case="bannerSwiper">배너 슬라이드01</a>
-        <a href="javascript:void(0);" data-type="banner" data-case="bannerSwiper">배너 슬라이드02</a>
-        <a href="javascript:void(0);" data-type="gap">공백</a>
-        <a href="javascript:void(0);" data-type="button">버튼</a>
+        <a href="javascript:void(0);" data-type="img" class="add-btn">이미지</a>
+        <div class="module-more">
+          <div class="more-btn add-btn">텍스트</div>
+          <div class="more-cont">
+            <a href="javascript:void(0);" data-type="txt" data-case="bigTxt" class="add-btn">대제목</a>
+            <a href="javascript:void(0);" data-type="txt" data-case="smallTxt" class="add-btn">소제목</a>
+            <a href="javascript:void(0);" data-type="txt" data-case="bodyTxt" class="add-btn">본문</a>
+          </div>
+        </div>
+        <div class="module-more">
+          <div class="more-btn add-btn">상품 리스트</div>
+          <div class="more-cont">
+            <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list2" class="add-btn">2열</a>
+            <a href="javascript:void(0);" data-type="goods" data-case="goodsTab" tab-case="list1" class="add-btn">1열</a>
+          </div>
+        </div>
+        <div class="module-more">
+          <div class="more-btn add-btn">상품 슬라이드</div>
+          <div class="more-cont">
+            <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView2" class="add-btn">2열</a>
+            <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1.5" class="add-btn">1.5열</a>
+            <a href="javascript:void(0);" data-type="goods" data-case="goodsSwiper" swiper-case="PerView1" class="add-btn">1열</a>
+          </div>
+        </div>
+        <!-- <a href="javascript:void(0);" data-type="banner" data-case="bannerTxt" class="add-btn">배너 텍스트</a>
+        <div class="module-more">
+          <div class="more-btn add-btn">배너 리스트</div>
+          <div class="more-cont"> 
+            <a href="javascript:void(0);" data-type="banner" data-case="bannerList" banner-case="list2" class="add-btn">2열</a>
+            <a href="javascript:void(0);" data-type="banner" data-case="bannerList" banner-case="list3" class="add-btn">3열</a>
+          </div>
+        </div>
+        <div class="module-more">
+          <div class="more-btn add-btn">배너 슬라이드</div>
+          <div class="more-cont">
+            <a href="javascript:void(0);" data-type="banner" data-case="bannerSwiper" class="add-btn">1열</a>
+            <a href="javascript:void(0);" data-type="banner" data-case="bannerSwiper" class="add-btn">2열</a>
+          </div>
+        </div> -->
+        <a href="javascript:void(0);" data-type="gap" class="add-btn">공백</a>
+        <a href="javascript:void(0);" data-type="button" class="add-btn">버튼</a>
       </div>
     </div>
 
@@ -402,11 +428,11 @@
                         </dl>
                       </li>
                     </ul>
+                    <div class="btnWrap">
+                      <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="swiper_uniqueData">상품추가</button>
+                    </div>
                   </div>
                 </div> 
-              </div>
-              <div class="btnWrap">
-                <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="swiper_uniqueData">상품추가</button>
               </div>
               <div class="module-option">
                 <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
@@ -610,6 +636,7 @@
             <div class="swiper-slide">
               <dl class="goodsWrap">
                 <dt class="goods-img">
+                  <button class="btn btn-size xs shadow goodsDelBtn bg">삭제</button>
                   <div><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=http%3A%2F%2Fshop1.phinf.naver.net%2F20210421_284%2F1618964180859FC6NQ_JPEG%2F55099797074620053_2029617427.jpeg" alt=""></div>
                   <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="modal_Goods" item-single="true">수정하기</button>
                 </dt>
@@ -627,6 +654,7 @@
             <div class="swiper-slide">
               <dl class="goodsWrap">
                 <dt class="goods-img">
+                  <button class="btn btn-size xs shadow goodsDelBtn bg">삭제</button>
                   <div><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=https%3A%2F%2Fshop-phinf.pstatic.net%2F20171022_298%2FshowindowCommon_1508673491292GN4A4_JPEG%2F55023studiolim3465.jpg" alt=""></div>
                   <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="modal_Goods" item-single="true">수정하기</button>
                 </dt>
@@ -644,6 +672,7 @@
             <div class="swiper-slide">
               <dl class="goodsWrap">
                 <dt class="goods-img">
+                  <button class="btn btn-size xs shadow goodsDelBtn bg">삭제</button>
                   <div><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fshop.phinf%2Fshop%2F20230102_280%2F1672588025136k8rKc_JPEG%2F4C68C940-01B2-49D3-8530-93B84A1ECA34.jpeg" alt=""></div>
                   <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="modal_Goods" item-single="true">수정하기</button>
                 </dt>

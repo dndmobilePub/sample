@@ -525,11 +525,9 @@ legend, caption {
 }
 /* jquery UI CSS - resizalabe */
 .ui-sortable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable .ui-dialog-titlebar {
@@ -542,7 +540,6 @@ legend, caption {
   position: absolute;
   font-size: 0.1px;
   display: block;
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
@@ -611,11 +608,9 @@ legend, caption {
   font-size: 0;
   line-height: 0;
   position: relative;
-  -ms-touch-action: none;
   touch-action: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .cropper-container img {
@@ -1761,6 +1756,14 @@ legend, caption {
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
+<<<<<<< HEAD
+=======
+.field input[type=password]::-moz-placeholder {
+  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
+  -webkit-text-security: none;
+  font-size: 2rem;
+}
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 .field input[type=password]::placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
@@ -1837,6 +1840,13 @@ legend, caption {
   border: 0;
   background-color: transparent;
 }
+<<<<<<< HEAD
+=======
+.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
+  font-weight: normal;
+  color: #949494;
+}
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   font-weight: normal;
   color: #949494;
@@ -1844,6 +1854,12 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
 }
+<<<<<<< HEAD
+=======
+.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
+  color: #ccc;
+}
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   color: #ccc;
 }
@@ -1858,6 +1874,13 @@ legend, caption {
   max-width: 1.1rem;
   padding-right: 0;
 }
+<<<<<<< HEAD
+=======
+.field-input.mid_num input::-moz-placeholder {
+  font-family: "pass";
+  font-size: 0.4rem;
+}
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 .field-input.mid_num input::placeholder {
   font-family: "pass";
   font-size: 0.4rem;
@@ -1956,6 +1979,9 @@ legend, caption {
   margin-top: 0;
   margin-left: 1rem;
 }
+.field-group .field-select-wrap {
+  flex-basis: 15%;
+}
 .field-group .btnWrap {
   margin-top: 0;
 }
@@ -2032,6 +2058,12 @@ legend, caption {
   opacity: 1;
   touch-action: none;
 }
+<<<<<<< HEAD
+=======
+._input input._password::-moz-placeholder {
+  font-weight: 700;
+}
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 ._input input._password::placeholder {
   font-weight: 700;
 }
@@ -2045,6 +2077,12 @@ legend, caption {
   z-index: 2;
   color: transparent;
 }
+<<<<<<< HEAD
+=======
+._input ._secureTxt > input[type=password]::-moz-placeholder {
+  color: transparent;
+}
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 ._input ._secureTxt > input[type=password]::placeholder {
   color: transparent;
 }
@@ -2124,9 +2162,6 @@ legend, caption {
 .field-select-wrap {
   display: flex;
 }
-.field-select-wrap .field-select {
-  margin-left: 0.8rem;
-}
 .field-select-wrap .btnWrap {
   flex-grow: 0;
   margin-left: 0.8rem;
@@ -2138,7 +2173,7 @@ legend, caption {
 .field-select > button {
   font-size: 1.8rem;
 }
-.field-select .border {
+.field-select .btn-select {
   position: relative;
   min-height: 4rem;
   border-radius: 0.5rem;
@@ -2151,20 +2186,28 @@ legend, caption {
   width: 100%;
   text-align: left;
 }
+<<<<<<< HEAD
 .field-select .border:focus-within {
+=======
+.field-select .btn-select:focus-within {
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
   box-shadow: inset 0 0 0 0.2rem #ccc;
 }
-.field-select .border-none {
-  position: relative;
-  min-height: 4rem;
-  border-radius: 0.5rem;
+.field-select .btn-select.border-none {
   background: transparent;
+<<<<<<< HEAD
   transition: box-shadow 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
   padding: 1.7rem 1rem 1.3rem 1rem;
   color: #000;
   font-weight: 700;
   width: 100%;
   text-align: left;
+=======
+  box-shadow: none;
+}
+.field-select .btn-select.border-none:focus-within {
+  box-shadow: none;
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 }
 .field-select-list {
   position: absolute;
@@ -3269,6 +3312,10 @@ legend, caption {
   justify-content: flex-start;
   align-items: center;
   position: relative;
+<<<<<<< HEAD
+=======
+  min-width: -moz-fit-content;
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
   min-width: fit-content;
 }
 .tab-list .tab {
@@ -4027,35 +4074,58 @@ label input {
   margin: 0;
   padding: 1.5rem 1rem;
 }
+.module-add-tit {
+  padding: 3rem 0 1rem;
+  margin: 0 2rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
 .module-add-box {
   position: fixed;
-  bottom: 10%;
+  bottom: 0;
   left: auto;
-  right: 2%;
-  z-index: 1000;
+  right: 0;
+  z-index: 100;
   min-width: 15rem;
-  background: #5C5C5C;
+  background: #fff;
+  height: 100vh;
+  box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.5);
 }
 .module-add-box .btnWrap {
-  padding: 0.5rem;
+  padding: 1rem;
+  margin-top: 0;
 }
-.module-add-box .btnWrap > a {
+.module-add-box .btnWrap .add-btn {
   display: block;
   padding: 0.5rem 1rem;
-  color: #ddd;
+  margin: 0 1rem;
+  color: #000;
   text-decoration: none;
-  background: #666;
-  border: 1px solid #999;
+  background: #fff;
   font-size: var(--space-ms);
   border-radius: 0.3rem;
 }
-.module-add-box .btnWrap > a ~ a {
+.module-add-box .btnWrap .add-btn ~ .add-btn {
   margin-top: 0.5rem;
 }
-.module-add-box .btnWrap > a:hover {
+.module-add-box .btnWrap .add-btn:hover {
   color: #333;
   font-weight: bold;
-  background: #fff;
+  background: #ddd;
+}
+.module-add-box .btnWrap .module-more .more-btn {
+  border: none;
+}
+.module-add-box .btnWrap .module-more .more-cont {
+  height: 0;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.module-add-box .btnWrap .module-more.on .more-btn {
+  border-bottom: 1px solid #ddd;
+}
+.module-add-box .btnWrap .module-more.on .more-cont {
+  height: auto;
 }
 .module-option .btn {
   min-width: initial;
@@ -4324,6 +4394,7 @@ label input {
 .edit-box .btn-edit ~ .btn-edit {
   margin-left: 1rem;
 }
+<<<<<<< HEAD
 .edit-box .btn-edit .edit {
   /*       &-bold {
           padding: .5rem 1rem;
@@ -4344,6 +4415,26 @@ label input {
             border: 1px solid #000;
           }
         } */
+=======
+.edit-box .btn-edit .edit-bold {
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.edit-box .btn-edit .edit-size {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.edit-box .btn-edit .edit-size-input {
+  margin-left: 0.5rem;
+  width: 3rem;
+  height: 2rem;
+  border: 1px solid #000;
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
 }
 .edit-box .btn-edit .edit-color {
   position: relative;

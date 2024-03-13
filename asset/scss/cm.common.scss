@@ -140,27 +140,54 @@ $moduel:'.module';
     }
   }
 
+  &-add-tit{
+    padding: 3rem 0 1rem;
+    margin: 0 2rem;
+    text-align: center;
+    border-bottom: 1px solid $color-gray6;
+  }
   &-add-box {
-    @include pos-offset-b(10%, auto, fixed){right:2%; z-index: 1000;}
+    @include pos-offset-b(0, auto, fixed){right:0; z-index: 100;}
     min-width:15rem;
-    background:$color-gray2;
+    background:$color-white;
+    height: 100vh;
+    box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.5);
 
     .btnWrap {
-      padding:.5rem;
-      & > a {
+      padding:1rem;
+      margin-top: 0;
+      .add-btn {
         @include display(block);
         padding:.5rem 1rem;
-        color:$color-gray6; text-decoration:none;
-        background:$color-gray3;
-        @include line(border, 1px solid $color-gray4);
+        margin: 0 1rem;
+        color:$color-black; text-decoration:none;
+        background:$color-white;
         font-size:var(--space-ms);
         border-radius: .3rem;
     
-        & ~ a {margin-top:.5rem;}
+        & ~ .add-btn {margin-top:.5rem;}
         &:hover {
           color:$color-gray1;
           font-weight:bold;
-          background:$color-white;
+          background:$color-gray6;
+        }
+      }
+      .module-more{
+        .more-btn{
+          border:none;
+        }
+        .more-cont{
+          height: 0;
+          overflow: hidden;
+          transition: .3s;
+        }
+        &.on{
+          .more-btn{
+            border-bottom:1px solid $color-gray6;
+          }
+          .more-cont{
+            height: auto;
+          }
         }
       }
     }

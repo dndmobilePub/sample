@@ -8,72 +8,75 @@
     <script type="text/javascript" src="../../asset/js/plugin/lib.jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="./../../asset/js/plugin/lib.jquery-ui.min.js"></script>
     <script type="text/javascript" src="../../asset/js/plugin/pg.spectrum.js"></script>
-    <script type="text/javascript" src="./../asset/js/ui.component.js"></script>
+    <script type="text/javascript" src="../../asset/js/ui.component.js"></script>
 </head>
 <body>
-    <div class="wrap member">
-        <header class="header mb"></header>
-        <div class="container mb">
-            <!--[s] 작업영억 -->
-            <div class="btnWrap">
-              <button class="btn btn-size md bg _modalBtn" data-modal="modal2">Center Modal</button>
+  <div class="btnWrap">
+    <button class="btn btn-size md bg _modalBtn" data-modal="modal2">휴대폰인증약관동의 임시팝업</button>
+  </div>
+  <div class="modalPop _center" modal-target="modal2"><!-- -->
+    <div class="modalWrap">
+        <div class="modal-header">
+            <!-- <a href="#" class="ico ico-his-prev" role="button"><span class="hide">이전페이지</span></a> -->
+            <h2 class="mp-title dep01">(필수) 휴대폰 인증 약관 동의(1/4)</h2>
+            <a href="#" class="btn-close-pop ico ico-pop-close" role="button"><span class="hide">창닫기</span></a>
+        </div>
+        <div class="modal-container">
+          <h4 class="tit dep04">개인정보 이용 및 제공 동의</h4>
+
+          <div class="field">
+            <h4 class="tit dep04">NICE</h4>
+            <p class="txt">[(주)케이티 귀중]<br>본인은 SK텔레콤(주)(이하 '회사'라 합니다)가 제공하는 본인확인서비스(ㅣ하 '서비스'라 합니다)를 이용하기 위해, 다음과 같이 '회사'가 본인의 개인정보를 수집/이용하고, 개인정보의 취급을 위탁하는 것에 동의합니다.</p>
+          </div>
+
+          <div class="filed">
+            <h4 class="tit dep04">1. 수집항목</h4>
+            <ul class="list01">
+              <li>
+                  <ul>
+                      <li>이용자의 성명, 이동전화번호, 가입한 이동전화 회사, 생년월일, 성별</li>
+                      <li>연계정보(CI), 중복가입확인정보(DI)</li>
+                      <li>이용자가 이용하는 웹사이트 또는 Application 정보, 이용일시</li>
+                      <li>내외국인 여부</li>
+                      <li>가입한 이동전화회사 및 이동전화브랜드</li>
+                  </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="field">
+            <h4 class="tit dep04">5. 위 개인정보 수집&middot;이용 및 취급위탁에 동의하지 않으실 경우, 서비스를 이용하실 수 없습니다.</h4>
+            <p class="txt">※ 회사가 제공하는 서비스와 관련된 개인정보의 취급과 관련된 사항은, 회사의 개인정보처리방침(회사 홈페이지 www.sktelecom.com)에 따릅니다.</p>
+            <p class="txt">[NICE평가정보(주) 귀중]<br>NICE평가정보(주)(이하'회사')는 SK텔레콤(주)의 업무를 대행하여 휴대폰본인확인서비스를 제공함에 있어 고객으로부터 개인정보를 수집하고 이용</p>
+          </div>
+
+          <div class="field">
+            <h4 class="tit dep04">1. 개인정보의 이용목적과 제공정보</h4>
+            <div class="txt">가. 정보항목
+              <ul class="list01">
+                <li>
+                    <ul>
+                        <li>생년월일, 성명, 성별, 내/외국인 구분, 휴대폰번호, 가입한 이동통신사, IP주소</li>
+                    </ul>
+                </li>
+              </ul>
             </div>
+          </div>
 
-            <div class="modalPop _center" modal-target="modal2">
-              <div class="modalWrap">
-                  <div class="modal-header">
-                      <!-- <a href="#" class="ico ico-his-prev" role="button"><span class="hide">이전페이지</span></a> -->
-                      <h1 class="mp-title dep01">(필수) 휴대폰 인증 약관 동의(1/4)</h1>
-                      <a href="#" class="btn-close-pop ico ico-pop-close" role="button"><span class="hide">창닫기</span></a>
-                  </div>
-                  <div class="modal-container">
-                    <p>
-                      <h4 class="tit dep04">개인정보 이용 및 제공 동의</h4>
-
-                      <h4 class="tit dep04">NICE</h4>
-                      <p class="txt">[(주)케이티 귀중]<br>본인은 SK텔레콤(주)(이하 '회사'라 합니다)가 제공하는 본인확인서비스(ㅣ하 '서비스'라 합니다)를 이용하기 위해, 다음과 같이 '회사'가 본인의 개인정보를 수집/이용하고, 개인정보의 취급을 위탁하는 것에 동의합니다.</p>
-
-                      <h4 class="tit dep04">1. 수집항목</h4>
-                      <ul class="list01">
-                        <li>
-                            <ul>
-                                <li>이용자의 성명, 이동전화번호, 가입한 이동전화 회사, 생년월일, 성별</li>
-                                <li>연계정보(CI), 중복가입확인정보(DI)</li>
-                                <li>이용자가 이용하는 웹사이트 또는 Application 정보, 이용일시</li>
-                                <li>내외국인 여부</li>
-                                <li>가입한 이동전화회사 및 이동전화브랜드</li>
-                            </ul>
-                        </li>
-                      </ul>
-
-                      <h4 class="tit dep04">5. 위 개인정보 수집&middot;이용 및 취급위탁에 동의하지 않으실 경우, 서비스를 이용하실 수 없습니다.</h4>
-                      <p class="txt">※ 회사가 제공하는 서비스와 관련된 개인정보의 취급과 관련된 사항은, 회사의 개인정보처리방침(회사 홈페이지 www.sktelecom.com)에 따릅니다.</p>
-                      <p class="txt">[NICE평가정보(주) 귀중]<br>NICE평가정보(주)(이하'회사')는 SK텔레콤(주)의 업무를 대행하여 휴대폰본인확인서비스를 제공함에 있어 고객으로부터 개인정보를 수집하고 이용</p>
-
-                      <h4 class="tit dep04">1. 개인정보의 이용목적과 제공정보</h4>
-                      <p class="txt">가. 정보항목
-                        <ul class="list01">
-                          <li>
-                              <ul>
-                                  <li>생년월일, 성명, 성별, 내/외국인 구분, 휴대폰번호, 가입한 이동통신사, IP주소</li>
-                              </ul>
-                          </li>
-                        </ul>
-                      </p>
-                    </p>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="btnWrap grow">
-                        <button class="btn btn-size md type2 bg">확인</button>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <!--[e] 작업영억 -->
-        </div>    
-        <footer class="footer mb"></footer>
+        </div>
+        <div class="modal-footer">
+          <div class="btnWrap grow">
+              <button class="btn btn-size md type2 bg">확인</button>
+          </div>
+      </div>
     </div>
+  </div>
+
+  <script>
+    $(function() {
+      COMPONENT_UI.init();
+    });
+  </script>
     
 </body>
 </html>

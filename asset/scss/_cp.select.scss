@@ -42,12 +42,6 @@
 
         &-wrap{
             @include display(flex);
-
-            & #{$field}{
-                &-select{
-                    margin-left: 0.8rem;
-                }
-            }
             
             & .btnWrap{
                 flex-grow:0;
@@ -63,7 +57,7 @@
             @include fontSize('lg');
         }
 
-        & .border{
+        & .btn-select{
             position: relative;
             min-height: 4.0rem;
             border-radius: .5rem;
@@ -76,19 +70,12 @@
             width: 100%;
             text-align: left;
             &:focus-within {box-shadow: inset 0 0 0 .2rem $color-gray8;}
-        }
 
-        & .border-none{
-            position: relative;
-            min-height: 4.0rem;
-            border-radius: .5rem;
-            background:transparent;
-            transition: box-shadow 250ms cubic-bezier(.65,.05,.36,1);
-            padding: 1.7rem 1rem 1.3rem 1rem;
-            color: $color-black;
-            font-weight: 700;
-            width: 100%;
-            text-align: left;
+            &.border-none{
+                background:transparent;
+                box-shadow: none;
+                &:focus-within{box-shadow: none;}
+            }
         }
 
         &-list{
