@@ -143,8 +143,15 @@
         & + & {margin-top:1rem;}
         & + #{$field} {margin-top:1rem;}
         
-        #{$field} {
-            & + & {margin-top:0; margin-left:1rem;}
+        & #{$field} {
+            & + & {margin-top:0; margin-left:1rem;};
+
+            &-select{
+                &-wrap{
+                    flex-basis: 15%;
+                }
+            }
+
         }
 
         & .btnWrap{

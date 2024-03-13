@@ -1208,20 +1208,22 @@ var COMPONENT_UI = (function (cp, $) {
         },
 
         selectBoxshow: function(){
-            $('.field-select > button').click(function(event) {
+            $('.field-select > .btn-select').click(function(event) {
                 event.stopPropagation();
                 var selectWidth = $(this).outerWidth();
                 $('.field-select-list').removeClass('_is-active');
                 $(this).next('.field-select-list').toggleClass('_is-active');
                 $(this).next('.field-select-list').css('width', selectWidth + 'px');
             });
-            $('.field-select-list li').click(function(event) {
-                event.stopPropagation();
-                var selectedText = $(this).text();
-                $(this).closest('.field-select').find('button').text(selectedText);
-                $(this).parent('.field-select-list').removeClass('_is-active');
+            $('.field-select-list li').each(function() {
+                $(this).click(function(event) {
+                    event.stopPropagation();
+                    var selectedText = $(this).text();
+                    $(this).closest('.field-select').find('button').text(selectedText);
+                    $(this).parent('.field-select-list').removeClass('_is-active');
+                });
             });
-            $(document).click(function() {
+            $('body, html').click(function() {
                 $('.field-select-list').removeClass('_is-active');
             });
         },
