@@ -714,6 +714,7 @@
     $(function() {
       COMPONENT_UI.init();
       COMPONENT_MD.init();
+      $('.guide-box').children('p').slideUp();
       $('.guideClsBtn').on('click', function(){
         $(this).parent('.guide-box').children('p').slideToggle();
       })
