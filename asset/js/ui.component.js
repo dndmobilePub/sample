@@ -1591,12 +1591,11 @@ var COMPONENT_UI = (function (cp, $) {
                             '</div>' +
                         '</div>');
 
-
-            $(_addTab).one('click', function() {
-                $(this).closest('li').before(_tabLi);
-                $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
-                cp.tab.init();
-            });
+                        $('body').off('click').one('click', _addTab, function() {
+                            $(this).closest('li').before(_tabLi);
+                            $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
+                            cp.tab.init();
+                        })
         },
     };
     /* accordion */
