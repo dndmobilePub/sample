@@ -148,7 +148,7 @@ var COMPONENT_MD = (function (cp, $) {
         },
         
         dragFn: function () {
-            $(".module-edit").sortable({
+            $(".dragWrap").sortable({
                 tolerance: 'pointer', 
                 distance: 20,
             });
@@ -748,9 +748,9 @@ var COMPONENT_MD = (function (cp, $) {
         },
         fontColor: function(editColor) {
             var targetData = $('.edit-box').data('edit');
-            var thisWrap = $('.edit-color').closest('.textEditerWrap');
+            var $thisWrap = $('.edit-color').closest('[contenteditable]');
             
-            thisWrap.next('[contenteditable]').each(function() {
+            $thisWrap.each(function() {
                 if ($(this).attr('edit-target') === targetData) {
                     $(this).css('color', editColor);
                 }
@@ -1007,7 +1007,7 @@ var COMPONENT_MD = (function (cp, $) {
                     $this.focus();
                 }
 
-                if (!$this.has('.textEditerWrap').length) {
+/*                 if (!$this.has('.textEditerWrap').length) {
                     $('.textEditerWrap').remove();
                     $('<div class="textEditerWrap"></div>').insertBefore($this);
                     $this.prev('.textEditerWrap').load('../../asset/_module/text-edit.html', function(){
@@ -1017,6 +1017,23 @@ var COMPONENT_MD = (function (cp, $) {
                         $(this).show();
                         cp.colorEdit.spectrumColor(thisColor);
                     })
+                } */
+
+                if ($this.parent().hasClass('txtEdit')) {
+                    if (!$this.has('.textEditerWrap').length) {
+                        $('.textEditerWrap').remove();
+                        var $textEditorWrap = $('<div class="textEditerWrap"></div>');
+                        $this.append($textEditorWrap);
+                        var $textEditor = $this.find('.textEditerWrap');
+
+                        $textEditor.load('../../asset/_module/text-edit.html', function(){
+                            var targetData = $('.edit-box').data('edit');
+                        
+                            $this.attr('edit-target', targetData);
+                            $(this).show();
+                            cp.colorEdit.spectrumColor(thisColor);
+                        })
+                    }
                 }
             });
             

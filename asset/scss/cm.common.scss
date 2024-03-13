@@ -402,8 +402,8 @@ $moduel:'.module';
 /* textEditerWrap */
 .textEditerWrap {
   @include display(none);
-  width: 100%;
-  margin: 0 0 .5rem;
+  @include pos-offset-r($top:0, $right:0);
+  width: auto;
   background: $color-light-gray5;
   font-size: 1.4rem;
   font-weight: normal;
@@ -420,7 +420,7 @@ $moduel:'.module';
       margin-left: 1rem;
     }
     .edit{
-      &-bold {
+/*       &-bold {
         padding: .5rem 1rem;
         font-weight: 700;
         border: 1px solid #000;
@@ -438,7 +438,7 @@ $moduel:'.module';
           width: 3rem; height: 2rem;
           border: 1px solid #000;
         }
-      }
+      } */
 
       &-color {
         position: relative;
