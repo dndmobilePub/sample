@@ -40,6 +40,7 @@ var COMPONENT_MD = (function (cp, $) {
                 cp.colorEdit.spectrumBtnColor(cp.optionEdit.currentModuleData, btnColor);
                 cp.colorEdit.imgColor();
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
+                cp.colorEdit.colorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
                 cp.optionEdit.gapHeight(cp.optionEdit.currentModuleData);
                 cp.optionEdit.inpTxtLocation(cp.optionEdit.currentModuleData);
@@ -946,12 +947,19 @@ var COMPONENT_MD = (function (cp, $) {
                 return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
             }
         },
-        colorSelect: function() {
-            $('.color-selbox input[name="colorSelect"]').change(function() {
+        colorSelect: function(dataType) {
+            $('.color-selbox input').change(function() {
                 var selectedOption = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('id');
+                var optionId = $(this).closest('.option-wrap').data('id');
+                var $md = $('.md[data-id="' + dataType + '"]');
 
-                $('.md[data-id="' + dataType + '"]').find('.tab a').css('color', selectedOption);
+                if (dataType === optionId && $md.length > 0) {
+                    if ($md.find('.tab a').length > 0) {
+                        $md.find('.tab a').css('color', selectedOption);
+                    } else if ($md.find('#countdown').length > 0) {
+                        $md.find('#countdown').css('color', selectedOption);
+                    }
+                }
             });
         },
         spectrumGrColor: function(initialColor) {
