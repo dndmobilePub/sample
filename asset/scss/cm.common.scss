@@ -38,15 +38,12 @@
     font-size:1.6rem;
   }
   &.deleteBtn{
-    @include display(none);
     margin:0;
   }
   &.optionBtn {
-    @include display(none);
     width: 100%;
   }
   &.dragBtn {
-    @include display(none);
     padding: 1rem 1.15rem;
     background: $color-violet;
     border-color: $color-violet;
@@ -194,6 +191,7 @@ $moduel:'.module';
   }
 
   &-option {
+    @include display(none);
     .btn {min-width:initial;}
 
     .btn ~ * {

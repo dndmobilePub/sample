@@ -3916,15 +3916,12 @@ legend, caption {
   font-size: 1.6rem;
 }
 .btn.deleteBtn {
-  display: none;
   margin: 0;
 }
 .btn.optionBtn {
-  display: none;
   width: 100%;
 }
 .btn.dragBtn {
-  display: none;
   padding: 1rem 1.15rem;
   background: #7c4bdf;
   border-color: #7c4bdf;
@@ -4074,6 +4071,9 @@ label input {
 }
 .module-add-box .btnWrap .module-more.on .more-cont {
   height: auto;
+}
+.module-option {
+  display: none;
 }
 .module-option .btn {
   min-width: initial;

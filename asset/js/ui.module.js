@@ -505,10 +505,9 @@ var COMPONENT_MD = (function (cp, $) {
             });
         
             $('.btnAddImg').off('click').on('click', function(){
-                //var dataType = $(this).closest('.option-wrap').data('type');
-                var $md = $('.md[data-module="' + dataType + '"]');
+                //var $md = $('.md[data-module="' + dataType + '"]');
+                var $md = $(this).closest('.md');
                 var $imgWraps = $md.children('.imgWrap');
-                console.log(dataType)
             
                 $imgWraps.each(function() {
                     var $imgWrap = $(this);
