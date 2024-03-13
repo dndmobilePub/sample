@@ -27,7 +27,7 @@ var COMPONENT_MD = (function (cp, $) {
     
                 $('.md').removeClass('_is-active');
                 $thisMd.addClass('_is-active');
-                $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
+                $('.option-wrap').addClass('show').attr('data-id', cp.optionEdit.currentModuleData);
                 $('.option-box').hide();
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
@@ -55,7 +55,7 @@ var COMPONENT_MD = (function (cp, $) {
             this.closeOptionWrap = function() {
                 const $optionWrap = $('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
-                $optionWrap.attr('data-type','').removeClass('show');
+                $optionWrap.attr('data-id','').removeClass('show');
                 $('.module-wrap').removeClass('_right');
                 cp.colorEdit.resetImgColor();
                 $('.md').removeClass('_is-active');
@@ -72,7 +72,7 @@ var COMPONENT_MD = (function (cp, $) {
                 stop: function(event, ui) {
                     var newHeight = ui.size.height;
                     const dataType = $(this).data('id');
-                    $('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
+                    $('.option-wrap[data-id="' + dataType + '"]').find('.gap-height').val(newHeight);
                 }
             });
         },
@@ -104,7 +104,7 @@ var COMPONENT_MD = (function (cp, $) {
         txtBgHeight:function() {
             $('.txtBgHeight').on('change', function() {
                 var heightValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
+                var dataType = $(this).closest('.option-wrap').data('id');
                 var $txtEditBg = $('.md[data-id="' + dataType + '"]').find('.txtEditBg');
 
                 $txtEditBg.css('height', heightValue);
@@ -113,7 +113,7 @@ var COMPONENT_MD = (function (cp, $) {
         anchorTab:function() {
             $('input[name="anchorTab"]').on('change', function() {
                 var anchorTabValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
+                var dataType = $(this).closest('.option-wrap').data('id');
                 var $anchorTab = $('.md[data-id="' + dataType + '"]').find('.tab-list');
 
                 $anchorTab.removeClass();
@@ -124,7 +124,7 @@ var COMPONENT_MD = (function (cp, $) {
             $('input[name="moreBtn"]').on('change', function() {
                 var moreBtnValue = $(this).val();
                 var moreBtnValue02 = $(this).parent('label').siblings().find('input[name="moreBtn"]').val();
-                var dataType = $(this).closest('.option-wrap').data('type');
+                var dataType = $(this).closest('.option-wrap').data('id');
                 var $moreBtnSwiper = $('.md[data-id="' + dataType + '"]').children('.swiper-inner');
 
                 $moreBtnSwiper.removeClass(moreBtnValue02);
@@ -949,7 +949,7 @@ var COMPONENT_MD = (function (cp, $) {
         colorSelect: function() {
             $('.color-selbox input[name="colorSelect"]').change(function() {
                 var selectedOption = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
+                var dataType = $(this).closest('.option-wrap').data('id');
 
                 $('.md[data-id="' + dataType + '"]').find('.tab a').css('color', selectedOption);
             });
@@ -978,8 +978,7 @@ var COMPONENT_MD = (function (cp, $) {
         txtBgColor:function(selectedColor) {
             $('.txtBgColor').off('change').each(function() {
                 $(this).on('change', function() {
-                    var dataType = $(this).closest('.option-wrap').data('type');
-                    console.log('dataType:', dataType);
+                    var dataType = $(this).closest('.option-wrap').data('id');
                     var $txtEditBg = $('.md[data-id="' + dataType + '"]').find('.txtEditBg');
                     
                     if ($txtEditBg.length > 0) {
@@ -1087,7 +1086,7 @@ var COMPONENT_MD = (function (cp, $) {
             $('.inpUse input').change(function() {
                 var radioValue = $(this).val();
                 var radioName = $(this).attr('name');
-                var dataType = $(this).closest('.option-wrap').data('type');
+                var dataType = $(this).closest('.option-wrap').data('id');
                 var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
                 
                 if (radioValue === "disuse") {
