@@ -324,9 +324,12 @@
         <!--// [E] 상세설정 -->
         <div class="module-wrap">
           <!-- [S] notice/guide -->
-          <div class="guide-box">
-            <p>각각의 모듈과 모듈에 해당하는 상세설정창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-id)</strong> : <strong>상세설정(data-id)</strong> 매칭</p>
-            <p>각각의 텍스트와 텍스트에 해당하는 폰트에디터 연결방식은 data-roll을 사용하며 고정값 <strong>thisEdit</strong>로 생성/삭제됩니다. (따로 설정할 필요없음)<br> - <strong>텍스트(edit-target)</strong> : <strong>폰트에디터(data-edit)</strong> 매칭</p>
+          <div class="guide-box" style="position: relative; padding-bottom: 5rem;">
+            <p>모듈과 그에 해당하는 모듈편집창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-id)</strong> : <strong>모듈편집(data-id)</strong> 매칭</p>
+            <p>모듈 타입은 모듈 추가시 지정되어 추가됩니다. (ex: 1차- 상품 리스트 모듈타입, 2차- 1열 스타일)<br> - <strong>1차 data-type</strong> , <strong>2차: data-case</strong> 매칭</p>
+            <p>모듈편집의 상세 설정은 모듈의 data-type과 data-case로 필터링됩니다.<br> - <strong>모듈 타입 1차(data-type)</strong> : <strong>모듈편집 상세 설정 1차(data-type)</strong><br> - <strong>모듈 타입 2차(data-case)</strong> : <strong>모듈편집 상세 설정 2차(data-case)</strong></p>
+            <p>텍스트 컬러 직접 수정시 data-roll을 사용하며 고정값 <strong>thisEdit</strong>로 생성/삭제됩니다. (따로 설정할 필요없음)<br> - <strong>텍스트(edit-target)</strong> : <strong>폰트에디터(data-edit)</strong> 매칭</p>
+            <a href="javascript:void(0);" class="ico ico-pop-close guideClsBtn" role="button" style="position: absolute;left: 2rem;bottom: 2rem;"><span class="hide">창닫기</span></a>
           </div>
           <!-- [E] notice/guide -->
           <section class="section module-edit">
@@ -711,6 +714,9 @@
     $(function() {
       COMPONENT_UI.init();
       COMPONENT_MD.init();
+      $('.guideClsBtn').on('click', function(){
+        $(this).parent('.guide-box').children('p').slideToggle();
+      })
     });
   </script>
 </body>
