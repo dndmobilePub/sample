@@ -3483,7 +3483,6 @@ legend, caption {
 .list-dot {
   padding: 0.3rem 0;
   margin-left: 1rem;
-  margin-top: 2rem;
 }
 .list-dot.cir > li {
   position: relative;
@@ -3518,6 +3517,10 @@ legend, caption {
   height: 0.3rem;
   background: #1c5a96;
 }
+.list-hyphen {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
 .list-hyphen > li {
   position: relative;
   padding: 0.5rem 0 0.5rem 1.2rem;
@@ -3534,6 +3537,10 @@ legend, caption {
   height: 0.1rem;
   background: #888;
 }
+.list-caution {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
 .list-caution > li {
   position: relative;
   padding: 0.5rem 0 0.5rem 1.2rem;
@@ -3547,6 +3554,10 @@ legend, caption {
   top: 0.2rem;
   left: 0;
 }
+.list-star {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
 .list-star > li {
   position: relative;
   padding: 0.5rem 0 0.5rem 1.2rem;
@@ -3559,6 +3570,64 @@ legend, caption {
   position: absolute;
   top: 0.5rem;
   left: 0;
+}
+.list-pool {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
+.list-pool > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+.list-pool > li::before {
+  content: "※";
+  display: block;
+  position: absolute;
+  top: 0.6rem;
+  left: 0;
+}
+.list-num {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+  counter-reset: list-number;
+}
+.list-num > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+  counter-increment: list-number;
+}
+.list-num > li::before {
+  content: counter(list-number) ".";
+  display: block;
+  position: absolute;
+  top: 0.6rem;
+  left: 0;
+}
+.list-num.cir {
+  counter-reset: circle-number;
+}
+.list-num.cir > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+  counter-increment: circle-number;
+}
+.list-num.cir > li::before {
+  content: counter(circle-number);
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  border: 1px solid #333;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
 }
 
 .goodsWrap .item {
