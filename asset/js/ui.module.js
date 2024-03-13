@@ -139,12 +139,13 @@ var COMPONENT_MD = (function (cp, $) {
             this.dragFn();
             this.mdBoxDel();
             this.mdBoxAddClk();
+            this.mdBoxAddBar();
             this.mdGoodsAdd();
+            this.mdGoodsDel();
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
             this.initializeSwiper();
             this.resetSwipers();
-            //this.mdBoxOption();
         },
         
         dragFn: function () {
@@ -174,6 +175,14 @@ var COMPONENT_MD = (function (cp, $) {
                 $('.modalPop.goodsPop').attr('item-idx', slideIdx);
 
                 COMPONENT_UI.modalPop.showModal($(this));
+            });
+        },
+
+        mdGoodsDel:function() {
+            $('body, html').on('click', '.goodsDelBtn', function() {
+                var targetSlide = $(this).parents('.swiper-slide');
+                $(targetSlide).remove();
+                
             });
         },
 
@@ -325,24 +334,15 @@ var COMPONENT_MD = (function (cp, $) {
             
         },
 
-        // mdBoxOption: function() {
-        //     $('.option-box a[goods-option="txt"]').click(function(e) {
+        mdBoxAddBar:function(){
+            $('.module-more').on('click', '.more-btn', function(e) {
+                var thisMore = $(this).parents('.module-more');
+                var otherMore = $(this).parents('.module-more').siblings();
+                // otherMore.removeClass('on');
+                thisMore.toggleClass('on');
 
-        //     });
-            
-        //     $('.option-box a[data-option]').click(function(e) {
-        //         // e.preventDefault();
-        //         var optionDataType = $(this).parents('.option-wrap').attr('data-type');
-        //         var optionGoodsOption = $(this).attr('data-option');
-        //         var optionDataSwiper = $(this).attr('data-swiper')
-        //         var dataCase = $('.md[data-module="' + optionDataType + '"]').attr('data-case');
-        //         var dataModule = $('.md[data-module="' + optionDataType + '"]').attr('data-module');
-        //         $('.md[data-module="' + optionDataType + '"]').attr('data-swiper', optionDataSwiper);
-
-               
-        //     });
-                
-        // },
+            });
+        },
 
         mdGoodsPopClose: function() {
             const productCheckboxes = $('.product-list input[type="checkbox"]');
@@ -359,10 +359,8 @@ var COMPONENT_MD = (function (cp, $) {
             });
         },
 
-
         // append 영역
         mdGoodPopSel: function() {
-            // $('.btn-registration-pop').on('click', function() {
             $('body, html').on('click', '.btn-registration-pop', function(){
                 var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
                 var itemSingle = $(this).closest('.modalPop.goodsPop').attr('item-single');
@@ -428,7 +426,7 @@ var COMPONENT_MD = (function (cp, $) {
                     loop: false,
                     slidesPerView: slidesPerView,  
                     spaceBetween: 10, 
-                    //autoplay: true,
+                    autoplay: true,
                     pagination: {
                         el: '.swiper-pagination',
                     },

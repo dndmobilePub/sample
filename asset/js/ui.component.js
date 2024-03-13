@@ -1556,10 +1556,43 @@ var COMPONENT_UI = (function (cp, $) {
         addTab: function() {
             const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
             const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
-                      _tabCont = $('<div class="tab-contents" contenteditable="true">탭컨텐츠 추가</div>');
+            _tabCont = $('<div class="tab-contents">' +
+                            '<p class="goods-category">iPad</p>' +
+                            '<ul class="lst lst-goods">' +
+                            '<li>' +
+                                '<dl class="goodsWrap">' +
+                                '<dt class="goods-img">' +
+                                    '<div class="no-img"></div>' +
+                                '</dt>' +
+                                '<dd class="item brand">애플</dd>' +
+                                '<dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>' +
+                                '<dd class="item price">1,249,000 원</dd>' +
+                                '<dd class="item benefit">' +
+                                    '<span class="label point">최대 50% M 포인트</span>' +
+                                '</dd>' +
+                                '</dl>' +
+                            '</li>' +
+                            '<li>' +
+                                '<dl class="goodsWrap">' +
+                                '<dt class="goods-img">' +
+                                    '<div class="no-img"></div>' +
+                                '</dt>' +
+                                '<dd class="item brand">애플</dd>' +
+                                '<dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>' +
+                                '<dd class="item price">1,249,000 원</dd>' +
+                                '<dd class="item benefit">' +
+                                    '<span class="label point">최대 50% M 포인트</span>' +
+                                '</dd>' +
+                                '</dl>' +
+                            '</li>' +
+                            '</ul>' +
+                            '<div class="btnWrap">' +
+                            '<button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="swiper_uniqueData">상품추가</button>' +
+                            '</div>' +
+                        '</div>');
+
 
             $(_addTab).one('click', function() {
-                
                 $(this).closest('li').before(_tabLi);
                 $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
                 cp.tab.init();
