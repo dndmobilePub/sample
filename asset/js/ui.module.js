@@ -10,6 +10,7 @@ var COMPONENT_MD = (function (cp, $) {
             this.inpTxtLocation();
             this.txtBgHeight();
             this.anchorTab();
+            this.moreBtn();
         },
         currentModuleData: null,
         optionOpen: function() {
@@ -39,6 +40,8 @@ var COMPONENT_MD = (function (cp, $) {
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
                 cp.optionEdit.gapHeight(cp.optionEdit.currentModuleData);
+                cp.optionEdit.inpTxtLocation(cp.optionEdit.currentModuleData);
+                cp.imgCrop.openCropImg(cp.optionEdit.currentModuleData);
 
                 if (dataCase) {
                     $('.option-box[data-case]').hide();
@@ -77,11 +80,23 @@ var COMPONENT_MD = (function (cp, $) {
                 $('.md-gap[data-module="' + dataType + '"]').css('height', newHeight);
             });
         },
-        inpTxtLocation:function() {
-            $('input[name="location"]').on('change', function() {
+        inpTxtLocation: function(dataType) {
+            var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+
+            $txtEdit.each(function() {
+                var classes = $(this).attr('class').split(' '); 
+                for (var i = 0; i < classes.length; i++) {
+                    if (classes[i] !== 'txtEdit') {
+                        $('input[name="location"]').filter(function() {
+                            return $(this).val() === classes[i];
+                        }).prop('checked', true);
+                        break;
+                    }
+                }
+            });
+            $('input[name="location"]').off('change').on('change', function() {
                 var locationValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                //var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
 
                 $txtEdit.removeClass();
                 $txtEdit.addClass('txtEdit ' + locationValue);
@@ -105,6 +120,17 @@ var COMPONENT_MD = (function (cp, $) {
                 $anchorTab.removeClass();
                 $anchorTab.addClass('tab-list ' + anchorTabValue);
             });
+        },
+        moreBtn:function() {
+            $('input[name="moreBtn"]').on('change', function() {
+                var moreBtnValue = $(this).val();
+                var moreBtnValue02 = $(this).parent('label').siblings().find('input[name="moreBtn"]').val();
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $moreBtnSwiper = $('.md[data-module="' + dataType + '"]').children('.swiper-inner');
+
+                $moreBtnSwiper.removeClass(moreBtnValue02);
+                $moreBtnSwiper.addClass('swiper-inner ' + moreBtnValue);
+            });
         }
     };
     /* module option */
@@ -113,12 +139,13 @@ var COMPONENT_MD = (function (cp, $) {
             this.dragFn();
             this.mdBoxDel();
             this.mdBoxAddClk();
+            this.mdBoxAddBar();
             this.mdGoodsAdd();
+            this.mdGoodsDel();
             this.mdGoodsPopClose();
             this.mdGoodPopSel();
             this.initializeSwiper();
             this.resetSwipers();
-            //this.mdBoxOption();
         },
         
         dragFn: function () {
@@ -140,7 +167,22 @@ var COMPONENT_MD = (function (cp, $) {
             $('body, html').on('click', '.goodsAddBtn', function() {
                 var targetModal = $(this).data('modal');
                 $('.modalPop.goodsPop').attr('modal-target', targetModal);
-                cp.modalPop.showModal($(this));
+
+                // 240312 수정하기 추가하기 분기
+                var isSingle = $(this).attr('item-single');
+                var slideIdx = $(this).closest('.swiper-slide').index();
+                $('.modalPop.goodsPop').attr('item-single', isSingle);
+                $('.modalPop.goodsPop').attr('item-idx', slideIdx);
+
+                COMPONENT_UI.modalPop.showModal($(this));
+            });
+        },
+
+        mdGoodsDel:function() {
+            $('body, html').on('click', '.goodsDelBtn', function() {
+                var targetSlide = $(this).parents('.swiper-slide');
+                $(targetSlide).remove();
+                
             });
         },
 
@@ -150,8 +192,9 @@ var COMPONENT_MD = (function (cp, $) {
                 fetch('../../asset/_module/module_img.html').then(response => response.text()),
                 fetch('../../asset/_module/module_video.html').then(response => response.text()),
                 fetch('../../asset/_module/module_goods.html').then(response => response.text()),
-                fetch('../../asset/_module/module_group.html').then(response => response.text())
-            ]).then(([txtArea, imgArea, videoArea, goodsArea, groupArea]) => {
+                fetch('../../asset/_module/module_banner.html').then(response => response.text()),
+                fetch('../../asset/_module/module_button.html').then(response => response.text())
+            ]).then(([txtArea, imgArea, videoArea, goodsArea, bannerArea, buttonArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
                 goodsArea = goodsArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
@@ -176,11 +219,11 @@ var COMPONENT_MD = (function (cp, $) {
                     return matches.join('');
                 }
 
-                function groupAreaByCase(caseValue) {
-                    var pattern = new RegExp('<!-- 그룹 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 그룹 컨텐츠 ' + caseValue + ' -->', 'g');
+                function bannerAreaByCase(caseValue) {
+                    var pattern = new RegExp('<!-- 배너 컨텐츠 ' + caseValue + ' -->([\\s\\S]*?)<!--// 배너 컨텐츠 ' + caseValue + ' -->', 'g');
                     var matches = [];
                     var match;
-                    while ((match = pattern.exec(groupArea)) !== null) {
+                    while ((match = pattern.exec(bannerArea)) !== null) {
                         matches.push(match[0]);
                     }
                     return matches.join('');
@@ -195,14 +238,16 @@ var COMPONENT_MD = (function (cp, $) {
                     imgArea: imgArea,
                     videoArea: videoArea,
                     goodsArea: {
-                        type01HTML: goodsAreaByCase('goodsSwiper'),
+                        type01HTML: goodsAreaByCase('goodsSwiper'), 
                         type02HTML: goodsAreaByCase('goodsTab')
                     },
-                    groupArea: {
-                        type01HTML: groupAreaByCase('groupList'),
-                        type02HTML: groupAreaByCase('groupSwiper')
+                    bannerArea: {
+                        type01HTML: bannerAreaByCase('bannerList'),
+                        type02HTML: bannerAreaByCase('bannerSwiper')
                     },
+                    buttonArea: buttonArea,
                 });
+                COMPONENT_UI.tab.init();
             });
         },
         
@@ -253,21 +298,23 @@ var COMPONENT_MD = (function (cp, $) {
                             default:
                                 newContentHTML = content.goodsArea.type01HTML;
                         }
-                    }else if(dataType === 'group') {
+                    }else if(dataType === 'banner') {
                         switch (caseValue) {
-                            case 'groupList':
-                                newContentHTML = content.groupArea.type01HTML;
+                            case 'bannerList':
+                                newContentHTML = content.bannerArea.type01HTML;
                                 break;
-                            case 'groupSwiper':
-                                newContentHTML = content.groupArea.type02HTML;
+                            case 'bannerSwiper':
+                                newContentHTML = content.bannerArea.type02HTML;
                                 break;
                             default:
-                                newContentHTML = content.groupArea.type01HTML;
+                                newContentHTML = content.bannerArea.type01HTML;
                         }
                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
                         newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
+                    } else if(dataType === 'button') {
+                        newContentHTML = content.buttonArea;
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -287,24 +334,15 @@ var COMPONENT_MD = (function (cp, $) {
             
         },
 
-        // mdBoxOption: function() {
-        //     $('.option-box a[goods-option="txt"]').click(function(e) {
+        mdBoxAddBar:function(){
+            $('.module-more').on('click', '.more-btn', function(e) {
+                var thisMore = $(this).parents('.module-more');
+                var otherMore = $(this).parents('.module-more').siblings();
+                // otherMore.removeClass('on');
+                thisMore.toggleClass('on');
 
-        //     });
-            
-        //     $('.option-box a[data-option]').click(function(e) {
-        //         // e.preventDefault();
-        //         var optionDataType = $(this).parents('.option-wrap').attr('data-type');
-        //         var optionGoodsOption = $(this).attr('data-option');
-        //         var optionDataSwiper = $(this).attr('data-swiper')
-        //         var dataCase = $('.md[data-module="' + optionDataType + '"]').attr('data-case');
-        //         var dataModule = $('.md[data-module="' + optionDataType + '"]').attr('data-module');
-        //         $('.md[data-module="' + optionDataType + '"]').attr('data-swiper', optionDataSwiper);
-
-               
-        //     });
-                
-        // },
+            });
+        },
 
         mdGoodsPopClose: function() {
             const productCheckboxes = $('.product-list input[type="checkbox"]');
@@ -321,35 +359,49 @@ var COMPONENT_MD = (function (cp, $) {
             });
         },
 
+        // append 영역
         mdGoodPopSel: function() {
-            $('.btn-registration-pop').on('click', function() {
+            $('body, html').on('click', '.btn-registration-pop', function(){
                 var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
+                var itemSingle = $(this).closest('.modalPop.goodsPop').attr('item-single');
+                var slideIdx = $(this).closest('.modalPop.goodsPop').attr('item-idx');
                 var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
-                
-                var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
-                if (existingSwiper && existingSwiper.swiper) {
-                    existingSwiper.swiper.destroy();
+
+                if(itemSingle == "false") { // 추가하기 일 때
+                    var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
+                    if (existingSwiper && existingSwiper.swiper) {
+                        existingSwiper.swiper.destroy();
+                    }
+                    
+                    dataElem.closest('.md').find('.swiper-notification').remove();
+                    if ($('.product-list input[type="checkbox"]:checked').length > 0) {
+                        dataElem.parent('.btnWrap').siblings('.swiper-inner').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
+                    }
+            
+                    $('.product-list input[type="checkbox"]:checked').each(function() {
+                        var parentLi = $(this).closest('li');
+                        var clonedSlide = parentLi.find('.swiper-slide').clone();
+                        dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
+                        dataElem.closest('.md').children('.swiper-inner').removeClass('swiperIsEnd');
+                    });
+                    
+                    cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
+                    // cp.modalPop.closePop($(this));
+            
+                    $('.product-list input[type="checkbox"]').prop('checked', false);
+            
+                    setTimeout(function() {
+                        $('.btn-registration-pop').removeClass('btn-close-pop');
+                    }, 100);
+                } else if (itemSingle == "true") { // 수정하기 일 때
+                    $('.product-list input[type="checkbox"]:checked').each(function() {
+                        var parentLi = $(this).closest('li');
+                        var clonedSlide = parentLi.find('.swiper-slide').html();
+                        dataElem.closest('.md').find('.swiper-wrapper').children('.swiper-slide').eq(slideIdx).html(clonedSlide);
+                    });
+                    $('.product-list input[type="checkbox"]').prop('checked', false);
+                    
                 }
-                
-                dataElem.closest('.md').find('.swiper-notification').remove();
-                if ($('.product-list input[type="checkbox"]:checked').length > 0) {
-                    dataElem.parent('.btnWrap').siblings('.swiper').find('.swiper-wrapper .no-img').closest('.swiper-slide').remove();
-                }
-        
-                $('.product-list input[type="checkbox"]:checked').each(function() {
-                    var parentLi = $(this).closest('li');
-                    var clonedSlide = parentLi.find('.swiper-slide').clone();
-                    dataElem.closest('.md').find('.swiper-wrapper').append(clonedSlide);
-                });
-                
-                cp.moduleBox.initializeSwiper(dataElem.closest('.md').find('.swiper'));
-                // cp.modalPop.closePop($(this));
-        
-                $('.product-list input[type="checkbox"]').prop('checked', false);
-        
-                setTimeout(function() {
-                    $('.btn-registration-pop').removeClass('btn-close-pop');
-                }, 100);
             });
         },
 
@@ -370,7 +422,7 @@ var COMPONENT_MD = (function (cp, $) {
                     slidesPerView = 1;
                 }
 
-                new Swiper(this, {
+                var swiperInstance = new Swiper(this, {
                     loop: false,
                     slidesPerView: slidesPerView,  
                     spaceBetween: 10, 
@@ -383,9 +435,20 @@ var COMPONENT_MD = (function (cp, $) {
                         prevEl: '.swiper-button-prev',
                     },
                 });
+
+                swiperInstance.on('slideChange', function () {
+                    var swiperInner = $(swiperInstance.el).parent('.swiper-inner');
+
+                    if (swiperInstance.isEnd) {
+                        swiperInner.addClass('swiperIsEnd');
+                    } else {
+                        swiperInner.removeClass('swiperIsEnd');
+                    }
+                });
             });
             
         }, 
+
 
         resetSwipers: function() {
             $(document).ready(function() {
@@ -411,7 +474,7 @@ var COMPONENT_MD = (function (cp, $) {
         init: function () {
             this.openCropImg();
         },
-        openCropImg: function () {
+        openCropImg: function (dataType) {
             function loadCropModal($imgWrap) {
                 $('.cropModalWrap').load('../../asset/_module/modal.html', function () {
                     var cropModalWrap = $(this);
@@ -441,10 +504,11 @@ var COMPONENT_MD = (function (cp, $) {
                 }
             });
         
-            $('.btnAddImg').on('click', function(){
-                var dataType = $(this).closest('.option-wrap').data('type');
+            $('.btnAddImg').off('click').on('click', function(){
+                //var dataType = $(this).closest('.option-wrap').data('type');
                 var $md = $('.md[data-module="' + dataType + '"]');
                 var $imgWraps = $md.children('.imgWrap');
+                console.log(dataType)
             
                 $imgWraps.each(function() {
                     var $imgWrap = $(this);
@@ -515,8 +579,6 @@ var COMPONENT_MD = (function (cp, $) {
             $('#' + cropId).on('click', function () {
                 var initialAvatarURL;
                 var canvas;
-                
-                $imgWrap.removeClass("no-img");
 
                 if (cropper) {
                     var cropWidth = $('#cropWidth').val();
@@ -525,6 +587,8 @@ var COMPONENT_MD = (function (cp, $) {
                         width: cropWidth,
                         height: cropHeight
                     });
+                
+                    $imgWrap.removeClass("no-img");
                     initialAvatarURL = avatar.src;
                     avatar.src = canvas.toDataURL();
                     /*
@@ -648,39 +712,38 @@ var COMPONENT_MD = (function (cp, $) {
             this.spectrumGrColor();
         },
         spectrumColor: function(initialColor) {
-            $(document).ready(function(){
-                $("#editColor").spectrum({
-                    flat: false,
-                    showInput: true,
-                    preferredFormat: "hex",
-                    showInitial: true,
-                    showPalette: true,
-                    showSelectionPalette: true,
-                    maxPaletteSize: 10,
-                    color: initialColor,
-                    change: function(color) {
-                        var selectedColor = color.toHexString();
-                        cp.colorEdit.fontColor(selectedColor);
-                    },
+            var self = this;
+            $(".editColor").spectrum({
+                flat: false,
+                showInput: true,
+                preferredFormat: "hex",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxPaletteSize: 10,
+                color: initialColor,
+                change: function(color) {
+                    var selectedColor = color.toHexString();
+                    self.fontColor(selectedColor);
+                },
 
-                    palette: [
-                        ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)", 
-                        "rgb(204, 204, 204)", "rgb(217, 217, 217)", 
-                        "rgb(255, 255, 255)"],
-                        ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
-                        "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
-                        ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
-                        "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
-                        "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
-                        "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
-                        "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
-                        "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
-                        "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
-                        "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
-                        "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
-                        "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
-                    ]
-                });
+                palette: [
+                    ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)", 
+                    "rgb(204, 204, 204)", "rgb(217, 217, 217)", 
+                    "rgb(255, 255, 255)"],
+                    ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                    "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                    ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                    "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                    "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                    "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                    "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                    "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                    "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                    "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                    "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                    "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                ]
             });
         },
         fontColor: function(editColor) {
@@ -902,6 +965,7 @@ var COMPONENT_MD = (function (cp, $) {
             //this.fontBold();
             //this.fontSize();
             this.editOpen();
+            this.textHide();
         },
 /*         fontBold: function() {
             $(document).off('click').on('click', '.editBold', function(){
@@ -971,9 +1035,107 @@ var COMPONENT_MD = (function (cp, $) {
                     $('.textEditerWrap').remove();
                 }
             });
+        },
+        textHide: function() {
+            $('.inpUse input').change(function() {
+                var radioValue = $(this).val();
+                var radioName = $(this).attr('name');
+                var dataType = $(this).closest('.option-wrap').data('type');
+                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                
+                if (radioValue === "disuse") {
+                    $txtEdit.each(function(){
+                        $(this).find('[data-text="' + radioName + '"]').each(function() {
+                            $(this).hide();
+                        });
+                    })
+                } else {
+                    $txtEdit.each(function(){
+                        $(this).find('[data-text="' + radioName + '"]').each(function() {
+                            $(this).show();
+                        });
+                    })
+                }
+            });
         }
     };
-
+    /* module : countdown */
+    cp.countdownEdit = {
+        init: function() {
+            this.bindEvents();
+        },
+        bindEvents: function() {
+            $('#countdownDate').change(this.startCountdown);
+            $('#countdownTime').change(this.startCountdown);
+        },
+        startCountdown: function() {
+            var inputDate = $('#countdownDate').val();
+            var inputTime = $('#countdownTime').val();
+            
+            if (inputDate) {
+                var targetDate = new Date(inputDate);
+                var targetTime = targetDate.setHours(0, 0, 0, 0); // 날짜만 설정된 경우 0시로 설정
+    
+                if (inputTime) {
+                    var timeParts = inputTime.split(":");
+                    targetTime += parseInt(timeParts[0]) * 60 * 60 * 1000;
+                    targetTime += parseInt(timeParts[1]) * 60 * 1000;
+                }
+                
+                cp.countdownEdit.updateCountdown(targetTime);
+            } else {
+                alert("날짜를 입력하세요.");
+            }
+        },
+        updateCountdown: function(targetTime) {
+            clearInterval(cp.countdownInterval); // 기존의 카운트다운 인터벌 제거
+            cp.countdownInterval = setInterval(function() {
+                var currentTime = new Date().getTime();
+                var distance = targetTime - currentTime;
+    
+                if (distance <= 0) {
+                    clearInterval(cp.countdownInterval);
+                    $('#countdown').text("카운트다운 종료");
+                } else {
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    //var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    var daysStr = days.toString().padStart(2, '0');
+                    var hoursStr = hours.toString().padStart(2, '0');
+                    var minutesStr = minutes.toString().padStart(2, '0');
+                    //var secondsStr = seconds.toString().padStart(2, '0');
+                    $('#countdown .cdDate').html(daysStr);
+                    $('#countdown .cdTime').html(hoursStr);
+                    $('#countdown .cdMinute').html(minutesStr);
+                }
+            }, 1000); // 1초마다 갱신
+        }
+    };
+    /* module : HTML Code */
+    cp.htmlCodeEdit = {
+        init: function(){
+            this.htmlCode();
+        },
+        htmlCode: function() {
+            $('.htmlCodeSubmit').on('click', function() {
+                var htmlContent = $('.textareaHtml textarea').val();
+                $('.htmlCodeView').html(htmlContent);
+        
+                // HTML 유효성 검사
+                try {
+                    var tempDiv = $('<div></div>');
+                    tempDiv.html(htmlContent);
+        
+                    $('.errorDisplay').hide();
+                    tempDiv.remove();
+                } catch (error) {
+                    $('.errorDisplay').text('입력한 HTML에 문제가 있습니다: ' + error.message).show();
+                }
+            });
+        }
+    }
+    
     cp.init = function () {
         cp.optionEdit.init();
         cp.moduleBox.init();
@@ -981,6 +1143,8 @@ var COMPONENT_MD = (function (cp, $) {
         cp.videoModule.init(); // video insert    
         cp.colorEdit.init();
         cp.fontEditer.init();
+        cp.countdownEdit.init();
+        cp.htmlCodeEdit.init();
     };
 
     cp.init();

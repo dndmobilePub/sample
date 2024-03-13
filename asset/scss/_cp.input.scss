@@ -45,6 +45,10 @@
     }
 
     &-txt {@include display(flex); align-items:center; flex-shrink:0;}
+<<<<<<< HEAD
+=======
+    // &-msg {margin-top:.5rem;} BHY 삭제
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
     &-info {margin-top:.5rem; color:$color-gray3;}
 
     /* FIELD - INPUT */
@@ -142,8 +146,15 @@
         & + & {margin-top:1rem;}
         & + #{$field} {margin-top:1rem;}
         
-        #{$field} {
-            & + & {margin-top:0; margin-left:1rem;}
+        & #{$field} {
+            & + & {margin-top:0; margin-left:1rem;};
+
+            &-select{
+                &-wrap{
+                    flex-basis: 15%;
+                }
+            }
+
         }
 
         & .btnWrap{

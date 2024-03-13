@@ -228,10 +228,6 @@
 	&-contents {
 		padding: 0 2rem 2rem;
 		min-height: 20rem;
-
-		&:nth-child(even) {
-			background: $color-gray7;
-		}
 	}
 
 	&-sticky {
@@ -245,9 +241,9 @@
 			&-contents-wrap {
 				border: none;
 			}
-			&-contents {
-				// padding: 8rem 5rem;
-			}
+			// &-contents {
+			// 	// padding: 8rem 5rem;
+			// }
 		}
 	}
 }
@@ -265,3 +261,33 @@
 
 // 안드로이드 old 버전
 .aos_old .tab-sticky .tab-list-wrap {position: relative;}
+
+
+// 상품모듈 탭
+[data-type="goods"] {
+	&[tab-case="list1"]{
+		.lst-goods {
+			& > li {
+				@include width(100%);
+			}
+		}
+
+		.goodsWrap{
+			&:after{
+				content:'';
+				@include display(block);
+				clear: both;
+			}
+			.goods-img{
+				width: 50%;
+				float: left;
+				margin-right: 1.6rem;
+				margin-bottom: 0;
+			}
+			.item{
+				width: calc(50% - 1.6rem);
+				float:left;
+			}
+		}
+	}
+}

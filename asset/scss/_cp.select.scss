@@ -42,12 +42,15 @@
 
         &-wrap{
             @include display(flex);
+<<<<<<< HEAD
 
             & #{$field}{
                 &-select{
                     margin-left: 0.8rem;
                 }
             }
+=======
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
             
             & .btnWrap{
                 flex-grow:0;
@@ -63,7 +66,11 @@
             @include fontSize('lg');
         }
 
+<<<<<<< HEAD
         & .border{
+=======
+        & .btn-select{
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
             position: relative;
             min-height: 4.0rem;
             border-radius: .5rem;
@@ -76,6 +83,12 @@
             width: 100%;
             text-align: left;
             &:focus-within {box-shadow: inset 0 0 0 .2rem $color-gray8;}
+
+            &.border-none{
+                background:transparent;
+                box-shadow: none;
+                &:focus-within{box-shadow: none;}
+            }
         }
 
         & .border-none{

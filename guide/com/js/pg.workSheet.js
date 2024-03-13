@@ -112,7 +112,7 @@ var makeBoard = function () {
     var $data = data;
     var tbodyHtml = '';
     var idx = 1;
-    var urlLink = '';
+    var urlLink = '../html';
     var createTr = function (obj) {
       var trHtml = '';
       if (obj.directory !== undefined && obj.directory !== '') {
@@ -122,10 +122,13 @@ var makeBoard = function () {
         trHtml += '<td class="no">' + idx + '</td>';
         idx += 1;
         if (obj.id) {
+          var UrlId = obj.id;
+          var lastIndex = UrlId.lastIndexOf('/');
+          var idResult = UrlId.substring(lastIndex + 1);
           if (obj.link) {
             trHtml += '<td class="id">' + obj.id + '</td>';
           } else {
-            trHtml += '<td class="id"><a href="' + urlLink + '/' + obj.id + '.html" target="_blank">' + obj.id + '</a></td>';
+            trHtml += '<td class="id"><a href="' + urlLink + '/' + obj.id + '.html" target="_blank">' + idResult + '</a></td>';
           }
         } else {
           trHtml += '<td class="id"></td>';

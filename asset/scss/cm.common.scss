@@ -44,11 +44,9 @@
   &.optionBtn {
     @include display(none);
     width: 100%;
-    margin: .5rem 0 0;
   }
   &.dragBtn {
     @include display(none);
-    margin: .5rem 0 0;
     padding: 1rem 1.15rem;
     background: $color-violet;
     border-color: $color-violet;
@@ -136,30 +134,60 @@ $moduel:'.module';
           }
         }
       }
+      > .btnWrap {
+        margin:0; padding:1.5rem 1rem;
+      }
     }
   }
 
+  &-add-tit{
+    padding: 3rem 0 1rem;
+    margin: 0 2rem;
+    text-align: center;
+    border-bottom: 1px solid $color-gray6;
+  }
   &-add-box {
-    @include pos-offset-b(10%, auto, fixed){right:2%; z-index: 1000;}
+    @include pos-offset-b(0, auto, fixed){right:0; z-index: 100;}
     min-width:15rem;
-    background:$color-gray2;
+    background:$color-white;
+    height: 100vh;
+    box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.5);
 
     .btnWrap {
-      padding:.5rem;
-      & > a {
+      padding:1rem;
+      margin-top: 0;
+      .add-btn {
         @include display(block);
         padding:.5rem 1rem;
-        color:$color-gray6; text-decoration:none;
-        background:$color-gray3;
-        @include line(border, 1px solid $color-gray4);
+        margin: 0 1rem;
+        color:$color-black; text-decoration:none;
+        background:$color-white;
         font-size:var(--space-ms);
         border-radius: .3rem;
     
-        & ~ a {margin-top:.5rem;}
+        & ~ .add-btn {margin-top:.5rem;}
         &:hover {
           color:$color-gray1;
           font-weight:bold;
-          background:$color-white;
+          background:$color-gray6;
+        }
+      }
+      .module-more{
+        .more-btn{
+          border:none;
+        }
+        .more-cont{
+          height: 0;
+          overflow: hidden;
+          transition: .3s;
+        }
+        &.on{
+          .more-btn{
+            border-bottom:1px solid $color-gray6;
+          }
+          .more-cont{
+            height: auto;
+          }
         }
       }
     }
@@ -167,6 +195,10 @@ $moduel:'.module';
 
   &-option {
     .btn {min-width:initial;}
+
+    .btn ~ * {
+      margin: .5rem 0 0;
+    }
   }
   
   &-edit {
@@ -349,67 +381,15 @@ $moduel:'.module';
       @include display(flex);
       @include flex($j-content:space-around) {gap: 1rem};
     }
-  }
-}
-  
 
-[data-type="goods"] {
-  & > .btnWrap {margin:0; padding:1.5rem 1rem;}
-  .swiper{
-    @include display(flex);
-    padding: 0 2rem 2rem;
-    min-height: 20rem;
-    img{
-      max-width: 30rem;
-      width: 100%;
-    }
-  }
-  &[swiper-case="PerView1"]{
-    .goodsWrap{
-      &:after{
-        content:'';
-        @include display(block);
-        clear: both;
-      }
-      .goods-img{
-        width: 50%;
-        float: left;
-        margin-right: 1.6rem;
-        margin-bottom: 0;
-      }
-      .item{
-        width: calc(50% - 1.6rem);
-        float:left;
-      }
-    }
-  }
-  &[tab-case="list1"]{
-    .lst-goods {
-      & > li {
-        @include width(100%);
-      }
-    }
-  
-    .goodsWrap{
-      &:after{
-        content:'';
-        @include display(block);
-        clear: both;
-      }
-      .goods-img{
-        width: 50%;
-        float: left;
-        margin-right: 1.6rem;
-        margin-bottom: 0;
-      }
-      .item{
-        width: calc(50% - 1.6rem);
-        float:left;
+    .textareaHtml {
+      textarea {
+        width: 100%;
       }
     }
   }
 }
-
+  
 /* 이미지 */
 .imgWrap {
   @include pos(relative);

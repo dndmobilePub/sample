@@ -686,6 +686,7 @@ var COMPONENT_UI = (function (cp, $) {
             $modal.attr({'aria-hidden': 'false', 'tabindex':'0'}).focus();
             $modalWrap.attr({'role': 'dialog', 'aria-modal': 'true'})
                     .find('h1, h2, h3, h4, h5, h6').first().attr('tabindex', '0');
+            $modalWrap.find('.goodsAddBtn[item-single="true"]').attr('data-modal', target);
             dimmedEl.remove(); 
             $('body').addClass('no-scroll').append(dimmedEl);            
         },
@@ -1208,18 +1209,35 @@ var COMPONENT_UI = (function (cp, $) {
         },
 
         selectBoxshow: function(){
+<<<<<<< HEAD
             $('.field-select > button').click(function(event) {
+=======
+            $('.field-select > .btn-select').click(function(event) {
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
                 event.stopPropagation();
                 var selectWidth = $(this).outerWidth();
                 $('.field-select-list').removeClass('_is-active');
                 $(this).next('.field-select-list').toggleClass('_is-active');
                 $(this).next('.field-select-list').css('width', selectWidth + 'px');
             });
+<<<<<<< HEAD
             $('.field-select-list li').click(function(event) {
                 event.stopPropagation();
                 var selectedText = $(this).text();
                 $(this).closest('.field-select').find('button').text(selectedText);
                 $(this).parent('.field-select-list').removeClass('_is-active');
+=======
+            $('.field-select-list li').each(function() {
+                $(this).click(function(event) {
+                    event.stopPropagation();
+                    var selectedText = $(this).text();
+                    $(this).closest('.field-select').find('button').text(selectedText);
+                    $(this).parent('.field-select-list').removeClass('_is-active');
+                });
+            });
+            $('body, html').click(function() {
+                $('.field-select-list').removeClass('_is-active');
+>>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
             });
             $(document).click(function() {
                 $('.field-select-list').removeClass('_is-active');
@@ -1553,10 +1571,43 @@ var COMPONENT_UI = (function (cp, $) {
         addTab: function() {
             const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
             const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
-                      _tabCont = $('<div class="tab-contents" contenteditable="true">탭컨텐츠 추가</div>');
+            _tabCont = $('<div class="tab-contents">' +
+                            '<p class="goods-category">iPad</p>' +
+                            '<ul class="lst lst-goods">' +
+                            '<li>' +
+                                '<dl class="goodsWrap">' +
+                                '<dt class="goods-img">' +
+                                    '<div class="no-img"></div>' +
+                                '</dt>' +
+                                '<dd class="item brand">애플</dd>' +
+                                '<dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>' +
+                                '<dd class="item price">1,249,000 원</dd>' +
+                                '<dd class="item benefit">' +
+                                    '<span class="label point">최대 50% M 포인트</span>' +
+                                '</dd>' +
+                                '</dl>' +
+                            '</li>' +
+                            '<li>' +
+                                '<dl class="goodsWrap">' +
+                                '<dt class="goods-img">' +
+                                    '<div class="no-img"></div>' +
+                                '</dt>' +
+                                '<dd class="item brand">애플</dd>' +
+                                '<dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>' +
+                                '<dd class="item price">1,249,000 원</dd>' +
+                                '<dd class="item benefit">' +
+                                    '<span class="label point">최대 50% M 포인트</span>' +
+                                '</dd>' +
+                                '</dl>' +
+                            '</li>' +
+                            '</ul>' +
+                            '<div class="btnWrap">' +
+                            '<button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="swiper_uniqueData">상품추가</button>' +
+                            '</div>' +
+                        '</div>');
+
 
             $(_addTab).one('click', function() {
-                
                 $(this).closest('li').before(_tabLi);
                 $(this).parent().parent().parent().next('.tab-contents-wrap').append(_tabCont);
                 cp.tab.init();
