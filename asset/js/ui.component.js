@@ -686,6 +686,7 @@ var COMPONENT_UI = (function (cp, $) {
             $modal.attr({'aria-hidden': 'false', 'tabindex':'0'}).focus();
             $modalWrap.attr({'role': 'dialog', 'aria-modal': 'true'})
                     .find('h1, h2, h3, h4, h5, h6').first().attr('tabindex', '0');
+            $modalWrap.find('.goodsAddBtn[item-single="true"]').attr('data-modal', target);
             dimmedEl.remove(); 
             $('body').addClass('no-scroll').append(dimmedEl);            
         },

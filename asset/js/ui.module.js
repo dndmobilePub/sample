@@ -362,12 +362,13 @@ var COMPONENT_MD = (function (cp, $) {
 
         // append 영역
         mdGoodPopSel: function() {
-            $('.btn-registration-pop').on('click', function() {
+            // $('.btn-registration-pop').on('click', function() {
+            $('body, html').on('click', '.btn-registration-pop', function(){
                 var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
                 var itemSingle = $(this).closest('.modalPop.goodsPop').attr('item-single');
                 var slideIdx = $(this).closest('.modalPop.goodsPop').attr('item-idx');
                 var dataElem = $('.md').find('.goodsAddBtn[data-modal="' + thisData + '"]');
-                
+
                 if(itemSingle == "false") { // 추가하기 일 때
                     var existingSwiper = dataElem.closest('.md').find('.swiper')[0];
                     if (existingSwiper && existingSwiper.swiper) {
@@ -401,6 +402,7 @@ var COMPONENT_MD = (function (cp, $) {
                         dataElem.closest('.md').find('.swiper-wrapper').children('.swiper-slide').eq(slideIdx).html(clonedSlide);
                     });
                     $('.product-list input[type="checkbox"]').prop('checked', false);
+                    
                 }
             });
         },
