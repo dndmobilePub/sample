@@ -1209,24 +1209,13 @@ var COMPONENT_UI = (function (cp, $) {
         },
 
         selectBoxshow: function(){
-<<<<<<< HEAD
-            $('.field-select > button').click(function(event) {
-=======
             $('.field-select > .btn-select').click(function(event) {
->>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
                 event.stopPropagation();
                 var selectWidth = $(this).outerWidth();
                 $('.field-select-list').removeClass('_is-active');
                 $(this).next('.field-select-list').toggleClass('_is-active');
                 $(this).next('.field-select-list').css('width', selectWidth + 'px');
             });
-<<<<<<< HEAD
-            $('.field-select-list li').click(function(event) {
-                event.stopPropagation();
-                var selectedText = $(this).text();
-                $(this).closest('.field-select').find('button').text(selectedText);
-                $(this).parent('.field-select-list').removeClass('_is-active');
-=======
             $('.field-select-list li').each(function() {
                 $(this).click(function(event) {
                     event.stopPropagation();
@@ -1237,7 +1226,6 @@ var COMPONENT_UI = (function (cp, $) {
             });
             $('body, html').click(function() {
                 $('.field-select-list').removeClass('_is-active');
->>>>>>> 173aa0348c94092f533e639cf86c20c745ebdd00
             });
             $(document).click(function() {
                 $('.field-select-list').removeClass('_is-active');
