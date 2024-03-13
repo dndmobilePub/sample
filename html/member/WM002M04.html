@@ -44,38 +44,62 @@
               </div>
             </div>
 
+
+            <div class="field field-group invalid">
+              <div class="field">
+                <label class="field-label tit">이메일</label>
+                <div class="field-outline">
+                  <div class="field-input grow _input">
+                    <input type="tel" class="_format _number" placeholder="메일아이디">
+                  </div>
+                  <span class="field-txt">@</span>
+                  <div class="field-input grow _input">
+                    <input type="tel" class="_format _number" placeholder="메일아이디">
+                  </div>
+                </div>
+                <p class="field-msg">
+                  <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+                </p>
+              </div>
+              <div class="field-select-wrap">
+                <div class="field-select">
+                  <label class="field-label tit">메일선택</label>
+                  <button class="border">선택</button>
+                  <ul class="field-select-list" title="메일도메인">
+                    <li>선택</li>
+                    <li>naver.com</li>
+                    <li>daum.com</li>
+                  </ul>
+                </div>
+                <div class="btnWrap">
+                  <button class="btn btn-size bg" disabled>중복확인</button>
+                </div>
+              </div>
+            </div>
+
+
             <div class="field">
-              <label class="field-label tit">이메일</label>
               <div class="field-outline">
                 <div class="field-input grow _input">
                   <input type="tel" class="_format _number" placeholder="메일아이디">
                 </div>
                 <span class="field-txt">@</span>
                 <div class="field-input grow _input">
-                  <input type="tel" class="_format _number" placeholder="메일아이디">
+                  <div class="field-select">
+                    <button class="border-none">선택</button>
+                    <ul class="field-select-list" title="메일도메인">
+                      <li>선택</li>
+                      <li>naver.com</li>
+                      <li>daum.com</li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <p class="field-msg">
-                <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
-              </p>
-            </div>
-
-            <div class="field">
-              <label class="field-label tit">메일선택</label>
-              <button class="field-select type-one">선택</button>
-              <ul class="field-select-list" title="메일도메인">
-                <li>선택</li>
-                <li>naver.com</li>
-                <li>daum.com</li>
-              </ul>
-              <div class="btnWrap">
-                <button class="btn btn-size md bg">중복확인</button>
               </div>
             </div>
             
 
             <div class="field">
-              <label class="field-label">휴대폰번호</label>
+              <label class="field-label tit">휴대폰번호</label>
               <div class="field-outline disabled">
                 <div class="field-input grow _input">
                   <input type="text" placeholder="disabled" disabled="disabled">
@@ -84,7 +108,7 @@
             </div>
 
             <div class="field">
-              <label class="field-label req-a">비밀번호</label>
+              <label class="field-label req-a tit">비밀번호</label>
               <div class="field-outline">
                 <div class="field-input grow _input">
                   <input type="password" class="_format _password" placeholder="●●●●" maxlength="4">
@@ -96,7 +120,7 @@
             </div>
 
             <div class="field">
-              <label class="field-label">비밀번호 확인</label>
+              <label class="field-label tit">비밀번호 확인</label>
               <div class="field-outline">
                 <div class="field-input grow _input">
                   <input type="password" class="_format _password" placeholder="●●●●" maxlength="4">
@@ -109,13 +133,25 @@
 
             <h2 class="tit dep03">브랜드 정보</h2>
 
-            <div class="field-select grow">
-              <select class="select-sys" title="메일도메인">
-                <option>선택해주세요</option>
-                <option>naver.com</option>
-                <option>daum.net</option>
-                <option>gmail.com</option>
-              </select>
+            <div class="field-group">
+              <div class="field field-select">
+                <label class="field-label tit">메일선택</label>
+                <button class="border">선택</button>
+                <ul class="field-select-list" title="메일도메인">
+                  <li>선택</li>
+                  <li>naver.com</li> 
+                  <li>daum.com</li>
+                </ul>
+              </div>
+              <div class="field field-select">
+                <label class="field-label tit">메일선택</label>
+                <button class="border">선택</button>
+                <ul class="field-select-list" title="메일도메인">
+                  <li>선택</li>
+                  <li>naver.com</li>
+                  <li>daum.com</li>
+                </ul>
+              </div>
             </div>
 
             <div class="field-select grow">

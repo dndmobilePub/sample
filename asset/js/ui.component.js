@@ -1208,13 +1208,21 @@ var COMPONENT_UI = (function (cp, $) {
         },
 
         selectBoxshow: function(){
-            $('.field-select.type-one').click(function() {
+            $('.field-select > button').click(function(event) {
+                event.stopPropagation();
+                var selectWidth = $(this).outerWidth();
+                $('.field-select-list').removeClass('_is-active');
                 $(this).next('.field-select-list').toggleClass('_is-active');
+                $(this).next('.field-select-list').css('width', selectWidth + 'px');
             });
-            $('.field-select-list li').click(function() {
+            $('.field-select-list li').click(function(event) {
+                event.stopPropagation();
                 var selectedText = $(this).text();
-                $('.field-select.type-one').text(selectedText);
+                $(this).closest('.field-select').find('button').text(selectedText);
                 $(this).parent('.field-select-list').removeClass('_is-active');
+            });
+            $(document).click(function() {
+                $('.field-select-list').removeClass('_is-active');
             });
         },
     },

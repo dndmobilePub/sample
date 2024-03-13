@@ -45,7 +45,7 @@
     }
 
     &-txt {@include display(flex); align-items:center; flex-shrink:0;}
-    &-msg {margin-top:.5rem;}
+    // &-msg {margin-top:.5rem;} BHY 삭제
     &-info {margin-top:.5rem; color:$color-gray3;}
 
     /* FIELD - INPUT */
@@ -140,13 +140,28 @@
     /* FIELD - GROUP */
     &-group {
         @include display(flex);
-
         & + & {margin-top:1rem;}
         & + #{$field} {margin-top:1rem;}
         
         #{$field} {
             & + & {margin-top:0; margin-left:1rem;}
         }
+
+        & .btnWrap{
+            margin-top: 0;
+        }
+
+        & div{
+            flex-grow: 1;
+        }
+
+        & #{$field}{
+            & + #{$field}{
+                margin: 0;
+                margin-left: 0.8rem;
+            }
+        }
+        
     }
     & + &-group {margin-top:1rem;}
 
