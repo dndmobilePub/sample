@@ -146,10 +146,6 @@ body, th, td, input, select, textarea, button {
   letter-spacing: -0.5px;
 }
 
-input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
-  background: #f6f6f6;
-}
-
 input[type=text]:read-only, input[type=password]:read-only,
 input[type=text]:disabled, input[type=password]:disabled {
   background: #f6f6f6;
@@ -1844,6 +1840,7 @@ legend, caption {
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
+<<<<<<< HEAD
 .field input[type=password]::-webkit-input-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
@@ -1864,13 +1861,12 @@ legend, caption {
   -webkit-text-security: none;
   font-size: 2rem;
 }
+=======
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
 .field input[type=password]::placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
-}
-.field input[type=password]:-moz-read-only {
-  color: #999;
 }
 .field input[type=password]:read-only {
   color: #999;
@@ -1961,6 +1957,7 @@ legend, caption {
   border: 0;
   background-color: transparent;
 }
+<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder {
   font-weight: normal;
   color: #949494;
@@ -1977,6 +1974,8 @@ legend, caption {
   font-weight: normal;
   color: #949494;
 }
+=======
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   font-weight: normal;
   color: #949494;
@@ -1984,6 +1983,7 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
 }
+<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder {
   color: #ccc;
 }
@@ -1996,6 +1996,8 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio])::-ms-input-placeholder {
   color: #ccc;
 }
+=======
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   color: #ccc;
 }
@@ -2010,6 +2012,7 @@ legend, caption {
   max-width: 1.1rem;
   padding-right: 0;
 }
+<<<<<<< HEAD
 .field-input.mid_num input::-webkit-input-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
@@ -2026,6 +2029,8 @@ legend, caption {
   font-family: "pass";
   font-size: 0.4rem;
 }
+=======
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
 .field-input.mid_num input::placeholder {
   font-family: "pass";
   font-size: 0.4rem;
@@ -2244,6 +2249,7 @@ legend, caption {
 ._input input._password::-webkit-input-placeholder {
   font-weight: 700;
 }
+<<<<<<< HEAD
 ._input input._password::-moz-placeholder {
   font-weight: 700;
 }
@@ -2253,6 +2259,8 @@ legend, caption {
 ._input input._password::-ms-input-placeholder {
   font-weight: 700;
 }
+=======
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
 ._input input._password::placeholder {
   font-weight: 700;
 }
@@ -2266,6 +2274,7 @@ legend, caption {
   z-index: 2;
   color: transparent;
 }
+<<<<<<< HEAD
 ._input ._secureTxt > input[type=password]::-webkit-input-placeholder {
   color: transparent;
 }
@@ -2278,6 +2287,8 @@ legend, caption {
 ._input ._secureTxt > input[type=password]::-ms-input-placeholder {
   color: transparent;
 }
+=======
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
 ._input ._secureTxt > input[type=password]::placeholder {
   color: transparent;
 }
@@ -3645,8 +3656,11 @@ legend, caption {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+<<<<<<< HEAD
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
+=======
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
   min-width: fit-content;
 }
 .tab-list .tab {
@@ -4862,8 +4876,10 @@ label input {
 /* textEditerWrap */
 .textEditerWrap {
   display: none;
-  width: 100%;
-  margin: 0 0 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
   background: #f3f4f6;
   font-size: 1.4rem;
   font-weight: normal;
@@ -4887,6 +4903,7 @@ label input {
 .edit-box .btn-edit ~ .btn-edit {
   margin-left: 1rem;
 }
+<<<<<<< HEAD
 .edit-box .btn-edit .edit-bold {
   padding: 0.5rem 1rem;
   font-weight: 700;
@@ -4909,6 +4926,28 @@ label input {
   width: 3rem;
   height: 2rem;
   border: 1px solid #000;
+=======
+.edit-box .btn-edit .edit {
+  /*       &-bold {
+          padding: .5rem 1rem;
+          font-weight: 700;
+          border: 1px solid #000;
+          border-radius: .3rem;
+        }
+        &-size {
+          display: flex;
+          align-items: center;
+          padding: .4rem 1rem;
+          border: 1px solid #000;
+          border-radius: .3rem;
+
+          &-input {
+            margin-left: .5rem;
+            width: 3rem; height: 2rem;
+            border: 1px solid #000;
+          }
+        } */
+>>>>>>> e6561864cf060a4c928a019057e79905fddcff8a
 }
 .edit-box .btn-edit .edit-color {
   position: relative;
