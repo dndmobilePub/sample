@@ -122,9 +122,10 @@ $moduel:'.module';
             @include align(text, left);
           }
 
-          &Bg {
+          .txtEditBg {
             @include pos(absolute) {bottom: 0; left: 0; z-index: -1;};
             @include el-size(100%, 30%);
+            margin-top: 0;
             background: linear-gradient(to top, $color-gray8, transparent);
           }
 

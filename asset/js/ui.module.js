@@ -17,7 +17,7 @@ var COMPONENT_MD = (function (cp, $) {
             cp.optionEdit.currentModuleData = null;
             $('html, body').on('click', '.optionBtn', function() {
                 const $thisMd = $(this).closest('.md');
-                cp.optionEdit.currentModuleData = $thisMd.data('module');
+                cp.optionEdit.currentModuleData = $thisMd.data('id');
                 const dataType = $thisMd.data('type');
                 const dataCase = $thisMd.data('case');
                 const bgColor = $thisMd.css('background-color');
@@ -71,7 +71,7 @@ var COMPONENT_MD = (function (cp, $) {
                 minHeight: 10,
                 stop: function(event, ui) {
                     var newHeight = ui.size.height;
-                    const dataType = $(this).data('module');
+                    const dataType = $(this).data('id');
                     $('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
                 }
             });
@@ -79,36 +79,33 @@ var COMPONENT_MD = (function (cp, $) {
         gapHeight: function(dataType) {
             $('.gap-height').off('change').on('change', function() {
                 var newHeight = $(this).val();
-                $('.md-gap[data-module="' + dataType + '"]').css('height', newHeight);
+                $('.md-gap[data-id="' + dataType + '"]').css('height', newHeight);
             });
         },
         inpTxtLocation: function(dataType) {
-            var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+            var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
 
             $txtEdit.each(function() {
                 var classes = $(this).attr('class').split(' '); 
-                for (var i = 0; i < classes.length; i++) {
-                    if (classes[i] !== 'txtEdit') {
-                        $('input[name="location"]').filter(function() {
-                            return $(this).val() === classes[i];
-                        }).prop('checked', true);
-                        break;
-                    }
-                }
+                var lastClass = classes[classes.length - 1];
+    
+                $('input[name="location"]').filter(function() {
+                    return $(this).val() === lastClass;
+                }).prop('checked', true);
             });
             $('input[name="location"]').off('change').on('change', function() {
                 var locationValue = $(this).val();
-                //var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                //var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
 
                 $txtEdit.removeClass();
-                $txtEdit.addClass('txtEdit ' + locationValue);
+                $txtEdit.addClass('txt-edit txtEdit ' + locationValue);
             });
         },
         txtBgHeight:function() {
             $('.txtBgHeight').on('change', function() {
                 var heightValue = $(this).val();
                 var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+                var $txtEditBg = $('.md[data-id="' + dataType + '"]').find('.txtEditBg');
 
                 $txtEditBg.css('height', heightValue);
             });
@@ -117,7 +114,7 @@ var COMPONENT_MD = (function (cp, $) {
             $('input[name="anchorTab"]').on('change', function() {
                 var anchorTabValue = $(this).val();
                 var dataType = $(this).closest('.option-wrap').data('type');
-                var $anchorTab = $('.md[data-module="' + dataType + '"]').find('.tab-list');
+                var $anchorTab = $('.md[data-id="' + dataType + '"]').find('.tab-list');
 
                 $anchorTab.removeClass();
                 $anchorTab.addClass('tab-list ' + anchorTabValue);
@@ -128,7 +125,7 @@ var COMPONENT_MD = (function (cp, $) {
                 var moreBtnValue = $(this).val();
                 var moreBtnValue02 = $(this).parent('label').siblings().find('input[name="moreBtn"]').val();
                 var dataType = $(this).closest('.option-wrap').data('type');
-                var $moreBtnSwiper = $('.md[data-module="' + dataType + '"]').children('.swiper-inner');
+                var $moreBtnSwiper = $('.md[data-id="' + dataType + '"]').children('.swiper-inner');
 
                 $moreBtnSwiper.removeClass(moreBtnValue02);
                 $moreBtnSwiper.addClass('swiper-inner ' + moreBtnValue);
@@ -272,7 +269,7 @@ var COMPONENT_MD = (function (cp, $) {
                 newMd.attr('data-case', caseValue);
                 newMd.attr('swiper-case', swiperCase);
                 newMd.attr('tab-case', tabCase);
-                newMd.attr('data-module', moduleId);
+                newMd.attr('data-id', moduleId);
 
                 cp.moduleBox.mdBoxAddCont(function(content) {
                     var newContentHTML;
@@ -515,7 +512,7 @@ var COMPONENT_MD = (function (cp, $) {
             });
         
             $('.btnAddImg').off('click').on('click', function(){
-                //var $md = $('.md[data-module="' + dataType + '"]');
+                //var $md = $('.md[data-id="' + dataType + '"]');
                 var $md = $(this).closest('.md');
                 var $imgWraps = $md.children('.imgWrap');
             
@@ -784,7 +781,7 @@ var COMPONENT_MD = (function (cp, $) {
         },
         bgColor: function(selectedBgColor, moduleType) {
             $('.section').find('.md').each(function() {
-                if ($(this).data('module') === moduleType) {
+                if ($(this).data('id') === moduleType) {
                     $(this).css('background-color', selectedBgColor);
                 }
             });
@@ -808,7 +805,7 @@ var COMPONENT_MD = (function (cp, $) {
         },
         btnColor: function(selectedbtnColor, moduleType) {
             $('.section').find('.md').each(function() {
-                if ($(this).data('module') === moduleType) {
+                if ($(this).data('id') === moduleType) {
                     $(this).find('.btnBn').css('background-color', selectedbtnColor);
                 }
             });
@@ -954,7 +951,7 @@ var COMPONENT_MD = (function (cp, $) {
                 var selectedOption = $(this).val();
                 var dataType = $(this).closest('.option-wrap').data('type');
 
-                $('.md[data-module="' + dataType + '"]').find('.tab a').css('color', selectedOption);
+                $('.md[data-id="' + dataType + '"]').find('.tab a').css('color', selectedOption);
             });
         },
         spectrumGrColor: function(initialColor) {
@@ -983,7 +980,7 @@ var COMPONENT_MD = (function (cp, $) {
                 $(this).on('change', function() {
                     var dataType = $(this).closest('.option-wrap').data('type');
                     console.log('dataType:', dataType);
-                    var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+                    var $txtEditBg = $('.md[data-id="' + dataType + '"]').find('.txtEditBg');
                     
                     if ($txtEditBg.length > 0) {
                         $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
@@ -1091,7 +1088,7 @@ var COMPONENT_MD = (function (cp, $) {
                 var radioValue = $(this).val();
                 var radioName = $(this).attr('name');
                 var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
                 
                 if (radioValue === "disuse") {
                     $txtEdit.each(function(){

@@ -4004,13 +4004,14 @@ label input {
   align-items: flex-start;
   text-align: left !important;
 }
-.module-wrap .md .imgWrap .txt-editBg {
+.module-wrap .md .imgWrap .txt-edit .txtEditBg {
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: -1;
   width: 100%;
   height: 30%;
+  margin-top: 0;
   background: linear-gradient(to top, #ccc, transparent);
 }
 .module-wrap .md .imgWrap .txt-edit .md-logo {
