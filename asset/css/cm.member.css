@@ -4215,8 +4215,9 @@ legend, caption {
   position: fixed;
   left: 0;
   z-index: 9995;
-  width: 100%;
+  width: auto;
   height: 100%;
+  max-width: 110rem;
 }
 .modalPop._top {
   position: fixed;
@@ -4328,9 +4329,6 @@ legend, caption {
 }
 .modalPop .modal-footer .btnWrap {
   margin: 0;
-}
-.modalPop.mb {
-  width: 100%;
 }
 .modalPop.mb .modalWrap {
   padding: 4rem;
