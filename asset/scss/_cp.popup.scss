@@ -98,7 +98,7 @@
 
     &._is-active {@include display(block);}
 
-    .goodsAddBtn {@include display(none);}
+    .goodsAddBtn , .goodsDelBtn{@include display(none !important) ;}
 }
 
 .dimmed {

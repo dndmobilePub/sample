@@ -3094,7 +3094,7 @@ legend, caption {
   display: block;
   clear: both;
 }
-[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
+[data-type=goods][tab-case=list1] .goodsWrap .goods-info {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
@@ -3195,6 +3195,15 @@ legend, caption {
   left: 0;
 }
 
+.goodsWrap {
+  position: relative;
+}
+.goodsWrap .goodsAddBtn {
+  display: none;
+}
+.goodsWrap:hover .goodsAddBtn {
+  display: block;
+}
 .goodsWrap .item {
   padding: 0.3rem 0;
 }
@@ -3383,8 +3392,8 @@ legend, caption {
 .modalPop._is-active {
   display: block;
 }
-.modalPop .goodsAddBtn {
-  display: none;
+.modalPop .goodsAddBtn, .modalPop .goodsDelBtn {
+  display: none !important;
 }
 
 .dimmed {

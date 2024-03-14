@@ -107,7 +107,6 @@
     @include pos(relative){z-index:1;}
     @include el-size(100%, 100%);    
     box-sizing: content-box;
-    padding-right: 50px;
   }
 
   &-slide{
@@ -349,6 +348,21 @@
            }
         }
       }
+
+      .swiper{
+        &-wrapper{
+          gap: 1rem;
+          padding: 2rem 0;
+        }
+        &-slide{
+          width: calc((100% - 1rem) / 2);
+        }
+        &-initialized{
+          .swiper-wrapper{
+            gap: 0;
+          }
+        }
+      }
       
       .moreBtn{
         @extend %transition3s;
@@ -364,17 +378,44 @@
         }
        
       }
+
+      .btn{
+        &.goodsAddBtn{
+          @include pos-offset-l(0,0) {z-index: 1;};
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          border-radius:1rem;
+          background: $color-black;
+          opacity: .5;
+          color:$color-white;
+          font-size:1.6rem;
+
+          
+        }
+        
+      }
     }
   }
 
   &[swiper-case="PerView1"]{
+    .swiper{
+      &-slide{
+        width: 100%;
+      }
+      &-initialized{
+        .swiper-wrapper{
+          gap: 0;
+        }
+      }
+    }
     .goodsWrap{
       &:after{
         content:'';
         @include display(block);
         clear: both;
       }
-      .goods-img{
+      .goods-info{
         width: 50%;
         float: left;
         margin-right: 1.6rem;
@@ -383,6 +424,13 @@
       .item{
         width: calc(50% - 1.6rem);
         float:left;
+      }
+    }
+  }
+  &[swiper-case="PerView1.5"]{
+    .swiper{
+      &-slide{
+        width: calc((100% / 3) * 2);
       }
     }
   }
@@ -399,7 +447,7 @@
         @include display(block);
         clear: both;
       }
-      .goods-img{
+      .goods-info{
         width: 50%;
         float: left;
         margin-right: 1.6rem;

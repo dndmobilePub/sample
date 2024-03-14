@@ -145,6 +145,10 @@ body, th, td, input, select, textarea, button {
   letter-spacing: -0.5px;
 }
 
+input[type=text]:-moz-read-only, input[type=password]:-moz-read-only {
+  background: #f6f6f6;
+}
+
 input[type=text]:read-only, input[type=password]:read-only,
 input[type=text]:disabled, input[type=password]:disabled {
   background: #f6f6f6;
@@ -525,11 +529,9 @@ legend, caption {
 }
 /* jquery UI CSS - resizalabe */
 .ui-sortable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable .ui-dialog-titlebar {
@@ -542,7 +544,6 @@ legend, caption {
   position: absolute;
   font-size: 0.1px;
   display: block;
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
@@ -611,11 +612,9 @@ legend, caption {
   font-size: 0;
   line-height: 0;
   position: relative;
-  -ms-touch-action: none;
   touch-action: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .cropper-container img {
@@ -1761,10 +1760,18 @@ legend, caption {
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
+.field input[type=password]::-moz-placeholder {
+  font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
+  -webkit-text-security: none;
+  font-size: 2rem;
+}
 .field input[type=password]::placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
+}
+.field input[type=password]:-moz-read-only {
+  color: #999;
 }
 .field input[type=password]:read-only {
   color: #999;
@@ -1837,12 +1844,19 @@ legend, caption {
   border: 0;
   background-color: transparent;
 }
+.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
+  font-weight: normal;
+  color: #949494;
+}
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   font-weight: normal;
   color: #949494;
 }
 .field-input input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
+}
+.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
+  color: #ccc;
 }
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   color: #ccc;
@@ -1857,6 +1871,10 @@ legend, caption {
   position: relative;
   max-width: 1.1rem;
   padding-right: 0;
+}
+.field-input.mid_num input::-moz-placeholder {
+  font-family: "pass";
+  font-size: 0.4rem;
 }
 .field-input.mid_num input::placeholder {
   font-family: "pass";
@@ -2035,6 +2053,9 @@ legend, caption {
   opacity: 1;
   touch-action: none;
 }
+._input input._password::-moz-placeholder {
+  font-weight: 700;
+}
 ._input input._password::placeholder {
   font-weight: 700;
 }
@@ -2046,6 +2067,9 @@ legend, caption {
 ._input ._secureTxt > input[type=password] {
   position: relative;
   z-index: 2;
+  color: transparent;
+}
+._input ._secureTxt > input[type=password]::-moz-placeholder {
   color: transparent;
 }
 ._input ._secureTxt > input[type=password]::placeholder {
@@ -2311,7 +2335,6 @@ legend, caption {
   width: 100%;
   height: 100%;
   box-sizing: content-box;
-  padding-right: 50px;
 }
 .swiper-slide {
   flex-shrink: 0;
@@ -2532,6 +2555,16 @@ legend, caption {
   right: -4rem;
   width: 0;
 }
+[data-type=goods] .swiper-inner .swiper-wrapper {
+  gap: 1rem;
+  padding: 2rem 0;
+}
+[data-type=goods] .swiper-inner .swiper-slide {
+  width: calc((100% - 1rem) / 2);
+}
+[data-type=goods] .swiper-inner .swiper-initialized .swiper-wrapper {
+  gap: 0;
+}
 [data-type=goods] .swiper-inner .moreBtn {
   position: absolute;
   top: calc(50% - 1rem);
@@ -2552,12 +2585,32 @@ legend, caption {
   padding: 10px;
   border-radius: 100%;
 }
+[data-type=goods] .swiper-inner .btn.goodsAddBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 1rem;
+  background: #000;
+  opacity: 0.5;
+  color: #fff;
+  font-size: 1.6rem;
+}
+[data-type=goods][swiper-case=PerView1] .swiper-slide {
+  width: 100%;
+}
+[data-type=goods][swiper-case=PerView1] .swiper-initialized .swiper-wrapper {
+  gap: 0;
+}
 [data-type=goods][swiper-case=PerView1] .goodsWrap:after {
   content: "";
   display: block;
   clear: both;
 }
-[data-type=goods][swiper-case=PerView1] .goodsWrap .goods-img {
+[data-type=goods][swiper-case=PerView1] .goodsWrap .goods-info {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
@@ -2567,6 +2620,9 @@ legend, caption {
   width: calc(50% - 1.6rem);
   float: left;
 }
+[data-type=goods][swiper-case="PerView1.5"] .swiper-slide {
+  width: 66.6666666667%;
+}
 [data-type=goods][tab-case=list1] .lst-goods > li {
   width: 100%;
 }
@@ -2575,7 +2631,7 @@ legend, caption {
   display: block;
   clear: both;
 }
-[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
+[data-type=goods][tab-case=list1] .goodsWrap .goods-info {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
@@ -3264,6 +3320,7 @@ legend, caption {
   justify-content: flex-start;
   align-items: center;
   position: relative;
+  min-width: -moz-fit-content;
   min-width: fit-content;
 }
 .tab-list .tab {
@@ -3453,7 +3510,7 @@ legend, caption {
   display: block;
   clear: both;
 }
-[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
+[data-type=goods][tab-case=list1] .goodsWrap .goods-info {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
@@ -3554,6 +3611,15 @@ legend, caption {
   left: 0;
 }
 
+.goodsWrap {
+  position: relative;
+}
+.goodsWrap .goodsAddBtn {
+  display: none;
+}
+.goodsWrap:hover .goodsAddBtn {
+  display: block;
+}
 .goodsWrap .item {
   padding: 0.3rem 0;
 }
@@ -3742,8 +3808,8 @@ legend, caption {
 .modalPop._is-active {
   display: block;
 }
-.modalPop .goodsAddBtn {
-  display: none;
+.modalPop .goodsAddBtn, .modalPop .goodsDelBtn {
+  display: none !important;
 }
 
 .dimmed {
@@ -3907,14 +3973,6 @@ legend, caption {
 }
 
 /* 버튼 */
-.btn.goodsAddBtn {
-  width: 100%;
-  padding: 1.15rem 1.6rem;
-  border-radius: 5rem;
-  background: #000;
-  color: #fff;
-  font-size: 1.6rem;
-}
 .btn.deleteBtn {
   margin: 0;
 }
@@ -3925,6 +3983,19 @@ legend, caption {
   padding: 1rem 1.15rem;
   background: #7c4bdf;
   border-color: #7c4bdf;
+}
+.btn.goodsAddBtn {
+  width: 100%;
+  padding: 1.15rem 1.6rem;
+  border-radius: 5rem;
+  background: #000;
+  color: #fff;
+  font-size: 1.6rem;
+}
+.btn.goodsDelBtn {
+  position: absolute;
+  top: -2rem;
+  right: 0;
 }
 
 /* icon */

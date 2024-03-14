@@ -115,6 +115,16 @@
 // 상품
 .goods {
   &Wrap {
+    @include pos(relative);
+    
+    .goodsAddBtn{
+      @include display(none);
+    }
+    &:hover{
+      .goodsAddBtn{
+        @include display(block);
+      }
+    }
     .item {
       padding:.3rem 0;
       &.brand {
@@ -133,6 +143,12 @@
     font-weight:bold;
     margin:1rem 0;
   }
+  // &-info {
+  //   background:$color-gray6;
+  //   border-radius:1rem;
+  //   @include overflow(both, hidden);
+  //   margin-bottom:1rem;
+  // }
   &-img {
     background:$color-gray6;
     border-radius:1rem;
