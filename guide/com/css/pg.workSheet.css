@@ -2811,6 +2811,9 @@ legend, caption {
 [data-type=pop-swiper] .swip-swiper .swiper-button-next {
   right: -3rem;
 }
+[data-type=pop-swiper] .swip-swiper .swiper-button-disabled {
+  opacity: 0.2;
+}
 
 [data-type=goods] .swiper {
   display: -webkit-box;

@@ -342,6 +342,9 @@ $swip:'.swip';
           &-next{
             right: -3rem;
           }
+          &-disabled{
+            opacity: 0.2;
+          }
         }
       }
     }
