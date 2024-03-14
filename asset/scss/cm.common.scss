@@ -93,6 +93,9 @@ $moduel:'.module';
       &.md-txtbn {
         padding: 1.4rem 0;
       }
+      
+      .txtEdit {position: relative;}
+      .placeholder {display: none;}
       .txt-edit {
         @include pos(relative);
         padding: 2.4rem;
@@ -260,6 +263,7 @@ $moduel:'.module';
         .deleteBtn, .dragBtn, .optionBtn {
           @include display(block);
         }
+        [contenteditable].edit + .placeholder {z-index: -1;}
       }
       &:hover {
         outline-color: $color-valid;
@@ -277,19 +281,18 @@ $moduel:'.module';
       }
 
       [contenteditable] {
+        overflow: hidden;
         @include pos(relative);
-     
-/*         span {
-          display: block;
-          width: 100%;
-          height: 2rem;
-        } */
-
         &.edit {
-          &::after {
+/*           @include el-content(after, block) {
             content: '입력해주세요';
+            //@include pos-offset-l(0, 0);
+            width: 100%;
+            //height: 2rem;
+          } */
+          & + .placeholder {
             display: block;
-            position: absolute; left: 0; top: 0;
+            @include pos-offset-l(0, 0);
             width: 100%;
             height: 2rem;
           }
@@ -299,16 +302,37 @@ $moduel:'.module';
       h1[contenteditable] {
         height: 4rem;
         &.edit {
-          &::after {
-            content: '대제목입니다.';
+/*           &::after {
+            content: '기획전 대제목입니다.';
+          } */
+          & + .placeholder {
+            height: 4rem;
+            font-size: 2.8rem;
+            font-weight: 700;
           }
         }
       }
       h3[contenteditable] {
         height: 2.3rem;
         &.edit {
-          &::after {
-            content: '소제목입니다.';
+/*           &::after {
+            content: '기획전 소제목입니다.';
+          } */
+          & + .placeholder {
+            height: 2.3rem;
+            font-weight: 700;
+          }
+        }
+      }
+      p[contenteditable] {
+        height: 2.3rem;
+        &.edit {
+/*           &::after {
+            content: '기획전 설명입니다.';
+          } */
+          & + .placeholder {
+            height: 2rem;
+            font-size: 1.4rem;
           }
         }
       }

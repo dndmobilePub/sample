@@ -980,6 +980,14 @@ var COMPONENT_MD = (function (cp, $) {
             })
         }, */
         editOpen: function() {
+            $('[contenteditable]').each(function() {
+                var placeholderText = $(this).data('placeholder');
+                if ($(this).text().trim() === '') {
+                    $(this).parent('.txtEdit').append('<div class="placeholder">' + placeholderText + '</div>')
+                } else {
+                    $(this).parent('.txtEdit').find('.placeholder').remove();
+                }
+            });
             $('[contenteditable]').on('keyup', function() {
                 if ($(this).text().trim() === '') {
                     $(this).addClass('edit');
