@@ -1836,6 +1836,7 @@ var COMPONENT_UI = (function (cp, $) {
                 });
                 swiper.on('slideChange', function () {
                     $('.terms-num').text(swiper.activeIndex + 1)
+                    $('.swip-swiper').animate({scrollTop:0},'fast')
                   });
             },250)
         },
