@@ -17,16 +17,17 @@ var COMPONENT_MD = (function (cp, $) {
             cp.optionEdit.currentModuleData = null;
             $('html, body').on('click', '.optionBtn', function() {
                 const $thisMd = $(this).closest('.md');
-                cp.optionEdit.currentModuleData = $thisMd.data('module');
+                cp.optionEdit.currentModuleData = $thisMd.data('id');
                 const dataType = $thisMd.data('type');
                 const dataCase = $thisMd.data('case');
                 const bgColor = $thisMd.css('background-color');
+                const btnColor = $thisMd.find('.btnBn').css('background-color');
                 const mdHeight = parseInt($thisMd.css('height'), 10);
                 const grHeight = parseInt($thisMd.find('.txtEditBg').css('height'), 10);
     
                 $('.md').removeClass('_is-active');
                 $thisMd.addClass('_is-active');
-                $('.option-wrap').addClass('show').attr('data-type', cp.optionEdit.currentModuleData);
+                $('.option-wrap').addClass('show').attr('data-id', cp.optionEdit.currentModuleData);
                 $('.option-box').hide();
                 $('.option-box:not([data-type])').show();
                 $('.option-box[data-type="'+dataType+'"]').show();
@@ -36,6 +37,7 @@ var COMPONENT_MD = (function (cp, $) {
                 
                 cp.colorEdit.resetImgColor();
                 cp.colorEdit.spectrumBgColor(cp.optionEdit.currentModuleData, bgColor);
+                cp.colorEdit.spectrumBtnColor(cp.optionEdit.currentModuleData, btnColor);
                 cp.colorEdit.imgColor();
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
@@ -53,7 +55,7 @@ var COMPONENT_MD = (function (cp, $) {
             this.closeOptionWrap = function() {
                 const $optionWrap = $('.option-wrap');
                 cp.optionEdit.currentModuleData = null;
-                $optionWrap.attr('data-type','').removeClass('show');
+                $optionWrap.attr('data-id','').removeClass('show');
                 $('.module-wrap').removeClass('_right');
                 cp.colorEdit.resetImgColor();
                 $('.md').removeClass('_is-active');
@@ -69,44 +71,41 @@ var COMPONENT_MD = (function (cp, $) {
                 minHeight: 10,
                 stop: function(event, ui) {
                     var newHeight = ui.size.height;
-                    const dataType = $(this).data('module');
-                    $('.option-wrap[data-type="' + dataType + '"]').find('.gap-height').val(newHeight);
+                    const dataType = $(this).data('id');
+                    $('.option-wrap[data-id="' + dataType + '"]').find('.gap-height').val(newHeight);
                 }
             });
         },
         gapHeight: function(dataType) {
             $('.gap-height').off('change').on('change', function() {
                 var newHeight = $(this).val();
-                $('.md-gap[data-module="' + dataType + '"]').css('height', newHeight);
+                $('.md-gap[data-id="' + dataType + '"]').css('height', newHeight);
             });
         },
         inpTxtLocation: function(dataType) {
-            var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+            var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
 
             $txtEdit.each(function() {
                 var classes = $(this).attr('class').split(' '); 
-                for (var i = 0; i < classes.length; i++) {
-                    if (classes[i] !== 'txtEdit') {
-                        $('input[name="location"]').filter(function() {
-                            return $(this).val() === classes[i];
-                        }).prop('checked', true);
-                        break;
-                    }
-                }
+                var lastClass = classes[classes.length - 1];
+    
+                $('input[name="location"]').filter(function() {
+                    return $(this).val() === lastClass;
+                }).prop('checked', true);
             });
             $('input[name="location"]').off('change').on('change', function() {
                 var locationValue = $(this).val();
-                //var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                //var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
 
                 $txtEdit.removeClass();
-                $txtEdit.addClass('txtEdit ' + locationValue);
+                $txtEdit.addClass('txt-edit txtEdit ' + locationValue);
             });
         },
         txtBgHeight:function() {
             $('.txtBgHeight').on('change', function() {
                 var heightValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+                var dataType = $(this).closest('.option-wrap').data('id');
+                var $txtEditBg = $('.md[data-id="' + dataType + '"]').find('.txtEditBg');
 
                 $txtEditBg.css('height', heightValue);
             });
@@ -114,8 +113,8 @@ var COMPONENT_MD = (function (cp, $) {
         anchorTab:function() {
             $('input[name="anchorTab"]').on('change', function() {
                 var anchorTabValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $anchorTab = $('.md[data-module="' + dataType + '"]').find('.tab-list');
+                var dataType = $(this).closest('.option-wrap').data('id');
+                var $anchorTab = $('.md[data-id="' + dataType + '"]').find('.tab-list');
 
                 $anchorTab.removeClass();
                 $anchorTab.addClass('tab-list ' + anchorTabValue);
@@ -125,8 +124,8 @@ var COMPONENT_MD = (function (cp, $) {
             $('input[name="moreBtn"]').on('change', function() {
                 var moreBtnValue = $(this).val();
                 var moreBtnValue02 = $(this).parent('label').siblings().find('input[name="moreBtn"]').val();
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $moreBtnSwiper = $('.md[data-module="' + dataType + '"]').children('.swiper-inner');
+                var dataType = $(this).closest('.option-wrap').data('id');
+                var $moreBtnSwiper = $('.md[data-id="' + dataType + '"]').children('.swiper-inner');
 
                 $moreBtnSwiper.removeClass(moreBtnValue02);
                 $moreBtnSwiper.addClass('swiper-inner ' + moreBtnValue);
@@ -193,8 +192,10 @@ var COMPONENT_MD = (function (cp, $) {
                 fetch('../../asset/_module/module_video.html').then(response => response.text()),
                 fetch('../../asset/_module/module_goods.html').then(response => response.text()),
                 fetch('../../asset/_module/module_banner.html').then(response => response.text()),
-                fetch('../../asset/_module/module_button.html').then(response => response.text())
-            ]).then(([txtArea, imgArea, videoArea, goodsArea, bannerArea, buttonArea]) => {
+                fetch('../../asset/_module/module_button.html').then(response => response.text()),
+                fetch('../../asset/_module/module_code.html').then(response => response.text()),
+                fetch('../../asset/_module/module_countdown.html').then(response => response.text())
+            ]).then(([txtArea, imgArea, videoArea, goodsArea, bannerArea, buttonArea, htmlCodeArea, countdownArea]) => {
                 var uniqueData = generateUniqueId();
                 var swiperDataModal = 'swiper_' + uniqueData;
                 goodsArea = goodsArea.replace('data-modal="swiper_uniqueData"', 'data-modal="' + swiperDataModal + '"');
@@ -246,6 +247,8 @@ var COMPONENT_MD = (function (cp, $) {
                         type02HTML: bannerAreaByCase('bannerSwiper')
                     },
                     buttonArea: buttonArea,
+                    htmlCodeArea: htmlCodeArea,
+                    countdownArea: countdownArea,
                 });
                 COMPONENT_UI.tab.init();
             });
@@ -266,7 +269,7 @@ var COMPONENT_MD = (function (cp, $) {
                 newMd.attr('data-case', caseValue);
                 newMd.attr('swiper-case', swiperCase);
                 newMd.attr('tab-case', tabCase);
-                newMd.attr('data-module', moduleId);
+                newMd.attr('data-id', moduleId);
 
                 cp.moduleBox.mdBoxAddCont(function(content) {
                     var newContentHTML;
@@ -312,9 +315,13 @@ var COMPONENT_MD = (function (cp, $) {
                     } else if(dataType === 'video') {
                         newContentHTML = content.videoArea;
                     } else if(dataType === 'gap') {
-                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
+                        newContentHTML = '<div class="module-option"><button class="btn btn-size xs shadow deleteBtn">모듈삭제</button><div class="btn btn-size xs shadow dragBtn">드래그</div><button class="btn btn-size xs shadow optionBtn">설정</button></div>'
                     } else if(dataType === 'button') {
                         newContentHTML = content.buttonArea;
+                    } else if(dataType === 'htmlCode') {
+                        newContentHTML = content.htmlCodeArea;
+                    } else if(dataType === 'countdown') {
+                        newContentHTML = content.countdownArea;
                     }
                     newMd.append(newContentHTML);
                     $('.container .section').append(newMd);
@@ -505,10 +512,9 @@ var COMPONENT_MD = (function (cp, $) {
             });
         
             $('.btnAddImg').off('click').on('click', function(){
-                //var dataType = $(this).closest('.option-wrap').data('type');
-                var $md = $('.md[data-module="' + dataType + '"]');
+                //var $md = $('.md[data-id="' + dataType + '"]');
+                var $md = $(this).closest('.md');
                 var $imgWraps = $md.children('.imgWrap');
-                console.log(dataType)
             
                 $imgWraps.each(function() {
                     var $imgWrap = $(this);
@@ -775,8 +781,32 @@ var COMPONENT_MD = (function (cp, $) {
         },
         bgColor: function(selectedBgColor, moduleType) {
             $('.section').find('.md').each(function() {
-                if ($(this).data('module') === moduleType) {
+                if ($(this).data('id') === moduleType) {
                     $(this).css('background-color', selectedBgColor);
+                }
+            });
+        },
+        spectrumBtnColor: function(moduleType, btnColor) {
+            var self = this;
+            $(".colorBtnInput").spectrum({
+                flat: false,
+                showInput: true,
+                preferredFormat: "hex",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxPaletteSize: 10,
+                color: btnColor,
+                change: function(color) {
+                    var selectedbtnColor = color.toHexString();
+                    self.btnColor(selectedbtnColor, moduleType);
+                }
+            });
+        },
+        btnColor: function(selectedbtnColor, moduleType) {
+            $('.section').find('.md').each(function() {
+                if ($(this).data('id') === moduleType) {
+                    $(this).find('.btnBn').css('background-color', selectedbtnColor);
                 }
             });
         },
@@ -919,9 +949,9 @@ var COMPONENT_MD = (function (cp, $) {
         colorSelect: function() {
             $('.color-selbox input[name="colorSelect"]').change(function() {
                 var selectedOption = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('type');
+                var dataType = $(this).closest('.option-wrap').data('id');
 
-                $('.md[data-module="' + dataType + '"]').find('.tab a').css('color', selectedOption);
+                $('.md[data-id="' + dataType + '"]').find('.tab a').css('color', selectedOption);
             });
         },
         spectrumGrColor: function(initialColor) {
@@ -948,9 +978,8 @@ var COMPONENT_MD = (function (cp, $) {
         txtBgColor:function(selectedColor) {
             $('.txtBgColor').off('change').each(function() {
                 $(this).on('change', function() {
-                    var dataType = $(this).closest('.option-wrap').data('type');
-                    console.log('dataType:', dataType);
-                    var $txtEditBg = $('.md[data-module="' + dataType + '"]').find('.txtEditBg');
+                    var dataType = $(this).closest('.option-wrap').data('id');
+                    var $txtEditBg = $('.md[data-id="' + dataType + '"]').find('.txtEditBg');
                     
                     if ($txtEditBg.length > 0) {
                         $txtEditBg.css('background', 'linear-gradient(to top, ' + selectedColor + ', transparent)');
@@ -1057,8 +1086,8 @@ var COMPONENT_MD = (function (cp, $) {
             $('.inpUse input').change(function() {
                 var radioValue = $(this).val();
                 var radioName = $(this).attr('name');
-                var dataType = $(this).closest('.option-wrap').data('type');
-                var $txtEdit = $('.md[data-module="' + dataType + '"]').find('.txtEdit');
+                var dataType = $(this).closest('.option-wrap').data('id');
+                var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
                 
                 if (radioValue === "disuse") {
                     $txtEdit.each(function(){

@@ -38,15 +38,12 @@
     font-size:1.6rem;
   }
   &.deleteBtn{
-    @include display(none);
     margin:0;
   }
   &.optionBtn {
-    @include display(none);
     width: 100%;
   }
   &.dragBtn {
-    @include display(none);
     padding: 1rem 1.15rem;
     background: $color-violet;
     border-color: $color-violet;
@@ -86,7 +83,10 @@ $moduel:'.module';
       margin-left: 40rem;
     }
     .md {
-      .txtEdit {
+      &.md-htmlCode {
+        padding: 2.4rem;
+      }
+      .txt-edit {
         @include pos(relative);
         padding: 2.4rem;
         font-size: 1.4rem;
@@ -106,7 +106,7 @@ $moduel:'.module';
         }
       }
       .imgWrap {
-        .txtEdit {
+        .txt-edit {
           @include display(flex);
           @include flex($direction:column,  $j-content:flex-end);
           @include pos-offset-l(0,0) {z-index: 1;};
@@ -122,9 +122,10 @@ $moduel:'.module';
             @include align(text, left);
           }
 
-          &Bg {
+          .txtEditBg {
             @include pos(absolute) {bottom: 0; left: 0; z-index: -1;};
             @include el-size(100%, 30%);
+            margin-top: 0;
             background: linear-gradient(to top, $color-gray8, transparent);
           }
 
@@ -194,6 +195,7 @@ $moduel:'.module';
   }
 
   &-option {
+    @include display(none);
     .btn {min-width:initial;}
 
     .btn ~ * {

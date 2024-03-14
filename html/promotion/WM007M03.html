@@ -65,13 +65,15 @@
         </div> -->
         <a href="javascript:void(0);" data-type="gap" class="add-btn">공백</a>
         <a href="javascript:void(0);" data-type="button" class="add-btn">버튼</a>
+        <a href="javascript:void(0);" data-type="htmlCode" class="add-btn">코드</a>
+        <a href="javascript:void(0);" data-type="countdown" class="add-btn">카운트다운</a>
       </div>
     </div>
 
     <div class="container">
       <div class="moduleWrap">
         <!-- [S] 상세설정 -->
-        <div class="option-wrap" data-type="">
+        <div class="option-wrap" data-id="">
           <h2>상세설정</h2>
           <!-- [S] 상세설정 상품 -->
           <div class="option-box" data-type="goods" data-case="goodsTab">
@@ -103,12 +105,12 @@
           </div>
           <!-- [E] 상세설정 상품 -->
           <!-- [S] 상세설정 이미지 -->
-          <div class="option-box" data-type="img" data-case="imgFloat">
+<!--           <div class="option-box" data-type="img" data-case="imgFloat">
             <h3 class="option-tit">이미지 추가</h3>
             <div class="option-cont">
               <a href="#" class="btn shadow btnAddImg">이미지 추가</a>
             </div>
-          </div>
+          </div> -->
           <div class="option-box" data-type="img">
             <h3 class="option-tit">이미지 대체 텍스트</h3>
             <div class="option-cont field">
@@ -211,7 +213,7 @@
           <div class="option-box" data-type="button">
             <h3 class="option-tit">버튼 BG Color</h3>
             <div class="option-cont">
-              <input type="color" class="colorInput">
+              <input type="color" class="colorBtnInput">
             </div>
           </div>
           <div class="option-box" data-type="button">
@@ -322,9 +324,12 @@
         <!--// [E] 상세설정 -->
         <div class="module-wrap">
           <!-- [S] notice/guide -->
-          <div class="guide-box">
-            <p>각각의 모듈과 모듈에 해당하는 상세설정창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-module)</strong> : <strong>상세설정(data-type)</strong> 매칭</p>
-            <p>각각의 텍스트와 텍스트에 해당하는 폰트에디터 연결방식은 data-roll을 사용하며 고정값 <strong>thisEdit</strong>로 생성/삭제됩니다. (따로 설정할 필요없음)<br> - <strong>텍스트(edit-target)</strong> : <strong>폰트에디터(data-edit)</strong> 매칭</p>
+          <div class="guide-box" style="position: relative; padding-bottom: 5rem;">
+            <p>모듈과 그에 해당하는 모듈편집창 연결방식은 data-roll을 사용하며 uniq값을 가져야 합니다.<br> - <strong>모듈(data-id)</strong> : <strong>모듈편집(data-id)</strong> 매칭</p>
+            <p>모듈 타입은 모듈 추가시 지정되어 추가됩니다. (ex: 1차- 상품 리스트 모듈타입, 2차- 1열 스타일)<br> - <strong>1차 data-type</strong> , <strong>2차: data-case</strong> 매칭</p>
+            <p>모듈편집의 상세 설정은 모듈의 data-type과 data-case로 필터링됩니다.<br> - <strong>모듈 타입 1차(data-type)</strong> : <strong>모듈편집 상세 설정 1차(data-type)</strong><br> - <strong>모듈 타입 2차(data-case)</strong> : <strong>모듈편집 상세 설정 2차(data-case)</strong></p>
+            <p>텍스트 컬러 직접 수정시 data-roll을 사용하며 고정값 <strong>thisEdit</strong>로 생성/삭제됩니다. (따로 설정할 필요없음)<br> - <strong>텍스트(edit-target)</strong> : <strong>폰트에디터(data-edit)</strong> 매칭</p>
+            <a href="javascript:void(0);" class="ico ico-pop-close guideClsBtn" role="button" style="position: absolute;left: 2rem;bottom: 2rem;"><span class="hide">창닫기</span></a>
           </div>
           <!-- [E] notice/guide -->
           <section class="section module-edit">
@@ -345,9 +350,9 @@
             </div>
     
             <!-- [S] 타이틀 컨텐츠 -->
-            <div class="md md-img" data-type="title" data-module="default">
+            <div class="md md-img" data-type="title" data-id="default">
               <div class="imgWrap no-img"><img src=""></div>
-              <div class="txtEdit">
+              <div class="txt-edit txtEdit">
                 <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
                 <h3 class="fontBold" contenteditable="true" data-text="subTitle">소제목</h3>
                 <p contenteditable="true" data-text="titleDate">2024.01.25 - 02.25</p>
@@ -361,7 +366,7 @@
             
             <div class="dragWrap">
             <!-- [S] HTML 컨텐츠 -->
-            <div class="md md-img" data-type="htmlCode" data-module="htmlCode123" style="height: 100px;">
+            <div class="md md-img" data-type="htmlCode" data-id="htmlCode123" style="height: 100px;">
               <div class="htmlCodeView">
                 HTML
               </div>
@@ -375,7 +380,7 @@
             <!--// [E] HTML 컨텐츠 -->
     
             <!-- [S] 상품 컨텐츠 TYPE2 -->
-            <div class="md md-goods" data-type="goods" data-case="goodsTab" data-module="anchorTab" tab-case="list1">
+            <div class="md md-goods" data-type="goods" data-case="goodsTab" data-id="anchorTab" tab-case="list1">
               <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
                 <div class="tab-list-wrap">
                   <ul class="tab-list">
@@ -443,8 +448,8 @@
             <!--// [E] 상품 컨텐츠 TYPE2-->
             
             <!-- [S] 상품 컨텐츠 TYPE1 -->
-            <div class="md md-goods" data-type="goods" data-case="goodsSwiper" data-module="goodsSwiper" swiper-case="PerView2">
-              <div class="txtEdit">
+            <div class="md md-goods" data-type="goods" data-case="goodsSwiper" data-id="goodsSwiper" swiper-case="PerView2">
+              <div class="txt-edit txtEdit">
                 <h1 contenteditable="true" class="fontBold">대제목</h1>
               </div>
               <div class="swiper-inner swiperIsEnd disuse">
@@ -495,8 +500,8 @@
             <!--// [E] 상품 컨텐츠 TYPE1 -->
     
             <!-- [S] 텍스트 컨텐츠 TYPE1 -->
-            <div class="md md-txt" data-type="txt" data-module="TitleTxt">
-              <div class="txt txtEdit">
+            <div class="md md-txt" data-type="txt" data-id="TitleTxt">
+              <div class="txt txt-edit txtEdit">
                 <h1 contenteditable="true" class="fontBold">대제목</h1>
               </div>
               <div class="module-option">
@@ -507,8 +512,8 @@
             </div>
             <!--// [E] 텍스트 컨텐츠 TYPE1 -->
             <!-- [S] 텍스트 컨텐츠 TYPE2 -->
-            <div class="md md-txt" data-type="txt" data-module="TitleTxt">
-              <div class="txt txtEdit">
+            <div class="md md-txt" data-type="txt" data-id="TitleTxt">
+              <div class="txt txt-edit txtEdit">
                 <h3 contenteditable="true" class="fontBold">소제목</h3>
               </div>
               <div class="module-option">
@@ -519,8 +524,8 @@
             </div>
             <!--// [E] 텍스트 컨텐츠 TYPE2 -->
             <!-- [S] 텍스트 컨텐츠 TYPE3 -->
-            <div class="md md-txt" data-type="txt" data-module="TitleTxt">
-              <div class="txt txtEdit">
+            <div class="md md-txt" data-type="txt" data-id="TitleTxt">
+              <div class="txt txt-edit txtEdit">
                 <p contenteditable="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio eveniet rerum accusantium, iusto tempore similique? Iusto vel inventore pariatur totam soluta voluptas suscipit minima, incidunt culpa, doloremque dicta laboriosam libero.</p>
               </div>
               <div class="module-option">
@@ -532,8 +537,8 @@
             <!--// [E] 텍스트 컨텐츠 TYPE3 -->
     
             <!-- [S] 카운트다운 컨텐츠 -->
-            <div class="md md-img" data-type="countdown" data-module="countdownid">
-              <div class="txtEdit">
+            <div class="md md-img" data-type="countdown" data-id="countdownid">
+              <div class="txt-edit txtEdit">
                 <p contenteditable="true" data-text="countdownTitle">카운트다운 제목입니다.</p>
               </div>
               <div id="countdown">
@@ -548,10 +553,10 @@
             <!--// [E] 카운트다운 컨텐츠 -->
             
             <!-- [S] 이미지 위에 텍스트 -->
-            <div class="md md-img" data-type="img" data-module="test1234" data-case="imgFloat">
+            <div class="md md-img" data-type="img" data-id="test1234" data-case="imgFloat">
               <div class="imgWrap no-img img-background">
                 <img src="">
-                <div class="txtEdit leftBottom">
+                <div class="txt-edit txtEdit leftBottom">
                   <div class="imgWrap no-img md-logo"><img src=""></div>
                   <h3 contenteditable="true" data-text="subTitle">소제목</h3>
                   <div class="txtEditBg"></div>
@@ -559,14 +564,15 @@
               </div>
               <div class="module-option">
                 <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+                <button class="btn btn-size xs shadow btnAddImg">이미지 추가</button>
                 <div class="btn btn-size xs shadow dragBtn">드래그</div>
                 <button class="btn btn-size xs shadow optionBtn">설정</button>
               </div>
             </div>
-            <div class="md md-img" data-type="img" data-module="test5678" data-case="imgFloat">
+            <div class="md md-img" data-type="img" data-id="test5678" data-case="imgFloat">
               <div class="imgWrap no-img img-background">
                 <img src="">
-                <div class="txtEdit leftBottom">
+                <div class="txt-edit txtEdit leftBottom">
                   <div class="imgWrap no-img md-logo"><img src=""></div>
                   <h3 contenteditable="true" data-text="subTitle">소제목</h3>
                   <div class="txtEditBg"></div>
@@ -574,13 +580,14 @@
               </div>
               <div class="module-option">
                 <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
+                <button class="btn btn-size xs shadow btnAddImg">이미지 추가</button>
                 <div class="btn btn-size xs shadow dragBtn">드래그</div>
                 <button class="btn btn-size xs shadow optionBtn">설정</button>
               </div>
             </div>
             <!--// [E] 이미지 위에 텍스트 -->
             <!-- [S] 이미지 컨텐츠 -->
-            <div class="md md-img" data-type="img" data-case="onlyImg" data-module="onlyImg">
+            <div class="md md-img" data-type="img" data-case="onlyImg" data-id="onlyImg">
               <div class="imgWrap no-img"><img src=""></div>
               <div class="module-option">
                 <button class="btn btn-size xs shadow deleteBtn">모듈삭제</button>
@@ -592,7 +599,7 @@
             
     
             <!-- [S] 동영상 컨텐츠 -->
-    <!--         <div class="md md-video" data-type="video"data-module="video">
+    <!--         <div class="md md-video" data-type="video"data-id="video">
               <div class="videoWrap no-video"></div>
               <div class="btnWrap">
                 <button class="btn btn-size s bg type2 addVideo-file">파일 업로드</button>
@@ -707,6 +714,10 @@
     $(function() {
       COMPONENT_UI.init();
       COMPONENT_MD.init();
+      $('.guide-box').children('p').slideUp();
+      $('.guideClsBtn').on('click', function(){
+        $(this).parent('.guide-box').children('p').slideToggle();
+      })
     });
   </script>
 </body>
