@@ -1823,18 +1823,18 @@ var COMPONENT_UI = (function (cp, $) {
             this.popSwiper();
         },
         popSwiper: function () {
-            $('.swip-rt').each(function () {
-                var swiper = new swiper(".swiper-wrapper",{
-                    slidesPerView:1,
-                    centeredSlides: true,
-                    loop : false,
-                    navigator:{
-                        nextEl:".swiper-button-next",
-                        prevEl:".swiper-button-prev",
-                    }
-                })
-
-            });
+            setTimeout(()=>{
+                const swiper = new Swiper('.swip-content', {
+                    loop: false,
+                    navigation: {
+                      nextEl: '.swip-swiper .swiper-button-next',
+                      prevEl: '.swip-swiper .swiper-button-prev',
+                    },
+                });
+                swiper.on('slideChange', function () {
+                    $('.terms-num').text(swiper.activeIndex + 1)
+                  });
+            },250)
         },
     };
 

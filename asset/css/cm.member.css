@@ -2797,6 +2797,7 @@ legend, caption {
   text-align: left !important;
   cursor: inherit;
   margin-top: 3rem;
+  background-color: transparent;
 }
 [data-type=pop-swiper] .swip-swiper .swiper-slide:nth-child(odd) {
   background-color: transparent;
@@ -2806,6 +2807,9 @@ legend, caption {
 }
 [data-type=pop-swiper] .swip-swiper .swiper-button-next {
   right: -3rem;
+}
+[data-type=pop-swiper] .swip-swiper .swiper-button-disabled {
+  opacity: 0.2;
 }
 
 [data-type=goods] .swiper {
@@ -3944,7 +3948,6 @@ legend, caption {
 .list-dot {
   padding: 0.3rem 0;
   margin-left: 1rem;
-  margin-top: 2rem;
 }
 .list-dot.cir > li {
   position: relative;
@@ -3979,6 +3982,10 @@ legend, caption {
   height: 0.3rem;
   background: #1c5a96;
 }
+.list-hyphen {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
 .list-hyphen > li {
   position: relative;
   padding: 0.5rem 0 0.5rem 1.2rem;
@@ -3995,6 +4002,10 @@ legend, caption {
   height: 0.1rem;
   background: #888;
 }
+.list-caution {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
 .list-caution > li {
   position: relative;
   padding: 0.5rem 0 0.5rem 1.2rem;
@@ -4008,6 +4019,10 @@ legend, caption {
   top: 0.2rem;
   left: 0;
 }
+.list-star {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
 .list-star > li {
   position: relative;
   padding: 0.5rem 0 0.5rem 1.2rem;
@@ -4020,6 +4035,64 @@ legend, caption {
   position: absolute;
   top: 0.5rem;
   left: 0;
+}
+.list-pool {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+}
+.list-pool > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+.list-pool > li::before {
+  content: "※";
+  display: block;
+  position: absolute;
+  top: 0.6rem;
+  left: 0;
+}
+.list-num {
+  padding: 0.3rem 0;
+  margin-left: 1rem;
+  counter-reset: list-number;
+}
+.list-num > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+  counter-increment: list-number;
+}
+.list-num > li::before {
+  content: counter(list-number) ".";
+  display: block;
+  position: absolute;
+  top: 0.6rem;
+  left: 0;
+}
+.list-num.cir {
+  counter-reset: circle-number;
+}
+.list-num.cir > li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+  counter-increment: circle-number;
+}
+.list-num.cir > li::before {
+  content: counter(circle-number);
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  border: 1px solid #333;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
 }
 
 .goodsWrap {
@@ -4202,7 +4275,7 @@ legend, caption {
 .modalPop .modalWrap {
   background-color: #fff;
   border: 0.1rem solid #666;
-  padding: 4rem;
+  padding: 2rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -4212,16 +4285,16 @@ legend, caption {
   display: flex;
   -ms-flex-negative: 1;
       flex-shrink: 1;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 1rem;
 }
 .modalPop .modal-header .mp-title {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  text-align: left;
+  text-align: center;
 }
 .modalPop .modal-header .mp-title.dep01 {
   font-size: var(--space-mx);
@@ -4237,6 +4310,25 @@ legend, caption {
 }
 .modalPop .modal-footer .btnWrap {
   margin: 0;
+}
+.modalPop.mb {
+  width: 100%;
+}
+.modalPop.mb .modalWrap {
+  padding: 4rem;
+}
+.modalPop.mb .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.modalPop.mb .modal-header .mp-title {
+  text-align: left;
 }
 .modalPop._is-active {
   display: block;

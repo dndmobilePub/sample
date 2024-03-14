@@ -66,16 +66,16 @@
         &Wrap {
             background-color: $color-white;
             border: .1rem solid $color-gray3;
-            padding: 4rem;
+            padding: 2rem;
             box-sizing: border-box;
         }
         &-header {
-            @include display(flex) {flex-shrink:1; align-items: flex-start;}
+            @include display(flex) {flex-shrink:1; align-items: center;}
             margin-bottom: 1rem;
     
             .mp {
                 &-title {
-                    flex:1; text-align:left;
+                    flex:1; text-align:center;
                     &.dep01 {
                         font : {
                             size:var(--space-mx);
@@ -93,6 +93,24 @@
         &-footer {
             text-align: right;
             .btnWrap {margin:0;}
+        }
+    }
+
+    &.mb{
+        @include width();
+        & .modal{
+            &Wrap{
+                padding: 4rem
+            }
+            &-header{
+                @include display(flex) {flex-shrink:1; align-items: flex-start;}
+
+                & .mp{
+                    &-title{
+                        text-align: left;
+                    }
+                }
+            }
         }
     }
 
