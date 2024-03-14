@@ -1239,6 +1239,8 @@ var COMPONENT_UI = (function (cp, $) {
             this.tabClick();
             this.scrollEventHandler();
             this.addTab();
+            this.delTab();
+            this.tabUpdate();
         },
         tabSetting: function() {
             /**
@@ -1557,11 +1559,14 @@ var COMPONENT_UI = (function (cp, $) {
             const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
             const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
             _tabCont = $('<div class="tab-contents">' +
-                            '<p class="goods-category">iPad</p>' +
+                            '<div class="goods-tit">' +
+                            '<span class="goods-category" contenteditable="true">iPad</span>' +
+                            '<button class="btn btn-size xs shadow _delTab">탭삭제</button>' +
+                          '</div>' +
                             '<ul class="lst lst-goods">' +
                             '<li>' +
                                 '<dl class="goodsWrap">' +
-                                '<dt class="goods-img">' +
+                                '<dt class="goods-info">' +
                                     '<div class="no-img"></div>' +
                                 '</dt>' +
                                 '<dd class="item brand">애플</dd>' +
@@ -1574,7 +1579,7 @@ var COMPONENT_UI = (function (cp, $) {
                             '</li>' +
                             '<li>' +
                                 '<dl class="goodsWrap">' +
-                                '<dt class="goods-img">' +
+                                '<dt class="goods-info">' +
                                     '<div class="no-img"></div>' +
                                 '</dt>' +
                                 '<dd class="item brand">애플</dd>' +
@@ -1597,6 +1602,42 @@ var COMPONENT_UI = (function (cp, $) {
                             cp.tab.init();
                         })
         },
+        delTab: function() {
+            $('.tab-wrap').on('click', '.tab-contents-wrap ._delTab', function() {
+                const $tabWrap = $(this).closest('.tab-wrap');
+                const $tabs = $tabWrap.find('li.tab');
+                const index = $(this).closest('.tab-contents').index();
+        
+                if ($tabs.length <= 1) {
+                    return;
+                } else {
+                    $tabs.eq(index).remove();
+                    $tabWrap.find('.tab-contents').eq(index).remove();
+                }
+                console.log(index);
+        
+                cp.tab.moveHighLight($tabWrap);
+            });
+        },
+        tabUpdate: function() {
+            $('.tab-wrap').on('input', '.goods-category', function() {
+                const $tabWrap = $(this).closest('.tab-wrap');
+                const tabIndex = $(this).closest('.tab-contents').index();
+                const newCategory = $(this).text();
+                const $tabText = $tabWrap.find('.tab').eq(tabIndex).children('a');
+        
+                $tabText.text(newCategory);
+            });
+        
+            $('.tab-wrap').on('input', '.tab > a', function() {
+                const $tabWrap = $(this).closest('.tab-wrap');
+                const tabIndex = $(this).parent('.tab').index();
+                const newCategory = $(this).text();
+                const $tabContents = $tabWrap.find('.tab-contents').eq(tabIndex).find('.goods-category');
+        
+                $tabContents.text(newCategory);
+            });
+        }
     };
     /* accordion */
     cp.accordion = {

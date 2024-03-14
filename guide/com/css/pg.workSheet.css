@@ -3481,6 +3481,11 @@ legend, caption {
   padding: 0 2rem 2rem;
   min-height: 20rem;
 }
+.tab-contents ._delTab {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .tab-sticky .tab-list-wrap {
   position: sticky;
   top: 0;
@@ -3635,10 +3640,13 @@ legend, caption {
 .goodsWrap .item.price {
   font-size: var(--space-xs);
 }
+.goods-tit {
+  position: relative;
+  margin: 1rem 0;
+}
 .goods-category {
   font-size: var(--space-mx);
   font-weight: bold;
-  margin: 1rem 0;
 }
 .goods-img {
   background: #ddd;

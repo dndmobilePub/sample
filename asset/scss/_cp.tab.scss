@@ -228,6 +228,9 @@
 	&-contents {
 		padding: 0 2rem 2rem;
 		min-height: 20rem;
+		._delTab{
+			@include pos-offset-r(0, 0);
+		}
 	}
 
 	&-sticky {
