@@ -4536,3 +4536,26 @@ label input {
 .guide-box p ~ p {
   margin-top: 2rem;
 }
+
+/* marquee */
+.marquee {
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  padding: 1.5rem 0 1rem;
+  background: #000;
+}
+.marquee p {
+  display: inline-block;
+  color: #fff;
+  animation: marquee 12s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

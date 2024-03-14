@@ -637,3 +637,22 @@ $moduel:'.module';
     }
   }
 }
+
+/* marquee */
+.marquee {
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  padding: 1.5rem 0 1rem;
+  background: $color-black;
+
+  p {
+    display: inline-block;
+    color: $color-white;
+    animation: marquee 12s linear infinite;
+  }
+}
+@keyframes marquee {
+  0%{transform: translateX(100%);}
+  100%{transform: translateX(-100%);}
+}

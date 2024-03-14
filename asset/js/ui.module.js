@@ -652,65 +652,6 @@ var COMPONENT_MD = (function (cp, $) {
             }
         }
     };
-    /* module : video */
-    cp.videoModule = {
-        constEl: {
-            btnVideoFile: ".addVideo-file",
-            btnYoutube: ".addVideo-utube"
-        },
-        init: function () {
-            this.addVideo();
-            this.addYoutube();
-        },
-        addVideo: function () {
-            const btnVideo = $(this.constEl.btnVideoFile);
-
-            btnVideo.off('click').on('click', function () {
-                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-
-                var input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'video/*';
-                input.style.display = 'none';
-                input.onchange = function(event) {
-                    var file = event.target.files[0];
-                    var videoURL = URL.createObjectURL(file);
-                    var videoElement = $('<video controls></video>');
-                    videoElement.attr('src', videoURL);
-                    $videoWrap.html(videoElement);
-                    $videoWrap.removeClass('no-video');
-                };
-                
-                $('input[type="file"]').remove(); 
-    
-                document.body.appendChild(input);
-                input.click();
-            });
-        },
-        addYoutube: function () {
-            const btnYoutube = $(this.constEl.btnYoutube);
-
-            btnYoutube.off('click').on('click', function () {
-                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-
-                var inputURL = prompt("Please enter YouTube video URL:");
-                if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
-                    var videoId;
-                    if (inputURL.includes("youtube.com")) {
-                        videoId = inputURL.split('v=')[1];
-                    } else if (inputURL.includes("youtu.be")) {
-                        videoId = inputURL.split('/').pop();
-                    }
-                    var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
-                    iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
-                    $videoWrap.html(iframe);
-                    $videoWrap.removeClass('no-video');
-                } else {
-                    alert("Invalid YouTube video URL.");
-                }
-            });
-        }
-    };
     /* FONT UI : color picker */
     cp.colorEdit = {
         init: function() {
@@ -1113,6 +1054,65 @@ var COMPONENT_MD = (function (cp, $) {
             });
         }
     };
+    /* module : video */
+    cp.videoModule = {
+        constEl: {
+            btnVideoFile: ".addVideo-file",
+            btnYoutube: ".addVideo-utube"
+        },
+        init: function () {
+            this.addVideo();
+            this.addYoutube();
+        },
+        addVideo: function () {
+            const btnVideo = $(this.constEl.btnVideoFile);
+
+            btnVideo.off('click').on('click', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'video/*';
+                input.style.display = 'none';
+                input.onchange = function(event) {
+                    var file = event.target.files[0];
+                    var videoURL = URL.createObjectURL(file);
+                    var videoElement = $('<video controls></video>');
+                    videoElement.attr('src', videoURL);
+                    $videoWrap.html(videoElement);
+                    $videoWrap.removeClass('no-video');
+                };
+                
+                $('input[type="file"]').remove(); 
+    
+                document.body.appendChild(input);
+                input.click();
+            });
+        },
+        addYoutube: function () {
+            const btnYoutube = $(this.constEl.btnYoutube);
+
+            btnYoutube.off('click').on('click', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+
+                var inputURL = prompt("Please enter YouTube video URL:");
+                if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
+                    var videoId;
+                    if (inputURL.includes("youtube.com")) {
+                        videoId = inputURL.split('v=')[1];
+                    } else if (inputURL.includes("youtu.be")) {
+                        videoId = inputURL.split('/').pop();
+                    }
+                    var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
+                    iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+                    $videoWrap.html(iframe);
+                    $videoWrap.removeClass('no-video');
+                } else {
+                    alert("Invalid YouTube video URL.");
+                }
+            });
+        }
+    };
     /* module : countdown */
     cp.countdownEdit = {
         init: function() {
@@ -1188,6 +1188,26 @@ var COMPONENT_MD = (function (cp, $) {
                 }
             });
         }
+    };
+    /* module : marquee */
+    cp.marqueeEdit = {
+        init: function() {
+            this.animateTxt();
+        },
+        animateTxt: function() {
+            var $marquee = $('.marquee p');
+            var width = $marquee.width();
+            var containerWidth = $marquee.parent().width();
+            var duration = (width + containerWidth) / 100;
+            var loopText = $marquee.text();
+
+            $marquee.animate({ right: containerWidth }, {
+                duration: duration * 1000,
+                easing: 'linear'
+            });
+        
+            $marquee.text(loopText).css('right', -containerWidth);
+        }
     }
     
     cp.init = function () {
@@ -1199,6 +1219,7 @@ var COMPONENT_MD = (function (cp, $) {
         cp.fontEditer.init();
         cp.countdownEdit.init();
         cp.htmlCodeEdit.init();
+        cp.marqueeEdit.init();
     };
 
     cp.init();
