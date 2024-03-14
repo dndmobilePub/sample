@@ -2189,9 +2189,12 @@ legend, caption {
 .field.invalid .field-outline:focus-within {
   -webkit-box-shadow: inset 0 0 0 0.2rem #e93c79;
           box-shadow: inset 0 0 0 0.2rem #e93c79;
+<<<<<<< HEAD
 }
 .field.invalid .field-msg {
   margin-top: 0.5rem;
+=======
+>>>>>>> a9f72aa966b4c300231912f1c7b0968119710fe7
 }
 .field.invalid + .field-msg, .field.invalid .field-msg {
   color: #e93c79;
@@ -2412,6 +2415,7 @@ legend, caption {
 .field-select .btn-select.border-none:focus-within {
   -webkit-box-shadow: none;
           box-shadow: none;
+<<<<<<< HEAD
 }
 .field-select .border-none {
   position: relative;
@@ -2427,6 +2431,8 @@ legend, caption {
   font-weight: 700;
   width: 100%;
   text-align: left;
+=======
+>>>>>>> a9f72aa966b4c300231912f1c7b0968119710fe7
 }
 .field-select-list {
   position: absolute;
