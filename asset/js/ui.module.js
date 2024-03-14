@@ -976,6 +976,13 @@ var COMPONENT_MD = (function (cp, $) {
             })
         }, */
         editOpen: function() {
+            $('[contenteditable]').on('keyup', function() {
+                if ($(this).text().trim() === '') {
+                    $(this).addClass('edit');
+                } else {
+                    $(this).removeClass('edit');
+                }
+            });
             $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
                 var thisColor = $this.css('color');
@@ -984,20 +991,15 @@ var COMPONENT_MD = (function (cp, $) {
                     $this.attr('contenteditable', 'true');
                     $this.focus();
                 }
+                $('[contenteditable]').each(function() {
+                    if ($(this).text().trim() === '') {
+                        $(this).addClass('edit');
+                    } else {
+                        $(this).removeClass('edit');
+                    }
+                });
 
-/*                 if (!$this.has('.textEditerWrap').length) {
-                    $('.textEditerWrap').remove();
-                    $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $this.prev('.textEditerWrap').load('../../asset/_module/text-edit.html', function(){
-                        var targetData = $('.edit-box').data('edit');
-                    
-                        $this.attr('edit-target', targetData);
-                        $(this).show();
-                        cp.colorEdit.spectrumColor(thisColor);
-                    })
-                } */
-
-                if ($this.parent().hasClass('txtEdit')) {
+/*                 if ($this.parent().hasClass('txtEdit')) {
                     if (!$this.has('.textEditerWrap').length) {
                         $('.textEditerWrap').remove();
                         var $textEditorWrap = $('<div class="textEditerWrap"></div>');
@@ -1012,7 +1014,7 @@ var COMPONENT_MD = (function (cp, $) {
                             cp.colorEdit.spectrumColor(thisColor);
                         })
                     }
-                }
+                } */
             });
             
             $(document).on('click', function(event) {
@@ -1028,6 +1030,14 @@ var COMPONENT_MD = (function (cp, $) {
                 if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
                     $('[contenteditable]').removeAttr('edit-target').attr('contenteditable', 'false');
                     $('.textEditerWrap').remove();
+
+                    $('[contenteditable]').each(function() {
+                        if ($(this).text().trim() === '') {
+                            $(this).addClass('edit');
+                        } else {
+                            $(this).removeClass('edit');
+                        }
+                    });
                 }
             });
         },
@@ -1189,26 +1199,7 @@ var COMPONENT_MD = (function (cp, $) {
             });
         }
     };
-    /* module : marquee */
-    cp.marqueeEdit = {
-        init: function() {
-            this.animateTxt();
-        },
-        animateTxt: function() {
-            var $marquee = $('.marquee p');
-            var width = $marquee.width();
-            var containerWidth = $marquee.parent().width();
-            var duration = (width + containerWidth) / 100;
-            var loopText = $marquee.text();
-
-            $marquee.animate({ right: containerWidth }, {
-                duration: duration * 1000,
-                easing: 'linear'
-            });
-        
-            $marquee.text(loopText).css('right', -containerWidth);
-        }
-    }
+    
     
     cp.init = function () {
         cp.optionEdit.init();
@@ -1219,7 +1210,6 @@ var COMPONENT_MD = (function (cp, $) {
         cp.fontEditer.init();
         cp.countdownEdit.init();
         cp.htmlCodeEdit.init();
-        cp.marqueeEdit.init();
     };
 
     cp.init();

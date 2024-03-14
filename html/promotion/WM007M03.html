@@ -305,6 +305,15 @@
           </div>
           <!-- [E] 상세설정 HTML -->
           
+          <!-- [S] 상세설정 텍스트배너 -->
+<!--           <div class="option-box" data-type="txtbn">
+            <h3 class="option-tit">배너 BG Color</h3>
+            <div class="option-cont">
+              <input type="color" class="colorInput">
+            </div>
+          </div> -->
+          <!-- [E] 상세설정 텍스트배너 -->
+          
           <!-- [S] 상세설정 공통 -->
           <div class="option-box">
             <h3 class="option-tit">배경색상</h3>
@@ -331,6 +340,7 @@
           <a href="javascript:void(0);" class="ico ico-pop-close optionClsBtn" role="button"><span class="hide">창닫기</span></a>
         </div>
         <!--// [E] 상세설정 -->
+
         <div class="module-wrap">
           <!-- [S] notice/guide -->
           <div class="guide-box" style="position: relative; padding-bottom: 5rem;">
@@ -362,10 +372,10 @@
             <div class="md md-title" data-type="title" data-id="default">
               <div class="imgWrap no-img"><img src=""></div>
               <div class="txt-edit txtEdit">
-                <h1 contenteditable="true" data-text="mainTitle">대제목</h1>
-                <h3 class="fontBold" contenteditable="true" data-text="subTitle">소제목</h3>
+                <h1 contenteditable="true" data-text="mainTitle" class="edit"></h1>
+                <h3 class="fontBold edit" contenteditable="true" data-text="subTitle"><span></span></h3>
                 <p contenteditable="true" data-text="titleDate">2024.01.25 - 02.25</p>
-                <p contenteditable="true" data-text="titleDisc">설명</p>
+                <p contenteditable="true" data-text="titleDisc" class="edit"></p>
               </div>
               <div class="module-option">
                 <button class="btn btn-size xs shadow optionBtn">설정</button>
@@ -375,7 +385,7 @@
             
             <div class="dragWrap">
               <!-- [S] 텍스트배너 컨텐츠 -->
-              <div class="md md-txtbn" data-type="txtbn" data-id="txtbn123" style="height: 100px;">
+              <div class="md md-txtbn" data-type="txtbn" data-id="txtbn123">
                 <div class="marquee">
                   <p>텍스트를 입력해주세요. 텍스트를 입력해주세요. 텍스트를 입력해주세요.</p>
                 </div>

@@ -86,6 +86,10 @@ $moduel:'.module';
       &.md-htmlCode {
         padding: 2.4rem;
       }
+
+      &.md-txtbn {
+        padding: 1.4rem 0;
+      }
       .txt-edit {
         @include pos(relative);
         padding: 2.4rem;
@@ -268,9 +272,45 @@ $moduel:'.module';
           @include line(border, 1px solid $color-pk);
         }
       }
-      
-      [contenteditable=true] {
+
+      [contenteditable] {
         @include pos(relative);
+     
+/*         span {
+          display: block;
+          width: 100%;
+          height: 2rem;
+        } */
+
+        &.edit {
+          &::after {
+            content: '입력해주세요';
+            display: block;
+            position: absolute; left: 0; top: 0;
+            width: 100%;
+            height: 2rem;
+          }
+        }
+      }
+      
+      h1[contenteditable] {
+        height: 4rem;
+        &.edit {
+          &::after {
+            content: '대제목입니다.';
+          }
+        }
+      }
+      h3[contenteditable] {
+        height: 2.3rem;
+        &.edit {
+          &::after {
+            content: '소제목입니다.';
+          }
+        }
+      }
+
+      [contenteditable=true] {
         cursor: text;
         @include line(outline, 0);
       }
@@ -649,6 +689,7 @@ $moduel:'.module';
   p {
     display: inline-block;
     color: $color-white;
+    white-space: nowrap;
     animation: marquee 12s linear infinite;
   }
 }
