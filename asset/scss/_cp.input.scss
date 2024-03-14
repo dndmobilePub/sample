@@ -242,22 +242,22 @@
     &-clear {
         visibility: hidden; pointer-events: none; opacity: 0;
         @include el-size(1.4rem, 1.4rem);
+        @include display(inline-flex);
+        align-self:center;
         background:$color-gray4;
         border-radius:100%;
         @include pos(relative);
         @include el-content(both) {
-            @include el-size(.8rem,.15rem);
-            @include pos-offset-l(.61rem, 2.5px);
+            @include el-size(.8rem,.1rem);
+            @include pos-offset-l(calc(50%), calc(50%));
             background:$color-white;
         }
         
-        @include el-content(before) {transform:rotate(45deg);}
-        @include el-content(after) {transform:rotate(-45deg);}
+        @include el-content(before) {transform:translate(-50%, -50%) rotate(45deg);}
+        @include el-content(after) {transform:translate(-50%, -50%) rotate(-45deg);}
 
         &._active {
-            @include display(inline-flex);
             visibility: visible; pointer-events: all; opacity: 1; touch-action: none;
-            align-self: center;;
         }
     }
     input {
