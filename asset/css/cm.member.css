@@ -4197,8 +4197,9 @@ legend, caption {
   position: fixed;
   left: 0;
   z-index: 9995;
-  width: 100%;
+  width: auto;
   height: 100%;
+  max-width: 110rem;
 }
 .modalPop._top {
   position: fixed;
