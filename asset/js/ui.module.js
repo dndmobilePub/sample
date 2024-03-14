@@ -54,6 +54,24 @@ var COMPONENT_MD = (function (cp, $) {
                         $('.option-box[data-type="' + dataType + '"][data-case*="' + value + '"]').show();
                     });
                 }
+
+                const dataText = $thisMd.find('[contenteditable]').attr('data-text');
+                const chkUse = $thisMd.find('[contenteditable]').parent('.txtEdit').css('display');
+                $('[name="' + dataText + '"]').each(function() {
+                    if (chkUse === 'none') {
+                        if ($(this).val() === 'use') {
+                            $(this).prop('checked', false);
+                        } else if ($(this).val() === 'disuse') {
+                            $(this).prop('checked', true);
+                        }
+                    } else {
+                        if ($(this).val() === 'use') {
+                            $(this).prop('checked', true);
+                        } else if ($(this).val() === 'disuse') {
+                            $(this).prop('checked', false);
+                        }
+                    }
+                });
                 
             });
         },
