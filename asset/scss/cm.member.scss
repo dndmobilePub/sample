@@ -9,23 +9,7 @@
 /****************************************/
 /*	PART: IMPORT CSS
 /****************************************/
-@import 'variables';
-@import 'mixin';
-@import 'reset';
-@import 'font';
-@import 'plugin';
-@import 'cp.text';
-@import 'cp.button';
-@import 'cp.ico';
-@import 'cp.input';
-@import 'cp.select';
-@import 'cp.swiper';
-@import 'cp.rdochk';
-@import 'cp.accodion';
-@import 'cp.tab';
-@import 'cp.list';
-@import 'cp.table';
-@import 'cp.popup';
+@import 'cm.common';
 
 
 .member{

@@ -4,7 +4,8 @@
 .modalPop {
     @include display(none);
     @include pos(fixed) {left: 0; z-index: 9995;}
-    @include el-size(100%, 100%);
+    @include el-size(auto, 100%);
+    max-width: 110rem;
     
     &._top {
         @include pos-offset-l(-100%, 0, fixed);

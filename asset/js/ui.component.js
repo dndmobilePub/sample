@@ -1559,27 +1559,30 @@ var COMPONENT_UI = (function (cp, $) {
             const _addTab = '.tab-list-wrap > .tab-list > li._addTab > a';
             const _tabLi = $('<li class="tab"><a href="javascript:void(0);" contenteditable="true">추가탭</a></li>'),
             _tabCont = $('<div class="tab-contents">' +
-                            '<div class="goods-tit">' +
-                            '<span class="goods-category" contenteditable="true">iPad</span>' +
-                            '<button class="btn btn-size xs shadow _delTab">탭삭제</button>' +
-                          '</div>' +
-                            '<ul class="lst lst-goods">' +
+                            '<div class="goods-tit" data-anchorTab="anchorTab">' +
+                                '<span class="goods-category" contenteditable="true" data-text="infoTab">iPad</span>' +
+                                '<button class="btn btn-size xs shadow _delTab">탭삭제</button>' +
+                                '<div class="txtEdit">' +
+                                '<span class="goods-txt" contenteditable="true" data-text="infoTab">등록될 상품에 대한 설명입니다.</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<ul class="lst lst-goods">' +
                             '<li>' +
-                                '<dl class="goodsWrap">' +
-                                '<dt class="goods-info">' +
-                                    '<div class="no-img"></div>' +
-                                '</dt>' +
-                                '<dd class="item brand">애플</dd>' +
-                                '<dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>' +
-                                '<dd class="item price">1,249,000 원</dd>' +
-                                '<dd class="item benefit">' +
-                                    '<span class="label point">최대 50% M 포인트</span>' +
-                                '</dd>' +
+                                '<dl class="goodsWrap" data-chk="goodsInfo">' +
+                                    '<dt class="goods-img-wrap">' +
+                                        '<div class="no-img"></div>' +
+                                    '</dt>' +
+                                    '<dd class="item brand" goods-chk="goodsInfoBrand">애플</dd>' +
+                                    '<dd class="item name" goods-chk="goodsInfoName">Me iPad Pro 11형 Wi-Fi 128GB</dd>' +
+                                    '<dd class="item price" goods-chk="goodsInfoPrice">1,249,000 원</dd>' +
+                                    '<dd class="item benefit" goods-chk="goodsInfoTag">' +
+                                        '<span class="label point">최대 50% M 포인트</span>' +
+                                    '</dd>' +
                                 '</dl>' +
                             '</li>' +
                             '<li>' +
                                 '<dl class="goodsWrap">' +
-                                '<dt class="goods-info">' +
+                                '<dt class="goods-img-wrap">' +
                                     '<div class="no-img"></div>' +
                                 '</dt>' +
                                 '<dd class="item brand">애플</dd>' +
@@ -1823,19 +1826,21 @@ var COMPONENT_UI = (function (cp, $) {
             this.popSwiper();
         },
         popSwiper: function () {
-            setTimeout(()=>{
-                const swiper = new Swiper('.swip-content', {
-                    loop: false,
-                    navigation: {
-                      nextEl: '.swip-swiper .swiper-button-next',
-                      prevEl: '.swip-swiper .swiper-button-prev',
-                    },
-                });
-                swiper.on('slideChange', function () {
-                    $('.terms-num').text(swiper.activeIndex + 1)
-                    $('.swip-swiper').animate({scrollTop:0},'fast')
-                  });
-            },250)
+            if($('.swip-rt').length > 0){
+                setTimeout(()=>{
+                    const swiper = new Swiper('.swip-content', {
+                        loop: false,
+                        navigation: {
+                          nextEl: '.swip-swiper .swiper-button-next',
+                          prevEl: '.swip-swiper .swiper-button-prev',
+                        },
+                    });
+                    swiper.on('slideChange', function () {
+                        $('.terms-num').text(swiper.activeIndex + 1)
+                        $('.swip-swiper').animate({scrollTop:0},'fast')
+                      });
+                },250)      
+            }
         },
     };
 

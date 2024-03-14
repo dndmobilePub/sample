@@ -10,6 +10,7 @@ var COMPONENT_MD = (function (cp, $) {
             this.inpTxtLocation();
             this.txtBgHeight();
             this.anchorTab();
+            this.goodsInfo();
             this.moreBtn();
         },
         currentModuleData: null,
@@ -47,9 +48,13 @@ var COMPONENT_MD = (function (cp, $) {
                 cp.imgCrop.openCropImg(cp.optionEdit.currentModuleData);
 
                 if (dataCase) {
+                    const dataCaseValues = dataCase.split(' ');
                     $('.option-box[data-case]').hide();
-                    $('.option-box[data-type="' + dataType + '"][data-case="' + dataCase + '"]').show();
+                    dataCaseValues.forEach(function(value) {
+                        $('.option-box[data-type="' + dataType + '"][data-case*="' + value + '"]').show();
+                    });
                 }
+                
             });
         },
         optionClose: function() {
@@ -114,11 +119,58 @@ var COMPONENT_MD = (function (cp, $) {
         anchorTab:function() {
             $('input[name="anchorTab"]').on('change', function() {
                 var anchorTabValue = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('id');
-                var $anchorTab = $('.md[data-id="' + dataType + '"]').find('.tab-list');
-
-                $anchorTab.removeClass();
-                $anchorTab.addClass('tab-list ' + anchorTabValue);
+                var radioName = $(this).attr('name');
+                var dataType = $(this).closest('.option-wrap').attr('data-id');
+                var $anchorTab = $('.md[data-id="' + dataType + '"]').find('.tab-wrap');
+                
+                if (anchorTabValue === "disuse") {
+                    $anchorTab.each(function(){
+                        $(this).find('[data-anchorTab="' + radioName + '"]').each(function() {
+                            $(this).hide();
+                        });
+                    })
+                } else {
+                    $anchorTab.each(function(){
+                        $(this).find('[data-anchorTab="' + radioName + '"]').each(function() {
+                            $(this).show();
+                        });
+                    })
+                }
+                
+            });
+        },
+        goodsInfo:function() {
+            $('.chkUse input[type="checkbox"]').each(function() {
+                var checkedId = $(this).attr('id');
+                var checkedName = $(this).attr('name');
+                var dataType = $(this).closest('.option-wrap').attr('data-id');
+                var goodsWrap = $('.md[data-type="goods"]').find('.goodsWrap');
+                var dataChk = goodsWrap.attr('data-chk');
+                
+                if (dataChk === checkedName) {
+                    if ($(this).is(':checked') === true) {
+                        goodsWrap.find('[goods-chk="' + checkedId + '"]').show();
+                    } else {
+                        goodsWrap.find('[goods-chk="' + checkedId + '"]').hide();
+                    }
+                }
+            });
+            $('.chkUse input[type="checkbox"]').on('change', function() {
+                var checkedId = $(this).attr('id');
+                var checkedName = $(this).attr('name');
+                var dataType = $(this).closest('.option-wrap').attr('data-id');
+                var goodsWrap = $('.md[data-id="' + dataType + '"]').find('.goodsWrap');
+                var dataChk = goodsWrap.attr('data-chk');
+                
+                if (dataChk === checkedName) {
+                    if ($(this).is(':checked') === true) {
+                        $('.md[data-id="' + dataType + '"] .goodsWrap').find('[goods-chk="' + checkedId + '"]').show();
+                        console.log('show');
+                    } else {
+                        $('.md[data-id="' + dataType + '"] .goodsWrap').find('[goods-chk="' + checkedId + '"]').hide();
+                        console.log('hide');
+                    }
+                }
             });
         },
         moreBtn:function() {
@@ -1057,7 +1109,7 @@ var COMPONENT_MD = (function (cp, $) {
             $('.inpUse input').change(function() {
                 var radioValue = $(this).val();
                 var radioName = $(this).attr('name');
-                var dataType = $(this).closest('.option-wrap').data('id');
+                var dataType = $(this).closest('.option-wrap').attr('data-id');
                 var $txtEdit = $('.md[data-id="' + dataType + '"]').find('.txtEdit');
                 
                 if (radioValue === "disuse") {
