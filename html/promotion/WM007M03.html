@@ -369,11 +369,19 @@
             <!-- [S] 타이틀 컨텐츠 -->
             <div class="md md-title" data-type="title" data-id="default">
               <div class="imgWrap no-img"><img src=""></div>
-              <div class="txt-edit txtEdit">
-                <h1 contenteditable="true" data-text="mainTitle" class="edit"></h1>
-                <h3 class="fontBold edit" contenteditable="true" data-text="subTitle"><span></span></h3>
-                <p contenteditable="true" data-text="titleDate">2024.01.25 - 02.25</p>
-                <p contenteditable="true" data-text="titleDisc" class="edit"></p>
+              <div class="txt-edit">
+                <div class="txtEdit">
+                  <h1 class="edit" contenteditable="true" data-text="mainTitle" data-placeholder="기획전 대제목입니다"></h1>
+                </div>
+                <div class="txtEdit">
+                  <h3 class="fontBold edit" contenteditable="true" data-text="subTitle" data-placeholder="기획전 소제목입니다."></h3>
+                </div>
+                <div class="txtEdit">
+                  <p class="" contenteditable="true" data-text="titleDate" data-placeholder="기획전 전시기간입니다.">2024.01.25 - 02.25</p>
+                </div>
+                <div class="txtEdit">
+                  <p class="edit" contenteditable="true" data-text="titleDisc" data-placeholder="기획전 설명입니다."></p>
+                </div>
               </div>
               <div class="module-option">
                 <button class="btn btn-size xs shadow optionBtn">설정</button>
