@@ -225,10 +225,14 @@
       }
     }
   }
+  &-tit{
+    @include pos(relative);
+    margin:1rem 0;
+  }
   &-category {
     font-size:var(--space-mx);
     font-weight:bold;
-    margin:1rem 0;
+    
   }
   // &-info {
   //   background:$color-gray6;
