@@ -29,14 +29,6 @@
 
 /* 버튼 */
 .btn {
-  &.goodsAddBtn{
-    width: 100%;
-    padding: 1.15rem 1.6rem;
-    border-radius:5rem;
-    background: $color-black;
-    color:$color-white;
-    font-size:1.6rem;
-  }
   &.deleteBtn{
     margin:0;
   }
@@ -47,6 +39,17 @@
     padding: 1rem 1.15rem;
     background: $color-violet;
     border-color: $color-violet;
+  }
+  &.goodsAddBtn{
+    width: 100%;
+    padding: 1.15rem 1.6rem;
+    border-radius:5rem;
+    background: $color-black;
+    color:$color-white;
+    font-size:1.6rem;
+  }
+  &.goodsDelBtn{
+    @include pos-offset-r(-2rem,0);
   }
 }
 

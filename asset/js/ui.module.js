@@ -173,16 +173,23 @@ var COMPONENT_MD = (function (cp, $) {
                 var slideIdx = $(this).closest('.swiper-slide').index();
                 $('.modalPop.goodsPop').attr('item-single', isSingle);
                 $('.modalPop.goodsPop').attr('item-idx', slideIdx);
+                console.log(isSingle);
+                console.log(slideIdx);
 
                 COMPONENT_UI.modalPop.showModal($(this));
             });
         },
 
-        mdGoodsDel:function() {
+        mdGoodsDel: function() {
             $('body, html').on('click', '.goodsDelBtn', function() {
                 var targetSlide = $(this).parents('.swiper-slide');
+                var targetSwiper = $(this).parents('.swiper');
                 $(targetSlide).remove();
-                
+                var existingSwiper = targetSwiper[0];
+                if (existingSwiper && existingSwiper.swiper) {
+                    existingSwiper.swiper.destroy();
+                }
+                cp.moduleBox.initializeSwiper('.swiper');
             });
         },
 
@@ -369,7 +376,7 @@ var COMPONENT_MD = (function (cp, $) {
 
         // append 영역
         mdGoodPopSel: function() {
-            $('body, html').on('click', '.btn-registration-pop', function(){
+            $('.btn-registration-pop').on('click', function() {
                 var thisData = $(this).closest('.modalPop.goodsPop').attr('modal-target');
                 var itemSingle = $(this).closest('.modalPop.goodsPop').attr('item-single');
                 var slideIdx = $(this).closest('.modalPop.goodsPop').attr('item-idx');
@@ -414,14 +421,11 @@ var COMPONENT_MD = (function (cp, $) {
         },
 
         initializeSwiper: function(swiperContainer) {
-            
             $(swiperContainer).each(function() {
                 var slidesCount = $(this).find('.swiper-slide').length;
                 var slidesPerView = slidesCount > 1 ? 2 : 1; 
-                // var loopEnabled = slidesPerView > 1 && slidesCount >= 3;
-                // var loopOption = loopEnabled ? true : false;
                 var swiperCase = $(this).parents('.md').attr('swiper-case');
-            
+        
                 if (swiperCase === 'PerView2') {
                     slidesPerView = 2;
                 } else if (swiperCase === 'PerView1.5') {
@@ -429,33 +433,33 @@ var COMPONENT_MD = (function (cp, $) {
                 } else if (swiperCase === 'PerView1') {
                     slidesPerView = 1;
                 }
-
+        
                 var swiperInstance = new Swiper(this, {
                     loop: false,
                     slidesPerView: slidesPerView,  
                     spaceBetween: 10, 
-                    autoplay: true,
+                    autoplay: {
+                        delay: 3000, 
+                        disableOnInteraction: false, 
+                    },
                     pagination: {
                         el: '.swiper-pagination',
                     },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
                 });
-
+        
                 swiperInstance.on('slideChange', function () {
                     var swiperInner = $(swiperInstance.el).parent('.swiper-inner');
-
+        
                     if (swiperInstance.isEnd) {
                         swiperInner.addClass('swiperIsEnd');
+                        swiperInstance.autoplay.stop(); // 여기서 수정
                     } else {
                         swiperInner.removeClass('swiperIsEnd');
                     }
                 });
             });
-            
-        }, 
+        },
+        
 
 
         resetSwipers: function() {

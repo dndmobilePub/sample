@@ -228,6 +228,9 @@
 	&-contents {
 		padding: 0 2rem 2rem;
 		min-height: 20rem;
+		._delTab{
+			@include pos-offset-r(0, 0);
+		}
 	}
 
 	&-sticky {
@@ -278,7 +281,7 @@
 				@include display(block);
 				clear: both;
 			}
-			.goods-img{
+			.goods-info{
 				width: 50%;
 				float: left;
 				margin-right: 1.6rem;
