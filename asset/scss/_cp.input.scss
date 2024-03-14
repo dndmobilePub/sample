@@ -82,6 +82,25 @@
 
         &:focus-within {box-shadow: inset 0 0 0 .2rem $color-gray8;}
 
+        // [s]20240314 BHY - 추가(적용 후 주석 삭제 예정)
+        &.auth {
+            @include display(inline-flex);
+            @include width;
+            // width:calc(100% - 8rem);
+
+            #{$field} {
+                &-input {@include display(flex);}
+                ._input-clear {order:2;}
+            }
+        
+            .auth-time {
+                margin-left:1rem;
+                align-self:center; order:3;
+            }
+            .btn-auth {align-self: center; margin-right:1rem;}
+        }
+        // [e]20240314 BHY - 추가(적용 후 주석 삭제 예정)
+
         &.pw {
             &-group {
                 &.type2 {
