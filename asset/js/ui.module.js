@@ -140,6 +140,21 @@ var COMPONENT_MD = (function (cp, $) {
             });
         },
         goodsInfo:function() {
+            $('.chkUse input[type="checkbox"]').each(function() {
+                var checkedId = $(this).attr('id');
+                var checkedName = $(this).attr('name');
+                var dataType = $(this).closest('.option-wrap').attr('data-id');
+                var goodsWrap = $('.md[data-type="goods"]').find('.goodsWrap');
+                var dataChk = goodsWrap.attr('data-chk');
+                
+                if (dataChk === checkedName) {
+                    if ($(this).is(':checked') === true) {
+                        goodsWrap.find('[goods-chk="' + checkedId + '"]').show();
+                    } else {
+                        goodsWrap.find('[goods-chk="' + checkedId + '"]').hide();
+                    }
+                }
+            });
             $('.chkUse input[type="checkbox"]').on('change', function() {
                 var checkedId = $(this).attr('id');
                 var checkedName = $(this).attr('name');
