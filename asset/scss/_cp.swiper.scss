@@ -308,6 +308,45 @@
   }
 }
 
+// 팝업에서의 스와이퍼
+$swip:'.swip';
+[data-type="pop-swiper"]{
+  #{$swip}{
+    &-rt{
+    }
+
+    &-swiper{
+      overflow-x: hidden;
+      overflow-y: scroll;
+      height: fit-content;
+
+      & #{$swiper}{
+        &-slide{
+          color: $color-black;
+          line-height: inherit;
+          text-align: left !important;
+          cursor: inherit;
+          margin-top: 3rem;
+
+          &:nth-child(odd){
+            background-color: transparent;
+            
+          }
+        }
+      
+        &-button{
+          &-prev{
+            left: -2rem;
+          }
+          &-next{
+            right: -3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
 // 상품모듈 스와이퍼
 [data-type="goods"] {
   #{$swiper}{

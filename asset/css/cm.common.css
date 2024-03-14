@@ -2802,6 +2802,30 @@ legend, caption {
   overflow: hidden;
 }
 
+[data-type=pop-swiper] .swip-swiper {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+[data-type=pop-swiper] .swip-swiper .swiper-slide {
+  color: #000;
+  line-height: inherit;
+  text-align: left !important;
+  cursor: inherit;
+  margin-top: 3rem;
+}
+[data-type=pop-swiper] .swip-swiper .swiper-slide:nth-child(odd) {
+  background-color: transparent;
+}
+[data-type=pop-swiper] .swip-swiper .swiper-button-prev {
+  left: -2rem;
+}
+[data-type=pop-swiper] .swip-swiper .swiper-button-next {
+  right: -3rem;
+}
+
 [data-type=goods] .swiper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4257,7 +4281,7 @@ legend, caption {
 .modalPop .modalWrap {
   background-color: #fff;
   border: 0.1rem solid #666;
-  padding: 2rem;
+  padding: 4rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -4267,16 +4291,16 @@ legend, caption {
   display: flex;
   -ms-flex-negative: 1;
       flex-shrink: 1;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   margin-bottom: 1rem;
 }
 .modalPop .modal-header .mp-title {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  text-align: center;
+  text-align: left;
 }
 .modalPop .modal-header .mp-title.dep01 {
   font-size: var(--space-mx);

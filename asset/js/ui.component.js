@@ -1780,6 +1780,27 @@ var COMPONENT_UI = (function (cp, $) {
         }
     };
 
+    /* swiper *//* BHY - 240314 추가된 것(삭제예정) */
+    cp.swiper = {
+        init() {
+            this.popSwiper();
+        },
+        popSwiper: function () {
+            $('.swip-rt').each(function () {
+                var swiper = new swiper(".swiper-wrapper",{
+                    slidesPerView:1,
+                    centeredSlides: true,
+                    loop : false,
+                    navigator:{
+                        nextEl:".swiper-button-next",
+                        prevEl:".swiper-button-prev",
+                    }
+                })
+
+            });
+        },
+    };
+
     cp.init = function () {
         cp.uaCheck.init(); // ver check
         cp.tblCaption.init(); // table caption
@@ -1790,6 +1811,7 @@ var COMPONENT_UI = (function (cp, $) {
         cp.selectBox.init();
         cp.tab.init();
         cp.accordion.init();
+        cp.swiper.init();
     };
 
     cp.init();

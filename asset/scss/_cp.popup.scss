@@ -66,16 +66,16 @@
         &Wrap {
             background-color: $color-white;
             border: .1rem solid $color-gray3;
-            padding: 2rem;
+            padding: 4rem;
             box-sizing: border-box;
         }
         &-header {
-            @include display(flex) {flex-shrink:1; align-items: center;}
+            @include display(flex) {flex-shrink:1; align-items: flex-start;}
             margin-bottom: 1rem;
 
             .mp {
                 &-title {
-                    flex:1; text-align:center;
+                    flex:1; text-align:left;
                     &.dep01 {
                         font : {
                             size:var(--space-mx);
