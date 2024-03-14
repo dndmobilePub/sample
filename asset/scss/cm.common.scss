@@ -93,6 +93,9 @@ $moduel:'.module';
       &.md-txtbn {
         padding: 1.4rem 0;
       }
+      
+      .txtEdit {position: relative;}
+      .placeholder {display: none;}
       .txt-edit {
         @include pos(relative);
         padding: 2.4rem;
@@ -260,6 +263,7 @@ $moduel:'.module';
         .deleteBtn, .dragBtn, .optionBtn {
           @include display(block);
         }
+        [contenteditable].edit + .placeholder {z-index: -1;}
       }
       &:hover {
         outline-color: $color-valid;
@@ -276,8 +280,6 @@ $moduel:'.module';
         }
       }
 
-      .txtEdit {position: relative;}
-      .placeholder {display: none;}
       [contenteditable] {
         overflow: hidden;
         @include pos(relative);
@@ -290,9 +292,7 @@ $moduel:'.module';
           } */
           & + .placeholder {
             display: block;
-            @include pos-offset-l(0, 0) {
-              z-index: -1;
-            }
+            @include pos-offset-l(0, 0);
             width: 100%;
             height: 2rem;
           }

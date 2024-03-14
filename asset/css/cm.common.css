@@ -4126,6 +4126,12 @@ label input {
 .module-wrap .md.md-txtbn {
   padding: 1.4rem 0;
 }
+.module-wrap .md .txtEdit {
+  position: relative;
+}
+.module-wrap .md .placeholder {
+  display: none;
+}
 .module-wrap .md .txt-edit {
   position: relative;
   padding: 2.4rem;
@@ -4314,6 +4320,9 @@ label input {
 .module-edit .md:hover .deleteBtn, .module-edit .md:hover .dragBtn, .module-edit .md:hover .optionBtn, .module-edit .md._is-active .deleteBtn, .module-edit .md._is-active .dragBtn, .module-edit .md._is-active .optionBtn {
   display: block;
 }
+.module-edit .md:hover [contenteditable].edit + .placeholder, .module-edit .md._is-active [contenteditable].edit + .placeholder {
+  z-index: -1;
+}
 .module-edit .md:hover {
   outline-color: #0048ff;
   z-index: 5;
@@ -4324,12 +4333,6 @@ label input {
 }
 .module-edit .md .md-logo.no-img {
   border: 1px solid #e93c79;
-}
-.module-edit .md .txtEdit {
-  position: relative;
-}
-.module-edit .md .placeholder {
-  display: none;
 }
 .module-edit .md [contenteditable] {
   overflow: hidden;
@@ -4348,7 +4351,6 @@ label input {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
   width: 100%;
   height: 2rem;
 }
