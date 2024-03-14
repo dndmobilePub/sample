@@ -9,11 +9,12 @@
   }
 }
 
+// 240314 BHY - 리스트 추가(반영 후 주석 삭제 예정)
 .list{
   &-dot{
     padding: 0.3rem 0;
     margin-left: 1rem;
-    margin-top: 2rem;
+    // margin-top: 2rem;
 
     &.cir {
       & > li{
@@ -58,6 +59,9 @@
 }
 
   &-hyphen{
+    padding: 0.3rem 0;
+    margin-left: 1rem;
+
     & > li{
       position:relative;
       padding:0.5rem 0 0.5rem 1.2rem;
@@ -78,6 +82,8 @@
   }
 
   &-caution{
+    padding: 0.3rem 0;
+    margin-left: 1rem;
     & > li{
       position:relative;
       padding:0.5rem 0 0.5rem 1.2rem;
@@ -95,20 +101,102 @@
   }
 
   &-star{
+    padding: 0.3rem 0;
+    margin-left: 1rem;
+
+    & > li{
+      position:relative;
+      padding:0.5rem 0 0.5rem 1.2rem;
+      color: #333;
+      font-size: 1.3rem;
+
+      &::before{
+        content: "*";
+        display: block;
+        position: absolute;
+        top: 0.5rem;
+        left: 0;
+      } 
+    }
+  }
+
+  &-pool{
+    padding: 0.3rem 0;
+    margin-left: 1rem;
+
+    & > li{
+      position:relative;
+      padding:0.5rem 0 0.5rem 1.5rem;
+      color: #333;
+      font-size: 1.3rem;
+
+      &::before{
+        content: "※";
+        display: block;
+        position: absolute;
+        top: 0.6rem;
+        left: 0;
+      } 
+    }
+  }
+
+  &-num{
+    padding: 0.3rem 0;
+    margin-left: 1rem;
+    counter-reset:list-number;
+
+    & > li{
+      position:relative;
+      padding:0.5rem 0 0.5rem 1.5rem;
+      color: #333;
+      font-size: 1.3rem;
+      counter-increment:list-number;
+
+      &::before{
+        content:counter(list-number)".";
+        display: block;
+        position: absolute;
+        top: 0.6rem;
+        left: 0;
+      }
+    }
+
+    &.cir{
+      counter-reset: circle-number;
+
       & > li{
         position:relative;
-        padding:0.5rem 0 0.5rem 1.2rem;
+        padding:0.5rem 0 0.5rem 1.5rem;
         color: #333;
         font-size: 1.3rem;
+        counter-increment:circle-number;
 
         &::before{
-          content: "*";
-          display: block;
-          position: absolute;
-          top: 0.5rem;
+          content:counter(circle-number);
+          display: inline-block;
+          position: relative;
+          top: 0;
           left: 0;
-      } 
+          border: 1px solid #333;
+          border-radius: 50%;
+          width: 1.5rem;
+          height: 1.5rem;
+          text-align: center;
+        }
+
+        // &::after{
+        //   content: '';
+        //   display: inline-block;
+        //   // position: absolute;
+        //   top: 0.7rem;
+        //   left: -0.36rem;
+        //   border: 1px solid #333;
+        //   border-radius: 50%;
+        //   width: 1.25rem;
+        //   height: 1.25rem;
+        // }
       }
+    }
   }
 }
 
