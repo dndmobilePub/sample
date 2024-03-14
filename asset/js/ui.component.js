@@ -1212,8 +1212,11 @@ var COMPONENT_UI = (function (cp, $) {
             $('.field-select > .btn-select').click(function(event) {
                 event.stopPropagation();
                 var selectWidth = $(this).outerWidth();
-                $('.field-select-list').removeClass('_is-active');
-                $(this).next('.field-select-list').toggleClass('_is-active');
+                var selectList = $('.field-select-list');
+                var selectActive = $(this).next(selectList).hasClass('_is-active');
+
+                $('.field-select-list._is-active').not($(this).next(selectList)).removeClass('_is-active');
+                $(this).next(selectList).toggleClass('_is-active', !selectActive);
                 $(this).next('.field-select-list').css('width', selectWidth + 'px');
             });
             $('.field-select-list li').each(function() {
