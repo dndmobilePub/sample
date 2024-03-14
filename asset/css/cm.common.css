@@ -542,9 +542,11 @@ legend, caption {
 }
 /* jquery UI CSS - resizalabe */
 .ui-sortable-handle {
+  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable-handle {
+  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable .ui-dialog-titlebar {
@@ -557,6 +559,7 @@ legend, caption {
   position: absolute;
   font-size: 0.1px;
   display: block;
+  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
@@ -625,9 +628,11 @@ legend, caption {
   font-size: 0;
   line-height: 0;
   position: relative;
+  -ms-touch-action: none;
   touch-action: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .cropper-container img {
@@ -1839,20 +1844,16 @@ legend, caption {
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
-<<<<<<< HEAD
 .field input[type=password]::-webkit-input-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
 }
-=======
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field input[type=password]::-moz-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
 }
-<<<<<<< HEAD
 .field input[type=password]:-ms-input-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
@@ -1863,8 +1864,6 @@ legend, caption {
   -webkit-text-security: none;
   font-size: 2rem;
 }
-=======
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field input[type=password]::placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
@@ -1962,18 +1961,14 @@ legend, caption {
   border: 0;
   background-color: transparent;
 }
-<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder {
   font-weight: normal;
   color: #949494;
 }
-=======
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
   font-weight: normal;
   color: #949494;
 }
-<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio]):-ms-input-placeholder {
   font-weight: normal;
   color: #949494;
@@ -1982,8 +1977,6 @@ legend, caption {
   font-weight: normal;
   color: #949494;
 }
-=======
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   font-weight: normal;
   color: #949494;
@@ -1991,7 +1984,6 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
 }
-<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder {
   color: #ccc;
 }
@@ -2004,11 +1996,6 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio])::-ms-input-placeholder {
   color: #ccc;
 }
-=======
-.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
-  color: #ccc;
-}
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   color: #ccc;
 }
@@ -2023,18 +2010,14 @@ legend, caption {
   max-width: 1.1rem;
   padding-right: 0;
 }
-<<<<<<< HEAD
 .field-input.mid_num input::-webkit-input-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
 }
-=======
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input.mid_num input::-moz-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
 }
-<<<<<<< HEAD
 .field-input.mid_num input:-ms-input-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
@@ -2043,8 +2026,6 @@ legend, caption {
   font-family: "pass";
   font-size: 0.4rem;
 }
-=======
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input.mid_num input::placeholder {
   font-family: "pass";
   font-size: 0.4rem;
@@ -2272,9 +2253,6 @@ legend, caption {
 ._input input._password::-ms-input-placeholder {
   font-weight: 700;
 }
-._input input._password::-moz-placeholder {
-  font-weight: 700;
-}
 ._input input._password::placeholder {
   font-weight: 700;
 }
@@ -2288,7 +2266,6 @@ legend, caption {
   z-index: 2;
   color: transparent;
 }
-<<<<<<< HEAD
 ._input ._secureTxt > input[type=password]::-webkit-input-placeholder {
   color: transparent;
 }
@@ -2301,11 +2278,6 @@ legend, caption {
 ._input ._secureTxt > input[type=password]::-ms-input-placeholder {
   color: transparent;
 }
-=======
-._input ._secureTxt > input[type=password]::-moz-placeholder {
-  color: transparent;
-}
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 ._input ._secureTxt > input[type=password]::placeholder {
   color: transparent;
 }
@@ -2625,13 +2597,8 @@ legend, caption {
   z-index: 1;
   width: 100%;
   height: 100%;
-<<<<<<< HEAD
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
-  padding-right: 50px;
-=======
-  box-sizing: content-box;
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 }
 .swiper-slide {
   -ms-flex-negative: 0;
@@ -3710,10 +3677,7 @@ legend, caption {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-<<<<<<< HEAD
   min-width: -webkit-fit-content;
-=======
->>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
   min-width: -moz-fit-content;
   min-width: fit-content;
 }
@@ -4589,13 +4553,9 @@ label input {
 .module-wrap .md .txt-edit .fontBold {
   font-weight: 700;
 }
-<<<<<<< HEAD
-.module-wrap .md .imgWrap .txtEdit {
+.module-wrap .md .imgWrap .txt-edit {
   display: -webkit-box;
   display: -ms-flexbox;
-=======
-.module-wrap .md .imgWrap .txt-edit {
->>>>>>> 03926691871de65d5a61d0208767818fac97e3dc
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -4616,8 +4576,7 @@ label input {
   width: 100%;
   height: 100%;
 }
-<<<<<<< HEAD
-.module-wrap .md .imgWrap .txtEdit.center {
+.module-wrap .md .imgWrap .txt-edit.center {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -4632,7 +4591,7 @@ label input {
           align-items: center;
   text-align: center !important;
 }
-.module-wrap .md .imgWrap .txtEdit.leftBottom {
+.module-wrap .md .imgWrap .txt-edit.leftBottom {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -4645,20 +4604,6 @@ label input {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-=======
-.module-wrap .md .imgWrap .txt-edit.center {
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  text-align: center !important;
-}
-.module-wrap .md .imgWrap .txt-edit.leftBottom {
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: flex-start;
->>>>>>> 03926691871de65d5a61d0208767818fac97e3dc
   text-align: left !important;
 }
 .module-wrap .md .imgWrap .txt-edit .txtEditBg {
@@ -4668,11 +4613,8 @@ label input {
   z-index: -1;
   width: 100%;
   height: 30%;
-<<<<<<< HEAD
-  background: -webkit-gradient(linear, left bottom, left top, from(#ccc), to(transparent));
-=======
   margin-top: 0;
->>>>>>> 03926691871de65d5a61d0208767818fac97e3dc
+  background: -webkit-gradient(linear, left bottom, left top, from(#ccc), to(transparent));
   background: linear-gradient(to top, #ccc, transparent);
 }
 .module-wrap .md .imgWrap .txt-edit .md-logo {
