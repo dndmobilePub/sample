@@ -4307,6 +4307,25 @@ legend, caption {
 .modalPop .modal-footer .btnWrap {
   margin: 0;
 }
+.modalPop.mb {
+  width: 100%;
+}
+.modalPop.mb .modalWrap {
+  padding: 4rem;
+}
+.modalPop.mb .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.modalPop.mb .modal-header .mp-title {
+  text-align: left;
+}
 .modalPop._is-active {
   display: block;
 }

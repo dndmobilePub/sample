@@ -96,6 +96,24 @@
         }
     }
 
+    &.mb{
+        @include width();
+        & .modal{
+            &Wrap{
+                padding: 4rem
+            }
+            &-header{
+                @include display(flex) {flex-shrink:1; align-items: flex-start;}
+
+                & .mp{
+                    &-title{
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+
     &._is-active {@include display(block);}
 
     .goodsAddBtn , .goodsDelBtn{@include display(none !important) ;}
