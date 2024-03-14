@@ -3855,24 +3855,18 @@ legend, caption {
 .modalPop .modalWrap {
   background-color: #fff;
   border: 0.1rem solid #666;
-  padding: 4rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 .modalPop .modal-header {
   display: flex;
-  -ms-flex-negative: 1;
-      flex-shrink: 1;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  flex-shrink: 1;
+  align-items: center;
   margin-bottom: 1rem;
 }
 .modalPop .modal-header .mp-title {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  text-align: left;
+  flex: 1;
+  text-align: center;
 }
 .modalPop .modal-header .mp-title.dep01 {
   font-size: var(--space-mx);
@@ -3896,14 +3890,9 @@ legend, caption {
   padding: 4rem;
 }
 .modalPop.mb .modal-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-negative: 1;
-      flex-shrink: 1;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  flex-shrink: 1;
+  align-items: flex-start;
 }
 .modalPop.mb .modal-header .mp-title {
   text-align: left;
@@ -4789,28 +4778,14 @@ label input {
   display: inline-block;
   color: #fff;
   white-space: nowrap;
-  -webkit-animation: marquee 12s linear infinite;
-          animation: marquee 12s linear infinite;
-}
-
-@-webkit-keyframes marquee {
-  0% {
-    -webkit-transform: translateX(100%);
-            transform: translateX(100%);
-  }
-  100% {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
+  animation: marquee 12s linear infinite;
 }
 
 @keyframes marquee {
   0% {
-    -webkit-transform: translateX(100%);
-            transform: translateX(100%);
+    transform: translateX(100%);
   }
   100% {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
+    transform: translateX(-100%);
   }
 }
