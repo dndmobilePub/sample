@@ -58,7 +58,7 @@
                   </div>
                 </div>
                 <p class="field-msg">
-                  <span class="ico ico-error txt-r">오류체크 메세지 출력</span>
+                  <span class="txt-r">오류체크 메세지 출력</span>
                 </p>
               </div>
               <div class="field field-select-wrap">
@@ -95,16 +95,32 @@
                   </div>
                 </div>
               </div>
-            </div>
-            
+            </div>            
 
             <div class="field">
-              <label class="field-label tit">휴대폰번호</label>
-              <div class="field-outline disabled">
+              <label class="field-label tit" for="p_mobilenum">휴대폰번호</label>
+              <div class="field-outline auth">
                 <div class="field-input grow _input">
-                  <input type="text" placeholder="disabled" disabled="disabled">
+                  <input type="text" id="p_mobilenum" placeholder="휴대폰번호 ‘-’없이 입력">
+                </div>
+                <button class="btn btn-size s bg btn-auth">인증요청</button>
+              </div>
+              <p class="field-msg">
+                <span class="ico ico-error txt-r">인증시간이 초과되어 다시 인증요청 해주세요.</span>
+              </p>
+            </div>
+
+            <div class="field invalid">
+              <label class="field-label tit" for="auth_num">인증번호</label>
+              <div class="field-outline auth">
+                <div class="field-input grow _input">
+                  <input type="text" i="auth_num" placeholder="인증번호 6자리">
+                  <span class="auth-time">03:00</span>
                 </div>
               </div>
+              <p class="field-msg">
+                <span class="txt-r">인증시간이 초과되어 다시 인증요청 해주세요.</span>
+              </p>
             </div>
 
             <div class="field">

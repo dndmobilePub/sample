@@ -82,6 +82,24 @@
 
         &:focus-within {box-shadow: inset 0 0 0 .2rem $color-gray8;}
 
+        // 인증번호 필드 + 인증번호 & 인증번호 필드 + 인증시간
+        &.auth {
+            @include display(inline-flex);
+            @include width;
+            // width:calc(100% - 8rem);
+
+            #{$field} {
+                &-input {@include display(flex);}
+                ._input-clear {order:2;}
+            }
+        
+            .auth-time {
+                margin-left:1rem;
+                align-self:center; order:3;
+            }
+            .btn-auth {align-self: center; margin-right:1rem;}
+        }
+
         &.pw {
             &-group {
                 &.type2 {
@@ -223,11 +241,23 @@
     &._clear {width:calc(100% - 2.2rem);}
     &-clear {
         visibility: hidden; pointer-events: none; opacity: 0;
-        @include fontICO ("before", "\f057");
-        // &.\:active {visibility: visible; pointer-events: all; opacity: 1;}
+        @include el-size(1.4rem, 1.4rem);
+        background:$color-gray4;
+        border-radius:100%;
+        @include pos(relative);
+        @include el-content(both) {
+            @include el-size(.8rem,.15rem);
+            @include pos-offset-l(.61rem, 2.5px);
+            background:$color-white;
+        }
+        
+        @include el-content(before) {transform:rotate(45deg);}
+        @include el-content(after) {transform:rotate(-45deg);}
+
         &._active {
-            @include display(inline-flex); width:2rem; height:100%;
+            @include display(inline-flex);
             visibility: visible; pointer-events: all; opacity: 1; touch-action: none;
+            align-self: center;;
         }
     }
     input {
