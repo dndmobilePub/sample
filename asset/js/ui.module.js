@@ -1063,13 +1063,13 @@ var COMPONENT_MD = (function (cp, $) {
                 if (radioValue === "disuse") {
                     $txtEdit.each(function(){
                         $(this).find('[data-text="' + radioName + '"]').each(function() {
-                            $(this).hide();
+                            $(this).parent('.txtEdit').hide();
                         });
                     })
                 } else {
                     $txtEdit.each(function(){
                         $(this).find('[data-text="' + radioName + '"]').each(function() {
-                            $(this).show();
+                            $(this).parent('.txtEdit').show();
                         });
                     })
                 }
