@@ -1830,19 +1830,21 @@ var COMPONENT_UI = (function (cp, $) {
             this.popSwiper();
         },
         popSwiper: function () {
-            setTimeout(()=>{
-                const swiper = new Swiper('.swip-content', {
-                    loop: false,
-                    navigation: {
-                      nextEl: '.swip-swiper .swiper-button-next',
-                      prevEl: '.swip-swiper .swiper-button-prev',
-                    },
-                });
-                swiper.on('slideChange', function () {
-                    $('.terms-num').text(swiper.activeIndex + 1)
-                    $('.swip-swiper').animate({scrollTop:0},'fast')
-                  });
-            },250)
+            if($('.swip-rt').length > 0){
+                setTimeout(()=>{
+                    const swiper = new Swiper('.swip-content', {
+                        loop: false,
+                        navigation: {
+                          nextEl: '.swip-swiper .swiper-button-next',
+                          prevEl: '.swip-swiper .swiper-button-prev',
+                        },
+                    });
+                    swiper.on('slideChange', function () {
+                        $('.terms-num').text(swiper.activeIndex + 1)
+                        $('.swip-swiper').animate({scrollTop:0},'fast')
+                      });
+                },250)      
+            }
         },
     };
 
