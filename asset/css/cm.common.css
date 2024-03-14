@@ -542,11 +542,9 @@ legend, caption {
 }
 /* jquery UI CSS - resizalabe */
 .ui-sortable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable-handle {
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-draggable .ui-dialog-titlebar {
@@ -559,7 +557,6 @@ legend, caption {
   position: absolute;
   font-size: 0.1px;
   display: block;
-  -ms-touch-action: none;
   touch-action: none;
 }
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
@@ -628,11 +625,9 @@ legend, caption {
   font-size: 0;
   line-height: 0;
   position: relative;
-  -ms-touch-action: none;
   touch-action: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .cropper-container img {
@@ -1844,16 +1839,20 @@ legend, caption {
 .field input[type=password] {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
 }
+<<<<<<< HEAD
 .field input[type=password]::-webkit-input-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
 }
+=======
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field input[type=password]::-moz-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
   font-size: 2rem;
 }
+<<<<<<< HEAD
 .field input[type=password]:-ms-input-placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
@@ -1864,6 +1863,8 @@ legend, caption {
   -webkit-text-security: none;
   font-size: 2rem;
 }
+=======
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field input[type=password]::placeholder {
   font-family: "pass", "Roboto", Helvetica, Arial, sans-serif;
   -webkit-text-security: none;
@@ -1961,14 +1962,18 @@ legend, caption {
   border: 0;
   background-color: transparent;
 }
+<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder {
   font-weight: normal;
   color: #949494;
 }
+=======
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
   font-weight: normal;
   color: #949494;
 }
+<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio]):-ms-input-placeholder {
   font-weight: normal;
   color: #949494;
@@ -1977,6 +1982,8 @@ legend, caption {
   font-weight: normal;
   color: #949494;
 }
+=======
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   font-weight: normal;
   color: #949494;
@@ -1984,6 +1991,7 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
 }
+<<<<<<< HEAD
 .field-input input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder {
   color: #ccc;
 }
@@ -1996,6 +2004,11 @@ legend, caption {
 .field-input input:not([type=checkbox]):not([type=radio])::-ms-input-placeholder {
   color: #ccc;
 }
+=======
+.field-input input:not([type=checkbox]):not([type=radio])::-moz-placeholder {
+  color: #ccc;
+}
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input input:not([type=checkbox]):not([type=radio])::placeholder {
   color: #ccc;
 }
@@ -2010,14 +2023,18 @@ legend, caption {
   max-width: 1.1rem;
   padding-right: 0;
 }
+<<<<<<< HEAD
 .field-input.mid_num input::-webkit-input-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
 }
+=======
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input.mid_num input::-moz-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
 }
+<<<<<<< HEAD
 .field-input.mid_num input:-ms-input-placeholder {
   font-family: "pass";
   font-size: 0.4rem;
@@ -2026,6 +2043,8 @@ legend, caption {
   font-family: "pass";
   font-size: 0.4rem;
 }
+=======
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 .field-input.mid_num input::placeholder {
   font-family: "pass";
   font-size: 0.4rem;
@@ -2253,6 +2272,9 @@ legend, caption {
 ._input input._password::-ms-input-placeholder {
   font-weight: 700;
 }
+._input input._password::-moz-placeholder {
+  font-weight: 700;
+}
 ._input input._password::placeholder {
   font-weight: 700;
 }
@@ -2266,6 +2288,7 @@ legend, caption {
   z-index: 2;
   color: transparent;
 }
+<<<<<<< HEAD
 ._input ._secureTxt > input[type=password]::-webkit-input-placeholder {
   color: transparent;
 }
@@ -2278,6 +2301,11 @@ legend, caption {
 ._input ._secureTxt > input[type=password]::-ms-input-placeholder {
   color: transparent;
 }
+=======
+._input ._secureTxt > input[type=password]::-moz-placeholder {
+  color: transparent;
+}
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 ._input ._secureTxt > input[type=password]::placeholder {
   color: transparent;
 }
@@ -2597,9 +2625,13 @@ legend, caption {
   z-index: 1;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   padding-right: 50px;
+=======
+  box-sizing: content-box;
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
 }
 .swiper-slide {
   -ms-flex-negative: 0;
@@ -2838,6 +2870,16 @@ legend, caption {
   right: -4rem;
   width: 0;
 }
+[data-type=goods] .swiper-inner .swiper-wrapper {
+  gap: 1rem;
+  padding: 2rem 0;
+}
+[data-type=goods] .swiper-inner .swiper-slide {
+  width: calc((100% - 1rem) / 2);
+}
+[data-type=goods] .swiper-inner .swiper-initialized .swiper-wrapper {
+  gap: 0;
+}
 [data-type=goods] .swiper-inner .moreBtn {
   position: absolute;
   top: calc(50% - 1rem);
@@ -2858,12 +2900,32 @@ legend, caption {
   padding: 10px;
   border-radius: 100%;
 }
+[data-type=goods] .swiper-inner .btn.goodsAddBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 1rem;
+  background: #000;
+  opacity: 0.5;
+  color: #fff;
+  font-size: 1.6rem;
+}
+[data-type=goods][swiper-case=PerView1] .swiper-slide {
+  width: 100%;
+}
+[data-type=goods][swiper-case=PerView1] .swiper-initialized .swiper-wrapper {
+  gap: 0;
+}
 [data-type=goods][swiper-case=PerView1] .goodsWrap:after {
   content: "";
   display: block;
   clear: both;
 }
-[data-type=goods][swiper-case=PerView1] .goodsWrap .goods-img {
+[data-type=goods][swiper-case=PerView1] .goodsWrap .goods-info {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
@@ -2873,6 +2935,9 @@ legend, caption {
   width: calc(50% - 1.6rem);
   float: left;
 }
+[data-type=goods][swiper-case="PerView1.5"] .swiper-slide {
+  width: 66.6666666667%;
+}
 [data-type=goods][tab-case=list1] .lst-goods > li {
   width: 100%;
 }
@@ -2881,7 +2946,7 @@ legend, caption {
   display: block;
   clear: both;
 }
-[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
+[data-type=goods][tab-case=list1] .goodsWrap .goods-info {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
@@ -3645,7 +3710,10 @@ legend, caption {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+<<<<<<< HEAD
   min-width: -webkit-fit-content;
+=======
+>>>>>>> 173e3cc5848c3a028715a85af046b4e3b0dd6540
   min-width: -moz-fit-content;
   min-width: fit-content;
 }
@@ -3875,7 +3943,7 @@ legend, caption {
   display: block;
   clear: both;
 }
-[data-type=goods][tab-case=list1] .goodsWrap .goods-img {
+[data-type=goods][tab-case=list1] .goodsWrap .goods-info {
   width: 50%;
   float: left;
   margin-right: 1.6rem;
@@ -4048,6 +4116,15 @@ legend, caption {
   text-align: center;
 }
 
+.goodsWrap {
+  position: relative;
+}
+.goodsWrap .goodsAddBtn {
+  display: none;
+}
+.goodsWrap:hover .goodsAddBtn {
+  display: block;
+}
 .goodsWrap .item {
   padding: 0.3rem 0;
 }
@@ -4255,8 +4332,8 @@ legend, caption {
 .modalPop._is-active {
   display: block;
 }
-.modalPop .goodsAddBtn {
-  display: none;
+.modalPop .goodsAddBtn, .modalPop .goodsDelBtn {
+  display: none !important;
 }
 
 .dimmed {
@@ -4436,14 +4513,6 @@ legend, caption {
 }
 
 /* 버튼 */
-.btn.goodsAddBtn {
-  width: 100%;
-  padding: 1.15rem 1.6rem;
-  border-radius: 5rem;
-  background: #000;
-  color: #fff;
-  font-size: 1.6rem;
-}
 .btn.deleteBtn {
   margin: 0;
 }
@@ -4454,6 +4523,19 @@ legend, caption {
   padding: 1rem 1.15rem;
   background: #7c4bdf;
   border-color: #7c4bdf;
+}
+.btn.goodsAddBtn {
+  width: 100%;
+  padding: 1.15rem 1.6rem;
+  border-radius: 5rem;
+  background: #000;
+  color: #fff;
+  font-size: 1.6rem;
+}
+.btn.goodsDelBtn {
+  position: absolute;
+  top: -2rem;
+  right: 0;
 }
 
 /* icon */
