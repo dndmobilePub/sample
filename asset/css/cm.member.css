@@ -2815,6 +2815,7 @@ legend, caption {
   text-align: left !important;
   cursor: inherit;
   margin-top: 3rem;
+  background-color: transparent;
 }
 [data-type=pop-swiper] .swip-swiper .swiper-slide:nth-child(odd) {
   background-color: transparent;
