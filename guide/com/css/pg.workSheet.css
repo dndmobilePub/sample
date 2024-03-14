@@ -2829,6 +2829,9 @@ legend, caption {
 [data-type=pop-swiper] .swip-swiper .swiper-button-next {
   right: -3rem;
 }
+[data-type=pop-swiper] .swip-swiper .swiper-button-disabled {
+  opacity: 0.2;
+}
 
 [data-type=goods] .swiper {
   display: -webkit-box;
@@ -4591,6 +4594,9 @@ label input {
 .module-wrap .md.md-htmlCode {
   padding: 2.4rem;
 }
+.module-wrap .md.md-txtbn {
+  padding: 1.4rem 0;
+}
 .module-wrap .md .txt-edit {
   position: relative;
   padding: 2.4rem;
@@ -4819,8 +4825,36 @@ label input {
 .module-edit .md .md-logo.no-img {
   border: 1px solid #e93c79;
 }
-.module-edit .md [contenteditable=true] {
+.module-edit .md [contenteditable] {
   position: relative;
+  /*         span {
+            display: block;
+            width: 100%;
+            height: 2rem;
+          } */
+}
+.module-edit .md [contenteditable].edit::after {
+  content: "입력해주세요";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 2rem;
+}
+.module-edit .md h1[contenteditable] {
+  height: 4rem;
+}
+.module-edit .md h1[contenteditable].edit::after {
+  content: "대제목입니다.";
+}
+.module-edit .md h3[contenteditable] {
+  height: 2.3rem;
+}
+.module-edit .md h3[contenteditable].edit::after {
+  content: "소제목입니다.";
+}
+.module-edit .md [contenteditable=true] {
   cursor: text;
   outline: 0;
 }
@@ -5257,6 +5291,43 @@ label input {
   margin-top: 2rem;
 }
 
+/* marquee */
+.marquee {
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  padding: 1.5rem 0 1rem;
+  background: #000;
+}
+.marquee p {
+  display: inline-block;
+  color: #fff;
+  white-space: nowrap;
+  -webkit-animation: marquee 12s linear infinite;
+          animation: marquee 12s linear infinite;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
 /****************************************/
 /*	PART: work sheet PAGE STYLE
 /****************************************/

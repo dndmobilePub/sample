@@ -40,6 +40,7 @@ var COMPONENT_MD = (function (cp, $) {
                 cp.colorEdit.spectrumBtnColor(cp.optionEdit.currentModuleData, btnColor);
                 cp.colorEdit.imgColor();
                 cp.colorEdit.imgColorSelect(cp.optionEdit.currentModuleData);
+                cp.colorEdit.colorSelect(cp.optionEdit.currentModuleData);
                 cp.fontEditer.init();
                 cp.optionEdit.gapHeight(cp.optionEdit.currentModuleData);
                 cp.optionEdit.inpTxtLocation(cp.optionEdit.currentModuleData);
@@ -655,65 +656,6 @@ var COMPONENT_MD = (function (cp, $) {
             }
         }
     };
-    /* module : video */
-    cp.videoModule = {
-        constEl: {
-            btnVideoFile: ".addVideo-file",
-            btnYoutube: ".addVideo-utube"
-        },
-        init: function () {
-            this.addVideo();
-            this.addYoutube();
-        },
-        addVideo: function () {
-            const btnVideo = $(this.constEl.btnVideoFile);
-
-            btnVideo.off('click').on('click', function () {
-                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-
-                var input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'video/*';
-                input.style.display = 'none';
-                input.onchange = function(event) {
-                    var file = event.target.files[0];
-                    var videoURL = URL.createObjectURL(file);
-                    var videoElement = $('<video controls></video>');
-                    videoElement.attr('src', videoURL);
-                    $videoWrap.html(videoElement);
-                    $videoWrap.removeClass('no-video');
-                };
-                
-                $('input[type="file"]').remove(); 
-    
-                document.body.appendChild(input);
-                input.click();
-            });
-        },
-        addYoutube: function () {
-            const btnYoutube = $(this.constEl.btnYoutube);
-
-            btnYoutube.off('click').on('click', function () {
-                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
-
-                var inputURL = prompt("Please enter YouTube video URL:");
-                if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
-                    var videoId;
-                    if (inputURL.includes("youtube.com")) {
-                        videoId = inputURL.split('v=')[1];
-                    } else if (inputURL.includes("youtu.be")) {
-                        videoId = inputURL.split('/').pop();
-                    }
-                    var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
-                    iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
-                    $videoWrap.html(iframe);
-                    $videoWrap.removeClass('no-video');
-                } else {
-                    alert("Invalid YouTube video URL.");
-                }
-            });
-        }
-    };
     /* FONT UI : color picker */
     cp.colorEdit = {
         init: function() {
@@ -950,12 +892,19 @@ var COMPONENT_MD = (function (cp, $) {
                 return "#" + hex(rgbValues[1]) + hex(rgbValues[2]) + hex(rgbValues[3]);
             }
         },
-        colorSelect: function() {
-            $('.color-selbox input[name="colorSelect"]').change(function() {
+        colorSelect: function(dataType) {
+            $('.color-selbox input').change(function() {
                 var selectedOption = $(this).val();
-                var dataType = $(this).closest('.option-wrap').data('id');
+                var optionId = $(this).closest('.option-wrap').data('id');
+                var $md = $('.md[data-id="' + dataType + '"]');
 
-                $('.md[data-id="' + dataType + '"]').find('.tab a').css('color', selectedOption);
+                if (dataType === optionId && $md.length > 0) {
+                    if ($md.find('.tab a').length > 0) {
+                        $md.find('.tab a').css('color', selectedOption);
+                    } else if ($md.find('#countdown').length > 0) {
+                        $md.find('#countdown').css('color', selectedOption);
+                    }
+                }
             });
         },
         spectrumGrColor: function(initialColor) {
@@ -1031,6 +980,13 @@ var COMPONENT_MD = (function (cp, $) {
             })
         }, */
         editOpen: function() {
+            $('[contenteditable]').on('keyup', function() {
+                if ($(this).text().trim() === '') {
+                    $(this).addClass('edit');
+                } else {
+                    $(this).removeClass('edit');
+                }
+            });
             $(document).on('click', '[contenteditable]', function(event) {
                 var $this = $(this);
                 var thisColor = $this.css('color');
@@ -1039,20 +995,15 @@ var COMPONENT_MD = (function (cp, $) {
                     $this.attr('contenteditable', 'true');
                     $this.focus();
                 }
+                $('[contenteditable]').each(function() {
+                    if ($(this).text().trim() === '') {
+                        $(this).addClass('edit');
+                    } else {
+                        $(this).removeClass('edit');
+                    }
+                });
 
-/*                 if (!$this.has('.textEditerWrap').length) {
-                    $('.textEditerWrap').remove();
-                    $('<div class="textEditerWrap"></div>').insertBefore($this);
-                    $this.prev('.textEditerWrap').load('../../asset/_module/text-edit.html', function(){
-                        var targetData = $('.edit-box').data('edit');
-                    
-                        $this.attr('edit-target', targetData);
-                        $(this).show();
-                        cp.colorEdit.spectrumColor(thisColor);
-                    })
-                } */
-
-                if ($this.parent().hasClass('txtEdit')) {
+/*                 if ($this.parent().hasClass('txtEdit')) {
                     if (!$this.has('.textEditerWrap').length) {
                         $('.textEditerWrap').remove();
                         var $textEditorWrap = $('<div class="textEditerWrap"></div>');
@@ -1067,7 +1018,7 @@ var COMPONENT_MD = (function (cp, $) {
                             cp.colorEdit.spectrumColor(thisColor);
                         })
                     }
-                }
+                } */
             });
             
             $(document).on('click', function(event) {
@@ -1083,6 +1034,14 @@ var COMPONENT_MD = (function (cp, $) {
                 if (!$('.textEditerWrap').is(':focus') && !$('[contenteditable]').is(':focus')) {
                     $('[contenteditable]').removeAttr('edit-target').attr('contenteditable', 'false');
                     $('.textEditerWrap').remove();
+
+                    $('[contenteditable]').each(function() {
+                        if ($(this).text().trim() === '') {
+                            $(this).addClass('edit');
+                        } else {
+                            $(this).removeClass('edit');
+                        }
+                    });
                 }
             });
         },
@@ -1105,6 +1064,65 @@ var COMPONENT_MD = (function (cp, $) {
                             $(this).show();
                         });
                     })
+                }
+            });
+        }
+    };
+    /* module : video */
+    cp.videoModule = {
+        constEl: {
+            btnVideoFile: ".addVideo-file",
+            btnYoutube: ".addVideo-utube"
+        },
+        init: function () {
+            this.addVideo();
+            this.addYoutube();
+        },
+        addVideo: function () {
+            const btnVideo = $(this.constEl.btnVideoFile);
+
+            btnVideo.off('click').on('click', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'video/*';
+                input.style.display = 'none';
+                input.onchange = function(event) {
+                    var file = event.target.files[0];
+                    var videoURL = URL.createObjectURL(file);
+                    var videoElement = $('<video controls></video>');
+                    videoElement.attr('src', videoURL);
+                    $videoWrap.html(videoElement);
+                    $videoWrap.removeClass('no-video');
+                };
+                
+                $('input[type="file"]').remove(); 
+    
+                document.body.appendChild(input);
+                input.click();
+            });
+        },
+        addYoutube: function () {
+            const btnYoutube = $(this.constEl.btnYoutube);
+
+            btnYoutube.off('click').on('click', function () {
+                var $videoWrap = $(this).closest('.md-video').find('.videoWrap');
+
+                var inputURL = prompt("Please enter YouTube video URL:");
+                if (inputURL && (inputURL.includes("youtube.com") || inputURL.includes("youtu.be"))) {
+                    var videoId;
+                    if (inputURL.includes("youtube.com")) {
+                        videoId = inputURL.split('v=')[1];
+                    } else if (inputURL.includes("youtu.be")) {
+                        videoId = inputURL.split('/').pop();
+                    }
+                    var iframe = $('<iframe width="100" frameborder="0" allowfullscreen></iframe>');
+                    iframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+                    $videoWrap.html(iframe);
+                    $videoWrap.removeClass('no-video');
+                } else {
+                    alert("Invalid YouTube video URL.");
                 }
             });
         }
@@ -1184,7 +1202,8 @@ var COMPONENT_MD = (function (cp, $) {
                 }
             });
         }
-    }
+    };
+    
     
     cp.init = function () {
         cp.optionEdit.init();
