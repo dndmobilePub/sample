@@ -77,18 +77,38 @@
           <div class="option-box" data-type="goods" data-case="goodsTab">
             <h3>앵커 탭 사용</h3>
             <div class="option-cont">
-              <div class="input-box">
+              <div class="input-box inpUse">
                 <label for="anchorTabUse"><input type="radio" name="anchorTab" id="anchorTabUse" value="use" checked>사용</label>
                 <label for="anchorTabDisuse"><input type="radio" name="anchorTab" id="anchorTabDisuse" value="disuse">미사용</label>
               </div>
             </div>
           </div>
           <div class="option-box" data-type="goods" data-case="goodsTab">
-            <h3 class="option-tit">색상 선택</h3>
+            <h3>상품 설명 사용여부</h3>
+            <div class="option-cont">
+              <div class="input-box inpUse">
+                <label for="infoTabUse"><input type="radio" name="infoTab" id="infoTabUse" value="use" checked>사용</label>
+                <label for="infoTabDisuse"><input type="radio" name="infoTab" id="infoTabDisuse" value="disuse">미사용</label>
+              </div>
+            </div>
+          </div>
+          <div class="option-box" data-type="goods" data-case="goodsTab">
+            <h3 class="option-tit">모듈 폰트 Color</h3>
             <div class="option-cont">
               <div class="color-selbox">
                 <label for="colorBlack"><input type="radio" name="colorSelect" id="colorBlack" value="black">검정색(Black)</label>
                 <label for="colorWhite"><input type="radio" name="colorSelect" id="colorWhite" value="white">흰색(White)</label>
+              </div>
+            </div>
+          </div>
+          <div class="option-box" data-type="goods" data-case="goodsTab goodsSwiper">
+            <h3>노출정보</h3>
+            <div class="option-cont">
+              <div class="input-box chkUse">
+                <label for="goodsInfoBrand"><input type="checkbox" name="goodsInfo" id="goodsInfoBrand" >브랜드명</label>
+                <label for="goodsInfoName"><input type="checkbox" name="goodsInfo" id="goodsInfoName" >상품명</label>
+                <label for="goodsInfoPrice"><input type="checkbox" name="goodsInfo" id="goodsInfoPrice" checked>가격</label>
+                <label for="goodsInfoTag"><input type="checkbox" name="goodsInfo" id="goodsInfoTag" checked>이벤트 태그</label>
               </div>
             </div>
           </div>
@@ -409,7 +429,7 @@
               <div class="md md-goods" data-type="goods" data-case="goodsTab" data-id="anchorTab" tab-case="list1">
                 <div class="tab-wrap tab-sticky" data-roll="tab" id="tab-sticky">
                   <div class="tab-list-wrap">
-                    <ul class="tab-list">
+                    <ul class="tab-list" data-anchorTab="anchorTab">
                       <li class="tab _is-active"><a href="javascript:void(0);" contenteditable="true">기본탭</a></li>
                       <li class="_addTab"><a href="javascript:void(0);"><span class="hide">탭추가</span></a></li>
                     </ul>
@@ -417,43 +437,36 @@
               
                   <div class="tab-contents-wrap">
                     <div class="tab-contents">
-                      <p class="goods-category">iPad</p>
+                      <div class="goods-tit" data-anchorTab="anchorTab">
+                        <span class="goods-category" contenteditable="true" data-text="infoTab">iPad</span>
+                        <button class="btn btn-size xs shadow _delTab">탭삭제</button>
+                        <div class="txtEdit">
+                          <span class="goods-txt" contenteditable="true" data-text="infoTab">등록될 상품에 대한 설명입니다.</span>
+                        </div>
+                      </div>
                       <ul class="lst lst-goods">
                         <li>
-                          <dl class="goodsWrap">
-                            <dt class="goods-img">
+                          <dl class="goodsWrap" data-chk="goodsInfo">
+                            <dt class="goods-img-wrap">
                               <div class="no-img"></div>
                             </dt>
-                            <dd class="item brand">애플</dd>
-                            <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                            <dd class="item price">1,249,000 원</dd>
-                            <dd class="item benefit">
+                            <dd class="item brand" goods-chk="goodsInfoBrand">애플</dd>
+                            <dd class="item name" goods-chk="goodsInfoName">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                            <dd class="item price" goods-chk="goodsInfoPrice">1,249,000 원</dd>
+                            <dd class="item benefit" goods-chk="goodsInfoTag">
                               <span class="label point">최대 50% M 포인트</span>
                             </dd>
                           </dl>
                         </li>
                         <li>
-                          <dl class="goodsWrap">
-                            <dt class="goods-img">
+                          <dl class="goodsWrap" data-chk="goodsInfo">
+                            <dt class="goods-img-wrap">
                               <div class="no-img"></div>
                             </dt>
-                            <dd class="item brand">애플</dd>
-                            <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                            <dd class="item price">1,249,000 원</dd>
-                            <dd class="item benefit">
-                              <span class="label point">최대 50% M 포인트</span>
-                            </dd>
-                          </dl>
-                        </li>
-                        <li>
-                          <dl class="goodsWrap">
-                            <dt class="goods-img">
-                              <div class="no-img"></div>
-                            </dt>
-                            <dd class="item brand">애플</dd>
-                            <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                            <dd class="item price">1,249,000 원</dd>
-                            <dd class="item benefit">
+                            <dd class="item brand" goods-chk="goodsInfoBrand">애플</dd>
+                            <dd class="item name" goods-chk="goodsInfoName">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                            <dd class="item price" goods-chk="goodsInfoPrice">1,249,000 원</dd>
+                            <dd class="item benefit" goods-chk="goodsInfoTag">
                               <span class="label point">최대 50% M 포인트</span>
                             </dd>
                           </dl>
@@ -510,8 +523,8 @@
                     </div>
                   </div>
                   <!-- <div class="swiper-button-next"></div>
-                  <div class="swiper-button-prev"></div> -->
-                  <div class="swiper-pagination"></div>
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-pagination"></div> -->
                   <a href="javascript:void(0);" class="moreBtn">더보기</a>
                 </div>
                 <div class="btnWrap">
@@ -681,16 +694,16 @@
           <li>
             <input type="checkbox">
             <div class="swiper-slide">
-              <dl class="goodsWrap">
-                <dt class="goods-info">
+              <dl class="goodsWrap" data-chk="goodsInfo">
+                <dt class="goods-img-wrap">
                   <button class="btn btn-size xs shadow goodsDelBtn bg">삭제</button>
                   <div class="goods-img"><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=http%3A%2F%2Fshop1.phinf.naver.net%2F20210421_284%2F1618964180859FC6NQ_JPEG%2F55099797074620053_2029617427.jpeg" alt=""></div>
                   <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="modal_Goods" item-single="true">수정하기</button>
                 </dt>
-                <dd class="item brand">애플</dd>
-                <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                <dd class="item price">1,249,000 원</dd>
-                <dd class="item benefit">
+                <dd class="item brand" goods-chk="goodsInfoBrand">애플</dd>
+                <dd class="item name" goods-chk="goodsInfoName">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                <dd class="item price" goods-chk="goodsInfoPrice">1,249,000 원</dd>
+                <dd class="item benefit" goods-chk="goodsInfoTag">
                   <span class="label point">최대 50% M 포인트</span>
                 </dd>
               </dl>
@@ -699,16 +712,16 @@
           <li>
             <input type="checkbox">
             <div class="swiper-slide">
-              <dl class="goodsWrap">
-                <dt class="goods-info">
+              <dl class="goodsWrap" data-chk="goodsInfo">
+                <dt class="goods-img-wrap">
                   <button class="btn btn-size xs shadow goodsDelBtn bg">삭제</button>
                   <div class="goods-img"><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=https%3A%2F%2Fshop-phinf.pstatic.net%2F20171022_298%2FshowindowCommon_1508673491292GN4A4_JPEG%2F55023studiolim3465.jpg" alt=""></div>
                   <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="modal_Goods" item-single="true">수정하기</button>
                 </dt>
-                <dd class="item brand">애플</dd>
-                <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                <dd class="item price">1,249,000 원</dd>
-                <dd class="item benefit">
+                <dd class="item brand" goods-chk="goodsInfoBrand">애플</dd>
+                <dd class="item name" goods-chk="goodsInfoName">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                <dd class="item price" goods-chk="goodsInfoPrice">1,249,000 원</dd>
+                <dd class="item benefit" goods-chk="goodsInfoTag">
                   <span class="label point">최대 50% M 포인트</span>
                 </dd>
               </dl>
@@ -717,16 +730,16 @@
           <li>
             <input type="checkbox">
             <div class="swiper-slide">
-              <dl class="goodsWrap">
-                <dt class="goods-info">
+              <dl class="goodsWrap" data-chk="goodsInfo">
+                <dt class="goods-img-wrap">
                   <button class="btn btn-size xs shadow goodsDelBtn bg">삭제</button>
                   <div class="goods-img"><img src="https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fshop.phinf%2Fshop%2F20230102_280%2F1672588025136k8rKc_JPEG%2F4C68C940-01B2-49D3-8530-93B84A1ECA34.jpeg" alt=""></div>
                   <button class="btn btn-size xs shadow goodsAddBtn bg" data-modal="modal_Goods" item-single="true">수정하기</button>
                 </dt>
-                <dd class="item brand">애플</dd>
-                <dd class="item name">Me iPad Pro 11형 Wi-Fi 128GB</dd>
-                <dd class="item price">1,249,000 원</dd>
-                <dd class="item benefit">
+                <dd class="item brand" goods-chk="goodsInfoBrand">애플</dd>
+                <dd class="item name" goods-chk="goodsInfoName">Me iPad Pro 11형 Wi-Fi 128GB</dd>
+                <dd class="item price" goods-chk="goodsInfoPrice">1,249,000 원</dd>
+                <dd class="item benefit" goods-chk="goodsInfoTag">
                   <span class="label point">최대 50% M 포인트</span>
                 </dd>
               </dl>
