@@ -2256,6 +2256,11 @@ legend, caption {
   opacity: 0;
   width: 1.4rem;
   height: 1.4rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-item-align: center;
+      align-self: center;
   background: #999;
   border-radius: 100%;
   position: relative;
@@ -2264,45 +2269,40 @@ legend, caption {
   content: "";
   display: block;
   width: 0.8rem;
-  height: 0.15rem;
+  height: 0.1rem;
   position: absolute;
-  top: 0.61rem;
-  left: 2.5px;
+  top: 50%;
+  left: 50%;
   background: #fff;
 }
 ._input-clear::after {
   content: "";
   display: block;
   width: 0.8rem;
-  height: 0.15rem;
+  height: 0.1rem;
   position: absolute;
-  top: 0.61rem;
-  left: 2.5px;
+  top: 50%;
+  left: 50%;
   background: #fff;
 }
 ._input-clear::before {
   content: "";
   display: block;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+          transform: translate(-50%, -50%) rotate(45deg);
 }
 ._input-clear::after {
   content: "";
   display: block;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+          transform: translate(-50%, -50%) rotate(-45deg);
 }
 ._input-clear._active {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   visibility: visible;
   pointer-events: all;
   opacity: 1;
   -ms-touch-action: none;
       touch-action: none;
-  -ms-flex-item-align: center;
-      align-self: center;
 }
 ._input input._password::-webkit-input-placeholder {
   font-weight: 700;
@@ -4623,4 +4623,4 @@ legend, caption {
 }
 .member .container .loginWrap .btnWrap + .btnWrap {
   margin-top: 2.4rem;
-}/*# sourceMappingURL=cm.member.css.map */
+}
