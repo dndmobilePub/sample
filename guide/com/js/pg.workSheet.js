@@ -134,7 +134,7 @@ var makeBoard = function () {
           trHtml += '<td class="id"></td>';
         }
         if (obj.type) {
-          trHtml += '<td class="type"><span>' + obj.type + '</span></td>';
+          trHtml += '<td class="type"><span class="pop">' + obj.type + '</span></td>';
         } else {
           trHtml += '<td class="type"><span>페이지</span></td>';
         }
@@ -186,7 +186,7 @@ var makeBoard = function () {
         } else if (obj.state === 'hold') {
           trHtml += '<td class="complete"><span class="hold">보류</span></td>';
         } else if (obj.workdate) {
-          trHtml += '<td class="complete"><span class="ing">검수중</span></td>';
+          trHtml += '<td class="complete"><span class="ing">작업중</span></td>';
         } else {
           trHtml += '<td class="complete"><span>대기중</span></td>';
         }
@@ -203,7 +203,7 @@ var makeBoard = function () {
               remark += '<li>' + this + '</li>';
             }
           });
-          trHtml += '<td class="etc"><ul class="remark">' + remark + '</ul><a href="' + urlLink + '/' + obj.id + '.html" class="btn_hover" target="_blank">' + obj.id + '</a></td>';
+          trHtml += '<td class="etc"><ul class="remark">' + remark + '</ul></td>';
         } else {
           trHtml += '<td class="etc"><a href="' + urlLink + '/' + obj.id + '.html" class="btn_hover" target="_blank">' + obj.id + '</a></td>';
         }
@@ -922,7 +922,7 @@ var guide = {
     var prevTargetText = null;
     var $gTarget = $('.pg_target');
     $('.pg_content').each(function (index, item) {
-      var targets = $(item).find('tbody tr td:nth-child(5)');
+      var targets = $(item).find('tbody tr td:nth-child(4)');
       $.each(targets, function (i, target) {
         var area = $(target).closest('.pg_board_panel').find('.pg_target>ul');
         var targetText = $(target).text();
